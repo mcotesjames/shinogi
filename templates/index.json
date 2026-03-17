@@ -67,7 +67,7 @@
           "type": "heading",
           "settings": {
             "heading": "SHINOGI CASE 15-25 designs durable, purpose-built systems to protect and organize professional tools.",
-            "heading_size": "h3",
+            "heading_size": "h4",
             "heading_tag": "h3"
           }
         },
@@ -183,7 +183,7 @@
         "color_scheme": "",
         "enable_border_top": false,
         "enable_border_bottom": true,
-        "heading": "The 1525-Case",
+        "heading": "Case 15-25",
         "heading_font": "heading",
         "heading_size": "h6",
         "heading_tag": "h2",
