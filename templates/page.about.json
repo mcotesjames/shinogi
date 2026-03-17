@@ -55,15 +55,15 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Introduce your company with a clear, strong headline",
-            "heading_size": "h3",
+            "heading": "Where structure and purpose define strength, balance, and lasting integrity",
+            "heading_size": "h4",
             "heading_tag": "h3"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Use this section to provide a concise introduction to your company, its mission, and core values. Keep the tone clear and professional, ensuring visitors understand your brand’s purpose.</p><p>You may include information about your history, main achievements, or areas of expertise. Highlight what makes your business unique in a straightforward way.</p>"
+            "text": "<p>Rooted in the Japanese concept of shinogi – the ridgeline or backbone of a blade – SHINOGI systems are built with technical intent, shaped by real use, and refined through restraint. In traditional sword-making, the shinogi is not ornamental. It is essential. It provides strength, balance, and integrity. This philosophy is applied to every SHINOGI product, beginning with Case 15–25. Nothing is added without reason. Nothing exists without function. The result is equipment designed to endure time, movement, and daily wear.</p>"
           }
         }
       },
@@ -73,7 +73,7 @@
       ],
       "settings": {
         "color_scheme": "",
-        "layout": "column",
+        "layout": "row",
         "enable_border_top": false,
         "enable_border_bottom": false,
         "heading": "",
