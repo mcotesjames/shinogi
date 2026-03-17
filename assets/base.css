@@ -708,6 +708,17 @@ details > * {
   font-size: calc(var(--font-body-scale) * 1rem);
 }
 
+body,
+.body-large,
+.body-normal,
+.body-small,
+.body-xs,
+.rte {
+  font-style: normal;
+  font-synthesis: none;
+  font-variation-settings: "ital" 0;
+}
+
 .page-header {
   display: flex;
   flex-direction: column;
