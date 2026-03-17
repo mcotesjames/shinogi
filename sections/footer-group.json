@@ -1,1 +1,187 @@
-{"type":"footer","name":"t:sections.footer.settings.footer-group.label","sections":{"multicolumn":{"type":"multicolumn","blocks":{"column_1":{"type":"column","settings":{"heading":"Feature Title Here","text":"Briefly describe column","enable_icon":true,"icon":"cart","custom_icon_fit":"cover","show_button":false,"button_label":"Learn More","button_link":"","button_style":"tertiary"}},"column_2":{"type":"column","settings":{"heading":"Feature Title Here","text":"Briefly describe column","enable_icon":true,"icon":"arrow_back","custom_icon_fit":"cover","show_button":false,"button_label":"Learn More","button_link":"","button_style":"tertiary"}},"column_3":{"type":"column","settings":{"heading":"Feature Title Here","text":"Briefly describe column","enable_icon":true,"icon":"lock","custom_icon_fit":"cover","show_button":false,"button_label":"Learn More","button_link":"","button_style":"tertiary"}}},"block_order":["column_1","column_2","column_3"],"disabled":true,"settings":{"color_scheme":"background-1","enable_border_top":true,"enable_border_bottom":false,"heading":"","heading_font":"body","heading_size":"h6","heading_tag":"h2","heading_group_button_show":false,"heading_group_button_label":"Learn More","heading_group_button_link":"","heading_group_button_style":"tertiary","heading_group_enable_border_bottom":true,"column_width":"small","column_heading_font":"subtitle","column_heading_size":"h6","column_heading_tag":"h2","padding_top":"no-indent","padding_bottom":"no-indent","margin_top":"no-indent","margin_bottom":"no-indent"}},"ticker":{"type":"ticker","settings":{"color_scheme":"background-1","enable_border_top":false,"enable_border_bottom":false,"enable_ticker_text":false,"ticker_text":"Your latest announcement","ticker_text_size":"h5","enable_image":true,"image":"shopify:\/\/shop_images\/Vector.svg","image_width":300,"ticker_speed":5,"ticker_pause_hover":true,"ticker_direction":"right_to_left","ticker_link":"","description":"","padding_top":"l","padding_bottom":"l","margin_top":"no-indent","margin_bottom":"no-indent"}},"footer":{"type":"footer","blocks":{"block_1":{"type":"link_list","settings":{"heading":"Quick links","menu":"footer","default_open":true}},"block_2":{"type":"link_list","settings":{"heading":"Quick links","menu":"footer","default_open":false}},"block_3":{"type":"link_list","settings":{"heading":"Quick links","menu":"footer","default_open":false}},"block_4":{"type":"link_list","settings":{"heading":"Quick links","menu":"footer","default_open":false}}},"block_order":["block_1","block_2","block_3","block_4"],"settings":{"main_color_scheme":"background-1","enable_border_top":true,"show_contact":true,"contact_heading":"Contact","show_logo":false,"logo_width":100,"show_contact_text":true,"contact_text":"Contact information goes here\nfor follow-up if necessary","contact_richtext":"<a href=\"\/\">Get in touch<\/a>","show_socials":false,"show_newsletter":true,"newsletter_heading":"Subscribe to our newsletter","show_newsletter_text":true,"newsletter_text":"By subscribing, you understand and agree to our Privacy Policy.","privacy_policy_consent":false,"bottom_color_scheme":"background-3","enable_country_selector":true,"enable_language_selector":true,"region_color_scheme":"","payment_enable":true,"enable_copyright":true,"enable_copyright_date":true,"show_policy":false,"enable_follow_on_shop":true}}},"order":["multicolumn","ticker","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:sections.footer.settings.footer-group.label",
+  "sections": {
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "heading": "Feature Title Here",
+            "text": "Briefly describe column",
+            "enable_icon": true,
+            "icon": "cart",
+            "custom_icon_fit": "cover",
+            "show_button": false,
+            "button_label": "Learn More",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "heading": "Feature Title Here",
+            "text": "Briefly describe column",
+            "enable_icon": true,
+            "icon": "arrow_back",
+            "custom_icon_fit": "cover",
+            "show_button": false,
+            "button_label": "Learn More",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "heading": "Feature Title Here",
+            "text": "Briefly describe column",
+            "enable_icon": true,
+            "icon": "lock",
+            "custom_icon_fit": "cover",
+            "show_button": false,
+            "button_label": "Learn More",
+            "button_link": "",
+            "button_style": "tertiary"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "background-1",
+        "enable_border_top": true,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "column_width": "small",
+        "column_heading_font": "subtitle",
+        "column_heading_size": "h6",
+        "column_heading_tag": "h2",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "ticker": {
+      "type": "ticker",
+      "settings": {
+        "color_scheme": "background-1",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "enable_ticker_text": false,
+        "ticker_text": "Your latest announcement",
+        "ticker_text_size": "h5",
+        "enable_image": true,
+        "image": "shopify://shop_images/Vector.svg",
+        "image_width": 300,
+        "ticker_speed": 5,
+        "ticker_pause_hover": true,
+        "ticker_direction": "right_to_left",
+        "ticker_link": "",
+        "description": "",
+        "padding_top": "l",
+        "padding_bottom": "l",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "block_1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer",
+            "default_open": true
+          }
+        },
+        "block_2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer",
+            "default_open": false
+          }
+        },
+        "block_3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer",
+            "default_open": false
+          }
+        },
+        "block_4": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer",
+            "default_open": false
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4"
+      ],
+      "settings": {
+        "main_color_scheme": "background-1",
+        "enable_border_top": true,
+        "show_contact": true,
+        "contact_heading": "Contact",
+        "show_logo": false,
+        "logo_width": 100,
+        "show_contact_text": true,
+        "contact_text": "Contact information goes here\nfor follow-up if necessary",
+        "contact_richtext": "<a href=\"/\">Get in touch</a>",
+        "show_socials": false,
+        "show_newsletter": false,
+        "newsletter_heading": "Subscribe to our newsletter",
+        "show_newsletter_text": true,
+        "newsletter_text": "By subscribing, you understand and agree to our Privacy Policy.",
+        "privacy_policy_consent": false,
+        "bottom_color_scheme": "background-3",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "region_color_scheme": "",
+        "payment_enable": true,
+        "enable_copyright": true,
+        "enable_copyright_date": true,
+        "show_policy": true,
+        "enable_follow_on_shop": true
+      }
+    }
+  },
+  "order": [
+    "multicolumn",
+    "ticker",
+    "footer"
+  ]
+}
