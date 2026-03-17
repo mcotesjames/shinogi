@@ -560,7 +560,7 @@
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
         "content_heading": "Stay Updated",
-        "content_heading_size": "h1",
+        "content_heading_size": "h3",
         "content_heading_tag": "h3",
         "newsletter_text": "By subscribing, you understand and agree to our Privacy Policy.",
         "privacy_policy_consent": false,
