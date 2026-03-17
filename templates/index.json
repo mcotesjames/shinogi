@@ -521,7 +521,7 @@
         "heading_size": "h2",
         "heading_tag": "h2",
         "heading_width": "medium",
-        "description": "First 500 orders will receive their Case 15-25 with personalised nameplate and handle.",
+        "description": "The first 500 orders include a Case 15–25 with a personalised nameplate and handle.",
         "vertical_alignment": "stretch",
         "horizontal_alignment": "center",
         "show_button": true,
@@ -548,7 +548,7 @@
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "",
-        "enable_border_top": false,
+        "enable_border_top": true,
         "enable_border_bottom": true,
         "heading": "",
         "heading_font": "body",
