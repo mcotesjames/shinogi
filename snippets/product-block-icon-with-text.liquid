@@ -1,0 +1,70 @@
+{% doc %}
+  Renders product icon with text block.
+
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-icon-with-text', block_obj: block %}
+{% enddoc %}
+
+{%- liquid
+  assign has_icon = false
+  assign has_custom_icon = false
+  if block_obj.settings.enable_icon
+    if block_obj.settings.icon != 'none' and block_obj.settings.icon != 'custom'
+      assign has_icon = true
+    elsif block_obj.settings.icon == 'custom'
+      if block_obj.settings.custom_icon != blank or block_obj.settings.custom_icon_2 != blank
+        assign has_icon = true
+        assign has_custom_icon = true
+      endif
+    endif
+  endif
+-%}
+{%- if block_obj.settings.text != blank or has_icon -%}
+  <div class="product-icon-with-text {{ block_obj.shopify_attributes }}">
+    {%- if has_icon -%}
+      <div class="product-icon-with-text__icon{% if has_custom_icon and block_obj.settings.custom_icon_2 != blank %} product-icon-with-text__icon--with-dm-icon{% endif %}">
+        {%- if block_obj.settings.icon != 'none' and block_obj.settings.icon != 'custom' -%}
+          {% render 'icon-pack', icon: block_obj.settings.icon %}
+        {%- elsif block_obj.settings.icon == 'custom' and has_custom_icon -%}
+          {%- capture custom_icon_style -%}
+            object-fit: {{ block_obj.settings.custom_icon_fit | default: 'cover' }};
+          {%- endcapture -%}
+          {%- if block_obj.settings.custom_icon != blank -%}
+            {% assign height = 40 | divided_by: block_obj.settings.custom_icon.aspect_ratio | round: 2 %}
+            {{
+              block_obj.settings.custom_icon
+              | image_url: width: 120
+              | image_tag:
+                height: height,
+                width: 40,
+                widths: '30, 60, 90, 120',
+                style: custom_icon_style,
+                class: 'product-icon-with-text__icon-image'
+            }}
+          {%- endif -%}
+          {%- if block_obj.settings.custom_icon_2 != blank -%}
+            {% assign height_2 = 40 | divided_by: block_obj.settings.custom_icon_2.aspect_ratio | round: 2 %}
+            {{
+              block_obj.settings.custom_icon_2
+              | image_url: width: 120
+              | image_tag:
+                height: height_2,
+                width: 40,
+                widths: '30, 60, 90, 120',
+                style: custom_icon_style,
+                class: 'product-icon-with-text__icon-image product-icon-with-text__icon-image--dark'
+            }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if block_obj.settings.text != blank -%}
+      <div class="product-icon-with-text__text {% if block_obj.settings.heading_font == 'heading'%}{{ block_obj.settings.heading_size }}{% elsif block_obj.settings.heading_font == 'subtitle' %}subtitle{% else %}title font--body{% endif %} richtext-link-inside">
+        {{- block_obj.settings.text -}}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

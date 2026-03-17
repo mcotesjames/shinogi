@@ -1,0 +1,43 @@
+{%- if section.settings.enable_dark_mode_toggle -%}
+  <div class="header__scheme no-js-hidden{% if button_type == 'icon' %} header__scheme--icon{% endif %}">
+    <button
+      class="button button--simple header__toggle-scheme js-toggle-scheme-button header__button header__button--{{ button_type }} focus-inset"
+      aria-label="{{ 'sections.header.dark_mode_label' | t }}"
+    >
+      {%- if button_type == 'icon' -%}
+        <div class="header__toggle-scheme-item">
+          {% render 'icon-light-mode' %}
+          {% render 'icon-dark-mode' %}
+        </div>
+      {%- elsif button_type == 'texticon' -%}
+        <div class="header__toggle-scheme-item">
+          {% render 'icon-light-mode' %}
+          {% render 'icon-dark-mode' %}
+        </div>
+        <div class="button__content">
+          <span
+            class="button__label header-label dark-mode-label"
+            data-label="{{- 'sections.header.dark_mode_label' | t -}}"
+          >
+            {{- 'sections.header.dark_mode_label' | t -}}
+          </span>
+        </div>
+        <div class="button__content">
+          <span
+            class="button__label header-label light-mode-label"
+            data-label="{{- 'sections.header.light_mode_label' | t -}}"
+          >
+            {{- 'sections.header.light_mode_label' | t -}}
+          </span>
+        </div>
+      {%- else -%}
+        <div class="button__content">
+          <span class="button__label header-label" data-label="{{- 'sections.header.dark_mode_label' | t -}}">
+            {{- 'sections.header.dark_mode_label' | t -}}
+          </span>
+        </div>
+        <div class="header__toggle-scheme-switcher"></div>
+      {%- endif -%}
+    </button>
+  </div>
+{%- endif -%}

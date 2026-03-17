@@ -1,0 +1,53 @@
+{%- if shop.customer_accounts_enabled and section.settings.enable_account_btn -%}
+  <div class="header__account{% if button_type == 'icon' %} header__account--icon{% endif %} {% if in_header_drawer != true %} color-{% if section.settings.overlay_mode == false %}{{ section.settings.header_color_scheme }}{% else %}background-1{% endif %}{% endif %}">
+    {% if section.settings.enable_account_modal_component %}
+      <shopify-account
+        menu="{{ section.settings.customer_account_menu | default: "customer-account-main-menu" }}"
+        style="display: flex; align-items: center;"
+      >
+        <div slot="signed-out-avatar">
+          <div class="header__button header__button--{{ button_type }} header__button--account button button--simple">
+            {% if button_type == 'icon' %}
+              {% render 'icon-account' %}
+            {% else %}
+              <div class="button__content">
+                <span class="button__label header-label" data-label="{{- 'sections.header.account_label' | t -}}">
+                  {{- 'sections.header.account_label' | t -}}
+                </span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </shopify-account>
+    {%- else -%}
+      {% liquid
+        if customer
+          assign btn_link = routes.account_url
+          assign btn_aria = 'customer.account_fallback' | t
+        else
+          assign btn_link = routes.account_login_url
+          assign btn_aria = 'customer.log_in' | t
+        endif
+      %}
+      <a
+        href="{{ btn_link }}"
+        class="header__button header__button--{{ button_type }} header__button--account focus-inset button button--simple"
+        aria-label="{{- btn_aria -}}"
+        role="button"
+        {% if customer and customer.name != blank %}
+          title="{{- 'sections.header.account_hover_text' | t: name: customer.name -}}"
+        {% endif %}
+      >
+        {%- if button_type == 'icon' -%}
+          {% render 'icon-account' %}
+        {%- else -%}
+          <div class="button__content">
+            <span class="button__label header-label" data-label="{{- 'sections.header.account_label' | t -}}">
+              {{- 'sections.header.account_label' | t -}}
+            </span>
+          </div>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

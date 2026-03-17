@@ -1,0 +1,104 @@
+<cart-notification id="CartNotification" class="cart-drawer cart-notification modal">
+  <div
+    id="CartNotification-Overlay"
+    class="cart-drawer__overlay modal__overlay"
+    onclick="this.closest('cart-notification').close?.()"
+  ></div>
+  <div
+    class="cart-drawer__inner modal__content color-{{ settings.notification_color_scheme }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ 'general.cart.cart' | t }}"
+    tabindex="-1"
+  >
+    {% comment %} CART NOTIFICATION HEADER {% endcomment %}
+    <div class="modal__heading cart-drawer__header">
+      <div class="cart-drawer__header-title">
+        <span class="subtitle">
+          {{- 'general.cart.cart_notification.cart_notification_title' | t -}}
+        </span>
+      </div>
+
+      {% render 'modal-close-button', is_inside_cart_notification: true %}
+    </div>
+
+    {% comment %} CART NOTIFICATION FREE SHIPPING {% endcomment %}
+    <div id="CartNotification-Shipping">
+      {% render 'cart-shipping-slider', cart: cart %}
+    </div>
+
+    <div class="cart-notification__wrapper">
+      {% comment %} NOTIFICATION CART ITEM {% endcomment %}
+      <cart-notification-item>
+        <form
+          action="{{ routes.cart_url }}"
+          id="CartNotification-Form"
+          class="cart-drawer__form"
+          method="post"
+        >
+          <div id="CartNotification-CartItems" class="cart-drawer__contents js-contents">
+            <div class="cart-drawer__cart-items" id="cart-notification-item"></div>
+
+            <p
+              id="CartNotification-LiveRegionText"
+              class="visually-hidden"
+              role="status"
+            ></p>
+            <p
+              id="CartNotification-LineItemStatus"
+              class="visually-hidden"
+              aria-hidden="true"
+              role="status"
+            >
+              {{- 'accessibility.loading' | t -}}
+            </p>
+          </div>
+          <div id="CartNotification-CartErrors" class="cart-drawer__form-errors body-small" role="alert"></div>
+        </form>
+      </cart-notification-item>
+
+      {% comment %} BUTTONS {% endcomment %}
+      <div class="cart-drawer__buttons">
+        <button
+          type="submit"
+          id="CartNotification-Checkout"
+          class="cart-drawer__checkout-button button button--primary focus-inset"
+          name="checkout"
+          form="CartDrawer-Form"
+        >
+          <div class="button__content">
+            <span class="button__label" data-label="{{- 'general.cart.checkout_button_label' | t -}}">
+              {{- 'general.cart.checkout_button_label' | t -}}
+            </span>
+          </div>
+        </button>
+        {% assign cart_btn_label = 'general.cart.view' | t %}
+        {% render 'button',
+          btn_label: cart_btn_label,
+          btn_style: 'tertiary',
+          btn_link: routes.cart_url,
+          class: 'cart__link'
+        %}
+      </div>
+
+      {% comment %} PRODUCT RECOMMENDATIONS {% endcomment %}
+      {%- if settings.enable_notification_recommended_products -%}
+        {{ 'component-card-simple.css' | asset_url | stylesheet_tag }}
+        <div
+          class="cart-notification__recommend"
+          data-base-url="{{ routes.product_recommendations_url }}?section_id=cart-notification-recommend&product_id=[product_id]&limit=4"
+        >
+          <div class="cart-notification__recommend-top subtitle">
+            {{- 'general.cart.cart_notification.related_products_title' | t -}}
+          </div>
+          {% comment %}
+            Content from the cart-notification-recommend.liquid section is inserted here after a successful request using the Section Rendering API.
+          {% endcomment %}
+          <div class="cart-notification__recommend-loading" style="display: none;">
+            {% render 'icon-loading' %}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</cart-notification>

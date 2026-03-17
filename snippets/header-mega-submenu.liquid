@@ -1,0 +1,78 @@
+{%- for block in section.blocks -%}
+  {% assign mega_submenu_trigger = block.settings.mega_submenu_trigger | handle | strip %}
+  {% liquid
+    assign mega_submenu_trigger = block.settings.mega_submenu_trigger | handle | strip
+    assign link_handleized = link.title | handle | strip
+
+    assign show_mega_submenu = false
+    if block.type == 'mega_submenu' and link.links != blank
+      if link.handle == mega_submenu_trigger or link_handleized == mega_submenu_trigger
+        assign show_mega_submenu = true
+      endif
+    endif
+  %}
+
+  {%- if show_mega_submenu -%}
+    <div
+      class="header__mega-submenu mega-submenu color-{{ block.settings.mega_submenu_color_scheme }}"
+      {{ block.shopify_attributes }}
+    >
+      <div
+        class="mega-submenu__wrapper"
+        tabindex="-1"
+        role="dialog"
+      >
+        <div class="mega-submenu__wrapper-inner">
+          <div class="mega-submenu__tabs">
+            {%- for sublink in link.links -%}
+              <div>
+                {%- if block.settings.enable_clickable_top_level -%}
+                  <a
+                    href="{{ sublink.url }}"
+                    class="mega-submenu__tab list-menu-item-animate body-small focus-inset{% if forloop.first and sublink.links != blank %} active{% endif %}"
+                    data-tab-id="{{ sublink.title | escape | handle }}-{{ forloop.index0 }}"
+                  >
+                    <span>
+                      {{- sublink.title | escape -}}
+                    </span>
+                  </a>
+                {%- else -%}
+                  <span
+                    class="mega-submenu__tab{% if sublink.links != blank %} list-menu-item-animate{% if forloop.first %} active{% endif %}{% endif %} body-small"
+                    data-tab-id="{{ sublink.title | escape | handle }}-{{ forloop.index0 }}"
+                  >
+                    <span>
+                      {{- sublink.title | escape -}}
+                    </span>
+                  </span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- for sublink in link.links -%}
+            {%- if sublink.links != blank -%}
+              <div
+                class="mega-submenu__submenu{% if forloop.first %} active{% endif %}"
+                data-tab-id="{{ sublink.title | escape | handle }}-{{ forloop.index0 }}"
+              >
+                {%- for subsublink in sublink.links -%}
+                  <div class="mega-submenu__submenu-item">
+                    <a
+                      href="{{ subsublink.url }}"
+                      class="list-menu-item-animate body-small focus-inset"
+                    >
+                      <span>
+                        {{- subsublink.title | escape -}}
+                      </span>
+                    </a>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endfor -%}

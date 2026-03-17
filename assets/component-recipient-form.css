@@ -1,0 +1,120 @@
+.recipient-form {
+  position: relative;
+  display: block;
+  margin-bottom: 1.6rem;
+  width: 100%;
+}
+.recipient-form input[type=checkbox] {
+  position: absolute;
+  opacity: 1;
+  width: 1.4rem;
+  height: 1.4rem;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  appearance: none;
+}
+.recipient-form input[type=checkbox]:checked + .recipient-checkbox .field__checkbox {
+  border-color: rgb(var(--color-foreground));
+}
+.recipient-form input[type=checkbox]:checked + .recipient-checkbox .field__checkbox::before {
+  visibility: visible;
+}
+.recipient-form .recipient-checkbox {
+  position: static;
+  color: rgb(var(--color-foreground));
+  word-break: break-word;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.recipient-form .recipient-checkbox .field__checkbox {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: var(--border-radius-input);
+  border: 0.1rem solid rgb(var(--color-foreground));
+  background-color: transparent;
+  transition: border-color var(--duration-default);
+}
+.recipient-form .recipient-checkbox .field__checkbox::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  visibility: hidden;
+  background-color: rgb(var(--color-foreground));
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+}
+@media screen and (pointer: fine) {
+  .recipient-form .recipient-checkbox:hover .field__checkbox {
+    border-color: rgb(var(--color-foreground));
+  }
+}
+.recipient-form .recipient-email-label {
+  display: none;
+}
+.recipient-form .recipient-fields__field:not(:last-child) {
+  margin: 0 0 1rem;
+}
+.recipient-form .recipient-fields hr {
+  margin: 1rem auto;
+  width: 100%;
+}
+.recipient-form .recipient-fields__field-help {
+  color: rgb(var(--color-foreground-secondary));
+  margin: 0.4rem 0 0;
+}
+.recipient-form .form__message {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: rgb(var(--color-foreground));
+  margin: 0.8rem 0 0;
+}
+.recipient-form .form__message .icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.recipient-form .product-form__recipient-error-message-wrapper ul {
+  list-style-position: inside;
+  padding-inline-start: 1.2rem;
+  margin: 0.4rem 0 0;
+}
+.recipient-form .error-message {
+  font-size: 1.2rem;
+}
+.no-js .recipient-form input[type=checkbox],
+.no-js .recipient-form .recipient-checkbox {
+  display: none !important;
+}
+.no-js .recipient-form .recipient-email-label.optional {
+  display: inline;
+}
+.js .recipient-form .recipient-fields {
+  display: none;
+}
+.js .recipient-form .recipient-email-label.required {
+  display: inline;
+}
+.js .recipient-form input[type=checkbox]:checked ~ .recipient-fields {
+  display: block;
+  animation: recipientFormOpen var(--duration-default) ease;
+}
+@keyframes recipientFormOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}

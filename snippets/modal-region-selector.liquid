@@ -1,0 +1,223 @@
+{% doc %}
+  Renders a button with modal for change region and language.
+
+  @param {object} section_obj - Section Liquid object
+  @param {string} modal_location - Location in html layout
+  @param {string} button_type - Button type. text or icon or texticon
+  @param {string} [class] - Custom CSS class
+  @param {boolean} [in_header_drawer] - Flag for header mobile menu
+
+  @example
+  {% render 'modal-region-selector', product_card_product: product %}
+{% enddoc %}
+
+{% liquid
+  assign enable_country_selector = false
+  if section_obj.settings.enable_country_selector and localization.available_countries.size > 1
+    assign enable_country_selector = true
+  endif
+
+  assign enable_language_selector = false
+  if section_obj.settings.enable_language_selector and localization.available_languages.size > 1
+    assign enable_language_selector = true
+  endif
+
+  assign current_country = localization.country
+  assign current_currency = localization.country.currency.iso_code | append: ' ' | append: localization.country.currency.symbol
+%}
+
+{%- capture button_label -%}
+  {%- if enable_country_selector -%}
+    {%- if modal_location == 'header' -%}
+      {{ current_currency }}
+    {%- else -%}
+      {{ current_country }} ({{ current_currency }})
+    {%- endif -%}
+  {%- endif -%}
+  {%- if enable_country_selector and enable_language_selector -%}
+    {{ " / " }}
+  {%- endif -%}
+  {%- if enable_language_selector -%}
+    {%- if modal_location == 'footer' -%}
+      {{- localization.language.endonym_name | upcase -}}
+    {%- else -%}
+      {{- localization.language.iso_code | upcase -}}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture modal_label -%}
+  {%- if enable_country_selector -%}
+    {{- 'localization.country_label' | t }}
+  {%- endif -%}
+  {%- if enable_country_selector and enable_language_selector -%}
+    {{ " & " }}
+  {%- endif -%}
+  {%- if enable_language_selector -%}
+    {{ 'localization.language_label' | t -}}
+  {%- endif -%}
+{%- endcapture -%}
+
+{% liquid
+  assign nojs_country_form_id = 'HeaderCountryFormNoScript'
+  if modal_location == 'footer'
+    assign nojs_country_form_id = 'FooterCountryFormNoScript'
+  endif
+  if modal_location == 'header_mobile'
+    assign nojs_country_form_id = 'HeaderMobileCountryFormNoScript'
+  endif
+  assign nojs_lang_form_id = 'HeaderLanguageFormNoScript'
+  if modal_location == 'footer'
+    assign nojs_lang_form_id = 'FooterCountryFormNoScript'
+  endif
+  if modal_location == 'header_mobile'
+    assign nojs_lang_form_id = 'HeaderMobileCountryFormNoScript'
+  endif
+
+  if in_header_drawer
+    assign in_header_drawer = true
+  else
+    assign in_header_drawer = false
+  endif
+%}
+
+{%- if enable_country_selector or enable_language_selector -%}
+  <noscript>
+    <div class="modal-region-selector{% if class != blank %} {{ class }}{% endif %}">
+      {%- if enable_country_selector -%}
+        {%- form 'localization', id: nojs_country_form_id, class: 'localization-form' -%}
+          <div class="localization-form__select">
+            <select
+              class="localization-selector"
+              name="country_code"
+              aria-label="{{ 'localization.country_label' | t }}"
+            >
+              {%- for country in localization.available_countries -%}
+                <option
+                  value="{{ country.iso_code }}"
+                  {%- if country.iso_code == localization.country.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ country.name }} ({{ country.currency.iso_code }}
+                  {{ country.currency.symbol }})
+                </option>
+              {%- endfor -%}
+            </select>
+            {% render 'icon-caret' %}
+          </div>
+          <button class="button button--tertiary focus-inset">
+            {{- 'localization.update_country' | t -}}
+          </button>
+        {%- endform -%}
+      {%- endif -%}
+
+      {%- if enable_language_selector -%}
+        {%- form 'localization', id: nojs_lang_form_id, class: 'localization-form' -%}
+          <div class="localization-form__select">
+            <select
+              class="localization-selector"
+              name="locale_code"
+              aria-label="{{ 'localization.language_label' | t }}"
+            >
+              {%- for language in localization.available_languages -%}
+                <option
+                  value="{{ language.iso_code }}"
+                  lang="{{ language.iso_code }}"
+                  {%- if language.iso_code == localization.language.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ language.endonym_name | capitalize }}
+                </option>
+              {%- endfor -%}
+            </select>
+            {% render 'icon-caret' %}
+          </div>
+          <button class="button button--tertiary focus-inset">
+            {{- 'localization.update_language' | t -}}
+          </button>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </noscript>
+
+  <modal-region-selector
+    class="modal-region-selector{% if class != blank %} {{ class }}{% if button_type == 'icon' %} {{ class }}--icon{% endif %}{% endif %} no-js-hidden"
+    data-modal-type="{% if modal_location == 'header' %}desktop-menu{% elsif modal_location == 'header_mobile' %}mobile{% elsif modal_location == 'footer' %}drawer{% endif %}"
+  >
+    <button class="header__button header__button--{{ button_type }} button button--simple modal-region-toggle focus-inset">
+      {%- if button_type == 'icon' -%}
+        {% render 'icon-region' %}
+      {%- elsif button_type == 'texticon' -%}
+        {% render 'icon-region' %}
+
+        <div class="button__content">
+          <span class="button__label header-label" data-label="{{- button_label -}}">{{- button_label -}}</span>
+        </div>
+      {%- else -%}
+        <div class="button__content">
+          <span class="button__label header-label" data-label="{{- button_label -}}">{{- button_label -}}</span>
+        </div>
+      {%- endif -%}
+    </button>
+
+    <div class="region-modal modal">
+      {%- if in_header_drawer == false -%}
+        <div class="modal__overlay"></div>
+      {%- endif -%}
+      {% liquid
+        assign modal_color_scheme = 'background-1'
+        if in_header_drawer == false and section_obj.settings.region_color_scheme != blank
+          assign modal_color_scheme = section_obj.settings.region_color_scheme
+        endif
+
+        if in_header_drawer == true and section_obj.settings.mobile_menu_color_scheme != blank
+          assign modal_color_scheme = section_obj.settings.mobile_menu_color_scheme
+        endif
+      %}
+      <div
+        class="modal__content color-{{ modal_color_scheme }}"
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ 'localization.update_country' | t }}"
+        tabindex="-1"
+      >
+        {%- if in_header_drawer -%}
+          <button
+            type="button"
+            class="mobile-submenu__back button--unstyled focus-inset"
+            aria-expanded="true"
+          >
+            {% render 'icon-menu-back' %}
+            <span class="header-label">{{- modal_label -}}</span>
+            <span></span>
+          </button>
+        {%- else -%}
+          <div class="modal__heading">
+            <span class="subtitle">{{ modal_label }}</span>
+            {% render 'modal-close-button' %}
+          </div>
+        {%- endif -%}
+
+        <div class="region-modal__selects">
+          {% if enable_country_selector %}
+            {% render 'modal-localization', modal_location: modal_location %}
+          {% endif %}
+
+          {% if enable_language_selector %}
+            {% render 'modal-language', modal_location: modal_location %}
+          {% endif %}
+
+          <button class="button button--primary region-modal__button">
+            <div class="button__content">
+              <span class="button__label" data-label="{{ 'localization.save_changes' | t }}">
+                {{- 'localization.save_changes' | t -}}
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </modal-region-selector>
+{%- endif -%}

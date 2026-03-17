@@ -1,0 +1,81 @@
+.blog-posts {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.blog-posts-layout {
+  width: 100%;
+  overflow: hidden;
+}
+
+.blog-posts-wrapper {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  margin-bottom: -0.1rem;
+}
+.blog-posts-wrapper--grid {
+  flex-wrap: wrap;
+}
+.blog-posts-wrapper--slider .blog-posts-card {
+  border-right: 0.1rem solid rgb(var(--color-border));
+}
+.blog-posts-wrapper--slider .blog-posts-card:last-child {
+  border-right: none;
+}
+@media (min-width: 576px) {
+  .blog-posts-wrapper--2 .blog-posts-card, .blog-posts-wrapper--3 .blog-posts-card, .blog-posts-wrapper--4 .blog-posts-card {
+    max-width: 50%;
+    width: 50%;
+  }
+  .blog-posts-wrapper--2.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(2n)), .blog-posts-wrapper--3.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(2n)), .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(2n)) {
+    border-right: 0.1rem solid rgb(var(--color-border));
+  }
+}
+@media (min-width: 990px) {
+  .blog-posts-wrapper--3 .blog-posts-card, .blog-posts-wrapper--4 .blog-posts-card {
+    max-width: 33.3333333333%;
+    width: 33.3333333333%;
+  }
+  .blog-posts-wrapper--3.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(3n)) {
+    border-right: 0.1rem solid rgb(var(--color-border));
+  }
+  .blog-posts-wrapper--3.blog-posts-wrapper--grid .blog-posts-card:nth-child(3n) {
+    border-right: none;
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card {
+    max-width: 50%;
+    width: 50%;
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(2n)) {
+    border-right: 0.1rem solid rgb(var(--color-border));
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card:nth-child(2n) {
+    border-right: none;
+  }
+}
+@media (min-width: 1200px) {
+  .blog-posts-wrapper--4 .blog-posts-card {
+    max-width: 25%;
+    width: 25%;
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card {
+    max-width: 25%;
+    width: 25%;
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card:not(:nth-child(4n)) {
+    border-right: 0.1rem solid rgb(var(--color-border));
+  }
+  .blog-posts-wrapper--4.blog-posts-wrapper--grid .blog-posts-card:nth-child(4n) {
+    border-right: none;
+  }
+}
+
+.blog-posts-card {
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+}

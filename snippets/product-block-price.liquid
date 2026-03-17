@@ -1,0 +1,92 @@
+{% doc %}
+  Renders product price block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {string} section_id - Section ID
+
+  @example
+  {% render 'product-block-price', product: product, block_obj: block, section_id: section.id %}
+{% enddoc %}
+
+<div class="product__price" id="price-{{ section_id }}" role="status" {{ block_obj.shopify_attributes }}>
+  <div class="product__price-inner">
+    {% liquid
+      assign show_sale_badge = false
+      assign is_placeholder_sale_price = false
+
+      if block_obj.settings.show_sale_badge
+        if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price
+          assign show_sale_badge = true
+        endif
+
+        if product == blank
+          assign show_sale_badge = true
+          assign is_placeholder_sale_price = true
+        endif
+      endif
+    %}
+
+    {%- render 'price',
+      product: product,
+      use_variant: true,
+      price_font: block_obj.settings.price_font,
+      price_font_size: block_obj.settings.price_font_size,
+      is_placeholder_sale_price: is_placeholder_sale_price
+    -%}
+
+    {%- if show_sale_badge -%}
+      <span class="badge badge--sale body-small" aria-hidden="true">
+        {%- if block_obj.settings.sale_badge_type == 'sale' -%}
+          {{- 'products.product.on_sale' | t -}}
+        {%- else -%}
+          {{- 'products.product.on_sale' | t -}}
+          <span>
+            <span>-</span>
+            <span>
+              {%- if product != blank -%}
+                {{-
+                  product.selected_or_first_available_variant.compare_at_price
+                  | minus: product.selected_or_first_available_variant.price
+                  | times: 100.0
+                  | divided_by: product.selected_or_first_available_variant.compare_at_price
+                  | round
+                -}}
+              {%- else -%}
+                15
+              {%- endif -%}
+            </span>
+            <span>%</span>
+          </span>
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+  </div>
+
+  {%- if block_obj.settings.show_tax_info == true -%}
+    {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
+      <div class="product__tax body-small richtext-link-inside-secondary">
+        {%- if cart.duties_included and cart.taxes_included -%}
+          {{ 'products.product.duties_and_taxes_included' | t }}
+        {%- elsif cart.taxes_included -%}
+          {{ 'products.product.taxes_included' | t }}
+        {%- elsif cart.duties_included -%}
+          {{ 'products.product.duties_included' | t }}
+        {%- endif -%}
+        {%- if shop.shipping_policy.body != blank -%}
+          {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if product != blank and block_obj.settings.show_installments == true -%}
+    <div class="product__installment body-small richtext-link-inside">
+      {%- assign product_form_installment_id = 'product-form-installment-' | append: section_id -%}
+      {%- form 'product', product, id: product_form_installment_id, class: 'installment' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {{ form | payment_terms }}
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>

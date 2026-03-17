@@ -1,0 +1,423 @@
+{%- liquid
+  assign next_product = blank
+  if collections.all.products.size > 1
+    # if there are product collections
+    if product.collections.size > 0
+      assign product_collection = product.collections[0]
+
+      if product_collection.products.size < 2 and product.collections.size > 1
+        for collection_item in product.collections
+          if collection_item.products.size > 1
+            assign product_collection = collection_item
+          endif
+        endfor
+      endif
+
+      if product_collection.products.size > 1
+        assign next_product_index = 0
+        for product_item in product_collection.products
+          if product_item.id == product.id
+            assign next_product_index = forloop.index0 | plus: 1
+            if product.collections[0].products[next_product_index] == blank
+              assign next_product_index = forloop.index0 | minus: 1
+            endif
+          endif
+        endfor
+
+        assign next_product = product_collection.products[next_product_index]
+      endif
+    endif
+
+    # if there are NO product collections
+    if product.collections.size == 0 or next_product == blank
+      # find random product from all products
+      assign products_size = collections.all.products.size
+
+      # find random index that will not change for an hour
+      assign hour = 'now' | date: '%Y%m%d%H' | plus: 0
+      assign random_index = hour | modulo: products_size
+      assign next_product = collections.all.products[random_index]
+      if next_product.id == product.id
+        assign random_index_next = hour | modulo: products_size | plus: 1
+        assign next_product = collections.all.products[random_index_next]
+        if next_product == blank
+          assign random_index_prev = hour | modulo: products_size | minus: 1
+          assign next_product = collections.all.products[random_index_prev]
+        endif
+      endif
+    endif
+  endif
+
+  if product.metafields.custom.next_product != blank and product.metafields.custom.next_product.type == 'product_reference'
+    assign next_product = product.metafields.custom.next_product.value
+  endif
+
+  if section.settings.overwrite_next_product != blank
+    assign next_product = section.settings.overwrite_next_product
+  endif
+-%}
+
+{%- if next_product != blank -%}
+  {{ 'section-next-product.css' | asset_url | stylesheet_tag }}
+
+  {%- style -%}
+    {% render 'section-padding' %}
+    {% render 'section-margin' %}
+  {%- endstyle -%}
+
+  <div class="next-product color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
+    <div class="next-product__wrapper container">
+      <div class="next-product__item">
+        {%- if next_product.url != blank -%}
+          <a
+            href="{{ next_product.url }}"
+            class="next-product__link focus-inset"
+            aria-label="{{ 'accessibility.product_link' | t }}"
+          ></a>
+        {%- endif -%}
+
+        <div class="next-product__info">
+          {%- if section.settings.subheading != blank -%}
+            <div class="subtitle">{{- section.settings.subheading -}}</div>
+          {%- endif -%}
+          <{{ section.settings.heading_tag | default: "h2" }} class="next-product__title {% if section.settings.heading_font == 'heading'%}{{ section.settings.heading_size }}{% else %}title font--body{% endif %}">
+            <span>{{- next_product.title -}}</span>
+          </{{ section.settings.heading_tag | default: "h2" }}>
+        </div>
+
+        {% liquid
+          case settings.card_media_ratio
+            when 'landscape'
+              # 4 / 3
+              assign padding_bottom = '75%'
+              assign media_ratio_for_calc = 1.33
+            when 'portrait'
+              # 162 / 216
+              assign padding_bottom = '133.33%'
+              assign media_ratio_for_calc = 0.75
+            when 'square'
+              # 1 / 1
+              assign padding_bottom = '100%'
+              assign media_ratio_for_calc = 1
+            else
+              # 1 / 1
+              assign padding_bottom = '100%'
+              assign media_ratio_for_calc = 1
+          endcase
+        %}
+        <div
+          class="next-product__media next-product__media--hover-effect-{{ settings.card_hover_effect }}{% if next_product.featured_media == blank %} next-product__media--placeholder{% endif %}"
+          style="--media-padding-bottom: {{ padding_bottom }};"
+        >
+          {%- if next_product.featured_media != blank -%}
+            {% liquid
+              assign calc_ratio = 1
+              if settings.card_media_fit == 'cover' and next_product.featured_media.aspect_ratio > media_ratio_for_calc
+                assign calc_ratio = next_product.featured_media.aspect_ratio | divided_by: media_ratio_for_calc | round: 2
+              endif
+
+              assign media_alt = next_product.title
+              if next_product.featured_media.alt != blank
+                assign media_alt = next_product.featured_media.alt
+              endif
+            %}
+
+            {%- capture sizes -%}
+              (min-width: 750px) calc({{ calc_ratio }} * 162px), calc({{ calc_ratio }} * 100px)
+            {%- endcapture -%}
+
+            {%- capture media_style -%}
+              object-fit: {{ settings.card_media_fit | default: 'cover' }};
+            {%- endcapture -%}
+
+            {{
+              next_product.featured_media
+              | image_url: width: next_product.featured_media.width
+              | image_tag:
+                loading: 'lazy',
+                class: 'motion-reduce media--first',
+                widths: '162, 324, 486, 648, 1000, 1200, 1400, 1600, 1800, 2000, 2400',
+                sizes: sizes,
+                style: media_style,
+                alt: media_alt
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.next-product.name",
+  "tag": "section",
+  "class": "next-product-section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.next-product.settings.paragraph__1.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.borders.enable_border_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": false,
+      "label": "t:sections.all.borders.enable_border_bottom.label"
+    },
+
+    {
+      "type": "product",
+      "id": "overwrite_next_product",
+      "label": "t:sections.next-product.settings.overwrite_next_product.label"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.next-product.settings.subheading.label",
+      "default": "t:sections.next-product.settings.subheading.default"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.all.heading_font.options__1.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        }
+      ],
+      "default": "heading",
+      "label": "t:sections.next-product.settings.heading_font.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_size.options__6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_size.options__5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        }
+      ],
+      "default": "h5",
+      "label": "t:sections.next-product.settings.heading_size.label",
+      "visible_if": "{{ section.settings.heading_font == 'heading' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "xs",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.next-product.name",
+      "category": "t:sections.categories.products"
+    }
+  ]
+}
+{% endschema %}

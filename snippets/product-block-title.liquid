@@ -1,0 +1,29 @@
+{% doc %}
+  Renders product title block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {boolean} [with_link] - Flag for render link
+
+  @example
+  {% render 'product-block-title', product: product, block_obj: block %}
+{% enddoc %}
+
+{% liquid
+  assign title_tag = "h1"
+  if block_obj.settings.heading_tag != blank
+    assign title_tag = block_obj.settings.heading_tag
+  endif
+%}
+
+<{{ title_tag }} class="product__title {{ block_obj.settings.heading_size }}" {{ block_obj.shopify_attributes }}>
+  {%- if with_link -%}
+    <a href="{{ product.url }}" class="focus-inset">
+  {%- endif -%}
+
+  {{- product.title | escape -}}
+
+  {%- if with_link -%}
+    </a>
+  {%- endif -%}
+</{{ title_tag }}>

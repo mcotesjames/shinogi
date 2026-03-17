@@ -1,0 +1,254 @@
+<cart-drawer id="CartDrawer" class="cart-drawer{% if cart == empty %} is-empty{% endif %} modal">
+  <div
+    id="CartDrawer-Overlay"
+    class="cart-drawer__overlay modal__overlay"
+    onclick="this.closest('cart-drawer').close?.()"
+  ></div>
+  <div
+    class="cart-drawer__inner modal__content color-{{ settings.drawer_color_scheme }}"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ 'general.cart.cart' | t }}"
+    tabindex="-1"
+  >
+    {% comment %} CART DRAWER HEADER {% endcomment %}
+    <div class="modal__heading cart-drawer__header">
+      <div class="cart-drawer__header-title">
+        <span class="subtitle">
+          {{- 'general.cart.cart_drawer_title' | t }}
+          ({{ cart.item_count }})</span
+        >
+      </div>
+
+      {% render 'modal-close-button', is_inside_cart_drawer: true %}
+    </div>
+
+    {% comment %} CART DRAWER FREE SHIPPING {% endcomment %}
+    {% render 'cart-shipping-slider', cart: cart %}
+
+    {% comment %} CART DRAWER EMPTY BLOCK {% endcomment %}
+    {%- if cart == empty -%}
+      <div class="cart-drawer__empty">
+        <div class="cart-drawer__empty-wrapper">
+          <p class="cart-drawer__empty-title richtext-link-inside">
+            {%- if settings.title_empty_cart != blank -%}
+              {{- settings.title_empty_cart -}}
+            {%- else -%}
+              {{- 'general.cart.empty_cart_title' | t -}}
+            {%- endif -%}
+          </p>
+          <p class="cart-drawer__empty-desc body-small richtext-link-inside-secondary">
+            {%- if settings.text_empty_cart != blank -%}
+              {{- settings.text_empty_cart -}}
+            {%- else -%}
+              {{- 'general.cart.empty_cart_text' | t -}}
+            {%- endif -%}
+          </p>
+
+          {% liquid
+            assign button_link = routes.collections_url | sort_by: 'best-selling'
+            if settings.button_link_empty_cart != blank
+              assign button_link = settings.button_link_empty_cart
+            endif
+
+            assign button_label = 'general.cart.empty_cart_button' | t
+            if settings.button_label_empty_cart != blank
+              assign button_label = settings.button_label_empty_cart
+            endif
+          %}
+
+          {% render 'button',
+            btn_label: button_label,
+            btn_style: 'primary',
+            btn_link: button_link,
+            class: 'cart-drawer__empty-button'
+          %}
+        </div>
+
+        {%- if settings.collection_empty_cart_drawer != blank -%}
+          <div class="cart-drawer__empty-collection">
+            {% render 'collection-card',
+              card_collection: settings.collection_empty_cart_drawer,
+              image_ratio: settings.collection_ratio_empty_cart_drawer,
+              heading_size: 'subtitle',
+              columns: 4,
+              is_collections_page: false
+            %}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {% comment %} DRAWER CART ITEMS {% endcomment %}
+    <cart-drawer-items class="{% if cart == empty %}is-empty{% endif %}">
+      <form
+        action="{{ routes.cart_url }}"
+        id="CartDrawer-Form"
+        class="cart-drawer__form"
+        method="post"
+      >
+        <div id="CartDrawer-CartItems" class="cart-drawer__contents js-contents">
+          {%- if cart != empty -%}
+            <div class="cart-drawer__cart-items">
+              {%- for item in cart.items -%}
+                {% render 'cart-item', item: item, cart_type: 'cart-drawer' %}
+              {% endfor %}
+            </div>
+          {%- endif -%}
+          <p
+            id="CartDrawer-LiveRegionText"
+            class="visually-hidden"
+            role="status"
+          ></p>
+          <p
+            id="CartDrawer-LineItemStatus"
+            class="visually-hidden"
+            aria-hidden="true"
+            role="status"
+          >
+            {{- 'accessibility.loading' | t -}}
+          </p>
+        </div>
+        <div id="CartDrawer-CartErrors" class="cart-drawer__form-errors body-small" role="alert"></div>
+      </form>
+    </cart-drawer-items>
+
+    {% comment %} SUBTOTAL, TAX NOTE, BUTTONS {% endcomment %}
+    <div class="cart-drawer__footer">
+      <div class="totals__wrapper">
+        {%- if cart.cart_level_discount_applications.size > 0 -%}
+          <ul
+            class="discounts list-unstyled"
+            role="list"
+            aria-label="{{ 'customer.order.discount' | t }}"
+          >
+            {%- for discount in cart.cart_level_discount_applications -%}
+              <li class="discounts__discount">
+                <span class="discounts__discount-label subtitle">
+                  {%- render 'icon-discount' -%}
+                  {{- discount.title -}}
+                </span>
+                <span class="discounts__discount-value body-small">
+                  -
+                  {%- if settings.currency_code_enabled -%}
+                    {{- discount.total_allocated_amount | money_with_currency -}}
+                  {%- else -%}
+                    {{- discount.total_allocated_amount | money -}}
+                  {%- endif -%}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="totals" role="status">
+          <div class="totals__subtotal subtitle">
+            {{- 'sections.cart.subtotal' | t -}}
+          </div>
+          <div class="totals__subtotal-value">
+            <span>
+              {%- if settings.currency_code_enabled -%}
+                {{- cart.total_price | money_with_currency -}}
+              {%- else -%}
+                {{- cart.total_price | money -}}
+              {%- endif -%}
+            </span>
+            <div class="loading-overlay hidden">
+              <div class="loading-overlay__spinner">
+                {% render 'icon-loading' %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="totals">
+          <p class="totals__shipping subtitle">
+            {{- 'sections.cart.shipping' | t -}}
+          </p>
+          <div class="totals__shipping-value body-small">
+            {{- 'sections.cart.shipping_at_checkout' | t -}}
+          </div>
+        </div>
+
+        {%- if settings.show_tax_info_drawer -%}
+          <small class="tax-note body-small richtext-link-inside-secondary">
+            {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+              {{- 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url -}}
+            {%- elsif cart.taxes_included -%}
+              {{- 'sections.cart.taxes_included_but_shipping_at_checkout' | t -}}
+            {%- elsif shop.shipping_policy.body != blank -%}
+              {{- 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url -}}
+            {%- else -%}
+              {{- 'sections.cart.taxes_and_shipping_at_checkout' | t -}}
+            {%- endif -%}
+          </small>
+        {%- endif -%}
+      </div>
+
+      {% comment %} CART NOTE {% endcomment %}
+      {%- if settings.show_cart_note_drawer -%}
+        <div class="cart-drawer__note">
+          <details id="Details-CartDrawer-Note" class="cart-drawer__note-details">
+            <summary class="cart-drawer__note-summary button button--simple focus-inset">
+              <div class="button__content">
+                <span class="button__label" data-label="{{- 'sections.cart.note_title' | t -}}">
+                  {{- 'sections.cart.note_title' | t -}}
+                </span>
+
+                <div class="cart-drawer__note-icon">
+                  {% render 'icon-plus-dropdown' %}
+                  {% render 'icon-minus-dropdown' %}
+                </div>
+              </div>
+            </summary>
+
+            <cart-note class="cart__note field">
+              <textarea
+                class="text-area field__input"
+                name="note"
+                dir="ltr"
+                id="CartDrawer-note"
+                placeholder="{{- 'sections.cart.note_title' | t -}}"
+              >{{ cart.note }}</textarea>
+              <label for="CartDrawer-note" class="body-small">
+                {{- 'sections.cart.note_title' | t -}}
+              </label>
+              <span class="cart__note-loading">
+                {% render 'icon-loading' %}
+              </span>
+              <span class="cart__note-success">
+                {% render 'icon-success' %}
+              </span>
+            </cart-note>
+          </details>
+        </div>
+      {%- endif -%}
+
+      <div class="cart-drawer__buttons">
+        <button
+          type="submit"
+          id="CartDrawer-Checkout"
+          class="cart-drawer__checkout-button button button--primary focus-inset"
+          name="checkout"
+          form="CartDrawer-Form"
+          {% if cart == empty %}
+            disabled
+          {% endif %}
+        >
+          <div class="button__content">
+            <span class="button__label" data-label="{{- 'general.cart.checkout_button_label' | t -}}">
+              {{- 'general.cart.checkout_button_label' | t -}}
+            </span>
+          </div>
+        </button>
+        {% assign cart_btn_label = 'general.cart.view' | t %}
+        {% render 'button',
+          btn_label: cart_btn_label,
+          btn_style: 'tertiary',
+          btn_link: routes.cart_url,
+          class: 'cart__link'
+        %}
+      </div>
+    </div>
+  </div>
+</cart-drawer>

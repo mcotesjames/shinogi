@@ -1,0 +1,70 @@
+<script>
+  (function () {
+    const body = document.querySelector('html[data-scheme]');
+    if (window.cscoDarkModeInitialized) return;
+
+    window.cscoDarkMode = {
+      init: function (e) {
+        if (window.cscoDarkModeInitialized) return;
+        window.cscoDarkModeInitialized = true;
+        this.initMode(e);
+        window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+          this.initMode(e);
+        });
+
+        window.addEventListener('load', () => {
+          const toggleBtns = document.querySelectorAll('.js-toggle-scheme-button');
+          toggleBtns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (body.getAttribute('data-scheme') === 'auto') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  this.changeScheme('light', true);
+                } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                  this.changeScheme('dark', true);
+                }
+              } else {
+                if (body.getAttribute('data-scheme') === 'dark') {
+                  this.changeScheme('light', true);
+                } else {
+                  this.changeScheme('dark', true);
+                }
+              }
+            });
+          });
+        });
+      },
+      initMode: function (e) {
+        let siteScheme = '{{ settings.color_scheme }}';
+
+        if ('{{ section.settings.enable_dark_mode_toggle }}' === 'true') {
+          const stored = localStorage.getItem('__theme__color_mode');
+          if (stored === 'light' || stored === 'dark') {
+            siteScheme = stored;
+          }
+        }
+        if (siteScheme && siteScheme !== body.getAttribute('data-scheme')) {
+          this.changeScheme(siteScheme, false);
+        }
+      },
+      changeScheme: function (siteScheme, cookie) {
+        body.classList.add('scheme-toggled');
+        body.setAttribute('data-scheme', siteScheme);
+        if (cookie) {
+          localStorage.setItem('__theme__color_mode', siteScheme);
+        }
+        setTimeout(() => {
+          body.classList.remove('scheme-toggled');
+        }, 100);
+      },
+    };
+  })();
+
+  window.cscoDarkMode.init();
+
+  document.addEventListener('shopify:section:load', function () {
+    setTimeout(() => {
+      window.cscoDarkMode.init();
+    }, 100);
+  });
+</script>

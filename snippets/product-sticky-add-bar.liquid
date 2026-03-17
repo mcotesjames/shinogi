@@ -1,0 +1,160 @@
+{% doc %}
+  Renders a sticky add to cart bar on the product page.
+
+  @param {object} product - Liquid product object
+  @param {object} section_obj - Section object
+  @param {object} block_obj - Block object
+
+  @example
+  {% render 'product-sticky-add-bar', product: product, section_obj: section, block_obj: block %}
+{% enddoc %}
+
+{% liquid
+  assign is_high_variant_product = false
+  if product.variants_count > 250
+    assign is_high_variant_product = true
+  endif
+%}
+
+<div
+  class="product-sticky-add-bar color-{{ block_obj.settings.color_scheme }}{% if block_obj.settings.show_on_mobile == false %} product-sticky-add-bar--hidden-on-mobile{% endif %} no-js-hidden"
+  {{ block_obj.shopify_attributes }}
+>
+  <div class="product-sticky-add-bar__container">
+    <div class="product-sticky-add-bar__info">
+      <h4 class="product-sticky-add-bar__title">{{- product.title -}}</h4>
+
+      <div id="price-sticky-{{ section_obj.id }}">
+        {%- render 'price', product: product, use_variant: true, price_font: '' -%}
+      </div>
+    </div>
+
+    {% liquid
+      assign has_variant_picker = false
+      if block_obj.settings.show_variant_picker_desktop or block_obj.settings.show_variant_picker_mobile
+        if product.has_only_default_variant != true
+          assign has_variant_picker = true
+        endif
+      endif
+    %}
+    <div class="product-sticky-add-bar__controls{% if has_variant_picker %} product-sticky-add-bar__controls--with-picker{% endif %}">
+      {% comment %} variant picker is temporarily disabled for products with more than 250 variants {% endcomment %}
+      {%- if has_variant_picker and is_high_variant_product == false -%}
+        <div class="product-sticky-add-bar__parameters{% if block_obj.settings.show_variant_picker_desktop == false %} product-sticky-add-bar__parameters--hidden-on-desktop{% endif %}{% if block_obj.settings.show_variant_picker_mobile == false %} product-sticky-add-bar__parameters--hidden-on-mobile{% endif %}">
+          <variant-radios
+            id="variant-picker-{{ section_obj.id }}-{{ block_obj.id }}"
+            class="no-js-hidden"
+            data-section="{{ section_obj.id }}"
+            data-url="{{ product.url }}"
+            data-is-high-variant-product="{{ is_high_variant_product }}"
+            data-variant-media-display="{% if section_obj.settings.show_primary_media_on_page_load == true %}show_all{% else %}{{ section_obj.settings.variant_media_display | default: 'show_all' }}{% endif %}"
+          >
+            {%- for option in product.options_with_values -%}
+              {% liquid
+                assign is_color_option = false
+
+                # for metafields color
+                for value in option.values
+                  if settings.enable_color_swatch and value.swatch.color != blank
+                    assign is_color_option = true
+                  endif
+                endfor
+
+                # for custom option color
+                assign color_trigger = settings.trigger_swatch | strip | newline_to_br | split: '<br />'
+                assign name_option = option.name | handle | strip
+                for item in color_trigger
+                  assign item_temp = item | handle | strip
+                  if settings.enable_color_swatch and name_option == item_temp
+                    assign is_color_option = true
+                  endif
+                endfor
+              %}
+              <fieldset
+                class="product-form__controls{% if is_color_option %} product-form__controls--colors{% endif %}"
+                id="SingleOptionSelector-{{ forloop.index0 }}"
+                data-option-position="{{ option.position }}"
+              >
+                <div>
+                  <legend class="product-form__group-name body-small">
+                    {{- option.name -}}
+                    :
+                  </legend>
+                  {% assign section_id = section_obj.id | append: block_obj.id %}
+                  <div class="product-form__controls-group">
+                    {% render 'product-variant-options',
+                      product: product,
+                      option: option,
+                      section_obj: section_obj,
+                      section_id: section_id,
+                      block_obj: block_obj,
+                      has_color_swatch: is_color_option,
+                      prevent_variant_image: true
+                    %}
+                  </div>
+                </div>
+              </fieldset>
+            {%- endfor -%}
+
+            <script type="application/json" data-all-variants-no-high>
+              {{ product.variants | json }}
+            </script>
+
+            <script type="application/json" data-selected-variant>
+              {{ product.selected_or_first_available_variant | json }}
+            </script>
+          </variant-radios>
+        </div>
+      {%- endif -%}
+
+      <product-form class="product-form">
+        {% assign product_form_id = 'sticky-bar-product-form-' | append: section_obj.id %}
+        {%- form 'product',
+          product,
+          id: product_form_id,
+          class: 'form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ product.selected_or_first_available_variant.id }}"
+            {% if product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+          <button
+            type="submit"
+            name="add"
+            class="product-form__submit button button--primary"
+            {% if product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+            <div class="button__content">
+              {%- if product.selected_or_first_available_variant.available -%}
+                <span class="button__label" data-label="{{- 'products.product.add_to_cart' | t -}}">
+                  {{- 'products.product.add_to_cart' | t -}}
+                </span>
+              {%- else -%}
+                <span>
+                  {{- 'products.product.sold_out' | t -}}
+                </span>
+              {%- endif -%}
+            </div>
+
+            <div class="loading-overlay__spinner hidden">
+              {%- render 'icon-loading' -%}
+            </div>
+          </button>
+        {%- endform -%}
+
+        <div class="product-form__error-message-wrapper" role="alert" hidden>
+          {% render 'icon-error' %}
+          <span class="product-form__error-message"></span>
+        </div>
+      </product-form>
+    </div>
+  </div>
+</div>

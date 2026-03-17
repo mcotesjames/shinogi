@@ -1,0 +1,14 @@
+{% doc %}
+  Renders product divider block.
+
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-divider', block_obj: block %}
+{% enddoc %}
+
+<div
+  class="product__divider{% if block_obj.settings.enable_border %} product__divider--border{% endif %}"
+  style="margin-top: {{ block_obj.settings.margin_top }};margin-bottom: {{ block_obj.settings.margin_bottom }};"
+  {{ block_obj.shopify_attributes }}
+></div>

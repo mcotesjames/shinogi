@@ -1,0 +1,112 @@
+{% doc %}
+  Renders a simple product card. Used for recommended products in Cart notification.
+
+  @param {object} product_card_product - Product Liquid object
+  @param {number} [color_scheme] - Color scheme. Default: settings.card_color_scheme
+  @param {string} [media_ratio_overwrite] - Local section variable for media ratio ('landscape', 'portrait', 'square').
+  @param {string} [media_fit_overwrite] - Local section variable for media fit ('contain', 'cover').
+
+  @example
+  {% render 'product-card-simple', product_card_product: product %}
+{% enddoc %}
+
+{% liquid
+  assign media_ratio = settings.card_media_ratio | default: 'square'
+  assign media_fit = settings.card_media_fit | default: 'cover'
+
+  if media_ratio_overwrite != blank
+    assign media_ratio = media_ratio_overwrite
+  endif
+
+  if media_fit_overwrite != blank
+    assign media_fit = media_fit_overwrite
+  endif
+
+  case media_ratio
+    when 'landscape'
+      # 4 / 3
+      assign padding_bottom = '75%'
+      assign settings_aspect_ratio = 1.33
+    when 'portrait'
+      # 182 / 240
+      assign padding_bottom = '131.9%'
+      assign settings_aspect_ratio = 0.75
+    when 'square'
+      # 1 / 1
+      assign padding_bottom = '100%'
+      assign settings_aspect_ratio = 1
+    else
+      # 1 / 1
+      assign padding_bottom = '100%'
+      assign settings_aspect_ratio = 1
+  endcase
+%}
+
+<div class="product-card-simple{% if color_scheme != blank %} color-{{ color_scheme }}{% endif %}">
+  <a
+    href="{{ product_card_product.url | default: '#' }}"
+    class="product-card-simple__link-overlay focus-inset"
+    aria-label="{{ 'accessibility.product_link' | t }}"
+  ></a>
+
+  <div
+    class="product-card-simple__media{% if product_card_product.featured_media == blank %} product-card-simple__media--placeholder{% endif %}"
+    style="--card-padding-bottom: {{ padding_bottom }};"
+  >
+    {%- if product_card_product.featured_media != blank -%}
+      {% liquid
+        assign calc_ratio = 1
+        if media_fit == 'cover' and product_card_product.featured_media.aspect_ratio > settings_aspect_ratio
+          assign calc_ratio = product_card_product.featured_media.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+        endif
+      %}
+      {%- capture sizes -%}
+          calc({{ calc_ratio }} * 270px)
+        {%- endcapture -%}
+      {%- capture media_style -%}
+          object-fit: {{ media_fit }};
+        {%- endcapture -%}
+      {{
+        product_card_product.featured_media
+        | image_url: width: product_card_product.featured_media.width
+        | image_tag:
+          loading: 'lazy',
+          widths: '180, 270, 360, 540, 720, 900, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600',
+          sizes: sizes,
+          style: media_style
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+
+    {% render 'product-card-badges', product_card_product: product_card_product, class: 'product-card-simple__badges' %}
+  </div>
+
+  <div class="product-card-simple__information">
+    {%- if settings.show_vendor and product_card_product.vendor != blank -%}
+      <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+      <div class="product-card-simple__vendor subtitle subtitle--small">
+        {% if settings.enable_vendor_link %}
+          {{ product_card_product.vendor | link_to_vendor: class: 'focus-inset' }}
+        {% else %}
+          {{ product_card_product.vendor }}
+        {% endif %}
+      </div>
+    {%- endif -%}
+
+    <h3 class="product-card-simple__title">
+      <a
+        class="focus-inset"
+        href="{{ product_card_product.url | default: '#' }}"
+        aria-label="{{ product_card_product.title | escape }}"
+      >
+        {{- product_card_product.title | escape -}}
+      </a>
+    </h3>
+
+    {% render 'price',
+      product: product_card_product,
+      display_mode_variant_prices: settings.display_mode_variant_prices
+    %}
+  </div>
+</div>

@@ -1,0 +1,8 @@
+{% comment %}
+  This section is used for the Section Rendering API in the cart.js file in the CartNotification and CartNotificationItem classes to find the last product added to the cart.
+{% endcomment %}
+{%- if cart != empty -%}
+  {%- for item in cart.items -%}
+    {% render 'cart-item', item: item, cart_type: 'cart-notification' %}
+  {%- endfor -%}
+{%- endif -%}

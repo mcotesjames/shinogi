@@ -1,0 +1,88 @@
+{% doc %}
+  Renders a small product card.
+
+  @param {object} product_card_product - Product Liquid object
+
+  @example
+  {% render 'product-card-complementary', product_card_product: product %}
+{% enddoc %}
+
+<div class="card-complementary">
+  <div class="card-complementary__inner">
+    {% liquid
+      assign media_ratio = settings.card_media_ratio | default: 'square'
+      assign media_fit = settings.card_media_fit | default: 'cover'
+
+      case media_ratio
+        when 'landscape'
+          assign product_card_padding_bottom = '75%'
+          assign settings_aspect_ratio = 1.33
+        when 'portrait'
+          assign product_card_padding_bottom = '131.7%'
+          assign settings_aspect_ratio = 0.75
+        when 'square'
+          assign product_card_padding_bottom = '100%'
+          assign settings_aspect_ratio = 1
+        else
+          assign product_card_padding_bottom = '100%'
+          assign settings_aspect_ratio = 1
+      endcase
+    %}
+    <div
+      class="card-complementary__image{% if product_card_product.featured_media == blank %} card-complementary__image--placeholder{% endif %}"
+      style="--image-padding-bottom: {{ product_card_padding_bottom }};"
+    >
+      {%- if product_card_product.featured_image -%}
+        {% liquid
+          assign calc_ratio = 1
+          if media_fit == 'cover' and product_card_product.featured_image.aspect_ratio > settings_aspect_ratio
+            assign calc_ratio = product_card_product.featured_image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+          endif
+        %}
+        {%- capture sizes -%}
+          calc(192px * {{ calc_ratio }})
+        {%- endcapture -%}
+        {%- capture media_style -%}
+          object-fit: {{ media_fit }};
+        {%- endcapture -%}
+        {{
+          product_card_product.featured_image
+          | image_url: width: 1000
+          | image_tag: loading: 'lazy', sizes: sizes, style: media_style, widths: '64, 128, 192, 400, 600, 800, 1000'
+        }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <div class="card-complementary__info">
+      {%- if settings.show_vendor -%}
+        <div class="card__vendor subtitle subtitle--small">
+          <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+          {%- if settings.enable_vendor_link -%}
+            {{- product_card_product.vendor | link_to_vendor: class: 'focus-inset' -}}
+          {%- else -%}
+            {{- product_card_product.vendor -}}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="card-complementary__title">
+        {{- product_card_product.title | escape -}}
+      </div>
+
+      {% render 'price',
+        product: product_card_product,
+        display_mode_variant_prices: settings.display_mode_variant_prices
+      %}
+    </div>
+  </div>
+
+  {%- if product_card_product.url != blank -%}
+    <a
+      href="{{ product_card_product.url }}"
+      class="card-complementary__link-overlay focus-inset"
+      aria-label="{{ 'accessibility.product_link' | t }}"
+    ></a>
+  {%- endif -%}
+</div>

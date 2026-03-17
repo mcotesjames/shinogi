@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "",
+        "heading_group_button_show": false,
+        "position": "center",
+        "button_style": "primary",
+        "button_full_width": true,
+        "text_alignment": "left",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "m",
+        "margin_bottom": "xl"
+      }
+    }
+  },
+  "order": ["form"]
+}

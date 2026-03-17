@@ -1,0 +1,17 @@
+{% doc %}
+  Renders product tags block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-tags', product: product, block_obj: block %}
+{% enddoc %}
+
+{%- if product.tags != blank -%}
+  <div class="product__badges body-small" {{ block_obj.shopify_attributes }}>
+    {%- for tag in product.tags -%}
+      <span class="badge badge--custom">{{- tag -}}</span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

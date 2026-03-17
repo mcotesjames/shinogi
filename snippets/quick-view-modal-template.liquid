@@ -1,0 +1,83 @@
+{% doc %}
+  Renders quick-view-modal template for use in Product card snippet.
+
+  @param {object} product_card_product - Product Liquid object
+  @param {string} image_ratio - Image ratio, set for product card in settings.card_media_ratio
+
+  @example
+  {% render 'quick-view-modal-template', product_card_product: product_card_product %}
+{% enddoc %}
+
+{%- liquid
+  assign image_ratio = image_ratio | default: 'square'
+
+  case image_ratio
+    when 'landscape'
+      assign image_padding_bottom = '75'
+      assign mobile_image_width = '37rem'
+      assign tablet_image_width = '38rem'
+      assign desktop_image_width = '45rem'
+    when 'portrait'
+      assign image_padding_bottom = '131.7'
+      assign mobile_image_width = '37rem'
+      assign tablet_image_width = '32rem'
+      assign desktop_image_width = '37rem'
+    when 'square'
+      assign image_padding_bottom = '100'
+      assign mobile_image_width = '37rem'
+      assign tablet_image_width = '37rem'
+      assign desktop_image_width = '42rem'
+    else
+      assign image_padding_bottom = '100'
+      assign mobile_image_width = '37rem'
+      assign tablet_image_width = '37rem'
+      assign desktop_image_width = '42rem'
+  endcase
+-%}
+
+<quick-view-modal
+  id="QuickView-{{ product_card_product.id }}"
+  class="quick-view-modal quick-view-modal--{{ settings.quickview_modal_type }} quick-view-modal--ratio-{{ image_ratio }} modal"
+>
+  <div class="modal__overlay" id="ModalCloseOverlay-{{ product_card_product.id }}"></div>
+
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ 'products.product.choose_product_options' | t: product_name: product_card_product.title | escape }}"
+    class="quick-view-modal__content modal__content color-{{ settings.quickview_modal_color_scheme }}"
+    style="--qv-image-padding-bottom: {{ image_padding_bottom }};{% if settings.quickview_modal_type == 'popup' %}--qv-image-width-mobile: {{ mobile_image_width }};--qv-image-width-tablet: {{ tablet_image_width }};--qv-image-width-desktop: {{ desktop_image_width }};{% endif %}"
+    tabindex="-1"
+  >
+    {%- assign modal_close_btn_id = 'ModalCloseBtn-' | append: product_card_product.id -%}
+    {%- if settings.quickview_modal_type == 'drawer' -%}
+      <div class="modal__heading">
+        <span class="subtitle">{{ 'general.product_card.quick_view_modal' | t }}</span>
+        {% render 'modal-close-button', id: modal_close_btn_id %}
+      </div>
+    {%- else -%}
+      {% render 'modal-close-button', id: modal_close_btn_id, only_icon: true %}
+    {%- endif -%}
+
+    <div id="QuickViewInfo-{{ product_card_product.id }}" class="quick-view-modal__content-info" data-pause-video="{{ settings.quickview_pause_video_modal_open }}"></div>
+
+    {%- if settings.quickview_show_description -%}
+      {%- liquid
+        assign description = product_card_product.description
+
+        if product_card_product.metafields.custom.excerpt != blank
+          if product_card_product.metafields.custom.excerpt.type == 'single_line_text_field' or product_card_product.metafields.custom.excerpt.type == 'multi_line_text_field'
+            assign description = product_card_product.metafields.custom.excerpt.value
+          endif
+        endif
+
+        assign description = description | strip_html
+      -%}
+      {% if description != blank %}
+        <div class="product__description" data-qv-product-description style="display:none;" aria-disabled="true">
+          {{- description -}}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</quick-view-modal>

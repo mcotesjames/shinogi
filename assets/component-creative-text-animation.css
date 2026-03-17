@@ -1,0 +1,39 @@
+.js [data-animation-type=creative] .js-split-text {
+  opacity: 0;
+}
+.js [data-animation-type=creative] .js-split-text.visible {
+  opacity: 1;
+}
+.js [data-animation-type=creative] .js-split-text .line {
+  overflow: hidden;
+}
+.js [data-animation-type=creative] .js-split-text .word {
+  display: inline-flex !important;
+  line-height: inherit;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}
+.js [data-animation-type=creative] .js-split-text .word.animated {
+  animation: word-slide-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: forwards;
+}
+@keyframes word-slide-in {
+  from {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.js [data-animation-type=creative] .js-fade {
+  opacity: 0;
+  transform: translateY(20%);
+  transition: opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.js [data-animation-type=creative] .js-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

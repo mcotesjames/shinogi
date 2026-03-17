@@ -1,0 +1,20 @@
+<div
+  class="product-parameters product-parameters--button product-parameters--placeholder"
+  {{ block.shopify_attributes }}
+>
+  <div>
+    <div class="product-form__controls">
+      <div class="product-form__group-name body-small">
+        {{- 'products.product.option_placeholder' | t -}}
+      </div>
+      <div class="product-form__controls-group">
+        {% assign options_placeholder = 'products.product.options_placeholder' | t | split: ', ' %}
+        {%- for option_placeholder in options_placeholder -%}
+          <div class="product-form__controls-label button button--unstyled{% if forloop.first %} product-form__controls-label--active{% endif %}">
+            {{- option_placeholder -}}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

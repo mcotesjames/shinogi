@@ -1,0 +1,84 @@
+.collection-card {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.collection-card--collections-page {
+  gap: 0;
+}
+.collection-card--collections-page .collection-card__information {
+  padding-inline: 1.2rem;
+  padding-block: 0.6rem;
+  border-top: 0.1rem solid rgb(var(--color-border));
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+  min-height: 3.8rem;
+  flex-grow: 1;
+  align-items: flex-start;
+}
+.collection-card__image {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background-color: rgb(var(--color-background-secondary));
+}
+.collection-card__image::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: var(--padding-bottom-collection);
+}
+.collection-card__image .collection-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  transition: var(--image-transition);
+  transform: scale(1);
+}
+.collection-card:not(.collection-card--collections-page) .collection-card__image {
+  border-radius: var(--border-radius-block);
+}
+.collection-card__information {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+.collection-card__title a {
+  line-height: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  word-break: break-word;
+  text-decoration: none;
+  color: inherit;
+  pointer-events: all;
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .collection-card__title a {
+    transition: opacity var(--duration-default);
+  }
+  .collection-card__title a:hover {
+    opacity: var(--hover-opacity);
+  }
+}
+.collection-card__link-overlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.collection-card__link-overlay:focus-visible {
+  outline-offset: -0.1rem;
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .collection-card:hover .collection-card-image {
+    transform: scale(1.02);
+  }
+}

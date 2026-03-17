@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "store-locations": {
+      "type": "store-locations",
+      "blocks": {
+        "block_1": {
+          "type": "location",
+          "settings": {
+            "group_name": "New York"
+          }
+        },
+        "block_2": {
+          "type": "location",
+          "settings": {
+            "group_name": "New York"
+          }
+        },
+        "block_3": {
+          "type": "location",
+          "settings": {
+            "group_name": "Toronto"
+          }
+        },
+        "block_4": {
+          "type": "location",
+          "settings": {
+            "group_name": "Toronto"
+          }
+        },
+        "block_5": {
+          "type": "location",
+          "settings": {
+            "group_name": "Paris"
+          }
+        }
+      },
+      "block_order": ["block_1", "block_2", "block_3", "block_4", "block_5"],
+      "settings": {
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "Stores",
+        "heading_font": "heading",
+        "heading_size": "h5",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_enable_border_bottom": true,
+        "padding_top": "s",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    }
+  },
+  "order": ["store-locations"]
+}

@@ -1,0 +1,70 @@
+{% comment %}
+  When the 'Enable boxed mode' setting is turned on in the Header, the 'Hero', 'Media Banner', 'Slideshow', 'Login', and 'Registration' sections will be shifted underneath the header if they are the first section inside the <main> element.
+
+  The styles are applied immediately after the page loads. Then, in header.js, the initHeaderOverlay script checks if the Header is the last section in the Header group and verifies the order of sections in <main>. It also applies the appropriate color scheme to the breadcrumbs. If these JS checks fail, the .not-mode class is added to the header, and the .not-margin class is added to the section.
+{% endcomment %}
+
+{%- liquid
+  assign header_selector = '.shopify-section-header:not(.not-mode)'
+  assign first_section_selector = '.has-header-interaction:first-child:not(.not-margin) [data-header-interaction]'
+-%}
+
+<style>
+  {{ header_selector }} ~ main > {{ first_section_selector }} {
+    margin-top: calc(-1 * (var(--header-height) + var(--breadcrumbs-height))) !important;
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__content,
+  {{ header_selector }} ~ main > {{ first_section_selector }} .hero__content,
+  {{ header_selector }} ~ main > {{ first_section_selector }} .slideshow__content {
+    padding-top: calc(1rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+  }
+  {%- if request.page_type == 'collection' -%}
+    {{ header_selector }} ~ main > {{ first_section_selector }} .collection-hero__content {
+      padding-top: calc(1.9rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  {%- endif -%}
+  {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-stretch .media-banner__content--stretch,
+  {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-stretch .hero__content--stretch {
+    grid-template-rows: max(2rem, calc(1fr - (1rem + var(--header-height) + var(--breadcrumbs-height)))) auto 1fr;
+  }
+  @media screen and (max-width: 575.99px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--full-mobile,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--full-mobile,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .slideshow__slide--full-mobile {
+      min-height: calc((var(--vh, 1vh) * 100) - var(--announcement-height)) !important;
+      min-height: calc(100svh - var(--announcement-height)) !important;
+    }
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-center.media-banner__wrapper--full-mobile .media-banner__content,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-center.hero__wrapper--full-mobile .hero__content {
+      padding-bottom: calc(1rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  }
+  @media screen and (min-width: 576px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--full-desktop,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--full-desktop,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .slideshow__slide--full-desktop {
+      min-height: calc((var(--vh, 1vh) * 100) - var(--announcement-height)) !important;
+      min-height: calc(100svh - var(--announcement-height)) !important;
+    }
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-center.media-banner__wrapper--full-desktop .media-banner__content,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-center.hero__wrapper--full-desktop .hero__content {
+      padding-bottom: calc(1rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login,
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login {
+    padding-top: calc(2.2rem + var(--header-height) + var(--breadcrumbs-height));
+  }
+  @media screen and (min-width: 750px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }}.login,
+    {{ header_selector }} ~ main > {{ first_section_selector }}.login {
+      padding-top: calc(5.4rem + var(--header-height) + var(--breadcrumbs-height));
+    }
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login--full_height,
+  {{ header_selector }} ~ main > {{ first_section_selector }}.register--full_height {
+    min-height: calc(100vh - var(--announcement-height)) !important;
+    min-height: calc(100svh - var(--announcement-height)) !important;
+    padding-top: calc(1.4rem + var(--header-height) + var(--breadcrumbs-height));
+  }
+</style>

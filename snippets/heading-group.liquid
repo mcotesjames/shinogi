@@ -1,0 +1,147 @@
+{% doc %}
+  Renders section text.
+
+  @param {string} [heading] - heading to render, will override settings.heading
+  @param {string} [heading_size] - heading size class, will override settings.heading_size
+  @param {string} [heading_tag] - heading tag to render, will override settings.heading_tag
+  @param {string} [heading_font] - heading font to render, will override settings.heading_font
+  @param {boolean} [button_show] - will override settings.heading_group_button_show
+  @param {string} [button_label] - will override settings.heading_group_button_label
+  @param {string} [button_link] - will override settings.heading_group_button_link
+  @param {string} [button_style] - will override settings.heading_group_button_style
+  @param {boolean} [enable_border_bottom] - will override settings.heading_group_enable_border_bottom
+  @param {boolean} [has_slider_controls] - render slider arrows
+  @param {string} [class] - custom CSS class
+  @param {object} [settings] - The block or section settings object
+  @param {object} [products_tabs] - The products list blocks objects for the Popular products section
+  @param {boolean} [hide_tabs] - The checkbox that hides the single tab for the Popular products section
+
+  @example
+  {% render 'heading-group', settings: section.settings %}
+{% enddoc %}
+
+{% liquid
+  assign heading = heading | default: settings.heading
+  assign heading_size = heading_size | default: settings.heading_size
+  assign heading_tag = heading_tag | default: settings.heading_tag
+  assign heading_font = heading_font | default: settings.heading_font
+  assign button_show = button_show | default: settings.heading_group_button_show
+  assign button_label = button_label | default: settings.heading_group_button_label
+  assign button_link = button_link | default: settings.heading_group_button_link
+  assign button_style = button_style | default: settings.heading_group_button_style | default: 'tertiary'
+  assign enable_border_bottom = enable_border_bottom | default: settings.heading_group_enable_border_bottom
+  assign hide_tabs = hide_tabs | default: false
+
+  assign has_button = false
+  if button_show and button_label != blank
+    assign has_button = true
+  endif
+
+  assign wrap_on_mobile = false
+  if heading != blank
+    assign heading_length = heading.size
+
+    if heading_font == 'heading' and heading_size != 'h6' and heading_length > 20 and has_button
+      assign wrap_on_mobile = true
+    endif
+
+    if heading_font == 'body' or heading_size == 'h6'
+      if heading_length > 55 and has_button
+        assign wrap_on_mobile = true
+      endif
+    endif
+  endif
+%}
+
+{%- if heading != blank or has_button or has_slider_controls -%}
+  <div class="container heading-group{% if class %} {{ class }}{% endif %}{% if wrap_on_mobile %} heading-group--wrap-on-mobile{% endif %}{% if enable_border_bottom %} heading-group--border-bottom{% endif %}">
+    {% liquid
+      assign has_tabs = false
+      if products_tabs != blank and hide_tabs == false
+        assign has_tabs = true
+      endif
+    %}
+    {%- if heading != blank or has_tabs -%}
+      <div class="heading-group__left">
+        {%- if heading != blank -%}
+          <{{ heading_tag | default: "h2" }}
+            class="title {% if heading_font == 'heading'%}{{ heading_size }} size--{{ heading_size }}{% else %}font--body{% endif %}{% if class %} {{ class }}__title{% endif %} richtext-link-inside"
+          >
+            {{- heading -}}
+          </{{ heading_tag | default: "h2" }}>
+        {%- endif -%}
+
+        {%- if has_tabs -%}
+          <div class="popular-products__tabs">
+            {%- for tab_block in products_tabs -%}
+              {% liquid
+                assign tab_label = 'sections.popular_products.tab_label' | t
+                if tab_block.settings.tab_label != blank
+                  assign tab_label = tab_block.settings.tab_label
+                endif
+              %}
+              <button
+                class="button popular-products__tab{% if forloop.index == 1 %} active button--tertiary{% else %} button--simple{% endif %} focus-inset"
+                aria-label="{{- tab_label | escape -}}"
+                data-products-tab-id="{{ tab_block.id }}"
+                {{ tab_block.shopify_attributes }}
+              >
+                <div class="button__content">
+                  <span class="button__label" data-label="{{- tab_label | escape -}}">
+                    {{- tab_label | escape -}}
+                  </span>
+                </div>
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if has_button or has_slider_controls -%}
+      <div class="heading-group__actions{% if has_button == false %} heading-group__actions--end-on-mobile{% endif %}">
+        {%- if has_slider_controls -%}
+          {% if products_tabs == blank %}
+            <div class="heading-group__navigation no-js-hidden">
+              <button class="heading-group__navigation-button heading-group__navigation-button-prev swiper-button-prev focus-inset">
+                {% render 'icon-arrow-left-slider' %}
+              </button>
+              <button class="heading-group__navigation-button heading-group__navigation-button-next swiper-button-next focus-inset">
+                {% render 'icon-arrow-right-slider' %}
+              </button>
+            </div>
+          {%- else -%}
+            {%- for tab_block in products_tabs -%}
+              <div
+                class="heading-group__navigation popular-products__navigation{% if forloop.index == 1 %} active{% endif %} no-js-hidden"
+                data-products-tab-id="{{ tab_block.id }}"
+              >
+                <button class="heading-group__navigation-button heading-group__navigation-button-prev swiper-button-prev focus-inset">
+                  {% render 'icon-arrow-left-slider' %}
+                </button>
+                <button class="heading-group__navigation-button heading-group__navigation-button-next swiper-button-next focus-inset">
+                  {% render 'icon-arrow-right-slider' %}
+                </button>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if has_button -%}
+          {% liquid
+            assign btn_class = 'heading-group__btn'
+            if class != blank
+              assign btn_class = btn_class | append: ' ' | append: class | append: '__button'
+            endif
+          %}
+          {% render 'button',
+            btn_label: button_label,
+            btn_link: button_link,
+            btn_style: button_style,
+            class: btn_class
+          %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{% endif %}

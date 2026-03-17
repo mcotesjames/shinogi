@@ -1,0 +1,85 @@
+{
+  "sections": {
+    "content_tabs": {
+      "type": "content-tabs",
+      "blocks": {
+        "richtext_content_1": {
+          "type": "richtext_content",
+          "settings": {
+            "block_heading": "Contacts",
+            "richtext_content": "<p><strong>Phone Number</strong></p><p>Kindly note that not all numbers may be accessible or covered by all mobile phone networks. Please also be mindful that we may monitor or record your communications for training and quality control purposes.</p><p>Call Customer Service on<br/>+1 (111) 111-1111</p><p><strong>WhatsApp</strong></p><p>+1 (111) 111-1111</p><p><strong>Email</strong></p><p>support@example.com</p><p><strong>Post</strong></p><p>Company Name<br/>123 Street Name,<br/>City, State, ZIP,<br/>Country</p>",
+            "show_button": false
+          }
+        },
+        "collapsible_content": {
+          "type": "collapsible_content",
+          "settings": {
+            "block_heading": "FAQ",
+            "enable_row_1": true,
+            "question_1": "What are my delivery options?",
+            "answer_1": "<p>We provide standard and express delivery to suit your needs. Shipping times and costs are shown at checkout.</p>",
+            "default_open_1": false,
+            "enable_row_2": true,
+            "question_2": "Do you offer free shipping?",
+            "answer_2": "<p>Free shipping is available on orders over a certain amount. Check our Shipping Policy for details.</p>",
+            "default_open_2": false,
+            "enable_row_3": true,
+            "question_3": "Which countries do you deliver to?",
+            "answer_3": "<p>We deliver worldwide, with availability depending on local couriers. At checkout you’ll see if shipping is possible to your country.</p>",
+            "default_open_3": false,
+            "enable_row_4": true,
+            "question_4": "Can I track my order?",
+            "answer_4": "<p>Yes, once your order ships you’ll receive a tracking link by email. This allows you to monitor its progress until it reaches you.</p>",
+            "default_open_4": false,
+            "enable_row_5": true,
+            "question_5": "Duties, Taxes and Border Charges",
+            "answer_5": "<p>Import duties or taxes may apply depending on your country’s regulations. Customers are responsible for covering these extra charges.</p>",
+            "default_open_5": false,
+            "enable_row_6": true,
+            "question_6": "Collect your order in store",
+            "answer_6": "<p>If you’re nearby, you can choose free in-store pickup at checkout. You’ll receive a notification once your order is ready for collection.</p>",
+            "default_open_6": false,
+            "enable_row_7": true,
+            "question_7": "In which countries is Afterpay accepted?",
+            "answer_7": "<p>Afterpay is available in selected regions. At checkout, you’ll see if the option is supported in your country before completing payment.</p>",
+            "default_open_7": false,
+            "enable_row_8": false,
+            "enable_row_9": false,
+            "enable_row_10": false,
+            "enable_row_11": false,
+            "enable_row_12": false
+          }
+        },
+        "richtext_content_2": {
+          "type": "richtext_content",
+          "settings": {
+            "block_heading": "Shipping & Delivery",
+            "richtext_content": "<p>Your order will be shipped from our warehouse within 1-3 business days. Once your order has been shipped, you will receive a shipping confirmation by email that will notify you of the carrier and the track and trace number.</p><p>In some countries we use a so-called \"last mile carrier\" for delivery. A last mile carrier is the logistics provider who is responsible for the final stage of delivery. You will find the local carrier and package number in the tracking information which you have received from us.</p><p><strong>Order Arrival</strong></p><p>Our arrival times are an estimate and unfortunately cannot be guaranteed. We do our best to ship your order as soon as possible so it can be delivered in a timely manner. During campaigns and Sale, delivery can take longer. If you are not home when your parcel arrives, the carrier will leave a card telling you where to find it. It might be stored in a safe place or you will receive details on how to pick it up or rearrange delivery.</p>",
+            "show_button": false
+          }
+        }
+      },
+      "block_order": [
+        "richtext_content_1",
+        "collapsible_content",
+        "richtext_content_2"
+      ],
+      "settings": {
+        "enable_border_top": true,
+        "enable_border_bottom": false,
+        "full_height": true,
+        "heading": "Customer Care",
+        "heading_font": "heading",
+        "heading_size": "h6",
+        "heading_tag": "h1",
+        "enable_heading_group": false,
+        "heading_group_button_show": false,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent",
+        "padding_top": "no-indent",
+        "padding_bottom": "xl"
+      }
+    }
+  },
+  "order": ["content_tabs"]
+}

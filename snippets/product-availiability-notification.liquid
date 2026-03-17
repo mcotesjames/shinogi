@@ -1,0 +1,42 @@
+{% doc %}
+  Renders Notify Me button in buy buttons block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {string} section_id - Section ID
+
+  @example
+  {% render 'product-availiability-notification', product: product, block_obj: block, section_id: section.id %}
+{% enddoc %}
+
+{%- liquid
+  assign gift_card_recipient_feature_active = false
+  if block_obj.settings.show_gift_card_recipient and product.gift_card?
+    assign gift_card_recipient_feature_active = true
+  endif
+
+  assign show_dynamic_checkout = false
+  if block_obj.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+    assign show_dynamic_checkout = true
+  endif
+
+  assign subscription_form_id = 'AvaliabilityNotificationForm-' | append: section_id
+-%}
+
+<div class="avaliability-notification">
+  <button
+    type="button"
+    id="Button-{{ subscription_form_id }}"
+    class="avaliability-notification-open-btn product-form__submit button button--{% if show_dynamic_checkout %}secondary{% else %}primary{% endif %} focus-inset"
+    title="{{- 'products.product.availiability_notification.sold_out_button_hover_text' | t -}}"
+  >
+    <div class="button__content">
+      <span
+        class="button__label"
+        data-label="{{- 'products.product.availiability_notification.sold_out_button_label' | t -}}"
+      >
+        {{- 'products.product.availiability_notification.sold_out_button_label' | t -}}
+      </span>
+    </div>
+  </button>
+</div>

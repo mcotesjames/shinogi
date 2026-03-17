@@ -1,0 +1,22 @@
+<div class="cart-count-bubble button button--simple">
+  {% comment %}If Buttons type == Icon in header settings{% endcomment %}
+  <div class="cart-count-bubble__icon">
+    {% render 'icon-cart' %}
+  </div>
+
+  {% comment %}If Buttons type == Text or Text with icon in header settings{% endcomment %}
+  <div class="button__content cart-count-bubble__text">
+    <span class="button__label header-label" data-label="{{- 'sections.header.cart_label' | t -}}">
+      {{- 'sections.header.cart_label' | t -}}
+    </span>
+  </div>
+
+  <span class="cart-count-bubble__count header-label">
+    {%- if cart.item_count < 100 -%}
+      <span aria-hidden="true">{{ cart.item_count }}</span>
+    {%- else -%}
+      <span aria-hidden="true">99+</span>
+    {%- endif -%}
+    <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+  </span>
+</div>

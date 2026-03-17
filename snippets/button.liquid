@@ -1,0 +1,44 @@
+{% doc %}
+  Renders button.
+
+  @param {string} [btn_label] - label to render, will override settings.link
+  @param {string} [btn_link] - link to render, will override settings.button_link
+  @param {string} [btn_style] - type to render, will override settings.button_style
+  @param {string} [class] - custom CSS class
+  @param {object} [settings] - The block or section settings object
+
+  @example
+  {% render 'button', btn_link: '/collections/all' %}
+{% enddoc %}
+
+{% liquid
+  assign btn_label = btn_label | default: settings.button_label
+  assign btn_link = btn_link | default: settings.button_link
+  assign btn_style = btn_style | default: settings.button_style | default: 'primary'
+%}
+
+{%- if btn_label != blank -%}
+  {% liquid
+    assign button_tag = 'a'
+    if btn_link == blank
+      assign button_tag = 'button'
+    endif
+  %}
+  <{{ button_tag | default: 'a' }}
+    {% if btn_link != blank %}
+      href="{{ btn_link }}"
+      aria-label="{{- btn_label | escape -}}"
+    {% endif %}
+    class="button button--{{ btn_style }} {% if class %}{{ class }}{% endif %} focus-inset"
+    {% if btn_link == blank %}
+      aria-disabled="true"
+    {% endif %}
+    {% if settings.links_blank and btn_link.type == 'external_link' %}
+      target="_blank"
+    {% endif %}
+  >
+    <div class="button__content">
+      <span class="button__label" data-label="{{- btn_label | escape -}}">{{- btn_label | escape -}}</span>
+    </div>
+  </{{ button_tag | default: 'a' }}>
+{%- endif -%}

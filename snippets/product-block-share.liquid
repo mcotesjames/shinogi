@@ -1,0 +1,82 @@
+{% doc %}
+  Renders product share block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-share', product: product, block_obj: block %}
+{% enddoc %}
+
+{%- if block_obj.settings.show_share_facebook
+  or block_obj.settings.show_share_twitter
+  or block_obj.settings.show_share_pinterest
+  or block_obj.settings.show_share_copy
+-%}
+  <div class="product__share" aria-label="list" {{ block_obj.shopify_attributes }}>
+    {%- if block_obj.settings.share_label -%}
+      <span class="product__share-label subtitle">{{ block_obj.settings.share_label }}</span>
+    {%- endif -%}
+
+    <ul class="product__share-list list-unstyled">
+      {%- if block_obj.settings.show_share_facebook -%}
+        <li>
+          <a
+            href="https://www.facebook.com/sharer.php?u={{ shop.url | append: product.url }}"
+            class="list-social__link focus-inset"
+            target="_blank"
+          >
+            {% render 'icon-facebook' %}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if block_obj.settings.show_share_twitter -%}
+        <li>
+          <a
+            href="https://twitter.com/share?url={{ shop.url | append: product.url }}&text={{ product.title | escape }}"
+            class="list-social__link focus-inset"
+            target="_blank"
+          >
+            {% render 'icon-twitter' %}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if block_obj.settings.show_share_pinterest and product.featured_media != blank -%}
+        <li>
+          {%- assign height = product.featured_media.width
+            | divided_by: product.featured_media.aspect_ratio
+            | round: 2
+          -%}
+          <a
+            href="https://pinterest.com/pin/create/bookmarklet/?media={{ product.featured_media | image_url: width: product.featured_media.width, height: height }}&url={{ shop.url | append: product.url }}&description={{ product.title | escape }}"
+            class="list-social__link focus-inset"
+            target="_blank"
+          >
+            {% render 'icon-pinterest' %}
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if block_obj.settings.show_share_copy -%}
+        <li>
+          <a
+            href="{{ shop.url | append: product.url }}"
+            class="copy-btn list-social__link focus-inset"
+          >
+            <span class="icon-copy">
+              {% render 'icon-share' %}
+            </span>
+            <span class="copy-success">
+              {% render 'icon-copied' %}
+            </span>
+            <span class="copy-error">
+              {% render 'icon-error' %}
+            </span>
+          </a>
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+{%- endif -%}

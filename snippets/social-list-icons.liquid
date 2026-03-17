@@ -1,0 +1,207 @@
+{% doc %}
+  Renders social links.
+
+  @param {string} [class] - Custom CSS class
+  @param {object} [block_obj] - Block Liquid object with local checkbox settings
+  @param {boolean} [show_labels] - Flag for toggle icons or labels. Default: false
+
+  @example
+  {% render 'social-list-icons' %}
+{% enddoc %}
+
+{% liquid
+  assign show_icons = true
+
+  if show_labels == true
+    assign show_icons = false
+  endif
+%}
+
+{%- if settings.social_instagram_link != blank
+  or settings.social_facebook_link != blank
+  or settings.social_twitter_link != blank
+  or settings.social_pinterest_link != blank
+  or settings.social_tiktok_link != blank
+  or settings.social_tumblr_link != blank
+  or settings.social_snapchat_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+-%}
+  <ul
+    class="list-social{% if show_labels %} list-social--labels{% endif %} list-unstyled{% if class != blank %} {{ class }}{% endif %}"
+    {% if block_obj != blank -%}
+      {{ block_obj.shopify_attributes }}
+    {%- endif %}
+  >
+    {%- if settings.social_instagram_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_instagram_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_instagram_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-instagram' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.instagram' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_facebook_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_facebook_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_facebook_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-facebook' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.facebook' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_twitter_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_twitter_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_twitter_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-twitter' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.twitter' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_pinterest_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_pinterest_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_pinterest_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-pinterest' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.pinterest' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_tiktok_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_tiktok_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_tiktok_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-tiktok' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.tiktok' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_tumblr_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_tumblr_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_tumblr_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-tumblr' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.tumblr' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_snapchat_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_snapchat_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_snapchat_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-snapchat' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.snapchat' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_youtube_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_youtube_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_youtube_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-youtube' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.youtube' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if settings.social_vimeo_link != blank -%}
+      <li>
+        <a
+          href="{{ settings.social_vimeo_link }}"
+          class="list-social__link{% if show_labels %} list-social__link--label{% endif %} focus-inset"
+          {%- if settings.links_blank and settings.social_vimeo_link.type == 'external_link' -%}
+            target="_blank"
+          {%- endif -%}
+        >
+          {%- if show_icons -%}
+            {%- render 'icon-vimeo' -%}
+          {%- endif -%}
+          <span class="body-small{% if show_icons %} visually-hidden{% endif %}">
+            {{- 'general.social.links.vimeo' | t -}}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

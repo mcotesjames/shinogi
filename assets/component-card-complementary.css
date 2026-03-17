@@ -1,0 +1,89 @@
+.card-complementary {
+  position: relative;
+  border-radius: 0.4rem;
+  border: 0.1rem solid rgb(var(--color-border));
+  overflow: hidden;
+}
+.card-complementary__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+}
+.card-complementary__image {
+  flex-shrink: 0;
+  position: relative;
+  width: 6.2rem;
+  display: flex;
+  overflow: hidden;
+}
+.card-complementary__image::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: var(--image-padding-bottom);
+}
+.card-complementary__image img,
+.card-complementary__image svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  transition: var(--image-transition);
+}
+.card-complementary__image--placeholder {
+  background-color: rgb(var(--color-background-secondary));
+}
+.card-complementary__image--placeholder .placeholder-svg {
+  fill: rgb(var(--color-foreground));
+  transform: scale(1.5);
+}
+.card-complementary__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+.card-complementary__title {
+  font-family: var(--font-heading-card-family);
+  font-style: var(--font-heading-card-style);
+  font-weight: var(--font-heading-card-weight);
+  font-size: calc(var(--font-heading-card-scale) * 1rem);
+  text-transform: var(--font-heading-card-text-transform);
+  color: rgb(var(--color-foreground));
+  letter-spacing: 0.005em;
+  word-break: break-word;
+  line-height: 1.285;
+  transition: opacity var(--duration-default);
+}
+.card-complementary__link-overlay {
+  text-decoration: none;
+  background-color: transparent;
+  z-index: 1;
+  display: block;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+.card-complementary__link-overlay:empty {
+  display: block;
+}
+.card-complementary--placeholder .card-complementary__image--placeholder .placeholder-svg {
+  fill: unset;
+  transform: unset;
+}
+@media screen and (hover: hover) and (pointer: fine) {
+  .card-complementary:not(.card-complementary--placeholder):hover .card-complementary__title {
+    opacity: var(--hover-opacity);
+  }
+  .card-complementary:not(.card-complementary--placeholder):hover .card-complementary__image img {
+    transform: scale(1.02);
+  }
+  .card-complementary:not(.card-complementary--placeholder):hover .card-complementary__image .placeholder-svg {
+    transform: scale(1.52);
+  }
+}

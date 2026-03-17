@@ -1,0 +1,199 @@
+{% doc %}
+  Renders a product modal with zoom images.
+
+  @param {object} section_obj - Section liquid object
+  @param {object} product - Product liquid object
+
+  @example
+  {% render 'product-zoom-modal', section_obj: section, product: product %}
+{% enddoc %}
+
+{% liquid
+  assign is_video_loop = section_obj.settings.enable_video_looping
+  assign is_video_autoplay = section_obj.settings.enable_video_autoplay
+%}
+
+<product-modal id="ProductModal-{{ section_obj.id }}" class="product-media-modal">
+  <div
+    class="product-media-modal__dialog color-{{ section_obj.settings.zoom_image_color_scheme }} background"
+    role="dialog"
+    aria-label="{{ 'products.modal.label' | t }}"
+    aria-modal="true"
+    tabindex="-1"
+  >
+    {%- if section_obj.id -%}
+      {%- assign modal_close_btn_id = 'ModalCloseBtn-' | append: section_obj.id -%}
+      {% render 'modal-close-button', id: modal_close_btn_id, class: 'product-media-modal__toggle' %}
+    {%- endif -%}
+
+    <div
+      class="product-media-modal__content swiper js-popup-slider"
+      aria-label="{{ 'products.modal.label' | t }}"
+      tabindex="0"
+      data-section-id="{{ section_obj.id }}"
+    >
+      <div class="swiper-wrapper">
+        {%- for media in product.media -%}
+          <div
+            class="swiper-slide product-media-modal__item"
+            data-media-modal-id="{{ section_obj.id }}-{{ media.id }}"
+          >
+            {%- if media.media_type == 'image' -%}
+              {%- liquid
+                assign img_alt = product.title | append: '-zoom-' | append: media.position
+                if media.preview_image.alt != blank
+                  assign img_alt = media.preview_image.alt
+                endif
+              -%}
+              <style>
+                [data-media-modal-id="{{ section_obj.id }}-{{ media.id }}"] [data-media-id="{{ media.id }}"] {
+                  object-fit: {{ section_obj.settings.zoom_image_fit_mobile }};
+                }
+                @media (min-width: 576px) {
+                  [data-media-modal-id="{{ section_obj.id }}-{{ media.id }}"] [data-media-id="{{ media.id }}"] {
+                    object-fit: {{ section_obj.settings.zoom_image_fit_desktop }};
+                  }
+                }
+              </style>
+              <div class="swiper-zoom-container">
+                {{
+                  media.preview_image
+                  | image_url: width: media.preview_image.width
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '550, 1100, 1445, 1680, 1750, 1920, 2048, 2200, 2890, 3000, 3200, 3400, 3600, 3800, 4096',
+                    data-media-id: media.id,
+                    alt: img_alt
+                }}
+              </div>
+            {%- else -%}
+              {%- if media.media_type == 'model' -%}
+                <div class="product-media-modal__model" data-media-id="{{ media.id }}">
+                  <product-model class="deferred-media">
+                    <button
+                      id="Deferred-Poster-Modal-{{ media.id }}"
+                      class="deferred-media__poster focus-inset"
+                      type="button"
+                    >
+                      <span class="deferred-media__poster-button motion-reduce">
+                        {%- if media.media_type == 'model' -%}
+                          {%- render 'icon-3d-model' -%}
+                        {%- else -%}
+                          {%- render 'icon-play' -%}
+                        {%- endif -%}
+                      </span>
+                      {{
+                        media.preview_image
+                        | image_url: width: 3600
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '550, 1100, 1445, 1680, 1750, 1920, 2048, 2200, 2890, 3000, 3200, 3400, 3600, 3800, 4096',
+                          data-media-id: media.id
+                      }}
+                    </button>
+                    <template>
+                      {{ media | media_tag: image_size: '2048x', toggleable: true }}
+                    </template>
+                  </product-model>
+
+                  <button
+                    class="button button--simple product__xr-button focus-inset"
+                    type="button"
+                    aria-label="{{ 'products.product.xr_button_label' | t }}"
+                    data-shopify-xr
+                    data-shopify-model3d-id="{{ media.id }}"
+                    data-shopify-title="title"
+                    data-shopify-xr-hidden
+                  >
+                    {% render 'icon-3d-model' %}
+                    {{ 'products.product.xr_button' | t }}
+                  </button>
+                </div>
+              {%- else -%}
+                <deferred-media
+                  class="deferred-media"
+                  data-media-id="{{ media.id }}"
+                  data-autoplay="{{ is_video_autoplay }}"
+                >
+                  <button
+                    id="Deferred-Poster-Modal-{{ media.id }}"
+                    class="deferred-media__poster focus-inset"
+                    type="button"
+                  >
+                    <span class="deferred-media__poster-button motion-reduce">
+                      {%- render 'icon-play' -%}
+                    </span>
+                    {{
+                      media.preview_image
+                      | image_url: width: 3600
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '550, 1100, 1445, 1680, 1750, 1920, 2048, 2200, 2890, 3000, 3200, 3400, 3600, 3800, 4096',
+                        data-media-id: media.id
+                    }}
+                  </button>
+                  <template>
+                    {%- case media.media_type -%}
+                      {%- when 'external_video' -%}
+                        {%- assign video_class = 'js-' | append: media.host -%}
+                        {%- if media.host == 'youtube' -%}
+                          {{
+                            media
+                            | external_video_url:
+                              autoplay: true,
+                              loop: is_video_loop,
+                              playlist: media.external_id,
+                              mute: is_video_autoplay
+                            | external_video_tag: class: video_class, loading: 'lazy'
+                          }}
+                        {%- else -%}
+                          {{
+                            media
+                            | external_video_url: autoplay: true, loop: is_video_loop, muted: is_video_autoplay
+                            | external_video_tag: class: video_class, loading: 'lazy'
+                          }}
+                        {%- endif -%}
+                      {%- when 'video' -%}
+                        {{
+                          media
+                          | media_tag:
+                            image_size: '2048x',
+                            autoplay: true,
+                            loop: is_video_loop,
+                            controls: true,
+                            preload: 'none'
+                        }}
+                    {%- endcase -%}
+                  </template>
+                </deferred-media>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="container product__slider-nav no-js-hidden">
+        <div class="swiper-button-prev product__slider-nav-prev focus-inset">
+          <div class="product__slider-nav-icons-container product__slider-nav-icons-container--prev">
+            {% render 'icon-arrow-left-product' %}
+            {% render 'icon-arrow-left-product' %}
+          </div>
+        </div>
+        <div class="swiper-button-next product__slider-nav-next focus-inset">
+          <div class="product__slider-nav-icons-container product__slider-nav-icons-container--next">
+            {% render 'icon-arrow-right-product' %}
+            {% render 'icon-arrow-right-product' %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+      {%- if section_obj.settings.show_gallery_info and section_obj.settings.gallery_info_text != blank -%}
+        <div class="product__media-info body-small">
+          {{- section_obj.settings.gallery_info_text | truncate: 140, '' -}}
+        </div>
+      {%- endif -%}
+    {% endcomment %}
+  </div>
+</product-modal>

@@ -1,0 +1,47 @@
+{% doc %}
+  Renders a small product card placeholder.
+
+  @param {number} [product_number] - Index of product in list
+
+  @example
+  {% render 'product-card-complementary-placeholder', product_number: 2 %}
+{% enddoc %}
+
+<div class="card-complementary card-complementary--placeholder">
+  <div class="card-complementary__inner">
+    {% liquid
+      assign media_ratio = settings.card_media_ratio | default: 'square'
+
+      case media_ratio
+        when 'landscape'
+          assign product_card_padding_bottom = '75%'
+        when 'portrait'
+          assign product_card_padding_bottom = '131.7%'
+        when 'square'
+          assign product_card_padding_bottom = '100%'
+        else
+          assign product_card_padding_bottom = '100%'
+      endcase
+    %}
+    <div
+      class="card-complementary__image card-complementary__image--placeholder"
+      style="--image-padding-bottom: {{ product_card_padding_bottom }};"
+    >
+      {{ 'product-apparel-' | append: product_number | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+
+    <div class="card-complementary__info">
+      {%- if settings.show_vendor -%}
+        <div class="card__vendor subtitle subtitle--small">
+          {{- 'products.product.vendor' | t -}}
+        </div>
+      {%- endif -%}
+
+      <div class="card-complementary__title">
+        {{- 'products.product.title_placeholder' | t -}}
+      </div>
+
+      {% render 'price', is_placeholder: true %}
+    </div>
+  </div>
+</div>

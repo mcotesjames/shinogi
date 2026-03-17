@@ -1,0 +1,5 @@
+{%- if section.blocks.size > 1 and section.settings.enable_pagination -%}
+  <div class="no-js-hidden slideshow__controls slideshow__controls--content-hor-{{ section.settings.horizontal_alignment }} container">
+    <div class="slideshow__pagination swiper-pagination color-{{ init_color_scheme }}"></div>
+  </div>
+{%- endif -%}

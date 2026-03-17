@@ -1,0 +1,211 @@
+{% doc %}
+  Renders avaliability notification drawer if it enable in buy buttons block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {string} section_id - Section ID
+
+  @example
+  {% render 'product-avaliability-notification-drawer', product: product, block_obj: block, section_id: section.id %}
+{% enddoc %}
+
+{% liquid
+  assign modal_color_scheme = 'background-1'
+  if block_obj.settings.availability_notification_color_scheme != blank
+    assign modal_color_scheme = block_obj.settings.availability_notification_color_scheme
+  endif
+%}
+
+<avaliability-notification-drawer
+  id="AvaliabilityNotificationDrawer-{{ section_id }}"
+  aria-labelledby="AvaliabilityNotificationHeading"
+  class="modal no-js-hidden avaliability-notification-drawer"
+>
+  <div class="avaliability-notification-overlay modal__overlay"></div>
+  <div
+    class="avaliability-notification-inner modal__content color-{{ modal_color_scheme }}"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="avaliability-notification-header modal__heading">
+      <span class="subtitle" id="AvaliabilityNotificationHeading">
+        {{- 'products.product.availiability_notification.modal_window_title' | t -}}
+      </span>
+
+      {% render 'modal-close-button', class: 'avaliability-notification-drawer-close' %}
+    </div>
+
+    {% liquid
+      assign product_title = product.title | escape
+      assign has_options = false
+      assign product_options = ''
+    %}
+
+    <div class="pickup-availability-product-info avaliability-notification-product-info">
+      <span class="avaliability-notification-product-title">
+        {{- product_title -}}
+      </span>
+
+      {%- unless product.has_only_default_variant -%}
+        <div class="body-small avaliability-notification-product-options">
+          {%- for product_option in product.options_with_values -%}
+            {%- assign has_options = true -%}
+            {%- for value in product_option.values -%}
+              {%- if product_option.selected_value == value -%}
+                <span>{{ value | escape -}}</span>
+                {%- assign product_options = product_options | append: value | escape -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- unless forloop.last -%}
+              &nbsp;/&nbsp;
+              {%- assign product_options = product_options | append: ' / ' -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+    </div>
+
+    {% assign subscription_form_id = 'AvaliabilityNotificationForm-' | append: section_id %}
+    {%- form 'contact', id: subscription_form_id, class: 'avaliability-notification-form' -%}
+      <div class="avaliability-notification-form-wrapper">
+        <div class="field">
+          <input
+            type="text"
+            name="contact[name]"
+            id="AvaliabilityNotification-Name"
+            dir="ltr"
+            {% if form.name %}
+              value="{{ form.name }}"
+            {% elsif customer %}
+              value="{{ customer.name }}"
+            {% endif %}
+            autocomplete="name"
+            placeholder="{{- 'templates.contact.form.name' | t -}}"
+          >
+          <label for="AvaliabilityNotification-Name" class="body-small">
+            {{- 'templates.contact.form.name' | t -}}
+          </label>
+        </div>
+
+        <div class="field">
+          <input
+            type="tel"
+            name="contact[phone]"
+            id="AvaliabilityNotification-Phone"
+            dir="ltr"
+            {% if form.first_name %}
+              value="{{ form.phone }}"
+            {% elsif customer %}
+              value="{{ customer.phone }}"
+            {% endif %}
+            autocomplete="tel"
+            pattern="[0-9\-]*"
+            placeholder="{{- 'templates.contact.form.phone' | t -}}"
+          >
+          <label for="AvaliabilityNotification-Phone" class="body-small">
+            {{- 'templates.contact.form.phone' | t -}}
+          </label>
+        </div>
+
+        <div class="field field--email">
+          <input
+            type="email"
+            name="contact[email]"
+            id="AvaliabilityNotification-Email"
+            dir="ltr"
+            {% if form.email %}
+              value="{{ form.email }}"
+            {% elsif customer %}
+              value="{{ customer.email }}"
+            {% endif %}
+            spellcheck="false"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+            autocapitalize="off"
+            autocomplete="email"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="RegisterForm-email-error"
+            {% endif %}
+            placeholder="{{- 'templates.contact.form.email' | t -}}"
+            required
+          >
+          <label for="AvaliabilityNotification-Email" class="body-small">
+            {{- 'templates.contact.form.email' | t -}}
+          </label>
+          {%- if form.errors contains 'email' -%}
+            <span
+              id="AvaliabilityNotification-Email-error"
+              class="form__message form__message--error body-small"
+            >
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}.
+            </span>
+          {%- endif -%}
+        </div>
+
+        <input
+          type="hidden"
+          id="AvaliabilityNotification-message"
+          name="contact[message]"
+          value="{{- 'products.product.availiability_notification.form_body_text' | t -}}"
+        >
+
+        <input
+          type="hidden"
+          id="AvaliabilityNotification-product"
+          name="contact[product_title]"
+          value="{{ product_title }}"
+        >
+
+        {%- if has_options -%}
+          <input
+            type="hidden"
+            id="AvaliabilityNotification-options"
+            name="contact[product_options]"
+            value="{{ product_options }}"
+          >
+        {%- endif -%}
+
+        <input
+          type="hidden"
+          id="AvaliabilityNotification-return"
+          name="return_to"
+          value="{{ product.url }}?variant={{ product.selected_or_first_available_variant.id }}&amp;contact_posted=true"
+        >
+
+        <button type="submit" class="button button--primary focus-inset">
+          <div class="button__content">
+            <span
+              class="button__label"
+              data-label="{{- 'products.product.availiability_notification.modal_button_label' | t -}}"
+            >
+              {{- 'products.product.availiability_notification.modal_button_label' | t -}}
+            </span>
+          </div>
+        </button>
+      </div>
+
+      {%- if form.errors -%}
+        <small
+          class="form__message form__message--error body-small"
+          id="{{subscription_form_id}}--error"
+        >
+          {%- render 'icon-error' -%}
+          {{ form.errors.messages.form }}
+        </small>
+      {%- endif -%}
+
+      {%- if form.posted_successfully? -%}
+        <small
+          class="form__message form__message--success"
+          id="{{ subscription_form_id }}--success"
+        >
+          {%- render 'icon-success' -%}
+          {{- 'products.product.availiability_notification.post_success' | t -}}
+        </small>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</avaliability-notification-drawer>

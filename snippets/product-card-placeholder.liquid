@@ -1,0 +1,250 @@
+{% doc %}
+  Renders a product card placeholder.
+
+  @param {number} [product_number] - Index of product in list
+  @param {number} [columns_mobile] - Product per row on mobile devices. Default: 1
+  @param {string} [information_block_type] - Information block type ('reveal', 'static'). Default: 'static'
+  @param {boolean} [show_quick_add_overwrite] - Local section variable for displaying a Quick add block. Default: true
+  @param {string} [quick_add_block_type] - Quick add block type ('reveal', 'static'). Default: 'reveal'
+  @param {boolean} [show_quick_view_overwrite] - Local section variable for displaying a Quick view button.
+  @param {string} [media_ratio_overwrite] - Local section variable for media ratio ('landscape', 'portrait', 'square').
+
+  @example
+  {% render 'product-card-placeholder', product_number: 2 %}
+{% enddoc %}
+
+{% liquid
+  assign columns_mobile = columns_mobile | default: 1
+  assign media_ratio = settings.card_media_ratio | default: 'square'
+  assign quick_add_block_type = quick_add_block_type | default: 'reveal'
+  assign product_card_type = settings.product_card_type | default: 'overlay'
+
+  assign is_full_reveal_info = false
+  if information_block_type == 'reveal'
+    assign is_full_reveal_info = true
+  endif
+
+  assign show_quick_add_block = true
+  if show_quick_add_overwrite == false
+    assign show_quick_add_block = false
+  endif
+
+  assign show_quick_view_button = settings.quickview_show
+  if show_quick_view_overwrite == false
+    assign show_quick_view_button = false
+  endif
+
+  if media_ratio_overwrite != blank
+    assign media_ratio = media_ratio_overwrite
+  endif
+
+  case media_ratio
+    when 'landscape'
+      assign padding_bottom = '75%'
+    when 'portrait'
+      assign padding_bottom = '131.7%'
+    when 'square'
+      assign padding_bottom = '100%'
+    else
+      assign padding_bottom = '100%'
+  endcase
+
+  # product_number can be from 1 to 4
+  if product_number == blank
+    assign product_number = 2
+  endif
+
+  assign has_sale_price = false
+  assign has_sale_badge = false
+  assign has_options = true
+  # assign has_swatches = false
+  assign has_soldout_badge = false
+  assign has_custom_badge = false
+  assign has_new_badge = false
+  if product_number == 1 or product_number == '1'
+    assign has_soldout_badge = true
+    assign placeholder_swatches = '#755547'
+  elsif product_number == 2 or product_number == '2'
+    # assign has_swatches = true
+    assign placeholder_swatches = '#E8E8E8'
+  elsif product_number == 3 or product_number == '3'
+    assign has_sale_badge = true
+    assign has_custom_badge = true
+    assign has_sale_price = true
+    assign placeholder_swatches = '#C6AA1F, #9B2131' | split: ','
+  elsif product_number == 4 or product_number == '4'
+    assign has_new_badge = true
+    assign has_options = true
+    assign placeholder_swatches = '#9F9255, #D094A7, #5B728F' | split: ','
+  endif
+
+  assign has_quick_options = false
+  if settings.show_quick_options and settings.quick_options != blank
+    assign has_quick_options = true
+  endif
+%}
+
+<product-card-placeholder
+  class="product-card product-card--{{ product_card_type }} product-card--placeholder product-card--mobile-{{ columns_mobile }}{% if product_card_type == 'overlay' %} color-{{ settings.card_color_scheme }}{% endif %}"
+  style="--card-padding-bottom: {{ padding_bottom }};"
+>
+  <div class="product-card__inner">
+    <div class="product-card__media product-card__media--hover-effect-{{ settings.card_hover_effect }}">
+      {{ 'product-apparel-' | append: product_number | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+
+    {%- if settings.show_new_badge
+      or settings.show_sale_badge
+      or settings.show_soldout_badge
+      or settings.show_custom_badges
+      or show_quick_view_button
+    -%}
+      <div class="product-card__top">
+        {%- if settings.show_new_badge
+          or settings.show_sale_badge
+          or settings.show_soldout_badge
+          or settings.show_custom_badges
+        -%}
+          <div class="product-card__badges body-small">
+            {%- if has_new_badge and settings.show_new_badge -%}
+              <span class="badge badge--new">
+                {{- 'products.product.new' | t -}}
+              </span>
+            {%- endif -%}
+
+            {%- if has_soldout_badge and settings.show_soldout_badge -%}
+              <span class="badge badge--sold-out" aria-hidden="true">
+                {{- 'products.product.sold_out' | t -}}
+              </span>
+            {%- elsif has_sale_badge and settings.show_sale_badge -%}
+              <span class="badge badge--sale" aria-hidden="true">
+                {% if settings.sale_badge_type == 'sale' %}
+                  {{- 'products.product.on_sale' | t -}}
+                {% else %}
+                  {{- 'products.product.on_sale' | t -}}
+                  <span>
+                    <span>-</span>
+                    <span>15</span>
+                    <span>%</span>
+                  </span>
+                {% endif %}
+              </span>
+            {%- endif -%}
+
+            {% if has_custom_badge and settings.show_custom_badges %}
+              <span class="badge badge--custom" aria-hidden="true">
+                {{- 'products.product.custom_badge_placeholder' | t -}}
+              </span>
+            {% endif %}
+          </div>
+        {%- endif -%}
+
+        {%- if show_quick_view_button -%}
+          <div class="product-card__quickview product-card__quickview--mobile-{{ settings.quickview_show_on_mobile }} no-js-hidden">
+            <button
+              class="product-card__button button button--{{ settings.quickview_button_style }} focus-inset"
+              disabled
+              aria-label="{{ 'general.product_card.quick_view_button' | t }}"
+            >
+              <div class="button__content">
+                <span
+                  class="product-card__quickview-text button__label"
+                  data-label="{{ 'general.product_card.quick_view_button' | t }}"
+                >
+                  {{- 'general.product_card.quick_view_button' | t -}}
+                </span>
+                <span class="product-card__mobile-icon button__icon">
+                  {% render 'icon-quick-view' %}
+                </span>
+              </div>
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-card__information{% if is_full_reveal_info and product_card_type == 'overlay' %} product-card__information--hover{% endif %}">
+      <div class="product-card__information-top">
+        {%- if settings.show_vendor -%}
+          <div class="product-card__vendor subtitle subtitle--small">
+            {{- 'products.product.vendor' | t -}}
+          </div>
+        {%- endif -%}
+
+        <h3 class="product-card__title">
+          {{- 'products.product.title_placeholder' | t -}}
+        </h3>
+
+        <div class="product-card__price-group">
+          {% render 'price', is_placeholder: true, is_placeholder_sale_price: has_sale_price %}
+
+          {%- if settings.enable_color_swatch and settings.card_color_swatches_mode != 'none' -%}
+            <div class="product-card__color-swatches product-card__color-swatches--placeholder">
+              <div class="product-card__option-group{% if has_soldout_badge %} product-card__option-group--disabled{% endif %}">
+                {%- for placeholder_swatch in placeholder_swatches -%}
+                  <div class="color-swatch" style="--swatch-color: {{ placeholder_swatch }};">
+                    <span class="visually-hidden">{{ placeholder_swatch }}</span>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {% if show_quick_add_block %}
+        {% if has_quick_options or settings.quickadd_show %}
+          <div class="product-card__information-bottom{% if quick_add_block_type == 'reveal' and product_card_type == 'overlay' %} show-on-hover{% endif %}">
+            {%- if has_quick_options and has_options -%}
+              {% assign options_placeholder = 'products.product.options_placeholder' | t | split: ', ' %}
+              <div class="product-card__option-group{% if has_soldout_badge %} product-card__option-group--unclickable{% endif %}">
+                {%- for option_placeholder in options_placeholder -%}
+                  <span class="product-card__option-group-placeholder">
+                    {{- option_placeholder -}}
+                  </span>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {% liquid
+              assign show_quick_add_button = false
+
+              if has_soldout_badge == false and settings.quickadd_show
+                assign show_quick_add_button = true
+                assign btn_label = 'general.product_card.quick_add_button' | t
+              endif
+
+              if has_soldout_badge == true and settings.quickadd_show and settings.quickadd_show_for_out_of_stock
+                assign show_quick_add_button = true
+                assign btn_label = 'products.product.sold_out' | t
+              endif
+            %}
+
+            {%- if show_quick_add_button -%}
+              <div class="product-card__quickadd no-js-hidden">
+                <button
+                  class="product-card__button button button--{{ settings.quickadd_button_style }}"
+                  disabled
+                  aria-label="{{ btn_label }}"
+                  {% if has_soldout_badge == true %}
+                    data-sold-out-message="true"
+                    aria-disabled="true"
+                  {% endif %}
+                >
+                  <div class="button__content">
+                    <span
+                      class="product-card__quickadd-text button__label"
+                      data-label="{{ btn_label }}"
+                    >
+                      {{- btn_label -}}
+                    </span>
+                  </div>
+                </button>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</product-card-placeholder>

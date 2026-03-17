@@ -1,0 +1,54 @@
+{% doc %}
+  Renders product extra option block.
+
+  @param {object} block_obj - Block Liquid object
+  @param {string} product_form_id - ID of the form that is used in the Buy buttons block
+  @param {string} section_id - Section ID
+
+  @example
+  {% render 'product-block-extra-option', product: product, block_obj: block, product_form_id: product_form_id, section_id: section.id %}
+{% enddoc %}
+
+{%- if block_obj.settings.option_label != blank -%}
+  {% liquid
+    if product_form_id == blank
+      assign product_form_id = 'product-form-' | append: section_id
+    endif
+  %}
+  <div class="product-extra-option" {{ block_obj.shopify_attributes }}>
+    <div class="field{% if block_obj.settings.option_type == 'checkbox' %} field--checkbox{% endif %}">
+      <input
+        type="{{ block_obj.settings.option_type }}"
+        class="{% if block_obj.settings.option_type == 'checkbox' %}focus-inset{% else %}field__input{% endif %}"
+        id="product-extra-option-{{ block_obj.id }}"
+        form="{{ product_form_id }}"
+        name="properties[{{- block_obj.settings.option_label -}}]"
+        dir="ltr"
+        {% if block_obj.settings.is_required -%}
+          required
+          {% if block_obj.settings.option_type == 'checkbox' -%}
+            oninvalid="this.classList.add('is-invalid')"
+            onchange="this.classList.remove('is-invalid')"
+          {%- endif %}
+        {%- endif %}
+        {% if block_obj.settings.option_type == 'text' -%}
+          autocorrect="off"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="{{ block_obj.settings.option_label }}"
+        {%- endif %}
+      >
+      <label class="body-small" for="product-extra-option-{{ block_obj.id }}">
+        {%- if block_obj.settings.option_type == 'checkbox' -%}
+          <span class="field__checkbox"></span>
+          <span class="field__label body-small">
+            {{- block_obj.settings.option_label -}}
+          </span>
+        {%- else -%}
+          {{- block_obj.settings.option_label -}}
+        {%- endif -%}
+      </label>
+    </div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,165 @@
+.newsletter__inner {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.newsletter__inner--right {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+@media (min-width: 990px) {
+  .newsletter__inner--right {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+}
+.newsletter__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 94.8rem;
+  min-width: 100%;
+  padding-block: 3.2rem;
+}
+@media (min-width: 576px) {
+  .newsletter__content {
+    padding-block: 4.8rem;
+  }
+}
+@media (min-width: 750px) {
+  .newsletter__content {
+    padding-block: 10rem;
+    min-width: 47.4rem;
+  }
+}
+.newsletter__content--left {
+  margin-inline-end: auto;
+  align-items: flex-start;
+  text-align: left;
+}
+.newsletter__content--left .newsletter__text {
+  text-align: left;
+}
+.newsletter__content--left .field--checkbox {
+  align-items: flex-start;
+}
+.newsletter__content--center {
+  margin-inline: auto;
+  align-items: center;
+  text-align: center;
+}
+.newsletter__content--center .newsletter__text {
+  text-align: left;
+}
+.newsletter__content--center .field--checkbox {
+  align-items: flex-start;
+}
+.newsletter__content--right {
+  margin-inline-start: auto;
+  align-items: flex-end;
+  text-align: right;
+}
+.newsletter__content--right .newsletter__text {
+  text-align: right;
+}
+.newsletter__content--right .field--checkbox {
+  align-items: flex-end;
+}
+.newsletter__button {
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .newsletter__button {
+    width: auto;
+  }
+}
+.newsletter .newsletter-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+@media (min-width: 750px) {
+  .newsletter .newsletter-form {
+    max-width: 47.4rem;
+  }
+}
+.newsletter .newsletter-form__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.newsletter .newsletter-form__inner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+}
+.newsletter .newsletter-form__field-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+@media (min-width: 576px) {
+  .newsletter .newsletter-form__field-wrapper {
+    width: auto;
+  }
+}
+.newsletter .newsletter-form .form__message {
+  width: 100%;
+  align-items: flex-start;
+}
+.newsletter .newsletter-form .form__message--success, .newsletter .newsletter-form .form__message--error {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.newsletter__form {
+  width: 100%;
+}
+.newsletter__form .rte {
+  color: rgba(var(--color-foreground), 0.6);
+}
+.newsletter__form .rte p {
+  margin-bottom: 0;
+  font-size: 1.4rem;
+}
+.newsletter__form .rte a {
+  color: rgb(var(--color-foreground), 1);
+  transition: color var(--duration-default);
+}
+@media screen and (pointer: fine) {
+  .newsletter__form .rte a:hover {
+    color: rgba(var(--color-foreground), 0.8);
+  }
+}
+.newsletter__text {
+  color: rgb(var(--color-foreground-secondary));
+}
+.newsletter__text.center {
+  text-align: center;
+}
+.newsletter .field--newsletter label::after {
+  display: none;
+}
+
+[dir=rtl] .newsletter .newsletter__content.newsletter__content--left, [dir=rtl] .newsletter .newsletter__content.newsletter__content--right {
+  margin-inline-end: auto;
+  margin-inline-start: unset;
+  align-items: flex-start;
+  text-align: right;
+}
+[dir=rtl] .newsletter .newsletter__content.newsletter__content--left .field--checkbox, [dir=rtl] .newsletter .newsletter__content.newsletter__content--right .field--checkbox {
+  align-items: flex-start;
+}
+[dir=rtl] .newsletter .newsletter__content.newsletter__content .newsletter__text {
+  text-align: right;
+}

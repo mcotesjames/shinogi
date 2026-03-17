@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main-collection": {
+      "type": "main-collection",
+      "settings": {},
+      "blocks": {
+        "collection-header": {
+          "type": "collection-header",
+          "settings": {}
+        }
+      },
+      "block_order": ["collection-header"]
+    }
+  },
+  "order": ["main-collection"]
+}

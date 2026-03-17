@@ -1,0 +1,790 @@
+{{ 'section-compare.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.image_before != blank or section.settings.image_after != blank -%}
+  <script src="{{ 'img-comparison.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% style %}
+  {% render 'section-padding' %}
+  {% render 'section-margin' %}
+{% endstyle %}
+
+{% comment %} define rte language {% endcomment %}
+{% liquid
+  assign language_code = request.locale.iso_code | split: '-' | first
+  case language_code
+    when 'ae', 'ar', 'arc', 'bcc', 'bqi', 'ckb', 'dv', 'fa', 'glk', 'ha', 'he', 'kwh', 'ks', 'ku', 'mzn', 'nqo', 'pnb', 'ps', 'sd', 'ug', 'ur', 'yi'
+      assign dir = 'rtl'
+    else
+      assign dir = 'ltr'
+  endcase
+%}
+
+{% comment %} calculate aspect ratio for compare-slider container {% endcomment %}
+{% liquid
+  assign only_one_section_image = blank
+  assign only_one_section_label = blank
+
+  if section.settings.image_before != blank and section.settings.image_after != blank
+    assign adapt_aspect_ratio = section.settings.image_before.aspect_ratio
+    if section.settings.image_after.aspect_ratio < adapt_aspect_ratio
+      assign adapt_aspect_ratio = section.settings.image_after.aspect_ratio
+    endif
+  elsif section.settings.image_before != blank and section.settings.image_after == blank
+    assign only_one_section_image = section.settings.image_before
+    assign only_one_section_label = section.settings.label_before
+  elsif section.settings.image_before == blank and section.settings.image_after != blank
+    assign only_one_section_image = section.settings.image_after
+    assign only_one_section_label = section.settings.label_after
+  else
+    assign only_one_section_image = blank
+    assign only_one_section_label = blank
+  endif
+
+  if section.settings.mobile_aspect_ratio != 'adapt' and section.settings.mobile_aspect_ratio != 'full_height'
+    assign aspect_ratio_mobile = section.settings.mobile_aspect_ratio | split: '/'
+    assign temp = aspect_ratio_mobile[0] | append: '.0'
+    assign padding_bottom_mobile = aspect_ratio_mobile[1] | divided_by: temp | times: 100 | round: 2
+  elsif section.settings.mobile_aspect_ratio == 'adapt'
+    if section.settings.image_before != blank and section.settings.image_after != blank
+      assign padding_bottom_mobile = 1 | divided_by: adapt_aspect_ratio | times: 100 | round: 2
+    elsif only_one_section_image != blank
+      assign padding_bottom_mobile = 1 | divided_by: only_one_section_image.aspect_ratio | times: 100 | round: 2
+    else
+      assign padding_bottom_mobile = 0
+    endif
+  else
+    assign padding_bottom_mobile = 0
+  endif
+
+  if section.settings.desktop_aspect_ratio != 'adapt' and section.settings.desktop_aspect_ratio != 'full_height'
+    assign aspect_ratio_desktop = section.settings.desktop_aspect_ratio | split: '/'
+    assign temp_desktop = aspect_ratio_desktop[0] | append: '.0'
+    assign padding_bottom_desktop = aspect_ratio_desktop[1] | divided_by: temp_desktop | times: 100 | round: 2
+  elsif section.settings.desktop_aspect_ratio == 'adapt'
+    if section.settings.image_before != blank and section.settings.image_after != blank
+      assign padding_bottom_desktop = 1 | divided_by: adapt_aspect_ratio | times: 100 | round: 2
+    elsif only_one_section_image != blank
+      assign padding_bottom_desktop = 1 | divided_by: only_one_section_image.aspect_ratio | times: 100 | round: 2
+    else
+      assign padding_bottom_desktop = 0
+    endif
+  else
+    assign padding_bottom_desktop = 0
+  endif
+%}
+
+{% style %}
+  {% if section.settings.mobile_aspect_ratio == 'full_height' %}
+      @media screen and (max-width: 575.99px) {
+        .compare-{{ section.id }} .compare__images {
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+
+      main > .section-compare:first-child > .compare-{{ section.id }} .compare__images {
+        min-height: calc(100vh - var(--announcement-height) - var(--header-height));
+        min-height: calc(100svh - var(--announcement-height) - var(--header-height));
+      }
+    }
+  {% endif %}
+
+
+  {% if section.settings.desktop_aspect_ratio == "full_height" %}
+    @media screen and (min-width: 576px) {
+      .compare-{{ section.id }} .compare__images {
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+
+      main > .section-compare:first-child > .compare-{{ section.id }} .compare__images {
+        min-height: calc(100vh - var(--announcement-height) - var(--header-height));
+        min-height: calc(100svh - var(--announcement-height) - var(--header-height));
+      }
+    }
+  {% endif %}
+{% endstyle %}
+
+{% comment %} get common values for images {% endcomment %}
+{% liquid
+  assign image_loading = 'lazy'
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign image_loading = 'eager'
+    assign fetch_priority = 'high'
+  endif
+
+  assign widths = '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600'
+
+  # get settings ratio for calculate mobile calc ratio for each image
+  if section.settings.mobile_aspect_ratio != 'adapt'
+    assign settings_mobile_aspect_ratio = temp | divided_by: aspect_ratio_mobile[1] | round: 2
+  else
+    if section.settings.image_before != blank and section.settings.image_after != blank
+      assign settings_mobile_aspect_ratio = adapt_aspect_ratio
+    elsif only_one_section_image != blank
+      assign settings_mobile_aspect_ratio = only_one_section_image.aspect_ratio
+    endif
+  endif
+
+  # get settings ratio for calculate desktop calc ratio for each image
+  if section.settings.desktop_aspect_ratio != 'adapt'
+    assign settings_desktop_aspect_ratio = temp_desktop | divided_by: aspect_ratio_desktop[1] | round: 2
+  else
+    if section.settings.image_before != blank and section.settings.image_after != blank
+      assign settings_desktop_aspect_ratio = adapt_aspect_ratio
+    elsif only_one_section_image != blank
+      assign settings_desktop_aspect_ratio = only_one_section_image.aspect_ratio
+    endif
+  endif
+%}
+
+<section class="compare compare-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} background {% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
+  {% render 'heading-group', settings: section.settings, class: 'compare-header' %}
+  {% if section.settings.label_before != blank or section.settings.label_after != blank %}
+    <div class="compare__top container">
+      <div class="compare__labels">
+        {%- if only_one_section_label != blank -%}
+          <span class="compare__label-only">
+            {{- only_one_section_label -}}
+          </span>
+        {% else %}
+          {%- if section.settings.label_before != blank or section.settings.label_after != blank -%}
+            <span class="compare__label-before">
+              {{- section.settings.label_before -}}
+            </span>
+            <span class="compare__label-after">
+              {{- section.settings.label_after -}}
+            </span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif %}
+  <div class="compare__wrapper{% if section.settings.enable_fullscreen == false %} container{% else %} full-screen{% endif %}">
+    {% comment %} render img-comparison-slider {% endcomment %}
+    <div
+      class="compare__images color-{{ section.settings.layout_color_scheme }}{% if only_one_section_image != blank %} background{% endif %}"
+      style="--padding-bottom-mobile: {{ padding_bottom_mobile }}%; --padding-bottom-desktop: {{ padding_bottom_desktop }}%;"
+    >
+      {%- if section.settings.image_before != blank and section.settings.image_after != blank -%}
+        {% liquid
+          if dir == 'rtl'
+            assign image_before = section.settings.image_after
+            assign image_after = section.settings.image_before
+          else
+            assign image_before = section.settings.image_before
+            assign image_after = section.settings.image_after
+          endif
+          # get calc ratio image before mobile
+          assign calc_ratio_mobile_before = 1
+          if image_before.aspect_ratio > settings_mobile_aspect_ratio
+            assign calc_ratio_mobile_before = image_before.aspect_ratio | divided_by: settings_mobile_aspect_ratio | round: 2
+          endif
+
+          # get calc ratio image before desktop
+          assign calc_ratio_desktop_before = 1
+          if image_before.aspect_ratio > settings_desktop_aspect_ratio
+            assign calc_ratio_desktop_before = image_before.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
+          endif
+
+          # get calc ratio image after mobile
+          assign calc_ratio_mobile_after = 1
+          if image_after.aspect_ratio > settings_mobile_aspect_ratio
+            assign calc_ratio_mobile_after = image_after.aspect_ratio | divided_by: settings_mobile_aspect_ratio | round: 2
+          endif
+
+          # get calc ratio image after desktop
+          assign calc_ratio_desktop_after = 1
+          if image_after.aspect_ratio > settings_desktop_aspect_ratio
+            assign calc_ratio_desktop_after = image_after.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
+          endif
+        %}
+
+        {%- capture image_styles -%}
+          object-fit: cover;
+        {%- endcapture -%}
+
+        {%- capture sizes_before_img -%}
+          {%- if section.settings.enable_fullscreen == true -%}  
+            (min-width: 750px) calc(100vw * {{ calc_ratio_desktop_before }}), calc(100vw * {{ calc_ratio_mobile_before }})
+          {%- else -%}
+           (min-width: 750px) calc((100vw - 24px) * {{ calc_ratio_desktop_before }}), calc((100vw - 24px) * {{ calc_ratio_mobile_before }})
+          {%- endif -%} 
+        {%- endcapture -%}
+
+        {%- capture sizes_after_img -%}
+          {%- if section.settings.enable_fullscreen == true -%}
+            (min-width: 750px) calc(100vw * {{ calc_ratio_desktop_after }}), calc(100vw * {{ calc_ratio_mobile_after }})
+          {%- else -%}
+            (min-width: 750px) calc((100vw - 24px) * {{ calc_ratio_desktop_after }}), calc((100vw - 24px) * {{ calc_ratio_mobile_after }})
+          {%- endif -%} 
+        {%- endcapture -%}
+
+        <img-comparison-slider>
+          <div
+            class="compare__figure compare__figure-before"
+            slot="first"
+          >
+            <div class="compare__figure-image">
+              {{
+                image_before
+                | image_url: width: 1896
+                | image_tag:
+                  loading: image_loading,
+                  fetchpriority: fetch_priority,
+                  sizes: sizes_before_img,
+                  widths: widths,
+                  styles: image_styles
+              }}
+              <div
+                class="compare__overlay"
+                style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="compare__figure compare__figure-after"
+            slot="second"
+          >
+            <div class="compare__figure-image">
+              {{
+                image_after
+                | image_url: width: 1896
+                | image_tag:
+                  loading: image_loading,
+                  fetchpriority: fetch_priority,
+                  sizes: sizes_after_img,
+                  widths: widths,
+                  styles: image_styles
+              }}
+
+              <div
+                class="compare__overlay"
+                style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"
+              ></div>
+            </div>
+          </div>
+
+          <div class="compare__handle" slot="handle">
+            {% render 'icon-compare' %}
+          </div>
+        </img-comparison-slider>
+      {%- elsif only_one_section_image != blank -%}
+        {% liquid
+          # get calc ratio image mobile
+          assign calc_ratio_mobile = 1
+          if only_one_section_image.aspect_ratio > settings_mobile_aspect_ratio
+            assign calc_ratio_mobile = only_one_section_image.aspect_ratio | divided_by: settings_mobile_aspect_ratio | round: 2
+          endif
+
+          # get calc ratio image desktop
+          assign calc_ratio_desktop = 1
+          if only_one_section_image.aspect_ratio > settings_desktop_aspect_ratio
+            assign calc_ratio_desktop = only_one_section_image.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
+          endif
+        %}
+
+        {%- capture sizes -%}
+          {%- if section.settings.enable_fullscreen == true -%}
+            (min-width: 750px) calc(100vw * {{ calc_ratio_desktop }}), calc(100vw * {{ calc_ratio_mobile }})
+          {%- else -%}
+            (min-width: 750px) calc((100vw - 24px) * {{ calc_ratio_desktop }}), calc((100vw - 24px) * {{ calc_ratio_mobile }})
+          {%- endif -%}
+        {%- endcapture -%}
+
+        {%- capture image_styles_only -%}
+          object-fit: cover;
+          object-position: {% if only_one_section_image.presentation.focal_point != blank %}{{ only_one_section_image.presentation.focal_point }}%{% else %}center{% endif %};
+        {%- endcapture -%}
+
+        <div class="compare__figure-image">
+          {{
+            only_one_section_image
+            | image_url: width: 1896
+            | image_tag:
+              loading: image_loading,
+              class: 'compare__image',
+              fetchpriority: fetch_priority,
+              sizes: sizes,
+              widths: widths,
+              styles: image_styles_only
+          }}
+          <div
+            class="compare__overlay"
+            style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"
+          ></div>
+        </div>
+      {%- else -%}
+        <div class="compare__default">
+          {{ 'collection-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder placeholder-svg--filled' }}
+          {{ 'collection-apparel-4' | placeholder_svg_tag: 'placeholder-svg placeholder placeholder-svg--filled' }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.compare.name",
+  "tag": "section",
+  "class": "section-compare",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.borders.enable_border_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": false,
+      "label": "t:sections.all.borders.enable_border_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section_heading_group.header.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.all.heading_font.options__1.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.all.heading_font.label",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_size.options__6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_size.options__5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__1.label"
+        }
+      ],
+      "default": "h6",
+      "label": "t:sections.all.heading_size.label",
+      "visible_if": "{{ section.settings.heading != blank and section.settings.heading_font == 'heading' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_group_button_show",
+      "label": "t:sections.all.button.button_show.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading_group_button_label",
+      "label": "t:sections.all.button.button_label.label",
+      "default": "t:sections.all.button.button_label.default_shop_now",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "url",
+      "id": "heading_group_button_link",
+      "label": "t:sections.all.button.button_link.label",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_group_button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.button.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.all.button.button_style.options__2.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:sections.all.button.button_style.options__3.label"
+        }
+      ],
+      "default": "tertiary",
+      "label": "t:sections.all.button.button_style.label",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_group_enable_border_bottom",
+      "default": true,
+      "label": "t:sections.all.borders.enable_border_bottom.label",
+      "visible_if": "{{ section.settings.heading != blank or section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.compare.settings.header__image.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "layout_color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "select",
+      "id": "desktop_aspect_ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "1:1"
+        },
+        {
+          "value": "2/1",
+          "label": "2:1"
+        },
+        {
+          "value": "3/2",
+          "label": "3:2"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "16:9"
+        },
+        {
+          "value": "21/9",
+          "label": "21:9"
+        },
+        {
+          "value": "adapt",
+          "label": "t:sections.all.aspect_ratio.adapt_to_media.label"
+        },
+        {
+          "value": "full_height",
+          "label": "t:sections.all.aspect_ratio.full_height.label"
+        }
+      ],
+      "default": "16/9",
+      "label": "t:sections.all.aspect_ratio.desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "mobile_aspect_ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "1:1"
+        },
+        {
+          "value": "2/1",
+          "label": "2:1"
+        },
+        {
+          "value": "3/2",
+          "label": "3:2"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3"
+        },
+        {
+          "value": "16/9",
+          "label": "16:9"
+        },
+        {
+          "value": "21/9",
+          "label": "21:9"
+        },
+        {
+          "value": "4/5",
+          "label": "4:5"
+        },
+        {
+          "value": "3/4",
+          "label": "3:4"
+        },
+        {
+          "value": "adapt",
+          "label": "t:sections.all.aspect_ratio.adapt_to_media.label"
+        },
+        {
+          "value": "full_height",
+          "label": "t:sections.all.aspect_ratio.full_height.label"
+        }
+      ],
+      "default": "16/9",
+      "label": "t:sections.all.aspect_ratio.mobile.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%",
+      "label": "t:sections.all.overlay_opacity.label",
+      "info": "t:sections.compare.settings.overlay_opacity.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fullscreen",
+      "label": "t:sections.compare.settings.enable_fullscreen.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.compare.settings.header__before.content"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "t:sections.compare.settings.image_before.label"
+    },
+    {
+      "type": "text",
+      "id": "label_before",
+      "label": "t:sections.compare.settings.label_before.label",
+      "default": "t:sections.compare.settings.label_before.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.compare.settings.header__after.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "t:sections.compare.settings.image_after.label"
+    },
+    {
+      "type": "text",
+      "id": "label_after",
+      "label": "t:sections.compare.settings.label_after.label",
+      "default": "t:sections.compare.settings.label_after.default"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.compare.presets.name",
+      "category": "t:sections.categories.banners"
+    }
+  ]
+}
+{% endschema %}

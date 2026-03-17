@@ -1,0 +1,168 @@
+{% liquid
+  assign has_block_video = false
+  assign has_block_image = false
+  assign has_block_placeholder = false
+
+  if block.settings.show_video == true and block.settings.video != blank
+    assign has_block_video = true
+  endif
+
+  if block.settings.enable_image
+    if block.settings.image != blank or block.settings.mobile_image != blank
+      assign has_block_image = true
+    else
+      assign has_block_placeholder = true
+    endif
+  endif
+
+  if has_block_image
+    if block.settings.mobile_image != blank
+      assign mobile_image = block.settings.mobile_image
+    else
+      assign mobile_image = block.settings.image
+    endif
+
+    if block.settings.image != blank
+      assign desktop_image = block.settings.image
+    else
+      assign desktop_image = block.settings.mobile_image
+    endif
+  endif
+%}
+
+<div class="slideshow__media slideshow__media-{{ block.id }}">
+  {%- if has_block_video -%}
+    {{
+      block.settings.video
+      | video_tag:
+        image_size: '1920x',
+        autoplay: true,
+        loop: true,
+        muted: true,
+        controls: false,
+        class: 'slideshow__video'
+    }}
+  {%- elsif has_block_image -%}
+    {% liquid
+      assign max_image_desktop_width = '100vw'
+      if section.settings.layout == 'split_screen'
+        assign max_image_desktop_width = '50vw'
+      endif
+
+      assign fetch_priority = 'auto'
+      assign image_loading = 'lazy'
+      if section.index == 1 and forloop_index == 0
+        assign fetch_priority = 'high'
+        assign image_loading = 'eager'
+      endif
+
+      assign one_image = false
+      if block.settings.image != blank and block.settings.mobile_image == blank
+        assign one_image = true
+        assign section_image = block.settings.image
+      elsif block.settings.image == blank and block.settings.mobile_image != blank
+        assign one_image = true
+        assign section_image = block.settings.mobile_image
+      endif
+
+      assign widths = '550, 720, 990, 1200, 1500, 1800, 2200, 2600, 3000, 3200, 3600, 4000'
+      assign widths_arr = widths | split: ', '
+
+      # get mobile calc ratio
+      if section.settings.image_ratio_mobile != 'adapt' and section.settings.image_ratio_mobile != 'full_height'
+        assign aspect_ratio_mobile = section.settings.image_ratio_mobile | split: '/'
+        assign temp = aspect_ratio_mobile[0] | append: '.0'
+        assign settings_mobile_aspect_ratio = temp | divided_by: aspect_ratio_mobile[1] | round: 2
+      elsif section.settings.image_ratio_mobile == 'full_height'
+        assign settings_mobile_aspect_ratio = 0.45
+      else
+        assign settings_mobile_aspect_ratio = mobile_image.aspect_ratio
+      endif
+
+      assign init_calc_ratio_mobile = 1
+      if mobile_image.width > mobile_image.height
+        assign init_calc_ratio_mobile = 1.4
+      endif
+
+      assign calc_ratio_mobile = init_calc_ratio_mobile
+      if mobile_image.aspect_ratio > settings_mobile_aspect_ratio
+        assign calc_ratio_mobile_temp = mobile_image.aspect_ratio | divided_by: settings_mobile_aspect_ratio | round: 2
+        assign calc_ratio_mobile = calc_ratio_mobile_temp | times: init_calc_ratio_mobile | round: 2
+      endif
+
+      # get desktop calc ratio
+      if section.settings.image_ratio_desktop != 'adapt' and section.settings.image_ratio_desktop != 'full_height'
+        assign aspect_ratio_desktop = section.settings.image_ratio_desktop | split: '/'
+        assign temp = aspect_ratio_mobile[0] | append: '.0'
+        assign settings_desktop_aspect_ratio = temp | divided_by: aspect_ratio_desktop[1] | round: 2
+        assign settings_tablet_aspect_ratio = temp | divided_by: aspect_ratio_desktop[1] | round: 2
+      elsif section.settings.image_ratio_desktop == 'full_height'
+        assign settings_tablet_aspect_ratio = 0.6
+        assign settings_desktop_aspect_ratio = 1.2
+      else
+        assign settings_tablet_aspect_ratio = desktop_image.aspect_ratio
+        assign settings_desktop_aspect_ratio = desktop_image.aspect_ratio
+      endif
+
+      assign calc_ratio_tablet = 1
+      if desktop_image.aspect_ratio > settings_tablet_aspect_ratio
+        assign calc_ratio_tablet = desktop_image.aspect_ratio | divided_by: settings_tablet_aspect_ratio | round: 2
+      endif
+
+      assign calc_ratio_desktop = 1
+      if desktop_image.aspect_ratio > settings_desktop_aspect_ratio
+        assign calc_ratio_desktop = desktop_image.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
+      endif
+    %}
+
+    {%- capture sizes -%}
+      (min-width: 990px) calc({{ calc_ratio_desktop }} * {{ max_image_desktop_width }}), (min-width: 576px) calc({{ calc_ratio_tablet }} * 100vw), calc({{ calc_ratio_mobile }} * 100vw)
+    {%- endcapture -%}
+    {%- if one_image -%}
+      {%- capture style -%}object-position: {{ section_image.presentation.focal_point }};{%- endcapture -%}
+      {{
+        section_image
+        | image_url: width: section_image.width
+        | image_tag:
+          class: 'slideshow__image',
+          loading: image_loading,
+          sizes: sizes,
+          widths: widths,
+          style: style,
+          fetchpriority: fetch_priority
+      }}
+    {%- else -%}
+      <picture>
+        <source
+          srcset="{% for width in widths_arr %}{{ block.settings.mobile_image | image_url: width: width }} {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
+          media="(max-width: 575px)"
+          sizes="{{ sizes }}"
+        >
+        <source
+          srcset="{% for width in widths_arr %}{{ block.settings.image | image_url: width: width }} {{ width }}w{% if forloop.last == false %}, {% endif %}{% endfor %}"
+          media="(min-width: 576px)"
+          sizes="{{ sizes }}"
+        >
+        <img
+          src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+          alt="{{ block.settings.image.alt }}"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          sizes="{{ sizes }}"
+          class="slideshow__image"
+          loading="{{ image_loading }}"
+          fetchpriority="{{ fetch_priority }}"
+          style="--focal_point_desktop: {{ block.settings.image.presentation.focal_point }}; --focal_point_mobile: {{ block.settings.mobile_image.presentation.focal_point }};"
+        >
+      </picture>
+    {%- endif -%}
+  {%- elsif has_block_placeholder -%}
+    {%- assign placeholder_index = forloop_index | modulo: 3 | plus: 1 -%}
+    {{ 'hero-apparel-' | append: placeholder_index | placeholder_svg_tag: 'slideshow__image placeholder-svg' }}
+  {%- endif -%}
+
+  <div
+    class="slideshow__overlay"
+    style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }}"
+  ></div>
+</div>

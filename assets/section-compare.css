@@ -1,0 +1,233 @@
+img-comparison-slider {
+  visibility: hidden;
+}
+img-comparison-slider:focus-visible .compare__handle {
+  outline: 0.1rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.2rem;
+}
+
+img-comparison-slider [slot=second] {
+  display: none;
+}
+
+img-comparison-slider.rendered {
+  visibility: inherit;
+}
+
+img-comparison-slider.rendered [slot=second] {
+  display: unset;
+}
+
+.compare {
+  overflow: hidden;
+}
+.compare__wrapper--split {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 990px) {
+  .compare__wrapper--split {
+    flex-direction: row;
+  }
+}
+.compare__wrapper.container {
+  padding-block: 1.2rem;
+}
+.compare__wrapper.full-screen .compare__images,
+.compare__wrapper.full-screen img-comparison-slider,
+.compare__wrapper.full-screen .compare__default,
+.compare__wrapper.full-screen .compare__overlay,
+.compare__wrapper.full-screen .compare__default svg {
+  border-radius: 0;
+}
+.compare__images {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.compare__images:has(.only-one-image) {
+  width: 100%;
+}
+.compare__images::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: var(--padding-bottom-mobile);
+}
+@media (min-width: 750px) {
+  .compare__images::after {
+    padding-bottom: var(--padding-bottom-desktop);
+  }
+}
+.compare img-comparison-slider {
+  user-select: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--border-radius-block);
+  outline: none;
+}
+.compare img-comparison-slider .second {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.compare img-comparison-slider .divider::after {
+  border-left-color: rgb(var(--color-background));
+}
+.compare__figure {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(var(--color-background-secondary));
+}
+.compare__figure-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+.compare__figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.compare__figure-before .compare__content {
+  align-items: flex-start;
+  right: auto;
+  left: 0;
+  margin-right: auto;
+}
+.compare__figure-before .compare__text {
+  align-items: flex-start;
+  text-align: left;
+}
+.compare__figure-after .compare__content {
+  align-items: flex-end;
+  right: 0;
+  left: auto;
+  margin-left: auto;
+}
+.compare__figure-after .compare__text {
+  align-items: flex-end;
+  text-align: right;
+}
+.compare__top {
+  padding-block: 1.6rem;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+}
+.compare__labels {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1.6rem;
+}
+.compare__labels span {
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: wrap;
+  color: rgb(var(--color-foreground));
+  font-weight: clamp(500, var(--font-body-weight) + 100, 700);
+}
+.compare__label-before, .compare__label-after {
+  width: calc(50% - 0.8rem);
+}
+.compare__label-after {
+  text-align: right;
+}
+.compare__handle {
+  width: 3.4rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+.compare__handle .icon-compare {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.compare__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.compare__default {
+  display: flex;
+  gap: 0.2rem;
+  width: 100%;
+  overflow: hidden;
+}
+.compare__default svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: static;
+}
+.compare__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: rgb(var(--color-background));
+}
+.no-js .compare img-comparison-slider {
+  visibility: visible;
+}
+.no-js .compare img-comparison-slider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  height: 100%;
+  width: 0.2rem;
+  background-color: rgb(var(--color-background));
+  transform: translate(-50%, -50%);
+}
+.no-js .compare img-comparison-slider .compare__figure {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 50%;
+  width: 50%;
+}
+.no-js .compare img-comparison-slider .compare__figure[slot=second] {
+  left: 50%;
+  right: 0;
+  display: block;
+}
+.no-js .compare img-comparison-slider .compare__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.no-js .compare .compare__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+[dir=rtl] .compare .compare__label-after {
+  text-align: left;
+}

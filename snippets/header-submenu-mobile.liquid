@@ -1,0 +1,82 @@
+<div class="mobile-submenu">
+  <button
+    type="button"
+    class="mobile-submenu__back button--unstyled focus-inset"
+    aria-expanded="true"
+  >
+    {% render 'icon-menu-back' %}
+    <span class="subtitle">{{- link.title | escape -}}</span>
+    <span></span>
+  </button>
+
+  <nav class="mobile-submenu__navigation">
+    <ul class="menu-drawer__menu list-menu" role="list">
+      {%- for childlink in link.links -%}
+        <li>
+          {%- if childlink.links == blank -%}
+            <a
+              href="{{ childlink.url }}"
+              class="menu-drawer__menu-item focus-inset header-label"
+              {% if childlink.current %}
+                aria-current="page"
+              {% endif %}
+              {% if settings.links_blank and childlink.type == 'http_link' %}
+                target="_blank"
+              {% endif %}
+            >
+              {{- childlink.title | escape -}}
+            </a>
+          {%- else -%}
+            <details>
+              <summary class="menu-drawer__menu-item focus-inset">
+                <a
+                  href="{{ childlink.url }}"
+                  class="menu-drawer__menu-link focus-inset header-label"
+                  {% if childlink.current %}
+                    aria-current="page"
+                  {% endif %}
+                  {% if settings.links_blank and childlink.type == 'http_link' %}
+                    target="_blank"
+                  {% endif %}
+                >
+                  {{- childlink.title | escape -}}
+                </a>
+                {% render 'icon-chevron' %}
+              </summary>
+
+              <div
+                id="childlink-{{ childlink.title | escape }}"
+                class="menu-drawer__submenu motion-reduce"
+              >
+                <div class="menu-drawer__inner-submenu">
+                  <ul
+                    class="menu-drawer__menu list-menu"
+                    role="list"
+                    tabindex="-1"
+                  >
+                    {%- for grandchildlink in childlink.links -%}
+                      <li>
+                        <a
+                          href="{{ grandchildlink.url }}"
+                          class="menu-drawer__menu-item focus-inset childlink"
+                          {% if grandchildlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                          {% if settings.links_blank and grandchildlink.type == 'http_link' %}
+                            target="_blank"
+                          {% endif %}
+                        >
+                          {{- grandchildlink.title | escape -}}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            </details>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,63 @@
+.pickup-availability {
+  margin-top: 1.2rem;
+}
+.pickup-availability pickup-availability {
+  display: block;
+}
+.pickup-availability .pickup-availability-preview {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.8rem;
+}
+
+pickup-availability-drawer .pickup-availability-header {
+  margin-bottom: 1.6rem;
+}
+pickup-availability-drawer .pickup-availability-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.6rem;
+}
+pickup-availability-drawer .pickup-availability-product-info > span {
+  font-family: var(--font-heading-card-family);
+  font-style: var(--font-heading-card-style);
+  font-weight: var(--font-heading-card-weight);
+  font-size: calc(var(--font-heading-card-scale) * 1rem);
+  text-transform: var(--font-heading-card-text-transform);
+  letter-spacing: 0.005em;
+  color: rgb(var(--color-foreground));
+  line-height: 1.285;
+}
+pickup-availability-drawer .pickup-availability-list {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  height: 100%;
+}
+pickup-availability-drawer .pickup-availability-list::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+pickup-availability-drawer .pickup-availability-list::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--color-foreground), 0.2);
+  border-radius: 2rem;
+}
+pickup-availability-drawer .pickup-availability-list__item {
+  border-top: 0.1rem solid rgba(var(--color-border));
+  padding: 1.2rem 0;
+}
+pickup-availability-drawer .pickup-availability-list__item:last-child {
+  padding-bottom: 0;
+}
+pickup-availability-drawer .pickup-availability-list__item > * {
+  margin: 0;
+}
+pickup-availability-drawer .pickup-availability-list__item > * + * {
+  margin-top: 0.6rem;
+}
+pickup-availability-drawer .pickup-availability-address {
+  font-style: normal;
+}
+pickup-availability-drawer .pickup-availability-address p {
+  margin: 0;
+}

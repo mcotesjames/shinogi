@@ -1,0 +1,15 @@
+{% comment %}
+  This section is used for the Section Rendering API in the cart.js file in the CartNotification class to fetch product recommendations for the last product added to the cart.
+{% endcomment %}
+{%- if recommendations.performed and recommendations.products_count > 0 -%}
+  <div class="cart-notification__recommend-list">
+    {%- for recommendation in recommendations.products -%}
+      <div class="cart-notification__recommend-item">
+        {% render 'product-card-simple',
+          product_card_product: recommendation,
+          color_scheme: settings.notification_color_scheme
+        %}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

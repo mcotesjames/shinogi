@@ -1,0 +1,48 @@
+{%- if block.settings.subheading != blank
+  or block.settings.heading != blank
+  or block.settings.description != blank
+  or block.settings.show_button
+-%}
+  <div class="slideshow__content container">
+    <div
+      class="slideshow__content-wrapper slideshow__content-wrapper--ver-{{ section.settings.vertical_alignment }} slideshow__content-wrapper--hor-{{ section.settings.horizontal_alignment }}"
+      {% if section.settings.enable_parallax and section.settings.animation_type == 'slide' -%}
+        data-swiper-parallax="-700"
+      {%- endif %}
+    >
+      <div class="slideshow__content-group">
+        {%- if block.settings.subheading != blank -%}
+          <div class="slideshow__content-subheading subtitle{% if section.settings.animation_type == 'creative' %} js-fade{% endif %}">
+            {{- block.settings.subheading -}}
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.heading != blank -%}
+          <{{ block.settings.heading_tag | default: "h2" }}
+            class="slideshow__content-title slideshow__content-title--width-{{ block.settings.heading_width }} {{ block.settings.heading_size }} richtext-link-inside{% if section.settings.animation_type == 'creative' %} js-split-text{% endif %}"
+          >
+            {{- block.settings.heading -}}
+          </{{ block.settings.heading_tag | default: "h2" }}>
+        {%- endif -%}
+
+        {%- if block.settings.description != blank -%}
+          <div class="slideshow__content-description richtext-link-inside{% if section.settings.animation_type == 'creative' %} js-fade{% endif %}">
+            {{- block.settings.description -}}
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.show_button and block.settings.button_label != blank -%}
+          {%- capture button_class -%}
+            slideshow__content-button{% if section.settings.animation_type == 'creative' %} js-fade js-fade-after{% endif %}
+          {%- endcapture -%}
+          {% render 'button',
+            btn_label: block.settings.button_label,
+            btn_style: block.settings.button_style,
+            btn_link: block.settings.button_link,
+            class: button_class
+          %}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

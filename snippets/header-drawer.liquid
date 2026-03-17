@@ -1,0 +1,247 @@
+<header-drawer
+  data-breakpoint="tablet"
+  class="{% if section.settings.enable_right_mobile_menu_border %} header-drawer--border{% endif %}"
+>
+  <details class="menu-drawer-container">
+    <summary
+      class="menu-drawer-icon focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      {% render 'icon-hamburger' %}
+    </summary>
+    <div
+      id="menu-drawer"
+      class="menu-drawer motion-reduce color-{{ section.settings.mobile_menu_color_scheme }}"
+      tabindex="-1"
+    >
+      <div class="menu-drawer__inner-container">
+        <div class="modal__heading container no-js-hidden">
+          {% assign logo_class = 'logo-in-drawer'
+            | append: ' logo-in-drawer-dark--'
+            | append: section.settings.show_dm_logo_in_mobile_menu
+          %}
+          {% render 'header-logo', class: logo_class, show_logo: section.settings.show_logo %}
+          {% render 'modal-close-button', id: 'mobile-menu-close-btn' %}
+        </div>
+        <div class="menu-drawer__main">
+          {%- if section.settings.menu != blank -%}
+            <nav class="menu-drawer__navigation">
+              <ul class="menu-drawer__menu list-menu" role="list">
+                {%- for link in section.settings.menu.links -%}
+                  {% liquid
+                    assign mega_menu = false
+                    assign link_handleized = link.title | handle | strip
+                  %}
+                  {% for block in section.blocks %}
+                    {% liquid
+                      assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip
+                      if block.type == 'mega_menu'
+                        if link.handle == mega_menu_trigger or link_handleized == mega_menu_trigger
+                          if block.settings.mega_menu_submenu != blank or block.settings.mega_menu_collections != blank
+                            assign mega_menu = true
+                          endif
+                        endif
+                      endif
+                    %}
+                  {% endfor %}
+                  <li>
+                    {%- if mega_menu -%}
+                      <menu-drawer class="mobile-submenu-drawer">
+                        <details id="Details-MobileMegaMenu-Link-{{ forloop.index }}">
+                          <summary class="menu-drawer__menu-item focus-inset">
+                            <a
+                              href="{{ link.url }}"
+                              class="menu-drawer__menu-link focus-inset header-label"
+                              {% if childlink.current %}
+                                aria-current="page"
+                              {% endif %}
+                              {% if settings.links_blank and link.type == 'http_link' %}
+                                target="_blank"
+                              {% endif %}
+                            >
+                              {{- link.title | escape -}}
+                            </a>
+                            {% render 'icon-chevron' %}
+                          </summary>
+
+                          {% render 'header-mega-menu-mobile', link: link, blocks: section.blocks %}
+                        </details>
+                      </menu-drawer>
+                    {%- elsif link.links != blank -%}
+                      <menu-drawer class="mobile-submenu-drawer">
+                        <details id="Details-MobileMenu-Link-{{ forloop.index }}">
+                          <summary class="menu-drawer__menu-item focus-inset">
+                            <a
+                              href="{{ link.url }}"
+                              class="menu-drawer__menu-link focus-inset header-label"
+                              {% if link.current %}
+                                aria-current="page"
+                              {% endif %}
+                              {% if settings.links_blank and link.type == 'http_link' %}
+                                target="_blank"
+                              {% endif %}
+                            >
+                              {{- link.title | escape -}}
+                            </a>
+                            {% render 'icon-chevron' %}
+                          </summary>
+
+                          {% render 'header-submenu-mobile', link: link %}
+                        </details>
+                      </menu-drawer>
+                    {%- else -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item focus-inset header-label"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                        {% if settings.links_blank and link.type == 'http_link' %}
+                          target="_blank"
+                        {% endif %}
+                      >
+                        {{- link.title | escape -}}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+
+          {% liquid
+            assign has_desktop_burger_menu = false
+            assign desktop_burger_menu = blank
+
+            for block in section.blocks
+              if block.type == 'desktop_burger' and block.settings.burger_main_menu != blank and block.settings.show_burger_main_on_mobile
+                assign has_desktop_burger_menu = true
+                assign desktop_burger_menu = block.settings.burger_main_menu
+              endif
+            endfor
+          %}
+          {%- if has_desktop_burger_menu and desktop_burger_menu != blank -%}
+            <nav class="menu-drawer__navigation">
+              <ul class="menu-drawer__menu list-menu" role="list">
+                {%- for link in desktop_burger_menu.links -%}
+                  <li>
+                    {%- if link.links != blank -%}
+                      <menu-drawer class="mobile-submenu-drawer">
+                        <details id="Details-MobileBurgerMenu-Link-{{ forloop.index }}">
+                          <summary class="menu-drawer__menu-item focus-inset">
+                            <a
+                              href="{{ link.url }}"
+                              class="menu-drawer__menu-link focus-inset header-label"
+                              {% if link.current %}
+                                aria-current="page"
+                              {% endif %}
+                              {% if settings.links_blank and link.type == 'http_link' %}
+                                target="_blank"
+                              {% endif %}
+                            >
+                              {{- link.title | escape -}}
+                            </a>
+                            {% render 'icon-chevron' %}
+                          </summary>
+
+                          {% render 'header-submenu-mobile', link: link %}
+                        </details>
+                      </menu-drawer>
+                    {%- else -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item focus-inset header-label"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                        {% if settings.links_blank and link.type == 'http_link' %}
+                          target="_blank"
+                        {% endif %}
+                      >
+                        {{- link.title | escape -}}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+
+          {%- if section.settings.enable_additional_button -%}
+            <div class="menu-drawer__additional">
+              {% render 'button',
+                btn_label: section.settings.additional_button_label,
+                btn_style: 'transparent',
+                btn_link: section.settings.additional_button_link,
+                class: 'menu-drawer__additional-btn'
+              %}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.enable_social_on_mobile -%}
+            {% render 'social-list-icons', class: 'menu-drawer__socials' %}
+          {%- endif -%}
+        </div>
+
+        {% liquid
+          assign has_localization_btns = false
+          assign enable_country_selector = false
+          if section.settings.enable_country_selector and localization.available_countries.size > 1
+            assign enable_country_selector = true
+          endif
+
+          assign enable_language_selector = false
+          if section.settings.enable_language_selector and localization.available_languages.size > 1
+            assign enable_language_selector = true
+          endif
+
+          if enable_country_selector or enable_language_selector
+            assign has_localization_btns = true
+          endif
+
+          assign has_customer_accounts = false
+          if shop.customer_accounts_enabled and section.settings.enable_account_btn
+            assign has_customer_accounts = true
+          endif
+        %}
+
+        {%- if has_localization_btns
+          or section.settings.enable_search
+          or section.settings.enable_dark_mode_toggle
+          or has_customer_accounts
+        -%}
+          <div class="menu-drawer__bottom">
+            {%- if has_localization_btns -%}
+              {% render 'modal-region-selector',
+                section_obj: section,
+                class: 'header__region',
+                modal_location: 'header_mobile',
+                in_header_drawer: true,
+                button_type: 'text'
+              %}
+            {%- endif -%}
+
+            {%- if section.settings.enable_search
+              or section.settings.enable_dark_mode_toggle
+              or has_customer_accounts
+            -%}
+              <div class="menu-drawer__bottom-buttons">
+                {%- if section.settings.enable_dark_mode_toggle -%}
+                  {% render 'header-color-scheme', button_type: 'icon' %}
+                {%- endif -%}
+
+                {%- if has_customer_accounts -%}
+                  {% render 'header-account', button_type: 'icon', in_header_drawer: true %}
+                {%- endif -%}
+
+                {%- if section.settings.enable_search -%}
+                  {% render 'header-search', section: section, button_type: 'icon', in_header_drawer: true %}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </details>
+</header-drawer>

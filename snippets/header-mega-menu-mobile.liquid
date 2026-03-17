@@ -1,0 +1,164 @@
+{% for block in blocks %}
+  {% liquid
+    assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip
+    assign link_handleized = link.title | handle | strip
+
+    assign show_mega_menu = false
+    if block.type == 'mega_menu'
+      if link.handle == mega_menu_trigger or link_handleized == mega_menu_trigger
+        if block.settings.mega_menu_submenu != blank or block.settings.mega_menu_collections != blank
+          assign show_mega_menu = true
+        endif
+      endif
+    endif
+  %}
+
+  {%- if show_mega_menu -%}
+    <div class="mobile-submenu" {{ block.shopify_attributes }}>
+      <button
+        type="button"
+        class="mobile-submenu__back button--unstyled focus-inset"
+        aria-expanded="true"
+      >
+        {% render 'icon-menu-back' %}
+        <span class="subtitle">{{- link.title | escape -}}</span>
+        <span></span>
+      </button>
+
+      {%- if block.settings.mega_menu_submenu != blank -%}
+        <nav class="mobile-submenu__navigation">
+          <ul class="menu-drawer__menu list-menu" role="list">
+            {%- for link in block.settings.mega_menu_submenu.links -%}
+              <li>
+                {%- if link.links != blank -%}
+                  <details>
+                    <summary class="menu-drawer__menu-item focus-inset">
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-link focus-inset header-label"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                        {% if settings.links_blank and link.type == 'http_link' %}
+                          target="_blank"
+                        {% endif %}
+                      >
+                        {{- link.title | escape -}}
+                      </a>
+                      {% render 'icon-chevron' %}
+                    </summary>
+
+                    <div
+                      id="link-{{ link.title | escape }}"
+                      class="menu-drawer__submenu motion-reduce"
+                      tabindex="-1"
+                    >
+                      <div class="menu-drawer__inner-submenu">
+                        <ul
+                          class="menu-drawer__menu list-menu"
+                          role="list"
+                          tabindex="-1"
+                        >
+                          {%- for childlink in link.links -%}
+                            <li>
+                              {%- if childlink.links == blank -%}
+                                <a
+                                  href="{{ childlink.url }}"
+                                  class="menu-drawer__menu-item focus-inset childlink"
+                                  {% if childlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                  {% if settings.links_blank and childlink.type == 'http_link' %}
+                                    target="_blank"
+                                  {% endif %}
+                                >
+                                  {{- childlink.title | escape -}}
+                                </a>
+                              {%- else -%}
+                                <details>
+                                  <summary class="menu-drawer__menu-item focus-inset childlink">
+                                    <a
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-link focus-inset"
+                                      {% if childlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                      {% if settings.links_blank and childlink.type == 'http_link' %}
+                                        target="_blank"
+                                      {% endif %}
+                                    >
+                                      {{- childlink.title | escape -}}
+                                    </a>
+                                    {% render 'icon-chevron' %}
+                                  </summary>
+                                  <div
+                                    id="childlink-{{ childlink.title | escape }}"
+                                    class="menu-drawer__submenu motion-reduce"
+                                  >
+                                    <ul
+                                      class="menu-drawer__menu list-menu"
+                                      role="list"
+                                      tabindex="-1"
+                                    >
+                                      {%- for grandchildlink in childlink.links -%}
+                                        <li>
+                                          <a
+                                            href="{{ grandchildlink.url }}"
+                                            class="menu-drawer__menu-item focus-inset grandchildlink"
+                                            {% if grandchildlink.current %}
+                                              aria-current="page"
+                                            {% endif %}
+                                            {% if settings.links_blank and grandchildlink.type == 'http_link' %}
+                                              target="_blank"
+                                            {% endif %}
+                                          >
+                                            {{- grandchildlink.title | escape -}}
+                                          </a>
+                                        </li>
+                                      {%- endfor -%}
+                                    </ul>
+                                  </div>
+                                </details>
+                              {%- endif -%}
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      </div>
+                    </div>
+                  </details>
+                {%- else -%}
+                  <a
+                    href="{{ link.url }}"
+                    class="menu-drawer__menu-item focus-inset header-label"
+                    {% if link.current %}
+                      aria-current="page"
+                    {% endif %}
+                    {% if settings.links_blank and link.type == 'http_link' %}
+                      target="_blank"
+                    {% endif %}
+                  >
+                    {{- link.title | escape -}}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      {%- if block.settings.mega_menu_collections != blank -%}
+        <div class="mobile-submenu__collections" {{ block.shopify_attributes }}>
+          {%- for collection in block.settings.mega_menu_collections -%}
+            {% render 'collection-card',
+              card_collection: collection,
+              image_ratio: block.settings.mega_menu_collection_ratio,
+              heading_size: 'subtitle',
+              columns: 4,
+              is_collections_page: false
+            %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{% endfor %}

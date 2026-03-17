@@ -1,0 +1,125 @@
+{
+  "sections": {
+    "page_info": {
+      "type": "main-page",
+      "settings": {
+        "heading_size": "h5",
+        "heading_tag": "h1",
+        "content_align": "left"
+      }
+    },
+    "lookbook_1": {
+      "type": "lookbook",
+      "blocks": {
+        "lookbook_item_1": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        },
+        "lookbook_item_2": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        },
+        "lookbook_item_3": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        }
+      },
+      "block_order": ["lookbook_item_1", "lookbook_item_2", "lookbook_item_3"],
+      "settings": {
+        "enable_border_top": true,
+        "enable_border_bottom": false,
+        "heading": "Collection 1",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": true,
+        "heading_group_button_label": "Explore",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "primary",
+        "heading_group_enable_border_bottom": true,
+        "items_per_row": 3,
+        "aspect_ratio": "portrait",
+        "object_fit": "cover",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "lookbook_2": {
+      "type": "lookbook",
+      "blocks": {
+        "lookbook_item_1": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        },
+        "lookbook_item_2": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        },
+        "lookbook_item_3": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "",
+            "card_description": "",
+            "list_button_show": false
+          }
+        }
+      },
+      "block_order": ["lookbook_item_1", "lookbook_item_2", "lookbook_item_3"],
+      "settings": {
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "Collection 2",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": true,
+        "heading_group_button_label": "Explore",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "primary",
+        "heading_group_enable_border_bottom": true,
+        "items_per_row": 3,
+        "aspect_ratio": "portrait",
+        "object_fit": "cover",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    }
+  },
+  "order": ["page_info", "lookbook_1", "lookbook_2"]
+}

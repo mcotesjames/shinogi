@@ -1,0 +1,77 @@
+{% doc %}
+  Renders a simple product card. Used for recommended products in Cart notification.
+
+  @param {object} product_card_product - Product Liquid object
+  @param {string} class - CSS class
+
+  @example
+  {% render 'product-card-badges', product_card_product: product %}
+{% enddoc %}
+
+{%- if settings.show_new_badge
+  or settings.show_sale_badge
+  or settings.show_soldout_badge
+  or settings.show_custom_badges
+-%}
+  <div class="{{ class | default: 'product-card__badges' }} body-small">
+    {%- if settings.show_new_badge -%}
+      {%- liquid
+        assign today = 'now' | date: '%s'
+        assign product_published_at = product_card_product.published_at | date: '%s'
+        assign days_difference = today | minus: product_published_at
+        assign days_difference_in_days = days_difference | divided_by: 86400
+      -%}
+
+      {%- if days_difference_in_days <= settings.new_badge_days %}
+        <span class="badge badge--new">
+          {{- 'products.product.new' | t -}}
+        </span>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if product_card_product.available == false and settings.show_soldout_badge -%}
+      <span class="badge badge--sold-out" aria-hidden="true">
+        {{- 'products.product.sold_out' | t -}}
+      </span>
+    {%- elsif product_card_product.selected_or_first_available_variant.compare_at_price
+        > product_card_product.selected_or_first_available_variant.price
+      and product_card_product.available
+      and settings.show_sale_badge
+    -%}
+      <span class="badge badge--sale" aria-hidden="true">
+        {% if settings.sale_badge_type == 'sale' %}
+          {{- 'products.product.on_sale' | t -}}
+        {% else %}
+          {{- 'products.product.on_sale' | t -}}
+          <span>
+            <span>-</span>
+            <span>
+              {{-
+                product_card_product.selected_or_first_available_variant.compare_at_price
+                | minus: product_card_product.selected_or_first_available_variant.price
+                | times: 100.0
+                | divided_by: product_card_product.selected_or_first_available_variant.compare_at_price
+                | round
+              -}}
+            </span>
+            <span>%</span>
+          </span>
+        {% endif %}
+      </span>
+    {%- endif -%}
+
+    {%- if settings.show_custom_badges and product_card_product.metafields.custom.badges != blank -%}
+      {%- if product_card_product.metafields.custom.badges.list? -%}
+        {%- for badge in product_card_product.metafields.custom.badges.value -%}
+          <span class="badge badge--custom" aria-hidden="true">
+            {{- badge -}}
+          </span>
+        {%- endfor -%}
+      {%- else -%}
+        <span class="badge badge--custom" aria-hidden="true">
+          {{- product_card_product.metafields.custom.badges -}}
+        </span>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

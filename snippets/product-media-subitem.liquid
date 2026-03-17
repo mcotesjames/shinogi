@@ -1,0 +1,72 @@
+{% doc %}
+  Renders a product media subitem (thumbnail).
+
+  @param {object} media - Media object
+  @param {object} product_obj - Product object
+  @param {object} section_obj - Section object
+
+  @example
+  {% render 'product-media-subitem', block_obj: block %}
+{% enddoc %}
+
+{% if media != blank %}
+  {%- liquid
+    case section_obj.settings.thumbs_aspect_ratio
+      when 'landscape'
+        # 4:3
+        assign settings_aspect_ratio = 1.33
+        assign thumbs_image_style = 'padding-bottom: 75%;'
+      when 'portrait'
+        # 668:880
+        assign settings_aspect_ratio = 0.76
+        assign thumbs_image_style = 'padding-bottom: 131.7%;'
+      when 'square'
+        # 1:1
+        assign settings_aspect_ratio = 1
+        assign thumbs_image_style = 'padding-bottom: 100%;'
+      else
+        # 1:1
+        assign settings_aspect_ratio = 1
+        assign thumbs_image_style = 'padding-bottom: 100%;'
+    endcase
+
+    assign thumbs_image_fit = section_obj.settings.thumbs_image_fit | default: 'cover'
+
+    assign calc_ratio = 1
+    if thumbs_image_fit == 'cover' and media.preview_image.aspect_ratio > settings_aspect_ratio
+      assign calc_ratio = media.preview_image.aspect_ratio | divided_by: 1 | round: 2
+    endif
+
+    assign widths = '100, 200, 300, 400, 500, 600, 700, 800, 1000, 1200'
+
+    assign fetch_priority = 'auto'
+    assign loading = 'lazy'
+
+    assign img_alt = product_obj.title | append: '-thumbmail-' | append: media.position
+    if media.preview_image.alt != blank
+      assign img_alt = media.preview_image.alt
+    endif
+  -%}
+
+  {%- capture img_sizes -%}
+    calc(100px * {{ calc_ratio }})
+  {%- endcapture -%}
+
+  {%- capture img_style -%}
+    object-fit: {{ thumbs_image_fit }};
+  {%- endcapture -%}
+
+  <div class="product__media-img" style="{{ thumbs_image_style }}">
+    {{
+      media.preview_image
+      | image_url: width: media.preview_image.width
+      | image_tag:
+        loading: loading,
+        fetchpriority: fetch_priority,
+        sizes: img_sizes,
+        widths: widths,
+        style: img_style,
+        alt: img_alt
+    }}
+  </div>
+{%- endif -%}

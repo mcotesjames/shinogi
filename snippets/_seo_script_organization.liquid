@@ -1,0 +1,22 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if section.settings.logo -%}
+      "logo": {{ section.settings.logo | image_url: section.settings.logo.width | prepend: "https:" | json }},
+    {%- endif %}
+    "sameAs": [
+      {{ settings.social_instagram_link | default: '' | json }},
+      {{ settings.social_facebook_link | default: '' | json }},
+      {{ settings.social_twitter_link | default: '' | json }},
+      {{ settings.social_pinterest_link | default: '' | json }},
+      {{ settings.social_tiktok_link | default: '' | json }},
+      {{ settings.social_tumblr_link | default: '' | json }},
+      {{ settings.social_snapchat_link | default: '' | json }},
+      {{ settings.social_youtube_link | default: '' | json }},
+      {{ settings.social_vimeo_link | default: '' | json }}
+    ],
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>

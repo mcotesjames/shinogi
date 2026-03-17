@@ -1,0 +1,86 @@
+{% doc %}
+  Renders ticker block in Ticker section.
+
+  @param {object} settings - The section settings object
+  @param {number} section_index - The section index
+  @param {boolean} [is_spacer] - Flag of spacer block
+
+  @example
+  {% render 'ticker-block', settings: section.settings, section_index: section.index %}
+{% enddoc %}
+
+{% liquid
+  if is_spacer
+    assign is_spacer = true
+  else
+    assign is_spacer = false
+  endif
+
+  assign image_loading = 'lazy'
+  assign fetch_priority = 'auto'
+  if section_index == 1
+    assign image_loading = 'eager'
+    assign fetch_priority = 'high'
+  endif
+
+  assign image_size_2x = settings.image_width | times: 2
+  assign image_size_3x = settings.image_width | times: 3
+%}
+
+<div class="ticker__block">
+  {%- if settings.enable_image -%}
+    {%- assign image_height = 140 -%}
+    {%- if settings.image != blank -%}
+      {%- assign image_height = settings.image_width | divided_by: settings.image.aspect_ratio | round: 2 -%}
+    {%- endif -%}
+
+    <div
+      class="ticker__image-wrapper{% if settings.image != blank and settings.image_2 != blank %} ticker__image-wrapper--with-dm-img{% endif %}"
+      style="width: {{ settings.image_width }}px;height: {{ image_height }}px;"
+    >
+      {%- if is_spacer == false -%}
+        {%- if settings.image != blank -%}
+          {%- capture srcset -%}
+            {{ settings.image | image_url: width: settings.image_width }}, {{ settings.image | image_url: width: image_size_2x }} 2x, {{ settings.image | image_url: width: image_size_3x }} 3x
+          {%- endcapture -%}
+          {{
+            settings.image
+            | image_url: width: settings.image.width
+            | image_tag:
+              loading: image_loading,
+              class: 'ticker__image',
+              fetchpriority: fetch_priority,
+              width: settings.image_width,
+              height: image_height,
+              srcset: srcset
+          }}
+
+          {%- if settings.image_2 != blank -%}
+            {%- capture srcset_2 -%}
+              {{ settings.image_2 | image_url: width: settings.image_width }}, {{ settings.image_2 | image_url: width: image_size_2x }} 2x, {{ settings.image_2 | image_url: width: image_size_3x }} 3x
+            {%- endcapture -%}
+            {{
+              settings.image_2
+              | image_url: width: settings.image_2.width
+              | image_tag:
+                loading: image_loading,
+                class: 'ticker__image ticker__image--dark',
+                fetchpriority: fetch_priority,
+                width: settings.image_width,
+                height: image_height,
+                srcset: srcset_2
+            }}
+          {%- endif -%}
+        {%- else -%}
+          {% render 'ticker-placeholder-image' %}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if settings.enable_ticker_text and settings.ticker_text != blank -%}
+    <span class="ticker__text {{ settings.ticker_text_size }}">
+      {{- settings.ticker_text -}}
+    </span>
+  {%- endif -%}
+</div>

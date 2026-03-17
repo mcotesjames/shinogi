@@ -1,0 +1,66 @@
+<div class="header__submenu motion-reduce color-{% if section.settings.overlay_mode == false %}{{ section.settings.header_color_scheme }}{% else %}background-1{% endif %}">
+  <ul class="header__submenu-list list-menu">
+    {%- for childlink in link.links -%}
+      <li>
+        {%- if childlink.links == blank -%}
+          <a
+            href="{{ childlink.url }}"
+            {% if settings.links_blank and childlink.type == 'http_link' %}
+              target="_blank"
+            {% endif %}
+            class="list-menu-item-animate header__menu-item focus-inset {% if childlink.current and childlink.url != '/' %} header__menu-item--active{% endif %}"
+            {% if childlink.current and childlink.url != '/' %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span class="body-small">
+              {{- childlink.title | escape -}}
+            </span>
+          </a>
+        {%- else -%}
+          <details class="header__submenu-details">
+            <summary class="header__submenu-summary focus-inset">
+              <a
+                href="{{ childlink.url }}"
+                {% if settings.links_blank and childlink.type == 'http_link' %}
+                  target="_blank"
+                {% endif %}
+                class="list-menu-item-animate header__menu-item focus-inset {% if childlink.current and childlink.url != '/' %} header__menu-item--active{% endif %}"
+                {% if childlink.current and childlink.url != '/' %}
+                  aria-current="page"
+                {% endif %}
+              >
+                <span class="body-small">{{- childlink.title | escape -}}</span>
+              </a>
+              <span class="icon-caret">
+                {% render 'icon-caret-small' %}
+              </span>
+            </summary>
+            <div class="header__submenu motion-reduce color-{% if section.settings.overlay_mode == false %}{{ section.settings.header_color_scheme }}{% else %}background-2{% endif %}">
+              <ul class="header__submenu-list list-menu">
+                {%- for grandchildlink in childlink.links -%}
+                  <li>
+                    <a
+                      href="{{ grandchildlink.url }}"
+                      {% if settings.links_blank and grandchildlink.type == 'http_link' %}
+                        target="_blank"
+                      {% endif %}
+                      class="list-menu-item-animate header__menu-item focus-inset {% if grandchildlink.current and grandchildlink.url != '/' %} header__menu-item--active{% endif %}"
+                      {% if grandchildlink.current and grandchildlink.url != '/' %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      <span class="body-small">
+                        {{- grandchildlink.title | escape -}}
+                      </span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>

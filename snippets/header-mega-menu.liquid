@@ -1,0 +1,124 @@
+{%- for block in section.blocks -%}
+  {% liquid
+    assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip
+    assign link_handleized = link.title | handle | strip
+
+    assign show_mega_menu = false
+    if block.type == 'mega_menu'
+      if link.handle == mega_menu_trigger or link_handleized == mega_menu_trigger
+        if block.settings.mega_menu_submenu != blank or block.settings.mega_menu_collections != blank
+          assign show_mega_menu = true
+        endif
+      endif
+    endif
+  %}
+
+  {%- if show_mega_menu -%}
+    <div
+      class="header__mega-menu mega-menu color-{{ block.settings.mega_menu_color_scheme }}"
+      {{ block.shopify_attributes }}
+    >
+      <div
+        class="mega-menu__wrapper"
+        tabindex="-1"
+        role="dialog"
+      >
+        {%- if block.settings.mega_menu_submenu != blank -%}
+          <div class="mega-menu__right">
+            <div class="mega-menu__submenu">
+              {%- for link in block.settings.mega_menu_submenu.links -%}
+                <ul class="mega-menu__subitem list-unstyled">
+                  <li class="mega-menu__subitem-title weight-medium">
+                    {%- if block.settings.enable_clickable_top_level -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="list-menu-item-animate mega-menu__link body-normal focus-inset"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                        aria-label="{{ link.title | escape }}"
+                      >
+                        <span>{{- link.title | escape -}}</span>
+                      </a>
+                    {%- else -%}
+                      <span>{{- link.title | escape -}}</span>
+                    {%- endif -%}
+                  </li>
+                  {%- if link.links != blank -%}
+                    {%- for childlink in link.links -%}
+                      <li class="mega-menu__subitem-item">
+                        {%- if childlink.links != blank -%}
+                          <details class="mega-menu__subitem-details">
+                            <summary class="mega-menu__subitem-summary focus-inset">
+                              <a
+                                href="{{ childlink.url }}"
+                                class="list-menu-item-animate mega-menu__link body-small focus-inset"
+                                {% if childlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                                aria-label="{{ childlink.title | escape }}"
+                              >
+                                <span>{{- childlink.title | escape -}}</span>
+                              </a>
+
+                              <span class="icon-caret">
+                                {% render 'icon-caret-small' %}
+                              </span>
+                            </summary>
+
+                            <ul class="list-unstyled">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li class="mega-menu__subitem-item mega-menu__subitem-item--child">
+                                  <a
+                                    href="{{ grandchildlink.url }}"
+                                    class="list-menu-item-animate mega-menu__link body-small focus-inset"
+                                    {% if grandchildlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                    aria-label="{{ grandchildlink.title | escape }}"
+                                  >
+                                    <span>{{- grandchildlink.title | escape -}}</span>
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </details>
+
+                        {%- else -%}
+                          <a
+                            href="{{ childlink.url }}"
+                            class="list-menu-item-animate mega-menu__link body-small focus-inset"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                            aria-label="{{ childlink.title | escape }}"
+                          >
+                            <span>{{- childlink.title | escape -}}</span>
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  {%- endif -%}
+                </ul>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.mega_menu_collections != blank -%}
+          {%- for collection in block.settings.mega_menu_collections -%}
+            <div class="mega-menu__collection">
+              {% render 'collection-card',
+                card_collection: collection,
+                image_ratio: block.settings.mega_menu_collection_ratio,
+                heading_size: 'subtitle',
+                columns: 4,
+                is_collections_page: false
+              %}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endfor -%}

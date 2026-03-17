@@ -1,0 +1,71 @@
+{% liquid
+  assign form_id = 'HeaderLanguageForm'
+  if modal_location == 'footer'
+    assign form_id = 'FooterLanguageForm'
+  endif
+  if modal_location == 'header_mobile'
+    assign form_id = 'HeaderMobileLanguageForm'
+  endif
+
+  assign list_id = 'HeaderLanguageList'
+  if modal_location == 'footer'
+    assign list_id = 'FooterLanguageList'
+  endif
+  if modal_location == 'header_mobile'
+    assign list_id = 'HeaderMobileLanguageList'
+  endif
+%}
+
+<modal-localization-form class="modal-language-form">
+  {%- form 'localization', id: form_id, class: 'localization-form' -%}
+    <div class="no-js-hidden">
+      <div class="disclosure">
+        <button
+          type="button"
+          class="modal-localization-button localization-selector focus-inset"
+          aria-expanded="false"
+          aria-controls="{{ list_id }}"
+        >
+          <div>
+            <span class="form-active-placeholder-text">{{ 'localization.language_label' | t }}</span>
+            <span class="localization-value-label form-text">
+              {{- localization.language.endonym_name | capitalize }}
+            </span>
+          </div>
+
+          {% render 'icon-caret' -%}
+        </button>
+        <ul
+          id="{{ list_id }}"
+          role="list"
+          class="disclosure__list list-unstyled color-background-1"
+          hidden
+        >
+          {%- for language in localization.available_languages -%}
+            <li class="disclosure__item" tabindex="-1">
+              <a
+                class="disclosure__link {% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset"
+                href="#"
+                hreflang="{{ language.iso_code }}"
+                lang="{{ language.iso_code }}"
+                {% if language.iso_code == localization.language.iso_code %}
+                  aria-current="true"
+                {% endif %}
+                data-value="{{ language.iso_code }}"
+                data-label="{{ language.endonym_name | capitalize }}"
+              >
+                <span class="form-text">
+                  {{ language.endonym_name | capitalize }}
+                </span>
+
+                {% render 'icon-check' %}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+      <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+    </div>
+  {%- endform -%}
+</modal-localization-form>

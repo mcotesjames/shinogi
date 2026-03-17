@@ -1,0 +1,224 @@
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  if collection.url
+    assign results_url = collection.url
+  else
+    assign terms = collection.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+
+  assign collection_image = blank
+
+  if collection.id != blank
+    if block.settings.image != blank
+      assign collection_image = block.settings.image
+    else
+      assign collection_image = collection.image
+    endif
+  else
+    if block.settings.image_products != blank
+      assign collection_image = block.settings.image_products
+    endif
+  endif
+
+  if block.settings.image_ratio != 'adapt' and block.settings.image_ratio != 'adapt_content'
+    assign aspect_ratio = block.settings.image_ratio | split: '/'
+    assign temp = aspect_ratio[0] | append: '.0'
+    assign padding_bottom = aspect_ratio[1] | divided_by: temp | times: 100 | round: 2
+  elsif block.settings.image_ratio == 'adapt'
+    if collection_image != blank
+      assign padding_bottom = 1 | divided_by: collection_image.aspect_ratio | times: 100 | round: 2
+    else
+      assign padding_bottom = 0
+    endif
+  else
+    assign padding_bottom = 0
+  endif
+
+  assign has_image = false
+  if block.settings.show_collection_image and collection_image != blank
+    assign has_image = true
+  endif
+-%}
+
+<div class="collection-hero">
+  <div
+    class="collection-hero__wrapper{% if has_image %} color-{{ block.settings.color_scheme }} background collection-hero__wrapper--with-image{% endif %} container"
+    {% if has_image -%}
+      style="--padding-bottom: {{ padding_bottom }}%;"
+      data-header-interaction="true"
+      data-color-scheme="{{ block.settings.color_scheme }}"
+    {%- endif %}
+  >
+    <div class="collection-hero__content horizontal-align__{{ block.settings.content_horizontal_alignment }} vertical-align__{{ block.settings.content_vertical_alignment }}">
+      <div class="collection-hero__text">
+        <h1 class="collection-hero__title {{ block.settings.heading_size }}">
+          <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+          {{- collection.title | escape -}}
+        </h1>
+        {%- if block.settings.show_collection_description and collection.description != blank -%}
+          <div class="collection-hero__description rte">
+            {{ collection.description }}
+          </div>
+        {%- endif -%}
+      </div>
+      {% if block.settings.enable_quick_filter %}
+        {% assign button_label = 'products.facets.view_all_label' | t %}
+        {% if block.settings.quick_filter_type == 'product_type' %}
+          {% assign count = 0 %}
+          {% for filter in collection.filters %}
+            {% if filter.type == 'list' and filter.param_name == 'filter.p.product_type' %}
+              {%- for value in filter.values -%}
+                {% assign count = count | plus: 1 %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {% if count > 1 %}
+            <facet-filters-form class="facets facets_tags">
+              <form id="FacetFiltersByProductTypeForm" class="facets__form">
+                <div class="facets-tag-wrapper js-filter">
+                  {%- for filter in collection.filters -%}
+                    {% if filter.type == 'list' and filter.param_name == 'filter.p.product_type' %}
+                      <div
+                        id="Details-Tag-{{ forloop.index }}-{{ section.id }}"
+                        class="disclosure-has-popup facets__disclosure js-filter"
+                        data-index="tag-{{ forloop.index }}"
+                      >
+                        <div id="FacetTag-{{ forloop.index }}-{{ section.id }}" class="facets__display">
+                          <div class="collection-hero__filters">
+                            <facet-remove>
+                              {% render 'button',
+                                btn_label: button_label,
+                                btn_link: results_url,
+                                btn_style: 'secondary',
+                                class: 'facets__reset-link facets-tag__button  js-hero-filter-clear button disabled'
+                              %}
+                            </facet-remove>
+                            {%- for value in filter.values -%}
+                              <div
+                                class="list-menu__item facets__item facets__item-tag js-hero-filter focus-inset {% if has_image == false %}js-hero-filter--no-image{% endif %}"
+                              >
+                                <input
+                                  dir="ltr"
+                                  type="checkbox"
+                                  class="focus-inset"
+                                  name="{{ value.param_name }}"
+                                  value="{{ value.value }}"
+                                  id="Filter-{{ filter.label | escape }}-tag-{{ forloop.index }}"
+                                  {% if value.active %}
+                                    checked
+                                  {% endif %}
+                                  {% if value.count == 0 and value.active == false %}
+                                    disabled
+                                  {% endif %}
+                                >
+                                <label
+                                  for="Filter-{{ filter.label | escape }}-tag-{{ forloop.index }}"
+                                  tabindex="0"
+                                  class="facet-checkbox secondary_text focus-inset {% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}"
+                                >
+                                  {{ value.label | escape }}
+                                </label>
+                              </div>
+                            {%- endfor -%}
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  {%- endfor -%}
+                </div>
+              </form>
+            </facet-filters-form>
+          {% endif %}
+        {% else %}
+          {% if collection.all_tags.size > 0 %}
+            <div class="collection-hero__filters tag-filters">
+              {% render 'button',
+                btn_label: button_label,
+                btn_link: results_url,
+                btn_style: 'secondary',
+                class: 'tag-filters__item js-hero-filter-clear disabled'
+              %}
+              {% for tag in collection.all_tags %}
+                {% if current_tags contains tag %}
+                  <a
+                    href="{{ tag | link_to_remove_tag: tag | split:'href="' | last | split:'"' | first }}"
+                    class="tag-filters__item button focus-inset js-hero-filter {% if has_image == false %}js-hero-filter--no-image{% endif %}"
+                    aria-label="{{ tag }}"
+                    id="{{ tag | handleize }}"
+                  >
+                    {{ tag }}
+                  </a>
+                {% else %}
+                  <a
+                    href="{{ tag | link_to_add_tag: tag | split:'href="' | last | split:'"' | first }}"
+                    class="tag-filters__item button focus-inset js-hero-filter {% if has_image == false %}js-hero-filter--no-image{% endif %}"
+                    aria-label="{{ tag }}"
+                    id="{{ tag | handleize }}"
+                  >
+                    {{ tag }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {%- if has_image -%}
+      {% liquid
+        assign fetch_priority = 'high'
+        assign image_loading = 'eager'
+
+        if block.settings.image_ratio != 'adapt' and block.settings.image_ratio != 'adapt_content'
+          assign settings_aspect_ratio = temp | divided_by: aspect_ratio[1] | round: 2
+        elsif block.settings.image_ratio == 'adapt'
+          assign settings_aspect_ratio = collection_image.aspect_ratio
+        else
+          assign settings_aspect_ratio = 1
+        endif
+
+        assign calc_ratio = 1
+        if collection_image.aspect_ratio > settings_aspect_ratio
+          assign calc_ratio = collection_image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+        endif
+      %}
+
+      {%- capture sizes -%}
+        calc(100vw * {{ calc_ratio }})
+      {%- endcapture -%}
+
+      {%- capture styles -%} 
+        object-fit: cover;
+      {%- endcapture -%}
+
+      <div class="collection-hero__image-wrapper">
+        {% liquid
+          assign image_alt = collection.title
+          if collection_image.alt != blank
+            assign image_alt = collection_image.alt
+          endif
+        %}
+        {{
+          collection_image
+          | image_url: width: collection_image.width
+          | image_tag:
+            loading: 'lazy',
+            widths: '360, 535, 720, 940, 1100, 1200, 1440, 1600, 1800, 2000, 2100, 2200, 2880, 3200, 3600, 4000, 4200, 4400',
+            sizes: sizes,
+            styles: styles,
+            fetchpriority: fetch_priority,
+            loading: image_loading,
+            alt: image_alt
+        }}
+      </div>
+      <div
+        class="collection-hero__overlay"
+        style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }}"
+      ></div>
+    {%- endif -%}
+  </div>
+</div>

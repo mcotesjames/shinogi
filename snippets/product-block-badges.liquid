@@ -1,0 +1,84 @@
+{% doc %}
+  Renders product badges block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-badges', product: product, block_obj: block %}
+{% enddoc %}
+
+{%- if block_obj.settings.show_new_badge
+  or block_obj.settings.show_sale_badge
+  or block_obj.settings.show_soldout_badge
+  or block_obj.settings.show_custom_badges
+  or block_obj.settings.show_product_tags
+-%}
+  <div class="product__badges body-small" {{ block_obj.shopify_attributes }}>
+    {%- if settings.show_new_badge -%}
+      {%- liquid
+        assign today = 'now' | date: '%s'
+        assign product_published_at = product.published_at | date: '%s'
+        assign days_difference = today | minus: product_published_at
+        assign days_difference_in_days = days_difference | divided_by: 86400
+      -%}
+
+      {%- if days_difference_in_days <= block_obj.settings.new_badge_days %}
+        <span class="badge badge--new">
+          {{- 'products.product.new' | t -}}
+        </span>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if block_obj.settings.show_custom_badges and product.metafields.custom.badges != blank -%}
+      {%- if product.metafields.custom.badges.list? -%}
+        {%- for badge in product.metafields.custom.badges.value -%}
+          <span class="badge badge--custom" aria-hidden="true">
+            {{- badge -}}
+          </span>
+        {%- endfor -%}
+      {%- else -%}
+        <span class="badge badge--custom" aria-hidden="true">
+          {{- product.metafields.custom.badges -}}
+        </span>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if block_obj.settings.show_product_tags and product.tags != blank -%}
+      {%- for tag in product.tags -%}
+        <span class="badge badge--custom" aria-hidden="true">{{- tag -}}</span>
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if product.available == false and block_obj.settings.show_soldout_badge -%}
+      <span class="badge badge--sold-out" aria-hidden="true">
+        {{- 'products.product.sold_out' | t -}}
+      </span>
+    {%- elsif product.selected_or_first_available_variant.compare_at_price
+        > product.selected_or_first_available_variant.price
+      and product.available
+      and block_obj.settings.show_sale_badge
+    -%}
+      <span class="badge badge--sale" aria-hidden="true">
+        {%- if block_obj.settings.sale_badge_type == 'sale' -%}
+          {{- 'products.product.on_sale' | t -}}
+        {%- else -%}
+          {{- 'products.product.on_sale' | t -}}
+          <span>
+            <span>-</span>
+            <span>
+              {{-
+                product.selected_or_first_available_variant.compare_at_price
+                | minus: product.selected_or_first_available_variant.price
+                | times: 100.0
+                | divided_by: product.selected_or_first_available_variant.compare_at_price
+                | round
+              -}}
+            </span>
+            <span>%</span>
+          </span>
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

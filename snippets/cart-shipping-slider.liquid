@@ -1,0 +1,17 @@
+{%- if settings.show_shipping -%}
+  <div
+    class="cart-shipping{% if cart == empty %} is-empty{% endif %}"
+    data-min-spend="{{ settings.min_spend | times: 100.0 }}"
+    data-total="{{ cart.total_price }}"
+    data-message=" {{ settings.message_shipping }}"
+    data-cart-is-empty="{{ cart.empty? }}"
+  >
+    <span class="cart-shipping__progress">
+      <span class="cart-shipping__progress-current"></span>
+    </span>
+    <p class="cart-shipping__message cart-shipping__message_default body-small active"></p>
+    <p class="cart-shipping__message cart-shipping__message_success body-small">
+      {{- settings.message_shipping_free -}}
+    </p>
+  </div>
+{%- endif -%}

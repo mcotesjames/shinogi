@@ -1,0 +1,74 @@
+<div class="specifications__detail">
+  {%- if block.settings.detail_heading != blank -%}
+    <div class="specifications__detail-title {{ block.settings.detail_heading_font }} richtext-link-inside-secondary">
+      {{- block.settings.detail_heading -}}
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.detail_value != blank -%}
+    <div class="specifications__detail-value {{ block.settings.detail_value_font }} richtext-link-inside">
+      {{- block.settings.detail_value -}}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.specifications.blocks.specification_detail.name",
+  "tag": "div",
+  "class": "specification-detail-block",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "detail_heading",
+      "label": "t:sections.specifications.blocks.specification_detail.settings.detail_heading.label",
+      "default": "t:sections.specifications.blocks.specification_detail.settings.detail_heading.default"
+    },
+    {
+      "type": "select",
+      "id": "detail_heading_font",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.all.heading_font.options__3.label"
+        }
+      ],
+      "default": "subtitle",
+      "label": "t:sections.specifications.blocks.specification_detail.settings.detail_heading_font.label",
+      "visible_if": "{{ block.settings.detail_heading != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "detail_value",
+      "label": "t:sections.specifications.blocks.specification_detail.settings.detail_value.label",
+      "default": "t:sections.specifications.blocks.specification_detail.settings.detail_value.default"
+    },
+    {
+      "type": "select",
+      "id": "detail_value_font",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.all.heading_font.options__3.label"
+        }
+      ],
+      "default": "subtitle",
+      "label": "t:sections.specifications.blocks.specification_detail.settings.detail_value_font.label",
+      "visible_if": "{{ block.settings.detail_value != blank }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.specifications.blocks.specification_detail.name"
+    }
+  ]
+}
+{% endschema %}

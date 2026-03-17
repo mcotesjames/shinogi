@@ -1,0 +1,54 @@
+{% doc %}
+  Renders product inventory block.
+
+  @param {object} product - Product Liquid object
+  @param {object} section_obj - Section Liquid object
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-inventory', product: product, section_obj: section, block_obj: block %}
+{% enddoc %}
+
+<div
+  id="Inventory-{{ section_obj.id }}"
+  class="product__inventory{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+  role="status"
+  {{ block_obj.shopify_attributes }}
+>
+  {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+    {%- liquid
+      assign inventory_quantity = product.selected_or_first_available_variant.inventory_quantity
+      assign threshold_value = block_obj.settings.inventory_threshold
+
+      assign status = 'in-stock'
+      if inventory_quantity > 0 and inventory_quantity < threshold_value
+        assign status = 'low-stock'
+      elsif inventory_quantity <= 0
+        assign status = 'out-of-stock'
+      else
+        assign status = 'in-stock'
+      endif
+    -%}
+    <span class="subtitle product__inventory-inner product__inventory-inner--{{ status }}">
+      {%- if status == 'in-stock' -%}
+        {%- if block_obj.settings.show_inventory_quantity -%}
+          {{ 'products.product.inventory_in_stock_show_count' | t: quantity: inventory_quantity -}}
+        {%- else -%}
+          {{- 'products.product.inventory_in_stock' | t -}}
+        {%- endif -%}
+      {%- elsif status == 'low-stock' %}
+        {%- if block_obj.settings.show_inventory_quantity -%}
+          {{- 'products.product.inventory_low_stock_show_count' | t: quantity: inventory_quantity -}}
+        {%- else -%}
+          {{- 'products.product.inventory_low_stock' | t -}}
+        {%- endif -%}
+      {%- elsif status == 'out-of-stock' -%}
+        {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+          {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
+        {%- else -%}
+          {{- 'products.product.inventory_out_of_stock' | t -}}
+        {%- endif -%}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</div>

@@ -1,0 +1,33 @@
+{% comment %}
+  Renders a page header.
+
+  Accepts:
+  - title: {String} Page title.
+  - title_size: {String} Page title size.
+  - title_font: {String} Page title font.
+  - description: {String} Page description.
+  - enable_border_bottom: {Boolean} Enable bottom border.
+  - class: {String} Class name(s).
+  - text_alignment: {String} Text alignment.
+
+  Usage:
+  {% render 'page-header', title: {{ 'page.title' | t }}, description: {{ 'page.description' | t }}, class: 'some-class some-other-class' %}
+  {% render 'page-header', title: {{ blog.title | escape }}, class: 'some-class' %}
+{% endcomment %}
+
+{% if title or description %}
+  <div class="page-header--outer container {% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
+    <div class="page-header{% if class %} {{ class }}{% endif %}  align--{{ text_alignment }}">
+      {% if title %}
+        <h1 class="page-header__title {% if title_font == 'heading'%}{{ title_size }} size--{{ title_size }}{% else %}font--body{% endif %}">
+          {{ title | escape }}
+        </h1>
+      {% endif %}
+      {% if description %}
+        <p class="page-header__description body-normal richtext-link-inside">
+          {{ description }}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

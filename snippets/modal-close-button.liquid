@@ -1,0 +1,25 @@
+<button
+  type="button"
+  class="modal-close-button button button--simple focus-inset{% if class != blank %} {{ class }}{% endif %}"
+  aria-label="{{ 'accessibility.close' | t }}"
+  {% if id != blank %}
+    id="{{ id }}"
+  {% endif %}
+  {% if is_inside_cart_drawer %}
+    onclick="this.closest('cart-drawer')?.close?.()"
+  {% endif %}
+  {% if is_inside_cart_notification %}
+    onclick="this.closest('cart-notification')?.close?.()"
+  {% endif %}
+>
+  <div class="modal-close-button__inner">
+    {%- if only_icon != true -%}
+      <div class="button__content">
+        <span class="button__label" data-label="{{- 'accessibility.close' | t -}}">
+          {{- 'accessibility.close' | t -}}
+        </span>
+      </div>
+    {%- endif -%}
+    {% render 'icon-close' %}
+  </div>
+</button>

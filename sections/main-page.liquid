@@ -1,0 +1,116 @@
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+
+<div class="page-section-wrapper container align-{{ section.settings.content_align }}">
+  <div class="page-header">
+    <div class="page-header__inner">
+      <{{ section.settings.heading_tag | default: 'h1' }} class="page-header__inner-title {{ section.settings.heading_size }}">
+        {{- page.title | escape -}}
+      </{{ section.settings.heading_tag | default: 'h1' }}>
+    </div>
+  </div>
+
+  {%- if page.content != blank -%}
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section",
+  "class": "page-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-page.settings.info.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_size.options__6.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_size.options__5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__1.label"
+        }
+      ],
+      "default": "h5",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "t:sections.main-page.settings.content_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.main-page.settings.content_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.main-page.settings.content_align.options__2.label"
+        }
+      ],
+      "default": "center"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,421 @@
+{{ 'section-main-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{% if settings.show_shipping %}
+  {{ 'component-cart-shipping.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  {% render 'section-margin' %}
+
+  .main-cart__empty-info {
+    display: none;
+  }
+
+  .is-empty .main-cart__empty-info {
+    display: flex;
+  }
+
+  .is-empty .hidden-when-cart-empty {
+    display: none;
+  }
+{%- endstyle -%}
+
+<div class="main-cart{% if cart == empty %} is-empty{% endif %}">
+  <div
+    class="main-cart__wrapper"
+    id="main-cart-wrapper"
+    data-id="{{ section.id }}"
+  >
+    <div class="main-cart__left">
+      <div class="main-cart__header">
+        <h1 class="main-page-title title font--body js-contents-title richtext-link-inside">
+          {%- if cart != empty -%}
+            {{- 'sections.cart.title' | t -}}
+          {%- else -%}
+            {%- if settings.title_empty_cart != blank -%}
+              {{- settings.title_empty_cart -}}
+            {%- else -%}
+              {{- 'general.cart.empty_cart_title' | t -}}
+            {%- endif -%}
+          {%- endif -%}
+        </h1>
+      </div>
+
+      <div id="main-cart-shipping" data-id="{{ section.id }}" class="no-js-hidden">
+        <div class="js-contents-shipping">
+          {% render 'cart-shipping-slider', cart: cart %}
+        </div>
+      </div>
+
+      <div class="main-cart__empty">
+        <div class="main-cart__empty-info js-contents-empty">
+          {%- if cart == empty -%}
+            <p class="main-cart__empty-desc body-small richtext-link-inside">
+              {%- if settings.text_empty_cart != blank -%}
+                {{- settings.text_empty_cart -}}
+              {%- else -%}
+                {{- 'general.cart.empty_cart_text' | t -}}
+              {%- endif -%}
+            </p>
+
+            {%- liquid
+              assign button_link = routes.collections_url | sort_by: 'best-selling'
+              if settings.button_link_empty_cart != blank
+                assign button_link = settings.button_link_empty_cart
+              endif
+
+              assign button_label = 'general.cart.empty_cart_button' | t
+              if settings.button_label_empty_cart != blank
+                assign button_label = settings.button_label_empty_cart
+              endif
+            -%}
+
+            {% render 'button',
+              btn_label: button_label,
+              btn_style: 'primary',
+              btn_link: button_link,
+              class: 'main-cart__empty-button'
+            %}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <cart-items class="{% if cart == empty %} is-empty{% endif %}">
+        <form action="{{ routes.cart_url }}" class="cart__contents" method="post" id="cart">
+          <div id="main-cart-items" data-id="{{ section.id }}">
+            <div class="js-contents">
+              {%- if cart != empty -%}
+                <div class="cart-items">
+                  {%- for item in cart.items -%}
+                    {% render 'cart-item', item: item, cart_type: 'cart-page' %}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+          <p
+            class="visually-hidden"
+            id="shopping-cart-line-item-status"
+            aria-live="polite"
+            aria-hidden="true"
+            role="status"
+          >
+            {{ 'accessibility.loading' | t }}
+          </p>
+        </form>
+      </cart-items>
+    </div>
+
+    <div id="main-cart-footer" data-id="{{ section.id }}">
+      <div class="cart__footer">
+        <div class="cart__blocks">
+          <div class="cart__blocks-title">{{- 'sections.cart.summary' | t -}}</div>
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                <div class="cart__app-blocks" {{ block.shopify_attributes }}>
+                  {% render block %}
+                </div>
+
+              {%- when 'subtotal' -%}
+                <div class="cart__blocks-content js-contents-totals" {{ block.shopify_attributes }}>
+                  <div class="totals__wrapper">
+                    <div class="totals">
+                      <p class="totals__items-subtotal subtitle">
+                        {{ 'sections.cart.subtotal' | t }}
+                      </p>
+                      <div class="totals__items-subtotal-value{% if cart == empty %} body-normal{% else %} body-small{% endif %}">
+                        {{ cart.items_subtotal_price | money_with_currency }}
+                      </div>
+                    </div>
+
+                    {% if cart != empty %}
+                      <div class="totals">
+                        <p class="totals__shipping subtitle">
+                          {{ 'sections.cart.shipping' | t }}
+                        </p>
+                        <div class="totals__shipping-value body-small">
+                          {{ 'sections.cart.shipping_at_checkout' | t }}
+                        </div>
+                      </div>
+
+                      {%- if cart.cart_level_discount_applications.size > 0 -%}
+                        <ul
+                          class="discounts list-unstyled"
+                          role="list"
+                          aria-label="{{ 'customer.order.discount' | t }}"
+                        >
+                          {%- for discount in cart.cart_level_discount_applications -%}
+                            <li class="discounts__discount">
+                              <span class="discounts__discount-label subtitle">
+                                {%- render 'icon-discount' -%}
+                                {{- discount.title -}}
+                              </span>
+                              <span class="discounts__discount-value body-small">
+                                -
+                                {%- if settings.currency_code_enabled -%}
+                                  {{- discount.total_allocated_amount | money_with_currency -}}
+                                {%- else -%}
+                                  {{- discount.total_allocated_amount | money -}}
+                                {%- endif -%}
+                              </span>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      <div class="totals">
+                        <p class="totals__subtotal subtitle">
+                          {{ 'sections.cart.estimated_total' | t }}
+                        </p>
+                        <div class="totals__subtotal-value body-small">
+                          <span>{{ cart.total_price | money_with_currency }}</span>
+                          <div class="loading-overlay hidden">
+                            <div class="loading-overlay__spinner">
+                              {% render 'icon-loading' %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {%- if block.settings.enable_tax_info -%}
+                        <small class="tax-note body-small richtext-link-inside-secondary">
+                          {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                            {{-
+                              'sections.cart.taxes_included_and_shipping_policy_html'
+                              | t: link: shop.shipping_policy.url
+                            -}}
+                          {%- elsif cart.taxes_included -%}
+                            {{- 'sections.cart.taxes_included_but_shipping_at_checkout' | t -}}
+                          {%- elsif shop.shipping_policy.body != blank -%}
+                            {{-
+                              'sections.cart.taxes_and_shipping_policy_at_checkout_html'
+                              | t: link: shop.shipping_policy.url
+                            -}}
+                          {%- else -%}
+                            {{- 'sections.cart.taxes_and_shipping_at_checkout' | t -}}
+                          {%- endif -%}
+                        </small>
+                      {%- endif -%}
+                    {% endif %}
+                  </div>
+                </div>
+
+              {%- when 'buttons' -%}
+                {% if cart != empty %}
+                  <div class="cart__ctas hidden-when-cart-empty" {{ block.shopify_attributes }}>
+                    <noscript>
+                      <button type="submit" class="cart__update-button button button--primary focus-inset" form="cart">
+                        <div class="button__content">
+                          <span class="button__label" data-label="{{- 'general.cart.update' | t -}}">
+                            {{- 'general.cart.update' | t -}}
+                          </span>
+                        </div>
+                      </button>
+                    </noscript>
+
+                    <button
+                      type="submit"
+                      class="cart__checkout-button button button--primary focus-inset"
+                      name="checkout"
+                      {% if cart == empty %}
+                        disabled
+                      {% endif %}
+                      form="cart"
+                    >
+                      <div class="button__content">
+                        <span class="button__label" data-label="{{- 'general.cart.checkout_button_label' | t -}}">
+                          {{- 'general.cart.checkout_button_label' | t -}}
+                        </span>
+                      </div>
+                    </button>
+
+                    {%- if additional_checkout_buttons -%}
+                      <div class="cart__footer-dynamic-checkout">
+                        <div class="cart__dynamic-checkout-buttons additional-checkout-buttons additional-checkout-buttons--vertical">
+                          {{ content_for_additional_checkout_buttons }}
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+              {%- when 'cart_note' -%}
+                {%- if cart != empty -%}
+                  <div class="hidden-when-cart-empty" {{ block.shopify_attributes }}>
+                    <cart-note class="cart__note field">
+                      <textarea
+                        class="text-area text-area--resize-vertical field__input"
+                        name="note"
+                        id="Cart-note"
+                        dir="ltr"
+                        placeholder="{{- 'sections.cart.note_title' | t -}}"
+                      >{{ cart.note }}</textarea>
+                      <label for="Cart-note" class="body-small">
+                        {{- 'sections.cart.note_title' | t -}}
+                      </label>
+                      <span class="cart__note-loading">
+                        {% render 'icon-loading' %}
+                      </span>
+                      <span class="cart__note-success">
+                        {% render 'icon-success' %}
+                      </span>
+                    </cart-note>
+                  </div>
+                {%- endif -%}
+
+              {%- when 'additional_text' -%}
+                {%- if cart != empty -%}
+                  <div
+                    class="cart__additional-text body-small hidden-when-cart-empty richtext-link-inside-secondary"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{- block.settings.cart_additional_text -}}
+                  </div>
+                {%- endif -%}
+            {%- endcase -%}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="cart-errors body-small" id="cart-errors"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart-items.name",
+  "class": "section-cart-items",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart-items.blocks.subtotal.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_tax_info",
+          "default": false,
+          "label": "t:sections.main-cart-items.blocks.subtotal.settings.enable_tax_info.label"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart-items.blocks.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-cart-items.settings.empty_cart_info.content"
+        }
+      ]
+    },
+    {
+      "type": "cart_note",
+      "name": "t:sections.main-cart-items.blocks.cart_note.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-cart-items.settings.empty_cart_info.content"
+        }
+      ]
+    },
+    {
+      "type": "additional_text",
+      "name": "t:sections.main-cart-items.blocks.additional_text.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-cart-items.settings.empty_cart_info.content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "cart_additional_text",
+          "label": "t:sections.main-cart-items.blocks.additional_text.settings.text.label",
+          "default": "t:sections.main-cart-items.blocks.additional_text.settings.text.default"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}

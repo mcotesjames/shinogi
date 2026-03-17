@@ -1,0 +1,202 @@
+{%- if section.settings.enable_search -%}
+  {% liquid
+    assign has_search_modal = false
+    assign search_modal_block = blank
+    for block in section.blocks
+      if block.type == 'search_modal'
+        assign has_search_modal = true
+        assign search_modal_block = block
+      endif
+    endfor
+
+    assign header_search_tag = 'div'
+    if has_search_modal
+      assign header_search_tag = 'header-search'
+    endif
+
+    assign search_input_id = 'Search-In-Modal'
+    if in_header_drawer
+      assign in_header_drawer = true
+      assign search_input_id = 'Search-In-Modal-Mobile'
+    else
+      assign in_header_drawer = false
+    endif
+  %}
+  <{{ header_search_tag }}
+    class="header__search{% if button_type == 'icon' %} header__search--icon{% endif %}"
+    data-location="{% if in_header_drawer %}mobile-menu{% else %}desktop-header{% endif %}"
+  >
+    <a
+      href="{{ routes.search_url }}"
+      class="button button--simple header__button header__button--{{ button_type }} header__button--search focus-inset"
+      aria-haspopup="dialog"
+      role="button"
+      aria-label="{{- 'general.search.search' | t -}}"
+    >
+      {%- if button_type == 'icon' -%}
+        {% render 'icon-search' %}
+      {%- elsif button_type == 'texticon' -%}
+        {% render 'icon-search' %}
+        <div class="button__content">
+          <span class="button__label header-label" data-label="{{- 'sections.header.search_label' | t -}}">
+            {{- 'sections.header.search_label' | t -}}
+          </span>
+        </div>
+      {%- else -%}
+        <div class="button__content">
+          <span class="button__label header-label" data-label="{{- 'sections.header.search_label' | t -}}">
+            {{- 'sections.header.search_label' | t -}}
+          </span>
+        </div>
+      {%- endif -%}
+    </a>
+
+    {%- if has_search_modal -%}
+      <div class="header__search-modal modal">
+        {%- if in_header_drawer == false -%}
+          <div class="modal__overlay"></div>
+        {%- endif -%}
+        {% liquid
+          assign modal_color_scheme = 'background-1'
+          if in_header_drawer == false and search_modal_block.settings.search_modal_color_scheme != blank
+            assign modal_color_scheme = search_modal_block.settings.search_modal_color_scheme
+          endif
+
+          if in_header_drawer == true and section.settings.mobile_menu_color_scheme != blank
+            assign modal_color_scheme = section.settings.mobile_menu_color_scheme
+          endif
+        %}
+        <div
+          class="modal__content color-{{ modal_color_scheme }}"
+          role="dialog"
+          aria-modal="true"
+          aria-label="{{ 'general.search.search' | t }}"
+        >
+          {%- if in_header_drawer -%}
+            <button
+              type="button"
+              class="mobile-submenu__back button--unstyled focus-inset"
+              aria-expanded="true"
+            >
+              {% render 'icon-menu-back' %}
+              <span class="header-label">{{- 'general.search.search' | t -}}</span>
+              <span></span>
+            </button>
+          {%- else -%}
+            <div class="modal__heading">
+              <span class="subtitle">{{- 'general.search.search' | t -}}</span>
+              {% render 'modal-close-button' %}
+            </div>
+          {%- endif -%}
+
+          {%- if in_header_drawer -%}
+            <div class="menu-drawer-search-wrapper">
+          {%- endif -%}
+
+          {%- if search_modal_block.settings.enable_predictive_search -%}
+            <predictive-search class="search-modal__form" data-loading-text="{{- 'accessibility.loading' | t -}}">
+          {%- else -%}
+            <search-form class="search-modal__form">
+          {%- endif -%}
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search search__form">
+            <div class="field">
+              <input
+                class="search__input field__input"
+                id="{{ search_input_id }}"
+                dir="ltr"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ 'general.search.placeholder' | t }}"
+                {%- if search_modal_block.settings.enable_predictive_search -%}
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-controls="predictive-search-results-groups-wrapper"
+                  aria-haspopup="listbox"
+                  aria-autocomplete="list"
+                  autocorrect="off"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                {%- endif -%}
+              >
+              <label for="{{ search_input_id }}">
+                {{- 'general.search.placeholder' | t -}}
+              </label>
+              <input type="hidden" name="options[prefix]" value="last">
+              <button
+                class="search__button search__button--reset field__button focus-inset"
+                aria-label="{{- 'general.search.reset_search' | t -}}"
+                type="reset"
+                {%- if search.terms != blank -%}
+                  style="display: flex;"
+                {%- endif -%}
+              >
+                {% render 'icon-close' %}
+              </button>
+              <button
+                class="search__button field__button focus-inset"
+                aria-label="{{- 'general.search.search' | t -}}"
+                type="submit"
+              >
+                {% render 'icon-search-input' %}
+              </button>
+            </div>
+
+            {%- if search_modal_block.settings.enable_predictive_search -%}
+              <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                <div class="predictive-search__loading-state">
+                  {% render 'icon-loading' %}
+                </div>
+              </div>
+
+              <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+            {%- endif -%}
+          </form>
+          {%- if search_modal_block.settings.enable_predictive_search -%}
+            </predictive-search>
+          {%- else -%}
+            </search-form>
+          {%- endif -%}
+
+          {%- if search_modal_block.settings.search_menu != blank -%}
+            <div class="header__search-popular">
+              {%- if search_modal_block.settings.search_menu_label != blank -%}
+                <div class="subtitle">{{- search_modal_block.settings.search_menu_label -}}</div>
+              {%- endif -%}
+
+              {%- for link in search_modal_block.settings.search_menu.links -%}
+                <a
+                  href="{{ link.url }}"
+                  {% if settings.links_blank and link.type == 'http_link' %}
+                    target="_blank"
+                  {% endif %}
+                  class="header__search-popular-link hover-underlined-link-secondary body-small focus-inset"
+                  aria-label="{{- link.title -}}"
+                >
+                  <span>{{- link.title -}}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- if search_modal_block.settings.search_modal_collection != blank -%}
+            <div class="header__search-collection">
+              {% render 'collection-card',
+                card_collection: search_modal_block.settings.search_modal_collection,
+                image_ratio: search_modal_block.settings.search_modal_collection_ratio,
+                heading_size: 'subtitle',
+                columns: 4,
+                is_collections_page: false
+              %}
+            </div>
+          {%- endif -%}
+
+          {%- if in_header_drawer -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </{{ header_search_tag }}>
+{%- endif -%}

@@ -1,0 +1,53 @@
+<div class="header__left">
+  {% render 'header-drawer', section: section %}
+
+  {% render 'header-desktop-burger', section: section %}
+
+  {% if section.settings.logo_position == 'left-logo' %}
+    {% render 'header-logo',
+      position: 'left',
+      is_h1_logo: section.settings.h1_logo,
+      show_logo: section.settings.show_logo
+    %}
+  {% endif %}
+
+  {% if section.settings.menu != blank %}
+    {% render 'header-inline-menu', section: section %}
+  {% endif %}
+</div>
+
+{% if section.settings.logo_position == 'center-logo' %}
+  {% render 'header-logo',
+    position: 'center',
+    is_h1_logo: section.settings.h1_logo,
+    show_logo: section.settings.show_logo
+  %}
+{% endif %}
+
+<div class="header__column">
+  <div class="header__buttons">
+    {% render 'header-color-scheme', button_type: section.settings.dark_mode_button_type %}
+
+    {% render 'modal-region-selector',
+      section_obj: section,
+      class: 'header__region',
+      modal_location: 'header',
+      button_type: section.settings.region_button_type
+    %}
+
+    {% render 'header-search', section: section, button_type: section.settings.search_button_type %}
+
+    {% render 'header-account', button_type: section.settings.account_button_type %}
+
+    {%- if section.settings.enable_additional_button and section.settings.additional_button_label != blank -%}
+      {% render 'button',
+        btn_label: section.settings.additional_button_label,
+        btn_style: 'transparent',
+        btn_link: section.settings.additional_button_link,
+        class: 'header__additional-btn'
+      %}
+    {%- endif -%}
+
+    {% render 'header-cart', section: section %}
+  </div>
+</div>

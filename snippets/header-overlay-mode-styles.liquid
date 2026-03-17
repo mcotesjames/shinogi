@@ -1,0 +1,186 @@
+{% comment %}
+  When the 'Enable overlay mode' setting is turned on in the Header, the 'Hero', 'Media Banner', 'Slideshow', 'Login', and 'Registration' sections will be shifted underneath the header if they are the first section inside the <main> element.
+
+  The styles are applied immediately after the page loads. Then, in header.js, the initHeaderOverlay script checks if the Header is the last section in the Header group and verifies the order of sections in <main>. It also applies the appropriate color scheme to the breadcrumbs. If these JS checks fail, the .not-mode class is added to the header, and the .not-margin class is added to the section.
+{% endcomment %}
+
+{%- liquid
+  assign header_selector = '.shopify-section-header:not(.not-mode)'
+  assign header_not_sticky_selector = '.shopify-section-header:not(.shopify-section-header-sticky):not(.not-mode)'
+  assign first_section_selector = '.has-header-interaction:first-child:not(.not-margin) [data-header-interaction]'
+
+  assign overlay_scheme = section.settings.color_scheme_overlay_mode
+  assign first_scheme = settings.color_schemes[0]
+  for scheme_item in settings.color_schemes
+    if forloop.first
+      assign first_scheme = scheme_item
+    endif
+  endfor
+-%}
+
+{%- capture base_header_wrapper_selector -%}
+  body:has(main > {{ first_section_selector }}) {{ header_not_sticky_selector }} .header-wrapper
+{%- endcapture -%}
+
+<style>
+  {{ base_header_wrapper_selector }} {
+    background: transparent;
+    --color-background: {{ overlay_scheme.settings.colors_background_1.red }},{{ overlay_scheme.settings.colors_background_1.green }},{{ overlay_scheme.settings.colors_background_1.blue }};
+    --color-background-secondary: {{ overlay_scheme.settings.colors_background_2.red }},{{ overlay_scheme.settings.colors_background_2.green }},{{ overlay_scheme.settings.colors_background_2.blue }};
+    --color-foreground: {{ overlay_scheme.settings.colors_text.red }},{{ overlay_scheme.settings.colors_text.green }},{{ overlay_scheme.settings.colors_text.blue }};
+    --color-foreground-secondary: {{ overlay_scheme.settings.colors_secondary_text.red }}, {{ overlay_scheme.settings.colors_secondary_text.green }}, {{ overlay_scheme.settings.colors_secondary_text.blue }};
+    --color-border: {{ overlay_scheme.settings.colors_text.red }},{{ overlay_scheme.settings.colors_text.green }},{{ overlay_scheme.settings.colors_text.blue }};
+    --color-interface-elements: {{ overlay_scheme.settings.colors_secondary_text.red }},{{ overlay_scheme.settings.colors_secondary_text.green }},{{ overlay_scheme.settings.colors_secondary_text.blue }},0.5;
+    --color-account-icon: {{ overlay_scheme.settings.colors_text.red }},{{ overlay_scheme.settings.colors_text.green }},{{ overlay_scheme.settings.colors_text.blue }};
+  }
+  {{ base_header_wrapper_selector }} .header {
+    background: transparent;
+  }
+  {% comment %} change logo on overlay {% endcomment %}
+  {%- if section.settings.show_logo and section.settings.logo_2 != blank and section.settings.show_dm_logo_in_overlay_mode -%}
+    {{ base_header_wrapper_selector }} .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo {
+      opacity: 0;
+      visibility: hidden;
+    }
+    {{ base_header_wrapper_selector }} .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo:only-child {
+      opacity: 1;
+      visibility: visible;
+    }
+    {{ base_header_wrapper_selector }} .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo--overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+  {%- endif -%}
+  {% comment %} variable reassignment on hover {% endcomment %}
+  @media screen and (min-width: 1160px) and (hover: hover) and (pointer: fine) {
+    {{ base_header_wrapper_selector }}.hover-triggered {
+      background: transparent;
+      --color-background: {{ first_scheme.settings.colors_background_1.red }},{{ first_scheme.settings.colors_background_1.green }},{{ first_scheme.settings.colors_background_1.blue }};
+      --color-background-secondary: {{ first_scheme.settings.colors_background_2.red }},{{ first_scheme.settings.colors_background_2.green }},{{ first_scheme.settings.colors_background_2.blue }};
+      --color-foreground: {{ first_scheme.settings.colors_text.red }},{{ first_scheme.settings.colors_text.green }},{{ first_scheme.settings.colors_text.blue }};
+      --color-foreground-secondary: {{ first_scheme.settings.colors_secondary_text.red }}, {{ first_scheme.settings.colors_secondary_text.green }}, {{ first_scheme.settings.colors_secondary_text.blue }};
+      --color-border: {{ first_scheme.settings.color_border.red }},{{ first_scheme.settings.color_border.green }},{{ first_scheme.settings.color_border.blue }};
+      --color-interface-elements: {{ first_scheme.settings.color_interface_elements.red }},{{ first_scheme.settings.color_interface_elements.green }},{{ first_scheme.settings.color_interface_elements.blue }};
+      --color-account-icon: {{ first_scheme.settings.colors_text.red }},{{ first_scheme.settings.colors_text.green }},{{ first_scheme.settings.colors_text.blue }};
+    }
+    {{ base_header_wrapper_selector }}.hover-triggered .header {
+      background: rgb(var(--color-background));
+    }
+    {%- if section.settings.show_logo and section.settings.logo_2 != blank and section.settings.show_dm_logo_in_overlay_mode -%}
+      {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo {
+        opacity: 1;
+        visibility: visible;
+      }
+      {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo:only-child {
+        opacity: 1;
+        visibility: visible;
+      }
+      {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo--overlay {
+        opacity: 0;
+        visibility: hidden;
+      }
+    {%- endif -%}
+    [data-scheme="dark"] {
+      {{ base_header_wrapper_selector }}.hover-triggered {
+        --color-background: 31, 31, 31;
+        --color-background-secondary: 24, 24, 24;
+        --color-foreground: 255, 255, 255;
+        --color-foreground-secondary: 227, 226, 226;
+        --color-border: 83, 83, 83;
+        --color-interface-elements: 73, 73, 73;
+        --color-account-icon: 255, 255, 255;
+      }
+      {%- if section.settings.show_logo and section.settings.logo_2 != blank and section.settings.show_dm_logo_in_overlay_mode -%}
+        {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo {
+          opacity: 0;
+          visibility: hidden;
+        }
+        {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo--overlay {
+          opacity: 1;
+          visibility: visible;
+        }
+      {%- endif -%}
+    }
+  }
+  @media screen and (min-width: 1160px) and (hover: hover) and (pointer: fine) and (prefers-color-scheme: dark) {
+    [data-scheme="auto"] {
+      {{ base_header_wrapper_selector }}.hover-triggered {
+        --color-background: 31, 31, 31;
+        --color-background-secondary: 24, 24, 24;
+        --color-foreground: 255, 255, 255;
+        --color-foreground-secondary: 227, 226, 226;
+        --color-border: 83, 83, 83;
+        --color-interface-elements: 73, 73, 73;
+        --color-account-icon: 255, 255, 255;
+      }
+      {%- if section.settings.show_logo and section.settings.logo_2 != blank and section.settings.show_dm_logo_in_overlay_mode -%}
+        {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo {
+          opacity: 0;
+          visibility: hidden;
+        }
+        {{ base_header_wrapper_selector }}.hover-triggered .header--overlay-mode-dm-logo .header__heading:not(.logo-in-drawer) .header__heading-logo--overlay {
+          opacity: 1;
+          visibility: visible;
+        }
+      {%- endif -%}
+    }
+  }
+  {% comment %} styles for first section in main {% endcomment %}
+  {{ header_selector }} ~ main > {{ first_section_selector }} {
+    margin-top: calc(-1 * (var(--header-height) + var(--breadcrumbs-height))) !important;
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__content,
+  {{ header_selector }} ~ main > {{ first_section_selector}} .hero__content,
+  {{ header_selector }} ~ main > {{ first_section_selector}} .slideshow__content {
+    padding-top: calc(2rem + var(--header-height) + var(--breadcrumbs-height));
+  }
+  {%- if request.page_type == 'collection' -%}
+    {{ header_selector }} ~ main > {{ first_section_selector }} .collection-hero__content {
+      padding-top: calc(1.9rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  {%- endif -%}
+  {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-stretch .media-banner__content--stretch,
+  {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-stretch .hero__content--stretch {
+    grid-template-rows: max(2rem, calc(1fr - (1rem + var(--header-height) + var(--breadcrumbs-height)))) auto 1fr;
+  }
+  @media screen and (max-width: 575.99px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--full-mobile,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--full-mobile,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .slideshow__slide--full-mobile {
+      min-height: calc((var(--vh, 1vh) * 100) - var(--announcement-height)) !important;
+      min-height: calc(100svh - var(--announcement-height)) !important;
+    }
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-center.media-banner__wrapper--full-mobile .media-banner__content,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-center.hero__wrapper--full-mobile .hero__content {
+      padding-bottom: calc(1rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  }
+  @media screen and (min-width: 576px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--full-desktop,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--full-desktop,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .slideshow__slide--full-desktop {
+      min-height: calc((var(--vh, 1vh) * 100) - var(--announcement-height)) !important;
+      min-height: calc(100svh - var(--announcement-height)) !important;
+    }
+    {{ header_selector }} ~ main > {{ first_section_selector }} .media-banner__wrapper--ver-center.media-banner__wrapper--full-desktop .media-banner__content,
+    {{ header_selector }} ~ main > {{ first_section_selector }} .hero__wrapper--ver-center.hero__wrapper--full-desktop .hero__content {
+      padding-bottom: calc(1rem + var(--header-height) + var(--breadcrumbs-height)) !important;
+    }
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login,
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login {
+    padding-top: calc(3.2rem + var(--header-height) + var(--breadcrumbs-height));
+  }
+  @media screen and (min-width: 750px) {
+    {{ header_selector }} ~ main > {{ first_section_selector }}.login,
+    {{ header_selector }} ~ main > {{ first_section_selector }}.login {
+      padding-top: calc(6.4rem + var(--header-height) + var(--breadcrumbs-height));
+    }
+  }
+  {{ header_selector }} ~ main > {{ first_section_selector }}.login--full_height,
+  {{ header_selector }} ~ main > {{ first_section_selector }}.register--full_height {
+    min-height: calc(100vh - var(--announcement-height)) !important;
+    min-height: calc(100svh - var(--announcement-height)) !important;
+    padding-top: calc(2.4rem + var(--header-height) + var(--breadcrumbs-height));
+  }
+</style>

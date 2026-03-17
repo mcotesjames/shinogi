@@ -1,0 +1,89 @@
+{% comment %}
+  Renders a blog post card for a given blog.
+
+  Accepts:
+  - article_index: {Number} Article index
+  -	article_heading_font_size: {String} Post heading font size. Default = h3
+  - article_heading_tag: {String} Post heading tag for SEO. Default = h3
+  - aspect_ratio: {String} Aspect ratio of the image. Default = square
+  - show_image: {Boolean} Show the post image or not. Default = false
+  - show_date: {Boolean} Show the post date or not. Default = false
+  - show_author: {Boolean} Show the post author or not. Default = false
+  - show_tags: {Boolean} Show the post tags or not. Default = false
+  - show_excerpt: {Boolean} Show the post excerpt or not. Default = false
+  - columns_count: {Number} Sizes of the card per row for calculate image width. Default image width = 100vw
+  - show_comments_count: {Boolean} Show the comments count or not. Default = false
+  Usage:
+  {% render 'article-card', ... %}
+{% endcomment %}
+
+{% liquid
+  assign is_show_comments_count = false
+
+  if show_comments_count == true
+    assign is_show_comments_count = true
+  endif
+
+  assign show_meta = false
+
+  if show_tags == true or show_author == true or show_date == true or is_show_comments_count == true
+    assign show_meta = true
+  endif
+%}
+
+<article class="article-card article-card--placeholder">
+  {%- if show_image == true -%}
+    {% assign image_index = article_index | modulo: 3 | plus: 1 %}
+    <div class="article-card-image-wrapper article-card-image-wrapper--{% if aspect_ratio %}{{ aspect_ratio }}{% else %}square{% endif %}">
+      {{
+        'hero-apparel-'
+        | append: image_index
+        | placeholder_svg_tag: 'placeholder-svg article-card-image motion-reduce'
+      }}
+    </div>
+  {%- endif -%}
+  <div class="article-card-content">
+    <{{ article_heading_tag | default: 'h3' }}
+      class="article-card-title article-card-title--font-heading {{ article_heading_font_size | default: 'h4' }}"
+      id="Article-placeholder-{{ section.id }}-{{ article_index }}"
+    >
+      <span class="article-card-title__link">
+        {{- 'general.blog.title_placeholder' | t -}}
+      </span>
+    </{{ article_heading_tag | default: 'h3' }}>
+    {%- if show_excerpt -%}
+      <div class="article-card-excerpt body-small">
+        {{- 'general.blog.excerpt_placeholder' | t -}}
+      </div>
+    {%- endif -%}
+    {% if show_meta == true %}
+      <div class="article-card-meta">
+        {%- if show_tags -%}
+          <ul class="article-card-tags list-unstyled">
+            <li class="article-card-tag">
+              <span class="article-card-tag__link subtitle">
+                {{ 'general.blog.tag_placeholder' | t }}
+              </span>
+            </li>
+          </ul>
+        {%- endif -%}
+        {%- if show_date == true -%}
+          <span class="article-card-date subtitle">
+            {{ 'now' | time_tag: '%d/%m/%y' }}
+          </span>
+        {%- endif -%}
+        {%- if show_author == true -%}
+          <span class="article-card-author subtitle">
+            {{ 'general.blog.author_placeholder' | t }}
+          </span>
+        {%- endif -%}
+        {%- if is_show_comments_count == true -%}
+          <div class="article-card-comments">
+            {% render 'icon-comments' %}
+            <span class="article-card-comments__count subtitle"> 2 </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {% endif %}
+  </div>
+</article>

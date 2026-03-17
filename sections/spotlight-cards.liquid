@@ -1,0 +1,923 @@
+{{ 'section-spotlight-cards.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'spotlight-cards.js' | asset_url}}" defer="defer"></script>
+
+{% style %}
+  {% render 'section-padding' %}
+  {% render 'section-margin' %}
+{% endstyle %}
+
+{% liquid
+  if section.settings.aspect_ratio == 'landscape'
+    assign card_padding_bottom = '69.5'
+  elsif section.settings.aspect_ratio == 'portrait'
+    if section.settings.cards_per_row == 2
+      # 960 : 1200
+      assign card_padding_bottom = '125'
+    else
+      # 640 : 726
+      assign card_padding_bottom = '113.4'
+    endif
+  elsif section.settings.aspect_ratio == 'square'
+    assign card_padding_bottom = '100'
+  elsif section.settings.aspect_ratio == 'adapt'
+    assign card_padding_bottom = 0
+  endif
+%}
+
+{% style %}
+  .spotlight-cards-{{ section.id }} .spotlight-cards__item::before {
+    content: '';
+    display: block;
+    width: 0;
+    padding-bottom: {{ card_padding_bottom }}%;
+  }
+{% endstyle %}
+
+<div
+  class="spotlight-cards spotlight-cards-{{ section.id }} color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}"
+  data-layout-type="{{ section.settings.layout_type }}"
+>
+  {% comment %} RENDER HEADING GROUP {% endcomment %}
+  {% liquid
+    assign has_slider_controls = false
+    if section.settings.layout_type == 'slider'
+      assign has_slider_controls = true
+    endif
+  %}
+  {% render 'heading-group',
+    settings: section.settings,
+    class: 'spotlight-cards-header',
+    has_slider_controls: has_slider_controls
+  %}
+
+  {% comment %} RENDER MAIN CONTENT {% endcomment %}
+  {% if section.blocks.size > 0 %}
+    <div
+      class="spotlight-cards__content{% if section.blocks.size >= 1 and section.settings.layout_type == 'slider' %} swiper swiper--spotlight-cards{% endif %}"
+      {% if section.settings.layout_type == 'slider' %}
+        data-items-per-row="{{ section.settings.cards_per_row }}"
+      {% endif %}
+    >
+      <div
+        class="
+          spotlight-cards__blocks {% if section.settings.layout_type == 'slider' %} spotlight-cards__blocks--{{ section.settings.cards_per_row }}{% else %} spotlight-cards__blocks--grid spotlight-cards__blocks--{{ section.settings.cards_per_row }}{% endif %}
+          {% if section.blocks.size >= 1 and section.settings.layout_type == 'slider' %} swiper-wrapper{% endif %}
+        "
+      >
+        {% for block in section.blocks %}
+          {% liquid
+            assign total = section.blocks.size
+            assign i = forloop.index
+
+            # classes to prevent displaying border-bottom on the last row of cards
+            assign extra_classes = ''
+            if section.settings.layout_type == 'grid'
+              case section.settings.cards_per_row
+                when 2
+                  assign remainder_576 = total | modulo: 2
+                  if remainder_576 == 0
+                    assign last_count_576 = 2
+                  else
+                    assign last_count_576 = remainder_576
+                  endif
+
+                  assign cutoff_576 = total | minus: last_count_576
+                  if i > cutoff_576
+                    assign extra_classes = extra_classes | append: ' without-border-bottom-576'
+                  endif
+
+                when 3
+                  assign remainder_576 = total | modulo: 2
+                  if remainder_576 == 0
+                    assign last_count_576 = 2
+                  else
+                    assign last_count_576 = remainder_576
+                  endif
+                  assign cutoff_576 = total | minus: last_count_576
+                  if i > cutoff_576
+                    assign extra_classes = extra_classes | append: ' without-border-bottom-576'
+                  endif
+
+                  assign remainder_990 = total | modulo: 3
+                  if remainder_990 == 0
+                    assign last_count_990 = 3
+                  else
+                    assign last_count_990 = remainder_990
+                  endif
+                  assign cutoff_990 = total | minus: last_count_990
+                  if i > cutoff_990
+                    assign extra_classes = extra_classes | append: ' without-border-bottom-990'
+                  endif
+
+                when 4
+                  assign remainder_576 = total | modulo: 2
+                  if remainder_576 == 0
+                    assign last_count_576 = 2
+                  else
+                    assign last_count_576 = remainder_576
+                  endif
+                  assign cutoff_576 = total | minus: last_count_576
+                  if i > cutoff_576
+                    assign extra_classes = extra_classes | append: ' without-border-bottom-576'
+                  endif
+
+                  assign remainder_1200 = total | modulo: 4
+                  if remainder_1200 == 0
+                    assign last_count_1200 = 4
+                  else
+                    assign last_count_1200 = remainder_1200
+                  endif
+                  assign cutoff_1200 = total | minus: last_count_1200
+                  if i > cutoff_1200
+                    assign extra_classes = extra_classes | append: ' without-border-bottom-1200'
+                  endif
+              endcase
+            endif
+          %}
+          <div
+            class="
+               spotlight-cards__item horizontal-align__{{ section.settings.content_horizontal_alignment }}
+              {% if section.settings.layout_type == 'slider' or section.settings.enable_sticky == false %} vertical-align__{{ section.settings.content_vertical_alignment }} {% endif %}
+               color-{{ block.settings.card_color_scheme }} {% if block.settings.show_image == false %} background{% endif %}
+              {% if section.blocks.size >= 1 and section.settings.layout_type == 'slider' %} swiper-slide{% endif %}
+              {% if section.settings.enable_hover_animation %} spotlight-cards__item--hover spotlight-cards__item-{{ block.id }}{% endif %}
+              {% if extra_classes != blank %} {{ extra_classes }}{% endif %}
+            "
+            {{ block.shopify_attributes }}
+          >
+            {%- if section.settings.enable_hover_animation
+              and block.settings.card_color_scheme != block.settings.card_color_scheme_on_hover
+            -%}
+              {% assign scheme_on_hover = block.settings.card_color_scheme_on_hover %}
+              <style>
+                @media (min-width: 750px) and (pointer: fine) {
+                  .spotlight-cards__item-{{ block.id }}.spotlight-cards__item--hover.color-{{ block.settings.card_color_scheme }}:hover {
+                    --color-background: {{ scheme_on_hover.settings.colors_background_1.red }},{{ scheme_on_hover.settings.colors_background_1.green }},{{ scheme_on_hover.settings.colors_background_1.blue }};
+                    --color-foreground: {{ scheme_on_hover.settings.colors_text.red }}, {{ scheme_on_hover.settings.colors_text.green }}, {{ scheme_on_hover.settings.colors_text.blue }};
+                    --color-border: {{ scheme_on_hover.settings.color_border.red }}, {{ scheme_on_hover.settings.color_border.green }}, {{ scheme_on_hover.settings.color_border.blue }};
+                  }
+                  .spotlight-cards__item-{{ block.id }}.spotlight-cards__item--hover.color-{{ block.settings.card_color_scheme }} * {
+                    transition: all var(--duration-default) ease-in-out;
+                    --color-overlay: {{ scheme_on_hover.settings.colors_background_overlay.red }},{{ scheme_on_hover.settings.colors_background_overlay.green }},{{ scheme_on_hover.settings.colors_background_overlay.blue }};
+                    --color-button-text: {{ scheme_on_hover.settings.colors_solid_button_labels.red }}, {{ scheme_on_hover.settings.colors_solid_button_labels.green }}, {{ scheme_on_hover.settings.colors_solid_button_labels.blue }};
+                    --color-button-text-hover: {{ scheme_on_hover.settings.colors_solid_button_labels_hover.red }}, {{ scheme_on_hover.settings.colors_solid_button_labels_hover.green }}, {{ scheme_on_hover.settings.colors_solid_button_labels_hover.blue }};
+                    --color-button: {{ scheme_on_hover.settings.colors_solid_button_background.red }}, {{ scheme_on_hover.settings.colors_solid_button_background.green }}, {{ scheme_on_hover.settings.colors_solid_button_background.blue }};
+                    --color-button-hover: {{ scheme_on_hover.settings.colors_solid_button_background_hover.red }}, {{ scheme_on_hover.settings.colors_solid_button_background_hover.green }}, {{ scheme_on_hover.settings.colors_solid_button_background_hover.blue }};
+                    --color-button-secondary: {{ scheme_on_hover.settings.colors_secondary_button_background.red }}, {{ scheme_on_hover.settings.colors_secondary_button_background.green }}, {{ scheme_on_hover.settings.colors_secondary_button_background.blue }};
+                    --color-button-secondary-hover: {{ scheme_on_hover.settings.colors_secondary_button_background_hover.red }}, {{ scheme_on_hover.settings.colors_secondary_button_background_hover.green }}, {{ scheme_on_hover.settings.colors_secondary_button_background_hover.blue }};
+                    --color-button-secondary-text: {{ scheme_on_hover.settings.colors_secondary_button_labels.red }}, {{ scheme_on_hover.settings.colors_secondary_button_labels.green }}, {{ scheme_on_hover.settings.colors_secondary_button_labels.blue }};
+                    --color-button-secondary-text-hover: {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.red }}, {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.green }}, {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.blue }};
+                    --color-button-tertiary-text: {{ scheme_on_hover.settings.colors_tertiary_button_labels.red }}, {{ scheme_on_hover.settings.colors_tertiary_button_labels.green }}, {{ scheme_on_hover.settings.colors_tertiary_button_labels.blue }};
+                  }
+                }
+                @media (max-width: 750px) {
+                  .spotlight-cards__item-{{ block.id }}.spotlight-cards__item--hover.color-{{ block.settings.card_color_scheme }} {
+                    --color-background: {{ scheme_on_hover.settings.colors_background_1.red }},{{ scheme_on_hover.settings.colors_background_1.green }},{{ scheme_on_hover.settings.colors_background_1.blue }};
+                    --color-foreground: {{ scheme_on_hover.settings.colors_text.red }}, {{ scheme_on_hover.settings.colors_text.green }}, {{ scheme_on_hover.settings.colors_text.blue }};
+                    --color-border: {{ scheme_on_hover.settings.color_border.red }}, {{ scheme_on_hover.settings.color_border.green }}, {{ scheme_on_hover.settings.color_border.blue }};
+                    --color-overlay: {{ scheme_on_hover.settings.colors_background_overlay.red }},{{ scheme_on_hover.settings.colors_background_overlay.green }},{{ scheme_on_hover.settings.colors_background_overlay.blue }};
+                    --color-button-text: {{ scheme_on_hover.settings.colors_solid_button_labels.red }}, {{ scheme_on_hover.settings.colors_solid_button_labels.green }}, {{ scheme_on_hover.settings.colors_solid_button_labels.blue }};
+                    --color-button-text-hover: {{ scheme_on_hover.settings.colors_solid_button_labels_hover.red }}, {{ scheme_on_hover.settings.colors_solid_button_labels_hover.green }}, {{ scheme_on_hover.settings.colors_solid_button_labels_hover.blue }};
+                    --color-button: {{ scheme_on_hover.settings.colors_solid_button_background.red }}, {{ scheme_on_hover.settings.colors_solid_button_background.green }}, {{ scheme_on_hover.settings.colors_solid_button_background.blue }};
+                    --color-button-hover: {{ scheme_on_hover.settings.colors_solid_button_background_hover.red }}, {{ scheme_on_hover.settings.colors_solid_button_background_hover.green }}, {{ scheme_on_hover.settings.colors_solid_button_background_hover.blue }};
+                    --color-button-secondary: {{ scheme_on_hover.settings.colors_secondary_button_background.red }}, {{ scheme_on_hover.settings.colors_secondary_button_background.green }}, {{ scheme_on_hover.settings.colors_secondary_button_background.blue }};
+                    --color-button-secondary-hover: {{ scheme_on_hover.settings.colors_secondary_button_background_hover.red }}, {{ scheme_on_hover.settings.colors_secondary_button_background_hover.green }}, {{ scheme_on_hover.settings.colors_secondary_button_background_hover.blue }};
+                    --color-button-secondary-text: {{ scheme_on_hover.settings.colors_secondary_button_labels.red }}, {{ scheme_on_hover.settings.colors_secondary_button_labels.green }}, {{ scheme_on_hover.settings.colors_secondary_button_labels.blue }};
+                    --color-button-secondary-text-hover: {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.red }}, {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.green }}, {{ scheme_on_hover.settings.colors_secondary_button_labels_hover.blue }};
+                    --color-button-tertiary-text: {{ scheme_on_hover.settings.colors_tertiary_button_labels.red }}, {{ scheme_on_hover.settings.colors_tertiary_button_labels.green }}, {{ scheme_on_hover.settings.colors_tertiary_button_labels.blue }};
+                  }
+                }
+              </style>
+            {%- endif -%}
+
+            {%- if block.settings.heading != blank
+              or block.settings.description != blank
+              or block.settings.button_show
+            -%}
+              <div class="spotlight-cards__info-wrapper {% if section.settings.layout_type =='grid' and section.settings.enable_sticky %} info--sticky{% endif %}">
+                <div class="spotlight-cards__info">
+                  {%- if block.settings.heading != blank -%}
+                    <{{ block.settings.heading_tag | default: 'h3' }}
+                      class="spotlight-cards__item-heading {{ block.settings.heading_size }}"
+                    >
+                      {{- block.settings.heading -}}
+                    </{{ block.settings.heading_tag | default: 'h3' }}>
+                  {%- endif -%}
+
+                  {%- if block.settings.description != blank -%}
+                    <p class="spotlight-cards__item-description description richtext-link-inside">
+                      {{- block.settings.description -}}
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.button_show and block.settings.button_label != blank -%}
+                    {% render 'button',
+                      btn_label: block.settings.button_label,
+                      btn_style: block.settings.button_style,
+                      btn_link: block.settings.button_link,
+                      class: 'spotlight-cards__card-btn'
+                    %}
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {% if block.settings.show_image %}
+              <div class="spotlight-cards__image-wrapper">
+                {% if block.settings.image != blank %}
+                  {% liquid
+                    assign card_image = block.settings.image
+                    assign image_styles = 'object-fit: ' | append: block.settings.object_fit
+
+                    if section.settings.aspect_ratio == 'landscape'
+                      assign settings_aspect_ratio = 1.55
+                    elsif section.settings.aspect_ratio == 'portrait'
+                      assign settings_aspect_ratio = 0.76
+                    else
+                      assign settings_aspect_ratio = 1
+                    endif
+
+                    assign calc_ratio = 1
+
+                    if card_image.aspect_ratio > settings_aspect_ratio
+                      assign calc_ratio = card_image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+                    endif
+
+                    assign image_loading = 'lazy'
+
+                    if section.index == 1 and forloop.index == 1
+                      assign image_loading = 'eager'
+                    endif
+                  %}
+                  {% assign columns_count = section.settings.cards_per_row %}
+                  {%- capture img_sizes -%}
+                    {%- if columns_count == 1 -%}
+                      calc(100vw  * {{ calc_ratio }})
+                    {%- elsif columns_count == 2 -%}
+                      (min-width: 576px) calc(50vw  * {{ calc_ratio }}), calc(100vw  * {{ calc_ratio }})
+                    {%- elsif columns_count == 3 -%}
+                      (min-width: 990px) calc(33.33vw * {{ calc_ratio }}),  (min-width: 576px) calc(50vw  * {{ calc_ratio }}), calc(100vw  * {{ calc_ratio }})
+                    {%- elsif columns_count == 4 -%}
+                      {% if section.settings.layout_type == 'grid' %}
+                        (min-width: 1200px) calc(25vw  * {{ calc_ratio }}), (min-width: 576px) calc(50vw  * {{ calc_ratio }}), calc(100vw * {{ calc_ratio }})
+                      {% else %}
+                        (min-width: 1200px) calc(25vw * {{ calc_ratio }}), (min-width: 990px) calc(33.33vw * {{ calc_ratio }}),  (min-width: 576px) calc(50vw * {{ calc_ratio }}), calc(100vw  * {{ calc_ratio }})
+                      {% endif %}
+                    {%- else -%}
+                      100vw
+                    {%- endif -%}
+                  {%- endcapture -%}
+
+                  {{
+                    card_image
+                    | image_url: width: card_image.width
+                    | image_tag:
+                      width: card_image.width,
+                      height: card_image.height,
+                      widths: '360, 535, 600, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800',
+                      sizes: img_sizes,
+                      class: 'spotlight-cards__image',
+                      style: image_styles,
+                      loading: image_loading
+                  }}
+                {% else %}
+                  {% assign image_index = forloop.index | modulo: 4 | plus: 1 %}
+                  {{
+                    'collection-apparel-'
+                    | append: image_index
+                    | placeholder_svg_tag: 'placeholder-svg spotlight-cards__image'
+                  }}
+                {% endif %}
+
+                {% if block.settings.overlay_opacity != 0 %}
+                  <span
+                    class="spotlight-cards__overlay"
+                    style="opacity: {{ block.settings.overlay_opacity | times: 0.01 }};"
+                  ></span>
+                {% endif %}
+              </div>
+            {%- endif %}
+
+            {%- if block.settings.enable_overlay_link and block.settings.card_overlay_link != blank -%}
+              <a
+                href="{{ block.settings.card_overlay_link }}"
+                class="spotlight-cards__link-overlay focus-inset"
+                aria-label="{{ block.settings.heading }}"
+                {% if settings.links_blank and block.settings.card_overlay_link.type == 'external_link' %}
+                  target="_blank"
+                {% endif %}
+              ></a>
+            {%- endif -%}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.spotlight-cards.name",
+  "class": "spotlight-cards-section",
+  "tag": "section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.all.section_layout.options__2.label"
+        },
+        {
+          "value": "slider",
+          "label": "t:sections.all.section_layout.options__1.label"
+        }
+      ],
+      "info": "t:sections.spotlight-cards.settings.layout_type.info",
+      "default": "grid",
+      "label": "t:sections.all.section_layout.label"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "t:sections.spotlight-cards.settings.cards_per_row.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": true,
+      "label": "t:sections.all.borders.enable_border_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": false,
+      "label": "t:sections.all.borders.enable_border_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section_heading_group.header.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.all.heading_font.options__1.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.all.heading_font.label",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_size.options__6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_size.options__5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__1.label"
+        }
+      ],
+      "default": "h6",
+      "label": "t:sections.all.heading_size.label",
+      "visible_if": "{{ section.settings.heading != blank and section.settings.heading_font == 'heading' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_group_button_show",
+      "label": "t:sections.all.button.button_show.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading_group_button_label",
+      "label": "t:sections.all.button.button_label.label",
+      "default": "t:sections.all.button.button_label.default_shop_now",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "url",
+      "id": "heading_group_button_link",
+      "label": "t:sections.all.button.button_link.label",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_group_button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.button.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.all.button.button_style.options__2.label"
+        },
+        {
+          "value": "tertiary",
+          "label": "t:sections.all.button.button_style.options__3.label"
+        }
+      ],
+      "default": "tertiary",
+      "label": "t:sections.all.button.button_style.label",
+      "visible_if": "{{ section.settings.heading_group_button_show }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_group_enable_border_bottom",
+      "default": true,
+      "label": "t:sections.all.borders.enable_border_bottom.label",
+      "visible_if": "{{ section.settings.heading != blank or section.settings.heading_group_button_show or section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.spotlight-cards.settings.header__cards.content"
+    },
+
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "t:sections.all.card.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.card.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.card.image_ratio.options__3.label"
+        }
+      ],
+      "default": "square",
+      "label": "t:sections.all.card.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "default": true,
+      "label": "t:sections.spotlight-cards.settings.enable_sticky.label",
+      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_alignment",
+      "label": "t:sections.all.vertical_alignment.label_content",
+      "visible_if": "{{ section.settings.layout_type == 'slider' or section.settings.enable_sticky == false }}",
+      "options": [
+        {
+          "value": "top",
+          "label": "t:sections.all.vertical_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.all.vertical_alignment.options__2.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.all.vertical_alignment.options__3.label"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_horizontal_alignment",
+      "label": "t:sections.all.horizontal_alignment.label_content",
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_animation",
+      "label": "t:sections.spotlight-cards.settings.enable_hover_animation.label",
+      "info": "t:sections.spotlight-cards.settings.enable_hover_animation.info",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.spotlight-cards.blocks.card.name",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "card_color_scheme",
+          "default": "background-1",
+          "label": "t:sections.all.color_scheme.label"
+        },
+        {
+          "type": "color_scheme",
+          "id": "card_color_scheme_on_hover",
+          "default": "background-3",
+          "label": "t:sections.spotlight-cards.blocks.card.settings.color_scheme_on_hover.label",
+          "visible_if": "{{ section.settings.enable_hover_animation == true }}"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.all.heading.label",
+          "default": "t:sections.spotlight-cards.blocks.card.settings.heading.default"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_size.options__5.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_size.options__4.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__1.label"
+            }
+          ],
+          "default": "h3",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_tag.options__1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_tag.options__2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.heading_tag.options__3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_tag.options__4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_tag.options__5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:sections.all.heading_tag.options__6.label"
+            },
+            {
+              "value": "div",
+              "label": "t:sections.all.heading_tag.options__7.label"
+            }
+          ],
+          "default": "h3",
+          "label": "t:sections.all.heading_tag.label",
+          "info": "t:sections.all.heading_tag.info"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "t:sections.all.text.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "t:sections.all.enable_image.label",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.image.label",
+          "visible_if": "{{ block.settings.show_image == true }}"
+        },
+        {
+          "type": "select",
+          "id": "object_fit",
+          "options": [
+            {
+              "value": "contain",
+              "label": "t:sections.all.card.image_fit.options__1.label"
+            },
+            {
+              "value": "cover",
+              "label": "t:sections.all.card.image_fit.options__2.label"
+            }
+          ],
+          "default": "cover",
+          "label": "t:sections.all.card.image_fit.label",
+          "visible_if": "{{ block.settings.show_image == true }}"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0,
+          "unit": "%",
+          "label": "t:sections.all.overlay_opacity.label",
+          "visible_if": "{{ block.settings.show_image == true }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_show",
+          "default": true,
+          "label": "t:sections.all.button.button_show.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.all.button.button_label.label",
+          "default": "t:sections.all.button.button_label.default_learn_more",
+          "visible_if": "{{ block.settings.button_show == true }}"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.all.button.button_link.label",
+          "visible_if": "{{ block.settings.button_show == true and block.settings.button_label != blank }}"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "visible_if": "{{ block.settings.button_show == true and block.settings.button_label != blank }}",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.all.button.button_style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.all.button.button_style.options__2.label"
+            },
+            {
+              "value": "tertiary",
+              "label": "t:sections.all.button.button_style.options__3.label"
+            }
+          ],
+          "default": "primary",
+          "label": "t:sections.all.button.button_style.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_overlay_link",
+          "label": "t:sections.spotlight-cards.blocks.card.settings.enable_overlay_link.label",
+          "default": false
+        },
+        {
+          "type": "url",
+          "id": "card_overlay_link",
+          "label": "t:sections.spotlight-cards.blocks.card.settings.card_overlay_link.label",
+          "visible_if": "{{ block.settings.enable_overlay_link == true }}"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.spotlight-cards.presets.name",
+      "category": "t:sections.categories.banners",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

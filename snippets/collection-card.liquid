@@ -1,0 +1,130 @@
+{% doc %}
+  Renders a collection card.
+
+  @param {object} card_collection - Collection Liquid object @param {string} [image_ratio] - landscape / portrait / square. Default: 'square'
+  @param {string} [image_fit] - contain / cover. Default: 'cover'
+  @param {object} [overwrite_image] - Overwrite image object
+  @param {number} [columns] - The number of columns to display. Default: 1
+  @param {number} [columns_mobile] - The number of columns to display om mobile devices. Default: 1
+  @param {string} [heading_size] - Heading size class. Default: 'h6'
+  @param {string} [heading_tag] - Heading tag for SEO. Default: 'h6'
+  @param {string} [image_ratio] - landscape / portrait / square. Default: 'portrait'
+  @param {boolean} is_collections_page - Flag for render aspect-ratios for Collections page.
+
+  @example
+  {% render 'collection-card', card_collection: collection %}
+{% enddoc %}
+
+{% if card_collection != blank %}
+  {% liquid
+    assign columns = columns | default: 1
+    assign columns_mobile = columns_mobile | default: 1
+
+    assign card_image_ratio = 'square'
+    if image_ratio != blank
+      assign card_image_ratio = image_ratio
+    endif
+
+    assign card_image_fit = 'cover'
+    if image_fit != blank
+      assign card_image_fit = image_fit
+    endif
+
+    assign card_heading_size = 'h6'
+    if heading_size != blank
+      assign card_heading_size = heading_size
+    endif
+
+    assign card_heading_tag = 'h6'
+    if heading_tag != blank
+      assign card_heading_tag = heading_tag
+    endif
+
+    assign collection_product_image = card_collection.featured_image
+    if overwrite_image != blank
+      assign collection_product_image = overwrite_image
+    endif
+
+    if card_image_ratio == 'landscape'
+      if is_collections_page == true
+        # 480 : 360
+        assign settings_aspect_ratio = 1.33
+        assign padding_bottom = '75%'
+      else
+        # 376 : 180
+        assign settings_aspect_ratio = 2.09
+        assign padding_bottom = '47.9%'
+      endif
+    elsif card_image_ratio == 'portrait'
+      assign settings_aspect_ratio = 0.88
+      assign padding_bottom = '113%'
+    else
+      # 1 : 1
+      assign settings_aspect_ratio = 1
+      assign padding_bottom = '100%'
+    endif
+  %}
+
+  <div class="collection-card {% if is_collections_page == true %} collection-card--collections-page{% endif %}">
+    <div
+      class="collection-card__image"
+      style="--padding-bottom-collection: {{ padding_bottom }};"
+    >
+      {%- if collection_product_image != blank -%}
+        {% liquid
+          assign calc_ratio = 1
+          if card_image_fit == 'cover' and collection_product_image.aspect_ratio > settings_aspect_ratio
+            assign calc_ratio = collection_product_image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+          endif
+        %}
+
+        {%- capture sizes -%}
+          (min-width: 1200px) calc({{ calc_ratio }} * (100vw / {{ columns }})),
+          {%- if columns >= 3 -%}
+            (min-width: 990px) calc({{ calc_ratio }} * (100vw / 3)),
+          {%- endif -%}
+          {%- if columns >= 2 -%}
+            (min-width: 576px) calc({{ calc_ratio }} * (100vw / 2)),
+          {%- endif -%}
+          {%- if columns_mobile == 2 -%}
+            calc({{ calc_ratio }} * 50vw)
+          {%- else -%}
+            calc({{ calc_ratio }} * 100vw)
+          {%- endif -%}
+        {%- endcapture -%}
+
+        {%- capture style -%}
+          object-fit: {{ card_image_fit }};
+        {%- endcapture -%}
+        {{
+          collection_product_image
+          | image_url: width: collection_product_image.width
+          | image_tag:
+            loading: 'lazy',
+            sizes: sizes,
+            widths: '360, 535, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800',
+            style: style,
+            class: 'collection-card-image'
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg collection-card-image' }}
+      {% endif %}
+    </div>
+
+    <div class="collection-card__information">
+      <{{ card_heading_tag | default: 'h6' }} class="collection-card__title {{ card_heading_size }}">
+        <a class="focus-inset" href="{{ card_collection.url | default: '#' }}" aria-label="{{ card_collection.title }}">
+          <span>{{- card_collection.title -}}</span>
+        </a>
+      </{{ card_heading_tag | default: 'h6' }}>
+    </div>
+
+    <a
+      href="{{ card_collection.url | default: '#' }}"
+      class="collection-card__link-overlay focus-inset"
+      aria-label="{{ card_collection.title }}"
+    >
+      <span class="visibility-hidden">{{- card_collection.title -}}</span>
+    </a>
+  </div>
+{% endif %}

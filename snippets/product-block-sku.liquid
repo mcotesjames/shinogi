@@ -1,0 +1,20 @@
+{% doc %}
+  Renders product SKU block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {string} section_id - Section ID
+
+  @example
+  {% render 'product-block-sku', product: product, block_obj: block, section_id: section.id %}
+{% enddoc %}
+
+<div
+  class="product__sku body-small{% if product.selected_or_first_available_variant.sku == blank %} visibility-hidden{% endif %}"
+  id="Sku-{{ section_id }}"
+  role="status"
+  {{ block_obj.shopify_attributes }}
+>
+  <span>{{ 'products.product.sku' | t }}: </span>
+  {{ product.selected_or_first_available_variant.sku -}}
+</div>

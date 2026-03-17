@@ -1,0 +1,170 @@
+{% comment %}
+  Renders a blog post card for a given blog.
+
+  Accepts:
+  - blog: {Object} Blog object
+  - article: {Object} Article object
+  -	article_heading_font_size: {String} Post heading font size. Default = h3
+  - article_heading_tag: {String} Post heading tag for SEO. Default = h3
+  - aspect_ratio: {String} Aspect ratio of the image. Default = square
+  - object_fit: {String} Object fit of the image. Default = cover
+  - show_image: {Boolean} Show the post image or not. Default = false
+  - show_date: {Boolean} Show the post date or not. Default = false
+  - show_author: {Boolean} Show the post author or not. Default = false
+  - show_tags: {Boolean} Show the post tags or not. Default = false
+  - show_excerpt: {Boolean} Show the post excerpt or not. Default = false
+  - columns_count: {Number} Sizes of the card per row for calculate image width. Default image width = 100vw
+  - show_comments_count: {Boolean} Show the comments count or not. Default = false
+
+  Usage:
+  {% render 'article-card', blog: section.settings.blog, ...  %}
+{% endcomment %}
+
+{% liquid
+  assign is_show_comments_count = false
+
+  if show_comments_count == true and blog.comments_enabled?
+    assign is_show_comments_count = true
+  endif
+
+  assign show_meta = false
+
+  if show_tags == true or show_author == true or show_date == true or is_show_comments_count == true
+    assign show_meta = true
+  endif
+
+  assign image_styles = 'object-fit: cover;'
+
+  if object_fit
+    assign image_styles = 'object-fit: ' | append: object_fit | append: ';'
+  endif
+%}
+
+<article class="article-card" aria-labelledby="Article-{{ article.id }}">
+  {%- if show_image == true -%}
+    <div class="article-card-image-wrapper article-card-image-wrapper--{% if aspect_ratio %}{{ aspect_ratio }}{% else %}square{% endif %}">
+      {% liquid
+        if aspect_ratio == 'landscape'
+          assign settings_aspect_ratio = 1.44
+        elsif aspect_ratio == 'portrait'
+          assign settings_aspect_ratio = 0.8
+        else
+          assign settings_aspect_ratio = 1
+        endif
+
+        assign calc_ratio = 1
+        if article.image.aspect_ratio > settings_aspect_ratio
+          assign calc_ratio = article.image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+        endif
+      %}
+
+      {%- capture img_sizes -%}
+        {%- if columns_count != blank -%}
+          {%- if columns_count == 1 -%}
+            calc((100vw - 2.4rem) * {{ calc_ratio }})
+          {%- elsif columns_count == 2 -%}
+            (min-width: 576px) calc((50vw - 2.4rem) * {{ calc_ratio }}), calc((100vw - 2.4rem) * {{ calc_ratio }})
+          {%- elsif columns_count == 3 -%}
+            (min-width: 990px) calc((33.33vw - 2.4rem) * {{ calc_ratio }}),  (min-width: 576px) calc((50vw - 2.4rem) * {{ calc_ratio }}), calc((100vw - 2.4rem) * {{ calc_ratio }})
+          {%- elsif columns_count == 4 -%}
+            {% if section.settings.layout == 'grid' %}
+              (min-width: 1200px) calc((25vw - 2.4rem) * {{ calc_ratio }}), (min-width: 576px) calc((50vw - 2.4rem) * {{ calc_ratio }}), calc((100vw - 2.4rem) * {{ calc_ratio }})
+            {% else %}
+              (min-width: 1200px) calc((25vw - 2.4rem) * {{ calc_ratio }}), (min-width: 990px) calc((33.33vw - 2.4rem) * {{ calc_ratio }}),  (min-width: 576px) calc((50vw - 2.4rem) * {{ calc_ratio }}), calc((100vw - 2.4rem) * {{ calc_ratio }})
+            {% endif %}
+          {%- else -%}
+            100vw
+          {%- endif -%}
+        {%- else -%}
+          100vw
+        {%- endif -%}
+      {%- endcapture -%}
+      {%- if article.image != blank -%}
+        {{
+          article.image
+          | image_url: width: article.image.width
+          | image_tag:
+            loading: 'lazy',
+            widths: '308, 416, 632, 700, 800, 900, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2560',
+            sizes: img_sizes,
+            class: 'article-card-image motion-reduce',
+            style: image_styles
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg article-card-image motion-reduce' }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="article-card-content">
+    <{{ article_heading_tag | default: 'h3' }}
+      class="article-card-title article-card-title--font-heading {{ article_heading_font_size | default: 'h4' }}"
+      id="Article-{{ article.id }}"
+    >
+      <a href="{{ article.url }}" class="article-card-title__link">{{ article.title | escape }}</a>
+    </{{ article_heading_tag | default: 'h3' }}>
+
+    {%- if show_excerpt and article.excerpt_or_content.size > 0 -%}
+      <div class="article-card-excerpt body-small">
+        {{ article.excerpt_or_content | strip_html | truncate: 150 }}
+      </div>
+    {%- endif -%}
+
+    {%- if show_meta == true -%}
+      <div class="article-card-meta">
+        {%- if show_tags and article.tags.size > 0 -%}
+          <ul class="article-card-tags list-unstyled">
+            {%- for tag in article.tags -%}
+              {% liquid
+                assign tag_handled = tag | handle
+                assign blog_filter_url = blog.url | append: '/tagged/' | append: tag_handled
+                if blog.url == blank
+                  assign root_url = request.locale.root_url | replace
+                  if root_url == '/'
+                    assign root_url = ''
+                  endif
+                  assign blog_title_handled = article.handle | split: '/' | first
+                  assign blog_filter_url = root_url | append: '/blogs/' | append: blog_title_handled | append: '/tagged/' | append: tag_handled
+                endif
+              %}
+              <li class="article-card-tag">
+                <a
+                  class="article-card-tag__link subtitle hover-underlined-link focus-inset"
+                  href="{{ blog_filter_url }}"
+                  aria-label="{{- tag -}}"
+                >
+                  <span>{{- tag -}}</span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if show_date == true -%}
+          <span class="article-card-date subtitle">
+            {{- article.published_at | time_tag: '%d/%m/%y' -}}
+          </span>
+        {%- endif -%}
+        {%- if show_author == true -%}
+          <span class="article-card-author subtitle">
+            {{- article.author -}}
+          </span>
+        {%- endif -%}
+        {%- if is_show_comments_count == true -%}
+          <div class="article-card-comments">
+            {% render 'icon-comments' %}
+            <span class="article-card-comments__count subtitle">
+              {{- article.comments_count -}}
+            </span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <a
+    href="{{ article.url | default: '#' }}"
+    class="article-card__overlay-link focus-inset"
+    aria-label="{{ article.title }} {{ "accessibility.article_link" | t }}"
+  >
+    <span class="visibility-hidden">{{- article.title -}}</span>
+  </a>
+</article>

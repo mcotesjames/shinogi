@@ -1,0 +1,112 @@
+{%- style -%}
+  {% render 'section-margin' %}
+
+  .template-404 .page-header {
+    padding-block: 4.8rem;
+  }
+
+  .template-404__button {
+    margin-top: 1.6rem;
+  }
+{%- endstyle -%}
+
+<div class="template-404 template-404__page">
+  <div class="page-header align--{{ section.settings.text_alignment }}">
+    <h1 class="page-header__title h6">
+      {{- 'templates.404.title' | t -}}
+    </h1>
+
+    <p class="page-header__text body-small">
+      {{- 'templates.404.text' | t -}}
+    </p>
+
+    {% assign button_label = 'templates.404.button_label' | t %}
+    {% render 'button',
+      btn_label: button_label,
+      btn_link: routes.root_url,
+      btn_style: 'primary',
+      class: 'page-header__button template-404__button'
+    %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "t:sections.all.text_align.label",
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ]
+}
+{% endschema %}

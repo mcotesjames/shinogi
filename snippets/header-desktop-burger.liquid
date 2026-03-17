@@ -1,0 +1,184 @@
+{%- for block in section.blocks -%}
+  {%- if block.type == 'desktop_burger' -%}
+    <burger-menu
+      class="no-js-hidden{% if block.settings.enable_right_icon_border %} burger-menu--border{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      <button
+        class="burger-menu__toggle burger-menu__toggle--open-btn {% if block.settings.enable_right_icon_border %} burger-menu__toggle--border{% endif %} button--unstyled focus-inset"
+        aria-label="{{ 'sections.header.burger_menu_open' | t }}"
+      >
+        {% render 'icon-hamburger' %}
+      </button>
+
+      <div class="burger-menu modal">
+        <div class="modal__overlay"></div>
+        <div
+          class="modal__content color-{{ block.settings.burger_color_scheme }}"
+          role="dialog"
+          aria-modal="true"
+          aria-label="{{ 'sections.header.burger_menu' | t }}"
+          tabindex="-1"
+        >
+          <div class="modal__heading">
+            <span class="subtitle">{{ 'sections.header.burger_menu_label' | t }}</span>
+            {% render 'modal-close-button' %}
+          </div>
+
+          <div class="burger-menu__content">
+            {%- if block.settings.burger_main_menu != blank -%}
+              <div class="burger-menu__content-main">
+                <ul class="burger-menu__list list-menu">
+                  {%- for link in block.settings.burger_main_menu.links -%}
+                    <li>
+                      {%- if link.links != blank -%}
+                        <menu-drawer>
+                          <details id="Details-DesktopBurger-Link-{{ forloop.index }}">
+                            <summary
+                              {% if block.settings.enable_clickable_top_level -%}
+                                class="burger-menu__summary"
+                              {%- endif %}
+                            >
+                              {%- if block.settings.enable_clickable_top_level -%}
+                                <a
+                                  href="{{ link.url }}"
+                                  class="burger-menu__link"
+                                  {% if link.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                  aria-label="{{ link.title | escape }}"
+                                >
+                                  {{ link.title | escape }}
+                                </a>
+
+                                {% render 'icon-chevron' %}
+                              {%- else -%}
+                                <span class="burger-menu__link">{{- link.title | escape -}}</span>
+                              {%- endif -%}
+                            </summary>
+                            <div class="burger-menu__submenu">
+                              <button
+                                type="button"
+                                class="burger-menu__submenu-back button--unstyled focus-inset"
+                                aria-expanded="true"
+                              >
+                                {% render 'icon-menu-back' %}
+                                <span class="subtitle">{{- link.title | escape -}}</span>
+                                <span></span>
+                              </button>
+
+                              <ul class="burger-menu__list list-menu">
+                                {%- for childlink in link.links -%}
+                                  <li>
+                                    {%- if childlink.links == blank -%}
+                                      <a
+                                        href="{{ childlink.url }}"
+                                        class="burger-menu__link"
+                                        {% if childlink.current %}
+                                          aria-current="page"
+                                        {% endif %}
+                                        aria-label="{{ childlink.title | escape }}"
+                                      >
+                                        {{- childlink.title | escape -}}
+                                      </a>
+                                    {%- else -%}
+                                      <details open>
+                                        <summary>
+                                          {%- if block.settings.enable_clickable_top_level -%}
+                                            <a
+                                              href="{{ childlink.url }}"
+                                              class="burger-menu__link burger-menu__link--small"
+                                              {% if childlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                              aria-label="{{ childlink.title | escape }}"
+                                            >
+                                              {{ childlink.title | escape }}
+                                            </a>
+                                          {%- else -%}
+                                            <span class="burger-menu__link burger-menu__link--small">
+                                              {{- childlink.title | escape -}}
+                                            </span>
+                                          {%- endif -%}
+                                        </summary>
+                                        <div class="burger-menu__submenu">
+                                          <ul class="burger-menu__list list-menu">
+                                            {%- for grandchildlink in childlink.links -%}
+                                              <li>
+                                                <a
+                                                  href="{{ grandchildlink.url }}"
+                                                  class="burger-menu__link"
+                                                  {% if grandchildlink.current %}
+                                                    aria-current="page"
+                                                  {% endif %}
+                                                  aria-label="{{ grandchildlink.title | escape }}"
+                                                >
+                                                  {{- grandchildlink.title | escape -}}
+                                                </a>
+                                              </li>
+                                            {%- endfor -%}
+                                          </ul>
+                                        </div>
+                                      </details>
+                                    {%- endif -%}
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </div>
+                          </details>
+                        </menu-drawer>
+                      {%- else -%}
+                        {% comment %}
+                          {%- if block.settings.enable_clickable_top_level -%}
+                        {% endcomment %}
+                        <a
+                          href="{{ link.url }}"
+                          {% if settings.links_blank and link.type == 'http_link' %}
+                            target="_blank"
+                          {% endif %}
+                          class="burger-menu__link"
+                          aria-label="{{ link.title }}"
+                        >
+                          <span>{{- link.title -}}</span>
+                        </a>
+                        {% comment %}
+                          {%- else -%}
+                            <span class="burger-menu__link">{{- link.title | escape -}}</span>
+                          {%- endif -%}
+                        {% endcomment %}
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            {% liquid
+              assign is_show_socials = false
+              if block.settings.burger_enable_social
+                if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank
+                  assign is_show_socials = true
+                endif
+              endif
+            %}
+            {%- if block.settings.burger_bottom_text != blank or is_show_socials -%}
+              <div class="burger-menu__bottom">
+                {%- if block.settings.burger_bottom_text != blank -%}
+                  <div class="burger-menu__bottom-text body-small richtext-link-inside">
+                    {{- block.settings.burger_bottom_text -}}
+                  </div>
+                {%- endif -%}
+
+                {%- if is_show_socials -%}
+                  <div class="burger-menu__social">
+                    {% render 'social-list-icons', show_labels: true %}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </burger-menu>
+  {%- endif -%}
+{%- endfor -%}

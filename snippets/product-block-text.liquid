@@ -1,0 +1,19 @@
+{% doc %}
+  Renders product text block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-text', product: product, block_obj: block %}
+{% enddoc %}
+
+{%- if block_obj.settings.text != blank -%}
+  <div class="product__text subtitle" {{ block_obj.shopify_attributes }}>
+    {%- if product.vendor == block_obj.settings.text and settings.enable_vendor_link -%}
+      {{- block_obj.settings.text | link_to_vendor: class: 'focus-inset' -}}
+    {%- else -%}
+      {{- block_obj.settings.text | strip_html -}}
+    {%- endif -%}
+  </div>
+{%- endif -%}

@@ -1,0 +1,24 @@
+{% doc %}
+  Renders product description block.
+
+  @param {object} product - Product Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {object} [placeholder_text] - Text for placeholder Featured product section
+
+  @example
+  {% render 'product-block-description', product: product, block_obj: block %}
+{% enddoc %}
+
+{%- if product.description != blank or block_obj.settings.overwrite_text != blank or placeholder_text != blank -%}
+  <div class="product__description rte rte--product" {{ block_obj.shopify_attributes }}>
+    {%- if block_obj.settings.overwrite_text != blank -%}
+      {{ block_obj.settings.overwrite_text }}
+    {%- else -%}
+      {% if product.description != blank %}
+        {{- product.description -}}
+      {%- else -%}
+        {{- placeholder_text -}}
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

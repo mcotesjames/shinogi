@@ -1,0 +1,168 @@
+{%- if section.settings.main_text != blank -%}
+  <script src="{{ 'announcement-bar.js' | asset_url }}" defer></script>
+
+  <style>
+    :root {
+      --announcement-height: {{ section.settings.height }}px;
+    }
+  </style>
+
+  <div
+    class="announcement-bar color-{{ section.settings.color_scheme }} background{% if section.settings.enable_ticker and section.settings.ticker_pause_hover %} announcement-bar-ticker--pause-hover{% endif %}"
+    role="region"
+    aria-label="{{ 'sections.header.announcement' | t }}"
+  >
+    {% liquid
+      assign target_ticker_line_width = 4000
+      assign char_width = 4
+
+      assign text_length = section.settings.main_text.size | default: 1
+      assign text_width = text_length | times: char_width
+      assign block_width = text_width | plus: 280
+      assign ticker_elements_count = target_ticker_line_width | divided_by: block_width | at_least: 1 | plus: 2
+
+      assign min_duration = 60
+      assign max_duration = 140
+      assign speed = section.settings.ticker_speed
+      assign speed_range = 10
+      assign duration_range = max_duration | minus: min_duration
+      assign duration_temp = speed | times: duration_range | divided_by: speed_range
+      assign duration = max_duration | minus: duration_temp
+    %}
+
+    <div
+      class="announcement-bar__message {% if section.settings.enable_ticker %}announcement-bar-ticker announcement-bar-ticker--{{ section.settings.ticker_direction }}{% if section.settings.ticker_pause_hover %} announcement-bar-ticker--pause-hover{% endif %}{% else %}container{% endif %}"
+      {% if section.settings.enable_ticker %}
+        style="--ticker-duration: {{ duration }}s;"
+      {% endif %}
+    >
+      {%- if section.settings.enable_ticker -%}
+        {%- capture ticker_block -%}
+          <div class="announcement-bar-ticker__block">
+            <span class="announcement-bar-ticker__text body-small richtext-link-inside">
+              {{- section.settings.main_text -}}
+            </span>
+          </div>
+        {%- endcapture -%}
+
+        <div
+          class="announcement-bar-ticker__line announcement-bar-ticker__line--spacer"
+          style="visibility: hidden;opacity: 0;position: static;"
+        >
+          {{ ticker_block }}
+        </div>
+
+        <div class="announcement-bar-ticker__line{% if speed == 0 %} announcement-bar-ticker__line--stopped{% endif %}">
+          {%- for i in (1..ticker_elements_count) -%}
+            {{ ticker_block }}
+          {%- endfor -%}
+        </div>
+
+        <div class="announcement-bar-ticker__line announcement-bar-ticker__line--second{% if speed == 0 %} announcement-bar-ticker__line--hidden{% endif %}">
+          {%- for i in (1..ticker_elements_count) -%}
+            {{ ticker_block }}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="announcement-bar__text body-small richtext-link-inside">
+          {{- section.settings.main_text -}}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.link != blank -%}
+      <a
+        href="{{ section.settings.link }}"
+        aria-label="{{ 'accessibility.link' | t }}"
+        class="announcement-bar__link"
+        {% if settings.links_blank and section.settings.link.type == 'external_link' %}
+          rel="nofollow"
+          target="_blank"
+        {% endif %}
+      ></a>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "class": "section-announcement",
+  "tag": "section",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-3",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 30,
+      "label": "t:sections.announcement-bar.settings.height.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "main_text",
+      "label": "t:sections.announcement-bar.settings.main_text.label",
+      "default": "t:sections.announcement-bar.settings.main_text.default",
+      "info": "t:sections.announcement-bar.settings.main_text.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_ticker",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.enable_ticker.label",
+      "visible_if": "{{ section.settings.main_text != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "ticker_speed",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "label": "t:sections.ticker.settings.ticker_speed.label",
+      "visible_if": "{{ section.settings.enable_ticker }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "ticker_pause_hover",
+      "default": true,
+      "label": "t:sections.ticker.settings.ticker_pause_hover.label",
+      "visible_if": "{{ section.settings.enable_ticker }}"
+    },
+    {
+      "type": "select",
+      "id": "ticker_direction",
+      "options": [
+        {
+          "value": "left_to_right",
+          "label": "t:sections.ticker.settings.ticker_direction.options__1.label"
+        },
+        {
+          "value": "right_to_left",
+          "label": "t:sections.ticker.settings.ticker_direction.options__2.label"
+        }
+      ],
+      "default": "left_to_right",
+      "label": "t:sections.ticker.settings.ticker_direction.label",
+      "visible_if": "{{ section.settings.enable_ticker }}"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.announcement-bar.settings.link.label",
+      "info": "t:sections.announcement-bar.settings.link.info"
+    }
+  ]
+}
+{% endschema %}

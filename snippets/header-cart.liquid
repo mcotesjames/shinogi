@@ -1,0 +1,10 @@
+<div class="header__cart header__cart--{{ section.settings.cart_button_type }} header__cart--{{ section.settings.cart_button_type_mobile }}-mobile">
+  <a
+    href="{{ routes.cart_url }}"
+    class="header__button focus-inset"
+    id="cart-icon-bubble"
+    aria-label="{{- 'general.cart.view' | t -}}"
+  >
+    {% render 'header-cart-button' %}
+  </a>
+</div>

@@ -1,0 +1,36 @@
+<div class="product__buy-buttons" {{ block.shopify_attributes }}>
+  <div class="product-form__buttons">
+    <div class="product-form__buttons-row">
+      {%- if block.settings.show_quantity_selector -%}
+        <div class="product-form__input product-form__quantity">
+          <div class="quantity">
+            <button class="quantity__button" type="button" aria-disabled="true" disabled>
+              {% render 'icon-minus' %}
+            </button>
+            <div
+              class="quantity__input"
+              style="display: flex; align-items: center; justify-content: center;"
+            >
+              1
+            </div>
+            <button class="quantity__button" type="button" aria-disabled="true" disabled>
+              {% render 'icon-plus' %}
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <button
+        class="product-form__submit button button--primary focus-inset"
+        aria-disabled="true"
+        style="opacity: 1; pointer-events: all;"
+      >
+        <div class="button__content">
+          <span class="button__label" data-label="{{- 'products.product.add_to_cart' | t -}}">
+            {{- 'products.product.add_to_cart' | t -}}
+          </span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<input type="hidden" value="{{ paginate.next.url }}" data-next-url>
+<input type="hidden" value="{{ paginate.pages }}" data-total-pages>
+<input type="hidden" value="{{ paginate.current_page }}" data-current-page>
+
+<div class="load-more-wrapper pagination-block container no-js-hidden">
+  {%- if settings.show_progressbar == true -%}
+    <div class="load-more-wrapper__progress">
+      <p class="load-more-wrapper__progress-label body-small" id="LoadMoreProgress">
+        {% liquid
+          assign items_shown = 0
+          if paginate.current_page != paginate.pages
+            assign items_shown = paginate.current_page | times: paginate.page_size
+          else
+            assign items_shown = paginate.items
+          endif
+          assign calculated_progress = items_shown | times: 100 | divided_by: paginate.items
+        %}
+        {{- 'general.pagination.progressbar_label' | t: current: items_shown, total: paginate.items -}}
+      </p>
+      <div class="load-more-wrapper__progress-bar">
+        <div
+          class="load-more-wrapper__progress-bar-inner"
+          id="LoadMoreProgressBar"
+          style="width: {{ calculated_progress }}%;"
+        ></div>
+      </div>
+    </div>
+  {%- endif -%}
+  <button class="button button--{{- settings.load_more_button_style }} js-load-more focus-inset">
+    <div class="button__content">
+      <span class="button__label" data-label="{{- 'general.pagination.load_more_label' | t -}}">
+        {{- 'general.pagination.load_more_label' | t -}}
+      </span>
+    </div>
+    <div class="load-more-wrapper__loader button__loader">
+      {%- render 'icon-loading' -%}
+    </div>
+  </button>
+</div>
