@@ -231,6 +231,17 @@
             "group_heading_tag": "h3"
           },
           "blocks": {
+            "specification_detail_tQMptg": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Silicone mat",
+                "detail_heading_font": "subtitle",
+                "detail_value": "silicone; Qty 2",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
+            },
             "specification_detail_1": {
               "type": "_specification-detail",
               "settings": {
@@ -260,12 +271,37 @@
                 "detail_value_font": "subtitle"
               },
               "blocks": {}
+            },
+            "specification_detail_eXY47E": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Aluminum frame",
+                "detail_heading_font": "subtitle",
+                "detail_value": "ALUMINUM; Qty 1",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
+            },
+            "specification_detail_faMXXE": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Splint",
+                "detail_heading_font": "subtitle",
+                "detail_value": "BAMBOO; Qty 1",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
+            "specification_detail_tQMptg",
             "specification_detail_1",
             "specification_detail_2",
-            "specification_detail_3"
+            "specification_detail_3",
+            "specification_detail_eXY47E",
+            "specification_detail_faMXXE"
           ]
         },
         "specification_group_2": {
@@ -306,12 +342,48 @@
                 "detail_value_font": "subtitle"
               },
               "blocks": {}
+            },
+            "specification_detail_FiPPVH": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Handle connector",
+                "detail_heading_font": "subtitle",
+                "detail_value": "ZINC ALLOY; Qty 2",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
+            },
+            "specification_detail_JW33gU": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Rivets M3",
+                "detail_heading_font": "subtitle",
+                "detail_value": "SS305; Qty 56",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
+            },
+            "specification_detail_nWXnTa": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Name plate",
+                "detail_heading_font": "subtitle",
+                "detail_value": "SS305; Qty 1",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "specification_detail_1",
             "specification_detail_2",
-            "specification_detail_3"
+            "specification_detail_3",
+            "specification_detail_FiPPVH",
+            "specification_detail_JW33gU",
+            "specification_detail_nWXnTa"
           ]
         },
         "specification_group_3": {
@@ -354,12 +426,36 @@
                 "detail_value_font": "subtitle"
               },
               "blocks": {}
+            },
+            "specification_detail_FPYmM7": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Paracord shoulder strap",
+                "detail_heading_font": "subtitle",
+                "detail_value": "Nylon paracord, Nylon woven strap; Qty 1",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
+            },
+            "specification_detail_Hz6cyj": {
+              "type": "_specification-detail",
+              "name": "t:sections.specifications.blocks.specification_detail.name",
+              "settings": {
+                "detail_heading": "Notebook",
+                "detail_heading_font": "subtitle",
+                "detail_value": "200gsm black Kraft, 80gsm woodfree; Qty 1",
+                "detail_value_font": "subtitle"
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "specification_detail_1",
             "specification_detail_yidmA4",
-            "specification_detail_8YTyUa"
+            "specification_detail_8YTyUa",
+            "specification_detail_FPYmM7",
+            "specification_detail_Hz6cyj"
           ]
         }
       },
