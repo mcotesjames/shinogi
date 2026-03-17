@@ -155,6 +155,7 @@
         "lookbook_item_aMJdky",
         "lookbook_item_aF478X"
       ],
+      "disabled": true,
       "name": "t:sections.lookbook.presets.name",
       "settings": {
         "color_scheme": "",
