@@ -242,7 +242,7 @@
         "object_fit": "cover",
         "slides_per_view_desktop": 4,
         "slides_per_view_mobile": 2,
-        "slider_speed": 35,
+        "slider_speed": 40,
         "slider_stop_on_hover": true,
         "enable_fullscreen": false,
         "social_media_name": "@shinogi",
