@@ -179,7 +179,7 @@
       ],
       "name": "t:sections.featured-product.name",
       "settings": {
-        "product_item": "case-15-25",
+        "product_item": "the-1525-case",
         "color_scheme": "",
         "enable_border_top": false,
         "enable_border_bottom": true,
@@ -478,7 +478,7 @@
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
         "product_list": [
-          "case-15-25"
+          "the-1525-case"
         ],
         "list_heading": "Customise your case",
         "list_heading_size": "h4",
@@ -507,7 +507,7 @@
         "color_scheme": "background-1",
         "color_scheme_mobile": "",
         "enable_image": true,
-        "image_desktop": "shopify://shop_images/DSC00027_1.jpg",
+        "image_desktop": "shopify://shop_images/DSC07242_1_ca760b03-4f74-4ad4-8b7e-de1d954fe461.jpg",
         "show_video": false,
         "image_ratio_desktop": "full_height",
         "image_ratio_mobile": "4/5",
