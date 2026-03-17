@@ -154,7 +154,7 @@
       "settings": {
         "main_color_scheme": "background-1",
         "enable_border_top": true,
-        "show_contact": true,
+        "show_contact": false,
         "contact_heading": "Contact",
         "show_logo": false,
         "logo_width": 100,
