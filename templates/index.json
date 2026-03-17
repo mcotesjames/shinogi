@@ -41,7 +41,7 @@
       "settings": {
         "layout": "split_screen",
         "image_ratio_desktop": "full_height",
-        "image_ratio_mobile": "full_height",
+        "image_ratio_mobile": "adapt",
         "vertical_alignment": "bottom",
         "horizontal_alignment": "left",
         "order_desktop": "content_first",
