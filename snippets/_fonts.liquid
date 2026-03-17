@@ -64,9 +64,9 @@
 
   :root {
     /* HEADING */
-    --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+    --font-heading-family: var(--font-custom-chargevector-family);
     --font-heading-style: {{ settings.type_header_font.style }};
-    --font-heading-weight: {{ settings.type_header_font.weight }};
+    --font-heading-weight: 700;
     --font-heading-letter-spacing: {{ settings.type_header_letter_spacing | divided_by: 10.0 }}em;
     --font-heading-line-height: {{ settings.type_header_line_height }};
     --font-heading-text-transform: {{ settings.heading_text_transform }};
@@ -77,7 +77,7 @@
     --font-heading-h5-scale: {{ settings.heading_h5_scale | divided_by: 100.0 }};
 
     /* BODY */
-    --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+    --font-body-family: var(--font-custom-acumin-family);
     --font-body-style: {{ settings.type_body_font.style }};
     --font-body-weight: {{ settings.type_body_font.weight }};
     --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
@@ -93,16 +93,16 @@
     --font-subtitle-letter-spacing: {{ settings.subtitle_letter_spacing | divided_by: 10.0 }}em;
 
     /* PRODUCT CARD */
-    --font-heading-card-family: {{ settings.type_header_font_card.family }}, {{ settings.type_header_font_card.fallback_families }};
+    --font-heading-card-family: var(--font-custom-chargevector-family);
     --font-heading-card-style: {{ settings.type_header_font_card.style }};
-    --font-heading-card-weight: {{ settings.type_header_font_card.weight }};
+    --font-heading-card-weight: 700;
     --font-heading-card-text-transform: {{ settings.heading_card_text_transform }};
     --font-heading-card-scale: {{ settings.heading_scale_card | divided_by: 100.0 }};
 
     /* BUTTONS */
-    --font-button-family: {{ settings.type_button_font.family }}, {{ settings.type_button_font.fallback_families }};
+    --font-button-family: var(--font-custom-chargevector-family);
     --font-button-style: {{ settings.type_button_font.style }};
-    --font-button-weight: {{ settings.type_button_font.weight }};
+    --font-button-weight: 700;
     --font-button-text-transform: {{ settings.button_text_transform }};
     --font-button-letter-spacing: {{ settings.button_letter_spacing | divided_by: 10.0 }}em;
     --font-button-scale: {{ settings.button_text_scale | divided_by: 100.0 }};
