@@ -179,7 +179,7 @@
       ],
       "name": "t:sections.featured-product.name",
       "settings": {
-        "product_item": "the-1525-case",
+        "product_item": "case-15-25",
         "color_scheme": "",
         "enable_border_top": false,
         "enable_border_bottom": true,
@@ -478,7 +478,7 @@
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
         "product_list": [
-          "the-1525-case"
+          "case-15-25"
         ],
         "list_heading": "Customise your case",
         "list_heading_size": "h4",
