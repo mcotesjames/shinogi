@@ -165,7 +165,7 @@
         "zoom_image_fit_mobile": "cover",
         "zoom_image_color_scheme": "",
         "show_gallery_info": true,
-        "gallery_info_text": "Use this space for model name, size, or special notes.",
+        "gallery_info_text": "",
         "padding_top": "no-indent",
         "padding_bottom": "no-indent"
       }
