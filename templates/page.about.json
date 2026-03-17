@@ -76,7 +76,7 @@
         "color_scheme": "",
         "layout": "row",
         "enable_border_top": false,
-        "enable_border_bottom": false,
+        "enable_border_bottom": true,
         "heading": "",
         "heading_font": "body",
         "heading_size": "h6",
