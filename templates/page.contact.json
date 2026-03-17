@@ -29,7 +29,7 @@
         "heading_group_enable_border_bottom": true,
         "position": "center",
         "heading_form": "Contact Us",
-        "heading_form_size": "h6",
+        "heading_form_size": "h5",
         "heading_form_tag": "h3",
         "text_form": "If you have any questions feel free to contact us, we promise to get back to you as quickly as we can.",
         "additional_text": "",
@@ -39,7 +39,7 @@
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
         "margin_top": "m",
-        "margin_bottom": "m"
+        "margin_bottom": "l"
       }
     }
   },
