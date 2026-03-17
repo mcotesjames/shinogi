@@ -26,6 +26,42 @@
   {{ body_font_bold_italic | font_face: font_display: 'swap' }}
   {{ heading_font_bold_italic | font_face: font_display: 'swap' }}
 
+  @font-face {
+    font-family: "ChargeVector";
+    src:
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/ChargeVector-PKldB_ac8e2d94-c0bb-4eb8-90a9-cd727a58c445.woff2?v=1773718612")
+        format("woff2"),
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/ChargeVector-PKldB_def78eab-0306-4fe6-9815-7b1ce2ffe8ee.woff?v=1773718612")
+        format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "ChargeVector";
+    src:
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/ChargeVector-PKldB_ac8e2d94-c0bb-4eb8-90a9-cd727a58c445.woff2?v=1773718612")
+        format("woff2"),
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/ChargeVectorBold-mLyD9_bf61ec85-c28a-4e20-9e3e-ed7e4556bcf6.woff?v=1773718612")
+        format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "AcuminVariableConcept";
+    src:
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/AcuminVariableConcept_27bd75ed-28dc-4833-bfd3-4f7dbbb93364.woff2?v=1773718613")
+        format("woff2"),
+      url("https://cdn.shopify.com/s/files/1/0929/2854/0973/files/AcuminVariableConcept_c3eb7fd5-fe58-42bf-8eff-8f50a68cfba5.woff?v=1773718612")
+        format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     /* HEADING */
     --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
@@ -78,5 +114,9 @@
     --font-header-menu-text-scale: {{ settings.header_menu_text_scale | divided_by: 100.0 }};
     --font-header-menu-letter-spacing: {{ settings.header_menu_letter_spacing | divided_by: 10.0 }}em;
     --font-header-menu-text-transform: {{ settings.header_menu_text_transform }};
+
+    /* CUSTOM */
+    --font-custom-chargevector-family: "ChargeVector", sans-serif;
+    --font-custom-acumin-family: "AcuminVariableConcept", sans-serif;
   }
 {% endstyle %}
