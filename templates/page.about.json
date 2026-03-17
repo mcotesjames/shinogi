@@ -21,12 +21,12 @@
         "image_ratio_mobile": "3/4",
         "media_layout": "full_width",
         "thumbs_aspect_ratio": "portrait",
-        "overlay_opacity": 0,
+        "overlay_opacity": 30,
         "thumbs_overlay_opacity": 10,
         "subheading": "",
         "heading": "The Origin",
-        "heading_size": "h2",
-        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_tag": "h1",
         "heading_width": "medium",
         "description": "",
         "vertical_alignment": "bottom",
@@ -181,89 +181,11 @@
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
-    },
-    "social_media": {
-      "type": "social-media",
-      "blocks": {
-        "image_9Fg7di": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_YgPrck": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_7PtMfU": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_DrDFFT": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_HJhVwq": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_k4MpT3": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_PahneW": {
-          "type": "image",
-          "settings": {}
-        },
-        "image_U6bbLB": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "image_9Fg7di",
-        "image_YgPrck",
-        "image_7PtMfU",
-        "image_DrDFFT",
-        "image_HJhVwq",
-        "image_k4MpT3",
-        "image_PahneW",
-        "image_U6bbLB"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "aspect_ratio": "square",
-        "object_fit": "cover",
-        "slides_per_view_desktop": 4,
-        "slides_per_view_mobile": 2,
-        "slider_speed": 35,
-        "slider_stop_on_hover": true,
-        "enable_fullscreen": false,
-        "social_media_name": "@shinogi",
-        "list_button_show": true,
-        "list_button_label": "Follow",
-        "list_button_link": "",
-        "list_button_style": "tertiary",
-        "padding_top": "no-indent",
-        "padding_bottom": "s",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
     }
   },
   "order": [
     "media_banner",
     "rich_text",
-    "lookbook_dr4jXp",
-    "social_media"
+    "lookbook_dr4jXp"
   ]
 }
