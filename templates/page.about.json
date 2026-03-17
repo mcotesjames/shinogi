@@ -197,15 +197,15 @@
         "heading_tf7jbh": {
           "type": "heading",
           "settings": {
-            "heading": "This section should introduce the topic in a compelling way that captures attention and motivates to keep reading.",
-            "heading_size": "h3",
+            "heading": "Shaped by craftsmanship, where precision, simplicity, and respect for tools define the approach",
+            "heading_size": "h4",
             "heading_tag": "h3"
           }
         },
         "text_9wc6gH": {
           "type": "text",
           "settings": {
-            "text": "<p>This section should be structured in a clear, organized, and thoughtfully planned manner, making it easy for the reader to follow along at every step, while also ensuring they fully grasp the overall purpose, key messages, and the practical value the content is intended to deliver.</p>"
+            "text": "<p>Founded by chef Matt Abergel, SHINOGI reflects a deep appreciation for Japanese craftsmanship and the thinking behind it: mastery through precision, strength through simplicity, and beauty born from function. With both his father and grandfather working as carpenters, Matt learned early that the integrity of a tool lies not only in the quality of its materials, but in how they are treated. This understanding, central to Japanese cuisine and craft, shaped his approach long before he entered professional kitchens and became further reinforced through years of building and leading restaurants, beginning with Yardbird in 2011 and most recently, Always Joy.</p><p></p><p>Matt started SHINOGI to create the products he wanted to use. The first system, Case 15–25, represents a decade of research, development, and refinement (2015–2025): a knife case designed to perform at the same level as the tools it protects, and built with the same rigor as the craft itself.</p>"
           }
         }
       },
@@ -217,9 +217,9 @@
       "settings": {
         "color_scheme": "",
         "layout": "column",
-        "enable_border_top": true,
-        "enable_border_bottom": true,
-        "heading": "About",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "",
         "heading_font": "body",
         "heading_size": "h6",
         "heading_tag": "h2",
@@ -236,8 +236,8 @@
         "objects_order": "content_first",
         "vertical_alignment": "stretch",
         "text_alignment": "left",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
+        "margin_top": "m",
+        "margin_bottom": "m"
       }
     },
     "content_tabs_YLgUCX": {
@@ -334,7 +334,7 @@
       "name": "t:sections.content-tabs.presets.name",
       "settings": {
         "color_scheme": "",
-        "enable_border_top": false,
+        "enable_border_top": true,
         "enable_border_bottom": true,
         "full_height": false,
         "heading": "",
@@ -349,47 +349,6 @@
         "heading_group_enable_border_bottom": true,
         "padding_top": "no-indent",
         "padding_bottom": "xl",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "text_banner_QRbbjd": {
-      "type": "text-banner",
-      "name": "t:sections.text-banner.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "section_ratio_desktop": "adapt",
-        "objects_order": "content_first",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "banner_heading": "Showcase Your Message Here — Use This Heading to Introduce the Content Visually Supported by the Image",
-        "banner_heading_size": "h4",
-        "banner_heading_tag": "h3",
-        "banner_description": "",
-        "list_button_show": true,
-        "list_button_label": "Learn More",
-        "list_button_url": "",
-        "list_button_style": "primary",
-        "enable_image": true,
-        "img_as_cursor": true,
-        "image_aspect_ratio": "portrait",
-        "image_aspect_ratio_mobile": "adapt",
-        "object_fit": "cover",
-        "image_width": 182,
-        "content_vertical_alignment": "bottom",
-        "content_horizontal_alignment": "left",
-        "content_horizontal_alignment_mobile": "left",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -478,7 +437,6 @@
     "collapsible_content_8yeNyF",
     "rich_text_eFTCN7",
     "content_tabs_YLgUCX",
-    "text_banner_QRbbjd",
     "social_media"
   ]
 }
