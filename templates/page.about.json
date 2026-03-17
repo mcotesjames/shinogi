@@ -15,6 +15,7 @@
         "color_scheme": "",
         "color_scheme_mobile": "",
         "enable_image": true,
+        "image_desktop": "shopify://shop_images/DSC00210_2.jpg",
         "show_video": false,
         "image_ratio_desktop": "full_height",
         "image_ratio_mobile": "3/4",
