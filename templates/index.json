@@ -501,7 +501,7 @@
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
         "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
+        "margin_bottom": "m"
       }
     },
     "media-banner": {
