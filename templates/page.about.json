@@ -63,7 +63,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Rooted in the Japanese concept of shinogi – the ridgeline or backbone of a blade – SHINOGI systems are built with technical intent, shaped by real use, and refined through restraint. In traditional sword-making, the shinogi is not ornamental. It is essential. It provides strength, balance, and integrity. This philosophy is applied to every SHINOGI product, beginning with Case 15–25. Nothing is added without reason. Nothing exists without function. The result is equipment designed to endure time, movement, and daily wear.</p>"
+            "text": "<p>Rooted in the Japanese concept of shinogi – the ridgeline or backbone of a blade – SHINOGI systems are built with technical intent, shaped by real use, and refined through restraint. In traditional sword-making, the shinogi is not ornamental. It is essential. It provides strength, balance, and integrity. This philosophy is applied to every SHINOGI product, beginning with Case 15–25. Nothing is added without reason. Nothing exists without function. The result is equipment designed to endure time, movement, and daily wear.</p><p>Founded by chef Matt Abergel, SHINOGI reflects a deep appreciation for Japanese craftsmanship and the thinking behind it: mastery through precision, strength through simplicity, and beauty born from function. With both his father and grandfather working as carpenters, Matt learned early that the integrity of a tool lies not only in the quality of its materials, but in how they are treated. This understanding, central to Japanese cuisine and craft, shaped his approach long before he entered professional kitchens and became further reinforced through years of building and leading restaurants, beginning with Yardbird in 2011 and most recently, Always Joy.</p><p>Matt started SHINOGI to create the products he wanted to use. The first system, Case 15–25, represents a decade of research, development, and refinement (2015–2025): a knife case designed to perform at the same level as the tools it protects, and built with the same rigor as the craft itself.</p>"
           }
         }
       },
@@ -191,168 +191,6 @@
         "margin_bottom": "no-indent"
       }
     },
-    "rich_text_eFTCN7": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_tf7jbh": {
-          "type": "heading",
-          "settings": {
-            "heading": "Shaped by craftsmanship, where precision, simplicity, and respect for tools define the approach",
-            "heading_size": "h4",
-            "heading_tag": "h3"
-          }
-        },
-        "text_9wc6gH": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Founded by chef Matt Abergel, SHINOGI reflects a deep appreciation for Japanese craftsmanship and the thinking behind it: mastery through precision, strength through simplicity, and beauty born from function. With both his father and grandfather working as carpenters, Matt learned early that the integrity of a tool lies not only in the quality of its materials, but in how they are treated. This understanding, central to Japanese cuisine and craft, shaped his approach long before he entered professional kitchens and became further reinforced through years of building and leading restaurants, beginning with Yardbird in 2011 and most recently, Always Joy.</p><p></p><p>Matt started SHINOGI to create the products he wanted to use. The first system, Case 15–25, represents a decade of research, development, and refinement (2015–2025): a knife case designed to perform at the same level as the tools it protects, and built with the same rigor as the craft itself.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_tf7jbh",
-        "text_9wc6gH"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "layout": "column",
-        "enable_border_top": false,
-        "enable_border_bottom": false,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "enable_image": false,
-        "image_width": 396,
-        "image_aspect_ratio": "square",
-        "image_aspect_ratio_mobile": "adapt",
-        "object_fit": "cover",
-        "objects_order": "content_first",
-        "vertical_alignment": "stretch",
-        "text_alignment": "left",
-        "margin_top": "m",
-        "margin_bottom": "m"
-      }
-    },
-    "content_tabs_YLgUCX": {
-      "type": "content-tabs",
-      "blocks": {
-        "richtext_content_7LqLk7": {
-          "type": "richtext_content",
-          "settings": {
-            "block_heading": "Details",
-            "content_page": "",
-            "richtext_content": "<p>Use this field to display any type of content, such as contact details, shipping information, or key benefits of your product or service.</p><p><a href='/'>Get in touch</a></p>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "collapsible_content_Y4J8Nw": {
-          "type": "collapsible_content",
-          "settings": {
-            "block_heading": "FAQ",
-            "enable_row_1": true,
-            "question_1": "Use this space to ask a question",
-            "answer_1": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_1": false,
-            "enable_row_2": true,
-            "question_2": "Use this space to ask a question",
-            "answer_2": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_2": false,
-            "enable_row_3": true,
-            "question_3": "Use this space to ask a question",
-            "answer_3": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_3": false,
-            "enable_row_4": false,
-            "question_4": "Use this space to ask a question",
-            "answer_4": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_4": false,
-            "enable_row_5": false,
-            "question_5": "Use this space to ask a question",
-            "answer_5": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_5": false,
-            "enable_row_6": false,
-            "question_6": "Use this space to ask a question",
-            "answer_6": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_6": false,
-            "enable_row_7": false,
-            "question_7": "Use this space to ask a question",
-            "answer_7": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_7": false,
-            "enable_row_8": false,
-            "question_8": "Use this space to ask a question",
-            "answer_8": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_8": false,
-            "enable_row_9": false,
-            "question_9": "Use this space to ask a question",
-            "answer_9": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_9": false,
-            "enable_row_10": false,
-            "question_10": "Use this space to ask a question",
-            "answer_10": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_10": false,
-            "enable_row_11": false,
-            "question_11": "Use this space to ask a question",
-            "answer_11": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_11": false,
-            "enable_row_12": false,
-            "question_12": "Use this space to ask a question",
-            "answer_12": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_12": false,
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "richtext_content_JfmRQg": {
-          "type": "richtext_content",
-          "settings": {
-            "block_heading": "Details",
-            "content_page": "",
-            "richtext_content": "<p>Use this field to display any type of content, such as contact details, shipping information, or key benefits of your product or service.</p><p><a href='/'>Get in touch</a></p>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "richtext_content_7LqLk7",
-        "collapsible_content_Y4J8Nw",
-        "richtext_content_JfmRQg"
-      ],
-      "name": "t:sections.content-tabs.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "enable_border_top": true,
-        "enable_border_bottom": true,
-        "full_height": false,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "enable_heading_group": false,
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "padding_top": "no-indent",
-        "padding_bottom": "xl",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
     "social_media": {
       "type": "social-media",
       "blocks": {
@@ -435,8 +273,6 @@
     "media_banner",
     "rich_text",
     "collapsible_content_8yeNyF",
-    "rich_text_eFTCN7",
-    "content_tabs_YLgUCX",
     "social_media"
   ]
 }
