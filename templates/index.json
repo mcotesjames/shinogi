@@ -105,7 +105,7 @@
         "objects_order": "content_first",
         "vertical_alignment": "stretch",
         "text_alignment": "left",
-        "margin_top": "m",
+        "margin_top": "xl",
         "margin_bottom": "no-indent"
       }
     },
