@@ -1,20 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "form": {
       "type": "contact-form",
       "settings": {
+        "color_scheme": "",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
         "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
         "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
         "position": "center",
+        "heading_form": "Contact Us",
+        "heading_form_size": "h6",
+        "heading_form_tag": "h3",
+        "text_form": "If you have any questions feel free to contact us, we promise to get back to you as quickly as we can.",
+        "additional_text": "",
         "button_style": "primary",
         "button_full_width": true,
         "text_alignment": "left",
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
         "margin_top": "m",
-        "margin_bottom": "xl"
+        "margin_bottom": "m"
       }
     }
   },
-  "order": ["form"]
+  "order": [
+    "form"
+  ]
 }
