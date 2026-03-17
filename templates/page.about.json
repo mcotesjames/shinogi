@@ -18,7 +18,7 @@
         "image_desktop": "shopify://shop_images/DSC00210_2.jpg",
         "show_video": false,
         "image_ratio_desktop": "21/9",
-        "image_ratio_mobile": "3/4",
+        "image_ratio_mobile": "adapt",
         "media_layout": "full_width",
         "thumbs_aspect_ratio": "portrait",
         "overlay_opacity": 30,
