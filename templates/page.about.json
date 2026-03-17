@@ -94,7 +94,7 @@
         "vertical_alignment": "stretch",
         "text_alignment": "left",
         "margin_top": "m",
-        "margin_bottom": "m"
+        "margin_bottom": "no-indent"
       }
     },
     "collapsible_content_8yeNyF": {
