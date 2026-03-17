@@ -9,6 +9,57 @@
  */
 {
   "sections": {
+    "slideshow_b67h6Y": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_8nLXez": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "background-1",
+            "media_color_scheme": "background-1",
+            "enable_image": true,
+            "image": "shopify://shop_images/DSC00210_2.jpg",
+            "show_video": false,
+            "overlay_opacity": 0,
+            "subheading": "",
+            "heading": "The Origin",
+            "heading_size": "h1",
+            "heading_tag": "h2",
+            "heading_width": "recommended",
+            "description": "",
+            "show_button": false,
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "slide_8nLXez"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "split_screen",
+        "image_ratio_desktop": "full_height",
+        "image_ratio_mobile": "3/4",
+        "vertical_alignment": "bottom",
+        "horizontal_alignment": "left",
+        "order_desktop": "content_first",
+        "order_mobile": "image_first",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "animation_type": "slide",
+        "enable_loop": true,
+        "enable_parallax": false,
+        "enable_pagination": true,
+        "enable_flowing_navigation": true,
+        "enable_autoplay": false,
+        "slide_duration": 5,
+        "autoplay_stop_on_hover": true,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
     "media_banner": {
       "type": "media-banner",
       "settings": {
@@ -258,6 +309,7 @@
     }
   },
   "order": [
+    "slideshow_b67h6Y",
     "media_banner",
     "rich_text",
     "lookbook_dr4jXp",
