@@ -823,6 +823,9 @@
         },
         "options__6": {
           "label": "Recommended"
+        },
+        "options__7": {
+          "label": "Tiny"
         }
       },
       "heading_tag": {
@@ -3678,7 +3681,6 @@
         "horizontal_alignment": {
           "info": "In the case of \"Row\" layout, this setting will apply only as text alignment."
         },
-
         "objects_order": {
           "label": "Content order",
           "options__1": {
@@ -3892,7 +3894,9 @@
         "header__cards": {
           "content": "Cards options"
         },
-        "cards_per_row": { "label": "Cards per row" },
+        "cards_per_row": {
+          "label": "Cards per row"
+        },
         "enable_sticky": {
           "label": "Enable sticky info"
         },

@@ -130,6 +130,9 @@
   white-space: wrap;
   max-width: calc(100% - 3rem);
 }
+.lookbook__info-top .lookbook__info-heading.tiny {
+  font-size: 14px;
+}
 .lookbook__info-top .lookbook__info-top-icon,
 .lookbook__info-top svg {
   display: none;
@@ -212,13 +215,13 @@
   overflow: hidden;
 }
 .lookbook--item-padding .lookbook__item {
-  padding: 1.2rem;
+  padding: 2rem;
 }
 .lookbook--item-padding .lookbook__image,
 .lookbook--item-padding .lookbook .placeholder-svg {
-  inset: 1.2rem;
-  width: calc(100% - 2.4rem);
-  height: calc(100% - 2.4rem);
+  inset: 2rem;
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
 }
 
 .lookbook--item-padding .lookbook__info-top {
