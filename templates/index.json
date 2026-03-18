@@ -191,7 +191,7 @@
       "settings": {
         "color_scheme": "",
         "aspect_ratio": "square",
-        "enable_border_top": true,
+        "enable_border_top": false,
         "enable_border_bottom": true,
         "show_return_button": false,
         "return_button_label": "Return",
