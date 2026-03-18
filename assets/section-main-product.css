@@ -103,7 +103,7 @@
 .product__divider:empty {
   display: block;
 }
-.product-title {
+.product__title {
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -1721,10 +1721,9 @@
 
 .product-accordion {
   overflow: hidden;
-  margin: 2rem 0;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 2rem;
   word-break: break-word;
+  border-bottom: 1px solid var(--color-border);
 }
 .product-accordion__toggle {
   display: flex;
