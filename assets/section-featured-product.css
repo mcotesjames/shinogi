@@ -65,6 +65,7 @@
   .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-2,
   .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-3 {
     width: 50%;
+    flex: 0 0 50%;
   }
   .featured-product--equal-columns .product__media--desktop-type-slider .product__media-item {
     max-width: 100%;
@@ -72,6 +73,7 @@
   .featured-product--equal-columns .product__info-container {
     width: 50%;
     max-width: none;
+    flex: 0 0 50%;
   }
 }
 .featured-product .product__media-list--with-borders {
