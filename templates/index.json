@@ -365,6 +365,7 @@
         "image_4yr7P3",
         "image_nGfVQC"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
@@ -509,6 +510,7 @@
     },
     "media-banner": {
       "type": "media-banner",
+      "disabled": true,
       "custom_css": [
         ".media-banner__wrapper {border-top: 1px solid #000000;}"
       ],
