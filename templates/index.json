@@ -147,7 +147,7 @@
         "heading_group_enable_border_bottom": true,
         "desktop_gallery_order": "before",
         "mobile_gallery_order": "before",
-        "desktop_media_ratio": "square",
+        "desktop_media_ratio": "landscape",
         "mobile_media_ratio": "square",
         "image_fit": "cover",
         "enable_border_between_images": false,
