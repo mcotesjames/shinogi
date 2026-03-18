@@ -144,7 +144,7 @@
         "color_scheme": "",
         "show_breadcrumbs": true,
         "enable_border_top_info": false,
-        "desktop_gallery_type": "stacked",
+        "desktop_gallery_type": "static",
         "mobile_gallery_type": "slider",
         "desktop_gallery_order": "before",
         "mobile_gallery_order": "before",
