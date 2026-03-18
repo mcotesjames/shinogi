@@ -60,6 +60,68 @@
         "margin_bottom": "no-indent"
       }
     },
+    "image_with_text_TWKtyL": {
+      "type": "image-with-text",
+      "blocks": {
+        "description_WLqXAP": {
+          "type": "description",
+          "settings": {
+            "content_description": "<p>Explains the background or story behind the image, helping the viewer understand its deeper significance or purpose.</p>"
+          }
+        },
+        "heading_YYYPGF": {
+          "type": "heading",
+          "settings": {
+            "content_heading": "This Is Where Your Key Statement Goes — Keep It Short and Focused",
+            "content_heading_size": "h4",
+            "content_heading_tag": "h3"
+          }
+        },
+        "button_KHytNq": {
+          "type": "button",
+          "settings": {
+            "list_button_label": "Learn More",
+            "list_button_url": "",
+            "list_button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "description_WLqXAP",
+        "heading_YYYPGF",
+        "button_KHytNq"
+      ],
+      "name": "t:sections.image-with-text.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_border_top": false,
+        "enable_border_bottom": true,
+        "objects_order_desktop": "image_first",
+        "objects_order_mobile": "content_first",
+        "enable_border_between_parts": true,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "aspect_ratio": "recommended",
+        "aspect_ratio_mobile": "recommended",
+        "object_fit": "cover",
+        "overlay_opacity": 0,
+        "image_as_link": false,
+        "image_link": "",
+        "content_vertical_alignment": "stretch",
+        "content_horizontal_alignment": "left",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
     "image_gallery_wpbVMx": {
       "type": "image-gallery",
       "blocks": {
@@ -621,6 +683,7 @@
   },
   "order": [
     "slideshow_dYbCAJ",
+    "image_with_text_TWKtyL",
     "image_gallery_wpbVMx",
     "image_gallery_XMinWW",
     "featured_product_b8f8Hz",
