@@ -65,7 +65,7 @@
 {%- endstyle -%}
 
 <div
-  class="lookbook lookbook-{{ section.id }} color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}"
+  class="lookbook lookbook-{{ section.id }} color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}{% if section.settings.enable_individual_item_padding %} lookbook--item-padding{% endif %}"
   data-info-type="{{ section.settings.info_type }}"
 >
   {% comment %} RENDER HEADING GROUP {% endcomment %}
@@ -478,6 +478,12 @@
       "id": "enable_border_info",
       "label": "t:sections.lookbook.settings.enable_border_info.label",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_individual_item_padding",
+      "default": false,
+      "label": "Enable individual item padding"
     },
     {
       "type": "text_alignment",
