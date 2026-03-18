@@ -646,13 +646,11 @@
   }
   .product__media-static-grid .product__media-item {
     width: 100%;
-    padding: 2rem;
-    box-sizing: border-box;
-    background-color: rgb(var(--color-border));
+    border-right: 0.1rem solid rgb(var(--color-border));
+    border-bottom: 0.1rem solid rgb(var(--color-border));
   }
-  .product__media-static-grid .product__media-item .deferred-media {
-    position: relative;
-    inset: auto;
+  .product__media-static-grid .product__media-item:nth-child(even) {
+    border-right: 0;
   }
 }
 .product__media-list-container {
