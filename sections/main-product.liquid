@@ -132,241 +132,88 @@
             {%- endif -%}
 
             {% comment %} render big images {% endcomment %}
-            {%- if section.settings.desktop_gallery_type == 'static' -%}
-              {% liquid
-                assign has_slider_classes_mobile = false
-                if product.media.size > 1
-                  if section.settings.mobile_gallery_type == 'slider_previews' or section.settings.mobile_gallery_type == 'slider'
-                    assign has_slider_classes_mobile = true
-                  endif
-                endif
-              %}
-              <div class="product__media-list-wrapper product__media-list-wrapper--static">
-                <div
-                  class="product__media-list product__media-list--static"
-                  data-desktop-type="{{ section.settings.desktop_gallery_type }}"
-                  data-mobile-type="{{ section.settings.mobile_gallery_type }}"
-                  data-has-desktop-zoom="{{ section.settings.enable_image_zoom_desktop }}"
-                  data-has-mobile-zoom="{{ section.settings.enable_image_zoom_mobile }}"
-                  data-quick-view-type="{{ settings.quickview_modal_type }}"
-                >
-                  <div class="product__media-list-container">
-                    {%- if product.media.size > 0 -%}
-                      {%- if featured_media != blank -%}
-                        <div class="product__media-item" data-media-id="{{ section.id }}-{{ featured_media.id }}">
-                          {% render 'product-media-item',
-                            media: featured_media,
-                            product_obj: product,
-                            section_obj: section,
-                            is_featured: true
-                          %}
-                        </div>
-                      {%- endif -%}
-
-                      {%- for media in product.media -%}
-                        {% if show_only_variant_media %}
-                          {% break %}
-                        {% endif %}
-
-                        {% if hide_unselected_variant_media and variant_images contains media.src %}
-                          {% continue %}
-                        {% endif %}
-
-                        {%- if media.id != featured_media.id -%}
-                          <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
-                            {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
-                          </div>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    {% else %}
-                      <div class="product__media-item product__media-item--placeholder">
-                        {% render 'product-media-item', product_obj: product, section_obj: section %}
+            <div class="product__media-list-wrapper">
+              <div
+                class="product__media-list{% if has_slider_classes %} js-media-list swiper{% endif %}"
+                data-desktop-type="{{ section.settings.desktop_gallery_type }}"
+                data-mobile-type="{{ section.settings.mobile_gallery_type }}"
+                data-has-desktop-zoom="{{ section.settings.enable_image_zoom_desktop }}"
+                data-has-mobile-zoom="{{ section.settings.enable_image_zoom_mobile }}"
+                data-quick-view-type="{{ settings.quickview_modal_type }}"
+              >
+                <div class="product__media-list-container{% if has_slider_classes %} swiper-wrapper{% endif %}">
+                  {%- if product.media.size > 0 -%}
+                    {%- if featured_media != blank -%}
+                      <div
+                        class="product__media-item{% if has_slider_classes %} swiper-slide{% endif %}"
+                        data-media-id="{{ section.id }}-{{ featured_media.id }}"
+                      >
+                        {% render 'product-media-item',
+                          media: featured_media,
+                          product_obj: product,
+                          section_obj: section,
+                          is_featured: true
+                        %}
                       </div>
                     {%- endif -%}
-                  </div>
-                </div>
 
-                {%- if product.media.size > 0 -%}
-                  {%- if section.settings.enable_image_zoom_desktop == true -%}
-                    <div class="product__media-cursor">
-                      {% render 'icon-plus-zoom' %}
-                    </div>
-                  {%- endif -%}
+                    {%- for media in product.media -%}
+                      {% if show_only_variant_media %}
+                        {% break %}
+                      {% endif %}
 
-                  {%- if section.settings.show_gallery_info and section.settings.gallery_info_text != blank -%}
-                    <div class="product__media-info body-small">
-                      {{- section.settings.gallery_info_text | truncate: 140, '' -}}
-                    </div>
-                  {%- endif -%}
-                {%- endif -%}
-              </div>
+                      {% if hide_unselected_variant_media and variant_images contains media.src %}
+                        {% continue %}
+                      {% endif %}
 
-              <div class="product__media-list-wrapper product__media-list-wrapper--mobile">
-                <div
-                  class="product__media-list{% if has_slider_classes_mobile %} js-media-list swiper{% endif %}"
-                  data-desktop-type="{{ section.settings.desktop_gallery_type }}"
-                  data-mobile-type="{{ section.settings.mobile_gallery_type }}"
-                  data-has-desktop-zoom="{{ section.settings.enable_image_zoom_desktop }}"
-                  data-has-mobile-zoom="{{ section.settings.enable_image_zoom_mobile }}"
-                  data-quick-view-type="{{ settings.quickview_modal_type }}"
-                >
-                  <div class="product__media-list-container{% if has_slider_classes_mobile %} swiper-wrapper{% endif %}">
-                    {%- if product.media.size > 0 -%}
-                      {%- if featured_media != blank -%}
-                        <div
-                          class="product__media-item{% if has_slider_classes_mobile %} swiper-slide{% endif %}"
-                          data-media-id="{{ section.id }}-{{ featured_media.id }}"
-                        >
-                          {% render 'product-media-item',
-                            media: featured_media,
-                            product_obj: product,
-                            section_obj: section,
-                            is_featured: true
-                          %}
-                        </div>
-                      {%- endif -%}
-
-                      {%- for media in product.media -%}
-                        {% if show_only_variant_media %}
-                          {% break %}
-                        {% endif %}
-
-                        {% if hide_unselected_variant_media and variant_images contains media.src %}
-                          {% continue %}
-                        {% endif %}
-
-                        {%- if media.id != featured_media.id -%}
-                          <div
-                            class="product__media-item{% if has_slider_classes_mobile %} swiper-slide{% endif %}"
-                            data-media-id="{{ section.id }}-{{ media.id }}"
-                          >
-                            {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
-                          </div>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    {% else %}
-                      <div class="product__media-item product__media-item--placeholder">
-                        {% render 'product-media-item', product_obj: product, section_obj: section %}
-                      </div>
-                    {%- endif -%}
-                  </div>
-
-                  {%- if has_slider_classes_mobile -%}
-                    <div class="container product__slider-nav no-js-hidden">
-                      <button class="swiper-button-prev product__slider-nav-prev focus-inset">
-                        <div class="product__slider-nav-icons-container product__slider-nav-icons-container--prev">
-                          {% render 'icon-arrow-left-product' %}
-                          {% render 'icon-arrow-left-product' %}
-                        </div>
-                      </button>
-                      <button class="swiper-button-next product__slider-nav-next focus-inset">
-                        <div class="product__slider-nav-icons-container product__slider-nav-icons-container--next">
-                          {% render 'icon-arrow-right-product' %}
-                          {% render 'icon-arrow-right-product' %}
-                        </div>
-                      </button>
-                    </div>
-                  {%- endif -%}
-                </div>
-
-                {%- if product.media.size > 0 -%}
-                  {%- if section.settings.enable_image_zoom_desktop == true -%}
-                    <div class="product__media-cursor">
-                      {% render 'icon-plus-zoom' %}
-                    </div>
-                  {%- endif -%}
-
-                  {%- if section.settings.show_gallery_info and section.settings.gallery_info_text != blank -%}
-                    <div class="product__media-info body-small">
-                      {{- section.settings.gallery_info_text | truncate: 140, '' -}}
-                    </div>
-                  {%- endif -%}
-                {%- endif -%}
-              </div>
-            {%- else -%}
-              <div class="product__media-list-wrapper">
-                <div
-                  class="product__media-list{% if has_slider_classes %} js-media-list swiper{% endif %}"
-                  data-desktop-type="{{ section.settings.desktop_gallery_type }}"
-                  data-mobile-type="{{ section.settings.mobile_gallery_type }}"
-                  data-has-desktop-zoom="{{ section.settings.enable_image_zoom_desktop }}"
-                  data-has-mobile-zoom="{{ section.settings.enable_image_zoom_mobile }}"
-                  data-quick-view-type="{{ settings.quickview_modal_type }}"
-                >
-                  <div class="product__media-list-container{% if has_slider_classes %} swiper-wrapper{% endif %}">
-                    {%- if product.media.size > 0 -%}
-                      {%- if featured_media != blank -%}
+                      {%- if media.id != featured_media.id -%}
                         <div
                           class="product__media-item{% if has_slider_classes %} swiper-slide{% endif %}"
-                          data-media-id="{{ section.id }}-{{ featured_media.id }}"
+                          data-media-id="{{ section.id }}-{{ media.id }}"
                         >
-                          {% render 'product-media-item',
-                            media: featured_media,
-                            product_obj: product,
-                            section_obj: section,
-                            is_featured: true
-                          %}
+                          {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
                         </div>
                       {%- endif -%}
-
-                      {%- for media in product.media -%}
-                        {% if show_only_variant_media %}
-                          {% break %}
-                        {% endif %}
-
-                        {% if hide_unselected_variant_media and variant_images contains media.src %}
-                          {% continue %}
-                        {% endif %}
-
-                        {%- if media.id != featured_media.id -%}
-                          <div
-                            class="product__media-item{% if has_slider_classes %} swiper-slide{% endif %}"
-                            data-media-id="{{ section.id }}-{{ media.id }}"
-                          >
-                            {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
-                          </div>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    {% else %}
-                      <div class="product__media-item product__media-item--placeholder">
-                        {% render 'product-media-item', product_obj: product, section_obj: section %}
-                      </div>
-                    {%- endif -%}
-                  </div>
-
-                  {%- if has_slider_classes -%}
-                    <div class="container product__slider-nav no-js-hidden">
-                      <button class="swiper-button-prev product__slider-nav-prev focus-inset">
-                        <div class="product__slider-nav-icons-container product__slider-nav-icons-container--prev">
-                          {% render 'icon-arrow-left-product' %}
-                          {% render 'icon-arrow-left-product' %}
-                        </div>
-                      </button>
-                      <button class="swiper-button-next product__slider-nav-next focus-inset">
-                        <div class="product__slider-nav-icons-container product__slider-nav-icons-container--next">
-                          {% render 'icon-arrow-right-product' %}
-                          {% render 'icon-arrow-right-product' %}
-                        </div>
-                      </button>
+                    {%- endfor -%}
+                  {% else %}
+                    <div class="product__media-item product__media-item--placeholder">
+                      {% render 'product-media-item', product_obj: product, section_obj: section %}
                     </div>
                   {%- endif -%}
                 </div>
 
-                {%- if product.media.size > 0 -%}
-                  {%- if section.settings.enable_image_zoom_desktop == true -%}
-                    <div class="product__media-cursor">
-                      {% render 'icon-plus-zoom' %}
-                    </div>
-                  {%- endif -%}
-
-                  {%- if section.settings.show_gallery_info and section.settings.gallery_info_text != blank -%}
-                    <div class="product__media-info body-small">
-                      {{- section.settings.gallery_info_text | truncate: 140, '' -}}
-                    </div>
-                  {%- endif -%}
+                {%- if has_slider_classes -%}
+                  <div class="container product__slider-nav no-js-hidden">
+                    <button class="swiper-button-prev product__slider-nav-prev focus-inset">
+                      <div class="product__slider-nav-icons-container product__slider-nav-icons-container--prev">
+                        {% render 'icon-arrow-left-product' %}
+                        {% render 'icon-arrow-left-product' %}
+                      </div>
+                    </button>
+                    <button class="swiper-button-next product__slider-nav-next focus-inset">
+                      <div class="product__slider-nav-icons-container product__slider-nav-icons-container--next">
+                        {% render 'icon-arrow-right-product' %}
+                        {% render 'icon-arrow-right-product' %}
+                      </div>
+                    </button>
+                  </div>
                 {%- endif -%}
               </div>
-            {%- endif -%}
+
+              {%- if product.media.size > 0 -%}
+                {%- if section.settings.enable_image_zoom_desktop == true -%}
+                  <div class="product__media-cursor">
+                    {% render 'icon-plus-zoom' %}
+                  </div>
+                {%- endif -%}
+
+                {%- if section.settings.show_gallery_info and section.settings.gallery_info_text != blank -%}
+                  <div class="product__media-info body-small">
+                    {{- section.settings.gallery_info_text | truncate: 140, '' -}}
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
           </div>
         </div>
       {%- endif -%}
