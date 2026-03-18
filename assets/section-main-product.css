@@ -630,6 +630,16 @@
   height: auto;
   flex: 1;
 }
+@media (min-width: 990px) {
+  .product__media-list-wrapper--mobile {
+    display: none;
+  }
+}
+@media (max-width: 989.99px) {
+  .product__media-list-wrapper--static {
+    display: none;
+  }
+}
 .product__media-list-container {
   width: 100%;
   display: flex;
