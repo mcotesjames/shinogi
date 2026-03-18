@@ -166,10 +166,11 @@
         "lookbook_item_Xh7nhe": {
           "type": "lookbook_item",
           "settings": {
+            "card_image": "shopify://shop_images/DSC00126_2.jpg",
             "overlay_opacity": 0,
             "card_overlay_link": "",
             "card_heading": "Feature Title Here",
-            "card_heading_font": "heading",
+            "card_heading_font": "subtitle",
             "card_heading_size": "h6",
             "card_heading_tag": "h3",
             "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
@@ -182,10 +183,11 @@
         "lookbook_item_CqWeDc": {
           "type": "lookbook_item",
           "settings": {
+            "card_image": "shopify://shop_images/DSC07242_1.jpg",
             "overlay_opacity": 0,
             "card_overlay_link": "",
             "card_heading": "Feature Title Here",
-            "card_heading_font": "heading",
+            "card_heading_font": "subtitle",
             "card_heading_size": "h6",
             "card_heading_tag": "h3",
             "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
@@ -198,10 +200,11 @@
         "lookbook_item_PPzrXn": {
           "type": "lookbook_item",
           "settings": {
+            "card_image": "shopify://shop_images/DSC00164_1.jpg",
             "overlay_opacity": 0,
             "card_overlay_link": "",
             "card_heading": "Feature Title Here",
-            "card_heading_font": "heading",
+            "card_heading_font": "subtitle",
             "card_heading_size": "h6",
             "card_heading_tag": "h3",
             "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
@@ -233,7 +236,7 @@
         "heading_group_enable_border_bottom": true,
         "card_color_scheme": "",
         "items_per_row": 3,
-        "aspect_ratio": "portrait",
+        "aspect_ratio": "square",
         "object_fit": "cover",
         "info_type": "dropdown",
         "enable_border_info": false,
