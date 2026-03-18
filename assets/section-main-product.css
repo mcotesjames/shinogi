@@ -480,6 +480,15 @@
   .product__media--desktop-type-static .product__media-sublist-wrapper {
     display: none !important;
   }
+  .product__media--desktop-type-static {
+    width: 50%;
+    flex: 0 0 50%;
+  }
+  .product__media--desktop-type-static + .product__info-container {
+    width: 50%;
+    max-width: none;
+    flex: 0 0 50%;
+  }
   .product__media--desktop-type-static .product__media-list {
     overflow: visible;
   }
