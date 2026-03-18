@@ -58,6 +58,22 @@
     max-width: 100%;
   }
 }
+@media (min-width: 990px) {
+  .featured-product--equal-columns .product__media--desktop-type-slider,
+  .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-0,
+  .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-1,
+  .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-2,
+  .featured-product--equal-columns .product__media--desktop-type-slider.product__media--size-3 {
+    width: 50%;
+  }
+  .featured-product--equal-columns .product__media--desktop-type-slider .product__media-item {
+    max-width: 100%;
+  }
+  .featured-product--equal-columns .product__info-container {
+    width: 50%;
+    max-width: none;
+  }
+}
 .featured-product .product__media-list--with-borders {
   background-color: rgb(var(--color-border));
 }

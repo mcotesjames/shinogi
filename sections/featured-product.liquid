@@ -31,7 +31,7 @@
   >
 {%- endif -%}
 
-<div class="featured-product color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
+<div class="featured-product color-{{ section.settings.color_scheme }} background section-{{ section.id }}-padding{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}{% if section.settings.enable_equal_columns %} featured-product--equal-columns{% endif %}">
   {% render 'heading-group', settings: section.settings, class: 'featured-product-header' %}
   <div class="product">
     <div class="product__outer">
@@ -344,6 +344,12 @@
       "id": "enable_border_bottom",
       "default": false,
       "label": "t:sections.all.borders.enable_border_bottom.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_equal_columns",
+      "default": false,
+      "label": "Equal column widths on desktop"
     },
     {
       "type": "header",
