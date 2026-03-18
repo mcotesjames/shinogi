@@ -117,15 +117,21 @@
       "blocks": {
         "image_L87akx": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/DSC00155_3.jpg"
+          }
         },
         "image_CD37PM": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/DSC00176_2.jpg"
+          }
         },
         "image_h3WQKR": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/DSC002211.jpg"
+          }
         }
       },
       "block_order": [
