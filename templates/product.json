@@ -552,6 +552,7 @@
         "image_6yGWi8",
         "image_7Cwd8m"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
