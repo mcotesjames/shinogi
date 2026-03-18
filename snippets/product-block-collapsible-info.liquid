@@ -102,6 +102,52 @@
           </div>
         {%- endif -%}
 
+        {%- if product.metafields.custom.specification != blank -%}
+          {%- assign specification_groups = product.metafields.custom.specification.value -%}
+          {%- if specification_groups != blank -%}
+            <div class="product-accordion__specifications">
+              {%- for specification_group in specification_groups -%}
+                {%- if specification_group.specification_title != blank -%}
+                  <div class="product-accordion__specification-group">
+                    <div class="product-accordion__specification-title">
+                      {{- specification_group.specification_title -}}
+                    </div>
+
+                    {%- if specification_group.specification_item.value != blank -%}
+                      <div class="product-accordion__specification-items">
+                        {%- for specification_item in specification_group.specification_item.value -%}
+                          <div class="product-accordion__specification-item">
+                            {%- if specification_item.column_1 != blank -%}
+                              <div class="product-accordion__specification-cell">
+                                {{- specification_item.column_1 -}}
+                              </div>
+                            {%- endif -%}
+                            {%- if specification_item.column_2 != blank -%}
+                              <div class="product-accordion__specification-cell">
+                                {{- specification_item.column_2 -}}
+                              </div>
+                            {%- endif -%}
+                            {%- if specification_item.column_3 != blank -%}
+                              <div class="product-accordion__specification-cell">
+                                {{- specification_item.column_3 -}}
+                              </div>
+                            {%- endif -%}
+                            {%- if specification_item.column_4 != blank -%}
+                              <div class="product-accordion__specification-cell">
+                                {{- specification_item.column_4 -}}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
         {%- if has_button -%}
           {% render 'button',
             btn_label: block_obj.settings.button_label,
