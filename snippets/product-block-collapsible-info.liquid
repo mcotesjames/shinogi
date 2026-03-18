@@ -120,7 +120,7 @@
                       <!-- debug: group items count={{ specification_group.specification.value.size | default: 0 }} -->
                       <div class="product-accordion__specification-items">
                         {%- for specification in specification_group.specification.value -%}
-                          <!-- debug: item index={{ forloop.index }} col1={{ specification_item.column_1 | default: '[blank]' }} col2={{ specification_item.column_2 | default: '[blank]' }} col3={{ specification_item.column_3 | default: '[blank]' }} col4={{ specification_item.column_4 | default: '[blank]' }} -->
+                          <!-- debug: item index={{ forloop.index }} col1={{ specification.column_1 | default: '[blank]' }} col2={{ specification.column_2 | default: '[blank]' }} col3={{ specification.column_3 | default: '[blank]' }} col4={{ specification.column_4 | default: '[blank]' }} -->
                           <div class="product-accordion__specification-item">
                             {%- if specification_item.column_1 != blank -%}
                               <div class="product-accordion__specification-cell">
