@@ -30,14 +30,6 @@
             "sale_badge_type": "percentage"
           }
         },
-        "divider_1": {
-          "type": "divider",
-          "settings": {
-            "enable_border": true,
-            "margin_top": "44px",
-            "margin_bottom": "0"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -147,7 +139,6 @@
       "block_order": [
         "title",
         "price",
-        "divider_1",
         "variant_picker",
         "divider_2",
         "collapsible_info",
