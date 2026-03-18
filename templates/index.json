@@ -150,7 +150,7 @@
         "desktop_media_ratio": "portrait",
         "mobile_media_ratio": "square",
         "image_fit": "cover",
-        "enable_border_between_images": true,
+        "enable_border_between_images": false,
         "show_no_media_placeholder": true,
         "enable_video_looping": true,
         "enable_video_autoplay": true,
