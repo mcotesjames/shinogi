@@ -160,6 +160,58 @@
         "margin_bottom": "no-indent"
       }
     },
+    "image_gallery_TV8JjT": {
+      "type": "image-gallery",
+      "blocks": {
+        "image_87GcYn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC00176_2.jpg"
+          }
+        },
+        "image_VJxfAp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC00176_2.jpg"
+          }
+        },
+        "image_6qt4Pm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC00176_2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_87GcYn",
+        "image_VJxfAp",
+        "image_6qt4Pm"
+      ],
+      "name": "t:sections.image-gallery.name",
+      "settings": {
+        "color_scheme": "",
+        "aspect_ratio": "square",
+        "enable_border_top": false,
+        "enable_border_bottom": true,
+        "show_return_button": false,
+        "return_button_label": "Return",
+        "return_button_link": "",
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "description": "",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
     "lookbook_pMJi4z": {
       "type": "lookbook",
       "blocks": {
@@ -563,6 +615,7 @@
   "order": [
     "slideshow_dYbCAJ",
     "featured_product_b8f8Hz",
+    "image_gallery_TV8JjT",
     "lookbook_pMJi4z",
     "lookbook_kG64td",
     "image_gallery_wpbVMx",
