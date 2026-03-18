@@ -134,6 +134,7 @@
         "color_scheme": "",
         "enable_border_top": false,
         "enable_border_bottom": true,
+        "enable_equal_columns": true,
         "heading": "",
         "heading_font": "heading",
         "heading_size": "h6",
