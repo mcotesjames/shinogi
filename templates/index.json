@@ -310,7 +310,7 @@
       ],
       "name": "t:sections.lookbook.presets.name",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "background-1",
         "enable_border_top": false,
         "enable_border_bottom": true,
         "heading": "",
