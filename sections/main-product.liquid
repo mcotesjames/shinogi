@@ -400,6 +400,27 @@
         {%- endfor -%}
       </div>
     </div>
+    {%- if section.settings.desktop_gallery_type == 'static' and product.media.size > 1 -%}
+      <div class="product__media-static-grid">
+        {%- for media in product.media -%}
+          {% if show_only_variant_media %}
+            {% break %}
+          {% endif %}
+
+          {% if hide_unselected_variant_media and variant_images contains media.src %}
+            {% continue %}
+          {% endif %}
+
+          {%- if featured_media != blank and media.id == featured_media.id -%}
+            {% continue %}
+          {%- endif -%}
+
+          <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
+            {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 
   {% comment %} render sticky add to cart block and avaliability notification drawer {% endcomment %}
