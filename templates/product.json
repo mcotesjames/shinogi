@@ -54,16 +54,6 @@
             "show_inventory_quantity": true
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_quantity_selector": true,
-            "show_gift_card_recipient": false,
-            "enable_availability_notification": true,
-            "availability_notification_color_scheme": ""
-          }
-        },
         "divider_2": {
           "type": "divider",
           "settings": {
@@ -126,6 +116,24 @@
             "page": ""
           }
         },
+        "divider_zL3WB4": {
+          "type": "divider",
+          "settings": {
+            "enable_border": true,
+            "margin_top": "20px",
+            "margin_bottom": "0"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_quantity_selector": true,
+            "show_gift_card_recipient": false,
+            "enable_availability_notification": true,
+            "availability_notification_color_scheme": ""
+          }
+        },
         "sticky_add_to_cart_bar": {
           "type": "sticky_add_to_cart_bar",
           "settings": {
@@ -141,7 +149,6 @@
         "price",
         "divider_1",
         "variant_picker",
-        "buy_buttons",
         "divider_2",
         "collapsible_info",
         "divider_3",
@@ -149,6 +156,8 @@
         "divider_NTNYED",
         "popup_1",
         "popup_2",
+        "divider_zL3WB4",
+        "buy_buttons",
         "sticky_add_to_cart_bar"
       ],
       "custom_css": [
@@ -164,7 +173,7 @@
         "mobile_gallery_order": "before",
         "desktop_media_ratio": "square",
         "constrain_media_to_screen_height": false,
-        "mobile_media_ratio": "square",
+        "mobile_media_ratio": "portrait",
         "image_fit": "cover",
         "thumbs_aspect_ratio": "portrait",
         "thumbs_image_fit": "cover",
