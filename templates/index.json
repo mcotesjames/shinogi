@@ -9,115 +9,44 @@
  */
 {
   "sections": {
-    "slideshow_dYbCAJ": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_VyfPqq": {
-          "type": "slide",
-          "settings": {
-            "color_scheme": "background-1",
-            "media_color_scheme": "background-4",
-            "enable_image": true,
-            "image": "shopify://shop_images/DSC00018_Extended.jpg",
-            "show_video": false,
-            "overlay_opacity": 0,
-            "subheading": "",
-            "heading": "Case 15-25",
-            "heading_size": "h1",
-            "heading_tag": "h2",
-            "heading_width": "recommended",
-            "description": "",
-            "show_button": true,
-            "button_label": "Shop Now",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "slide_VyfPqq"
-      ],
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "split_screen",
-        "image_ratio_desktop": "full_height",
-        "image_ratio_mobile": "1/1",
-        "vertical_alignment": "bottom",
-        "horizontal_alignment": "left",
-        "order_desktop": "content_first",
-        "order_mobile": "image_first",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "animation_type": "slide",
-        "enable_loop": true,
-        "enable_parallax": false,
-        "enable_pagination": false,
-        "enable_flowing_navigation": true,
-        "enable_autoplay": false,
-        "slide_duration": 5,
-        "autoplay_stop_on_hover": true,
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "image_with_text_TWKtyL": {
-      "type": "image-with-text",
-      "blocks": {
-        "description_WLqXAP": {
-          "type": "description",
-          "settings": {
-            "content_description": "<p>Explains the background or story behind the image, helping the viewer understand its deeper significance or purpose.</p>"
-          }
-        },
-        "heading_YYYPGF": {
-          "type": "heading",
-          "settings": {
-            "content_heading": "This Is Where Your Key Statement Goes — Keep It Short and Focused",
-            "content_heading_size": "h4",
-            "content_heading_tag": "h3"
-          }
-        },
-        "button_KHytNq": {
-          "type": "button",
-          "settings": {
-            "list_button_label": "Learn More",
-            "list_button_url": "",
-            "list_button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "description_WLqXAP",
-        "heading_YYYPGF",
-        "button_KHytNq"
-      ],
-      "name": "t:sections.image-with-text.name",
+    "media_banner_WnYbXU": {
+      "type": "media-banner",
+      "name": "t:sections.media-banner.name",
       "settings": {
         "color_scheme": "",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "objects_order_desktop": "image_first",
-        "objects_order_mobile": "content_first",
-        "enable_border_between_parts": true,
+        "color_scheme_mobile": "",
+        "enable_image": true,
+        "image_desktop": "shopify://shop_images/DSC00018_Extended.jpg",
+        "show_video": true,
+        "image_ratio_desktop": "full_height",
+        "image_ratio_mobile": "3/4",
+        "media_layout": "full_width",
+        "thumbs_aspect_ratio": "portrait",
+        "overlay_opacity": 0,
+        "thumbs_overlay_opacity": 10,
+        "subheading": "",
         "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
+        "heading_size": "h2",
         "heading_tag": "h2",
+        "heading_width": "medium",
+        "description": "",
+        "vertical_alignment": "stretch",
+        "horizontal_alignment": "center",
+        "show_button": false,
+        "button_label": "Shop Now",
+        "button_link": "",
+        "button_style": "primary",
+        "section_top_heading": "",
+        "section_top_heading_font": "body",
+        "section_top_heading_size": "h6",
+        "section_top_heading_tag": "h2",
         "heading_group_button_show": false,
         "heading_group_button_label": "Learn More",
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "aspect_ratio": "recommended",
-        "aspect_ratio_mobile": "recommended",
-        "object_fit": "cover",
-        "overlay_opacity": 0,
-        "image_as_link": false,
-        "image_link": "",
-        "content_vertical_alignment": "stretch",
-        "content_horizontal_alignment": "left",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
+        "section_top_color_scheme": "",
+        "heading_group_enable_border_top": false,
+        "heading_group_enable_border_bottom": false,
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -222,6 +151,57 @@
         "heading_group_enable_border_bottom": true,
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "slideshow_dYbCAJ": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_VyfPqq": {
+          "type": "slide",
+          "settings": {
+            "color_scheme": "background-1",
+            "media_color_scheme": "background-4",
+            "enable_image": true,
+            "image": "shopify://shop_images/DSC00018_Extended.jpg",
+            "show_video": false,
+            "overlay_opacity": 0,
+            "subheading": "",
+            "heading": "Case 15-25",
+            "heading_size": "h1",
+            "heading_tag": "h2",
+            "heading_width": "recommended",
+            "description": "",
+            "show_button": true,
+            "button_label": "Shop Now",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "slide_VyfPqq"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "split_screen",
+        "image_ratio_desktop": "full_height",
+        "image_ratio_mobile": "1/1",
+        "vertical_alignment": "bottom",
+        "horizontal_alignment": "left",
+        "order_desktop": "content_first",
+        "order_mobile": "image_first",
+        "enable_border_top": false,
+        "enable_border_bottom": true,
+        "animation_type": "slide",
+        "enable_loop": true,
+        "enable_parallax": false,
+        "enable_pagination": false,
+        "enable_flowing_navigation": true,
+        "enable_autoplay": false,
+        "slide_duration": 5,
+        "autoplay_stop_on_hover": true,
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -682,10 +662,10 @@
     }
   },
   "order": [
-    "slideshow_dYbCAJ",
-    "image_with_text_TWKtyL",
+    "media_banner_WnYbXU",
     "image_gallery_wpbVMx",
     "image_gallery_XMinWW",
+    "slideshow_dYbCAJ",
     "featured_product_b8f8Hz",
     "rich_text_Qz3dNm",
     "content_tabs_AdVqmC",
