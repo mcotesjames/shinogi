@@ -94,19 +94,9 @@
             "margin_bottom": "auto"
           }
         },
-        "collapsible_info_dwQigf": {
-          "type": "collapsible_info",
-          "settings": {
-            "default_open": false,
-            "heading": "Details",
-            "enable_icon": false,
-            "icon": "none",
-            "custom_icon_fit": "cover",
-            "description": "<p>Use this block to add extra product details.</p>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": ""
-          }
+        "specification_CpmhFP": {
+          "type": "specification",
+          "settings": {}
         },
         "divider_NTNYED": {
           "type": "divider",
@@ -155,7 +145,7 @@
         "divider_2",
         "collapsible_info",
         "divider_3",
-        "collapsible_info_dwQigf",
+        "specification_CpmhFP",
         "divider_NTNYED",
         "popup_1",
         "popup_2",
