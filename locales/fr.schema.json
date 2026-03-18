@@ -3016,6 +3016,9 @@
           },
           "options__4": {
             "label": "Stacked with previews"
+          },
+          "options__5": {
+            "label": "Static"
           }
         },
         "mobile_gallery_type": {
