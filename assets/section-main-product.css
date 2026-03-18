@@ -645,6 +645,7 @@
     gap: 1.6rem;
   }
   .product__media-static-grid .product__media-item {
+    padding: 2rem;
     width: 100%;
     border-right: 0.1rem solid rgb(var(--color-border));
     border-bottom: 0.1rem solid rgb(var(--color-border));
