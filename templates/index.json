@@ -22,7 +22,7 @@
             "show_video": false,
             "overlay_opacity": 0,
             "subheading": "",
-            "heading": "Shinogi",
+            "heading": "Case 15-25",
             "heading_size": "h1",
             "heading_tag": "h2",
             "heading_width": "recommended",
@@ -58,56 +58,6 @@
         "autoplay_stop_on_hover": true,
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
-      }
-    },
-    "rich_text_Qz3dNm": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_RmxYae": {
-          "type": "heading",
-          "settings": {
-            "heading": "Designing durable, purpose-built systems to protect and organize professional tools.",
-            "heading_size": "h4",
-            "heading_tag": "h3"
-          }
-        },
-        "text_Tg83wR": {
-          "type": "text",
-          "settings": {
-            "text": "<p>SHINOGI exists to protect the tools that professionals rely on. We apply technical precision and utilitarian design to create systems that withstand time and use. Every detail serves a purpose: built for reliability and guided by respect for craft.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_RmxYae",
-        "text_Tg83wR"
-      ],
-      "custom_css": [],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "layout": "row",
-        "enable_border_top": false,
-        "enable_border_bottom": false,
-        "heading": "",
-        "heading_font": "heading",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "enable_image": true,
-        "image_width": 396,
-        "image_aspect_ratio": "square",
-        "image_aspect_ratio_mobile": "adapt",
-        "object_fit": "cover",
-        "objects_order": "content_first",
-        "vertical_alignment": "stretch",
-        "text_alignment": "left",
-        "margin_top": "l",
-        "margin_bottom": "l"
       }
     },
     "featured_product_b8f8Hz": {
@@ -182,9 +132,9 @@
       "settings": {
         "product_item": "case-15-25",
         "color_scheme": "",
-        "enable_border_top": true,
+        "enable_border_top": false,
         "enable_border_bottom": true,
-        "heading": "Case 15-25",
+        "heading": "",
         "heading_font": "heading",
         "heading_size": "h6",
         "heading_tag": "h2",
@@ -206,6 +156,57 @@
         "padding_bottom": "no-indent",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
+      }
+    },
+    "rich_text_Qz3dNm": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_RmxYae": {
+          "type": "heading",
+          "settings": {
+            "heading": "Designing durable, purpose-built systems to protect and organize professional tools.",
+            "heading_size": "h4",
+            "heading_tag": "h3"
+          }
+        },
+        "text_Tg83wR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>SHINOGI exists to protect the tools that professionals rely on. We apply technical precision and utilitarian design to create systems that withstand time and use. Every detail serves a purpose: built for reliability and guided by respect for craft.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_RmxYae",
+        "text_Tg83wR"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "background-1",
+        "layout": "row",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "heading",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "enable_image": true,
+        "image_width": 396,
+        "image_aspect_ratio": "square",
+        "image_aspect_ratio_mobile": "adapt",
+        "object_fit": "cover",
+        "objects_order": "content_first",
+        "vertical_alignment": "stretch",
+        "text_alignment": "left",
+        "margin_top": "l",
+        "margin_bottom": "l"
       }
     },
     "content_tabs_AdVqmC": {
@@ -351,6 +352,7 @@
         },
         "image_nGfVQC": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/DSC00164_1.jpg"
           }
@@ -438,6 +440,7 @@
         "slide_86DY7p",
         "slide_qEkFPP"
       ],
+      "disabled": true,
       "name": "t:sections.slideshow.presets.name",
       "settings": {
         "layout": "split_screen",
@@ -579,8 +582,8 @@
   },
   "order": [
     "slideshow_dYbCAJ",
-    "rich_text_Qz3dNm",
     "featured_product_b8f8Hz",
+    "rich_text_Qz3dNm",
     "content_tabs_AdVqmC",
     "image_gallery_wpbVMx",
     "slideshow_m4n8ij",
