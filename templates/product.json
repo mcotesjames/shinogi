@@ -108,6 +108,14 @@
             "button_link": ""
           }
         },
+        "divider_NTNYED": {
+          "type": "divider",
+          "settings": {
+            "enable_border": true,
+            "margin_top": "0",
+            "margin_bottom": "0"
+          }
+        },
         "popup_1": {
           "type": "popup",
           "settings": {
@@ -148,6 +156,7 @@
         "collapsible_info",
         "divider_3",
         "collapsible_info_dwQigf",
+        "divider_NTNYED",
         "popup_1",
         "popup_2",
         "sticky_add_to_cart_bar"
