@@ -32,6 +32,7 @@
   background: transparent;
   order: -1;
   flex-shrink: 0;
+  border-right: 1px solid rgb(var(--color-border));
 }
 @media (min-width: 990px) {
   .product__media {
