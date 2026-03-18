@@ -98,6 +98,11 @@
     flex: 0 0 50%;
   }
 }
+@media (min-width: 990px) {
+  .featured-product--column-border .product__media {
+    border-right: 0.1rem solid rgb(var(--color-border));
+  }
+}
 .featured-product .product .product-parameters--button {
   padding-top: 1.2rem;
 }
