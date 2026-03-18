@@ -374,6 +374,9 @@
             {%- when 'collapsible_info' -%}
               {% render 'product-block-collapsible-info', block_obj: block %}
 
+            {%- when 'specification' -%}
+              {% render 'product-block-specification', product: product %}
+
             {%- when 'extra_option' -%}
               {% render 'product-block-extra-option',
                 block_obj: block,
@@ -1694,6 +1697,11 @@
           "visible_if": "{{block.settings.show_button == true }}"
         }
       ]
+    },
+    {
+      "type": "specification",
+      "name": "Specification",
+      "limit": 1
     },
     {
       "type": "popup",
