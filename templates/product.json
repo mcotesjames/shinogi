@@ -94,6 +94,20 @@
             "margin_bottom": "auto"
           }
         },
+        "collapsible_info_dwQigf": {
+          "type": "collapsible_info",
+          "settings": {
+            "default_open": false,
+            "heading": "Details",
+            "enable_icon": false,
+            "icon": "none",
+            "custom_icon_fit": "cover",
+            "description": "<p>Use this block to add extra product details.</p>",
+            "show_button": false,
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
         "popup_1": {
           "type": "popup",
           "settings": {
@@ -101,7 +115,7 @@
             "color_scheme": "",
             "heading": "Details",
             "text": "<p>Use this block to add extra product details.</p>",
-            "page": "origin"
+            "page": ""
           }
         },
         "popup_2": {
@@ -133,6 +147,7 @@
         "divider_2",
         "collapsible_info",
         "divider_3",
+        "collapsible_info_dwQigf",
         "popup_1",
         "popup_2",
         "sticky_add_to_cart_bar"
@@ -168,55 +183,6 @@
         "gallery_info_text": "Use this space for model name, size, or special notes.",
         "padding_top": "no-indent",
         "padding_bottom": "no-indent"
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "A rigorously developed knife case built to perform at the same level as the tools it protects, with every detail serving reliability, strength, and function.",
-            "heading_size": "h4",
-            "heading_tag": "h3"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Rooted in the Japanese concept of shinogi—the ridgeline or backbone of a blade—Case 15-25 applies the principles of strength, balance, and integrity to equipment for professionals. Founded by chef Matt Abergel and shaped by a deep respect for Japanese craftsmanship, it represents a decade of research, development, and refinement (2015–2025), resulting in a knife case built to endure time, movement, and daily wear.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "layout": "column",
-        "enable_border_top": false,
-        "enable_border_bottom": false,
-        "heading": "",
-        "heading_font": "heading",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "enable_image": true,
-        "image": "shopify://shop_images/DSC001161.jpg",
-        "image_width": 480,
-        "image_aspect_ratio": "adapt",
-        "image_aspect_ratio_mobile": "square",
-        "object_fit": "cover",
-        "objects_order": "content_first",
-        "vertical_alignment": "stretch",
-        "text_alignment": "left",
-        "margin_top": "m",
-        "margin_bottom": "m"
       }
     },
     "specifications": {
@@ -483,6 +449,55 @@
         "margin_bottom": "no-indent"
       }
     },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "A rigorously developed knife case built to perform at the same level as the tools it protects, with every detail serving reliability, strength, and function.",
+            "heading_size": "h4",
+            "heading_tag": "h3"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Rooted in the Japanese concept of shinogi—the ridgeline or backbone of a blade—Case 15-25 applies the principles of strength, balance, and integrity to equipment for professionals. Founded by chef Matt Abergel and shaped by a deep respect for Japanese craftsmanship, it represents a decade of research, development, and refinement (2015–2025), resulting in a knife case built to endure time, movement, and daily wear.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "column",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "heading",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "enable_image": true,
+        "image": "shopify://shop_images/DSC001161.jpg",
+        "image_width": 480,
+        "image_aspect_ratio": "adapt",
+        "image_aspect_ratio_mobile": "square",
+        "object_fit": "cover",
+        "objects_order": "content_first",
+        "vertical_alignment": "stretch",
+        "text_alignment": "left",
+        "margin_top": "m",
+        "margin_bottom": "m"
+      }
+    },
     "image_gallery_Gg6zHb": {
       "type": "image-gallery",
       "blocks": {
@@ -626,8 +641,8 @@
   },
   "order": [
     "main_product",
-    "rich_text",
     "specifications",
+    "rich_text",
     "image_gallery_Gg6zHb",
     "popular_products_jjzArx"
   ]
