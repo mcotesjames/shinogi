@@ -646,6 +646,13 @@
   }
   .product__media-static-grid .product__media-item {
     width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: rgb(var(--color-border));
+  }
+  .product__media-static-grid .product__media-item .deferred-media {
+    position: relative;
+    inset: auto;
   }
 }
 .product__media-list-container {
