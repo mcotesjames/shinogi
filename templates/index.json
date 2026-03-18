@@ -234,7 +234,94 @@
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
-        "card_color_scheme": "",
+        "card_color_scheme": "background-1",
+        "items_per_row": 3,
+        "aspect_ratio": "square",
+        "object_fit": "cover",
+        "info_type": "dropdown",
+        "enable_border_info": false,
+        "content_horizontal_alignment": "left",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "lookbook_kG64td": {
+      "type": "lookbook",
+      "blocks": {
+        "lookbook_item_NKnqrh": {
+          "type": "lookbook_item",
+          "settings": {
+            "card_image": "shopify://shop_images/DSC00126_2.jpg",
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "subtitle",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        },
+        "lookbook_item_TJp3nk": {
+          "type": "lookbook_item",
+          "settings": {
+            "card_image": "shopify://shop_images/DSC07242_1.jpg",
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "subtitle",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        },
+        "lookbook_item_Wp7riN": {
+          "type": "lookbook_item",
+          "settings": {
+            "card_image": "shopify://shop_images/DSC00164_1.jpg",
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "subtitle",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        }
+      },
+      "block_order": [
+        "lookbook_item_NKnqrh",
+        "lookbook_item_TJp3nk",
+        "lookbook_item_Wp7riN"
+      ],
+      "name": "t:sections.lookbook.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_border_top": false,
+        "enable_border_bottom": true,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "card_color_scheme": "background-1",
         "items_per_row": 3,
         "aspect_ratio": "square",
         "object_fit": "cover",
@@ -274,6 +361,7 @@
         "image_4yr7P3",
         "image_nGfVQC"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
@@ -326,6 +414,7 @@
         "image_CD37PM",
         "image_h3WQKR"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
@@ -347,245 +436,6 @@
         "heading_group_enable_border_bottom": true,
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "rich_text_Qz3dNm": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_RmxYae": {
-          "type": "heading",
-          "settings": {
-            "heading": "Designing durable, purpose-built systems to protect and organize professional tools.",
-            "heading_size": "h4",
-            "heading_tag": "h3"
-          }
-        },
-        "text_Tg83wR": {
-          "type": "text",
-          "settings": {
-            "text": "<p>SHINOGI exists to protect the tools that professionals rely on. We apply technical precision and utilitarian design to create systems that withstand time and use. Every detail serves a purpose: built for reliability and guided by respect for craft.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_RmxYae",
-        "text_Tg83wR"
-      ],
-      "disabled": true,
-      "custom_css": [],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "color_scheme": "background-1",
-        "layout": "row",
-        "enable_border_top": false,
-        "enable_border_bottom": false,
-        "heading": "",
-        "heading_font": "heading",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "enable_image": true,
-        "image_width": 396,
-        "image_aspect_ratio": "square",
-        "image_aspect_ratio_mobile": "adapt",
-        "object_fit": "cover",
-        "objects_order": "content_first",
-        "vertical_alignment": "stretch",
-        "text_alignment": "left",
-        "margin_top": "l",
-        "margin_bottom": "l"
-      }
-    },
-    "content_tabs_AdVqmC": {
-      "type": "content-tabs",
-      "blocks": {
-        "richtext_content_DagM6R": {
-          "type": "richtext_content",
-          "settings": {
-            "block_heading": "Details",
-            "content_page": "",
-            "richtext_content": "<p>Use this field to display any type of content, such as contact details, shipping information, or key benefits of your product or service.</p><p><a href='/'>Get in touch</a></p>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "collapsible_content_dGVpgK": {
-          "type": "collapsible_content",
-          "settings": {
-            "block_heading": "FAQ",
-            "enable_row_1": true,
-            "question_1": "Use this space to ask a question",
-            "answer_1": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_1": false,
-            "enable_row_2": true,
-            "question_2": "Use this space to ask a question",
-            "answer_2": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_2": false,
-            "enable_row_3": true,
-            "question_3": "Use this space to ask a question",
-            "answer_3": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_3": false,
-            "enable_row_4": false,
-            "question_4": "Use this space to ask a question",
-            "answer_4": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_4": false,
-            "enable_row_5": false,
-            "question_5": "Use this space to ask a question",
-            "answer_5": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_5": false,
-            "enable_row_6": false,
-            "question_6": "Use this space to ask a question",
-            "answer_6": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_6": false,
-            "enable_row_7": false,
-            "question_7": "Use this space to ask a question",
-            "answer_7": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_7": false,
-            "enable_row_8": false,
-            "question_8": "Use this space to ask a question",
-            "answer_8": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_8": false,
-            "enable_row_9": false,
-            "question_9": "Use this space to ask a question",
-            "answer_9": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_9": false,
-            "enable_row_10": false,
-            "question_10": "Use this space to ask a question",
-            "answer_10": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_10": false,
-            "enable_row_11": false,
-            "question_11": "Use this space to ask a question",
-            "answer_11": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_11": false,
-            "enable_row_12": false,
-            "question_12": "Use this space to ask a question",
-            "answer_12": "<p>Use this space to provide a more informative response, explaining the topic in a way that is easy to understand while covering the key points that customers need to know.</p>",
-            "default_open_12": false,
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "richtext_content_AcVACf": {
-          "type": "richtext_content",
-          "settings": {
-            "block_heading": "Details",
-            "content_page": "",
-            "richtext_content": "<p>Use this field to display any type of content, such as contact details, shipping information, or key benefits of your product or service.</p><p><a href='/'>Get in touch</a></p>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "richtext_content_DagM6R",
-        "collapsible_content_dGVpgK",
-        "richtext_content_AcVACf"
-      ],
-      "disabled": true,
-      "name": "t:sections.content-tabs.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "full_height": false,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "enable_heading_group": false,
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "padding_top": "no-indent",
-        "padding_bottom": "xl",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "slideshow_m4n8ij": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_86DY7p": {
-          "type": "slide",
-          "settings": {
-            "color_scheme": "background-1",
-            "media_color_scheme": "background-1",
-            "enable_image": true,
-            "image": "shopify://shop_images/Gemini_Generated_Image_b3zltxb3zltxb3zl.png",
-            "show_video": false,
-            "overlay_opacity": 0,
-            "subheading": "Michelin Star Chef",
-            "heading": "Testimonial 1",
-            "heading_size": "h5",
-            "heading_tag": "h2",
-            "heading_width": "recommended",
-            "description": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu diam a felis vestibulum dapibus vel eget quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus commodo elit nec rutrum consequat.\"",
-            "show_button": false,
-            "button_label": "Shop Now",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "slide_qEkFPP": {
-          "type": "slide",
-          "settings": {
-            "color_scheme": "background-1",
-            "media_color_scheme": "background-1",
-            "enable_image": true,
-            "image": "shopify://shop_images/Gemini_Generated_Image_va4ym9va4ym9va4y.png",
-            "show_video": false,
-            "overlay_opacity": 0,
-            "subheading": "3 Michelin Stars holder",
-            "heading": "Testimonial 2",
-            "heading_size": "h5",
-            "heading_tag": "h2",
-            "heading_width": "recommended",
-            "description": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu diam a felis vestibulum dapibus vel eget quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus commodo elit nec rutrum consequat. Nam suscipit, eros eget eleifend venenatis, massa risus malesuada velit, ut laoreet risus erat eget velit. Integer venenatis, risus et ultricies euismod, ante diam pellentesque arcu, in vestibulum ex ligula eget dolor.\"",
-            "show_button": false,
-            "button_label": "Shop Now",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "slide_86DY7p",
-        "slide_qEkFPP"
-      ],
-      "disabled": true,
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "split_screen",
-        "image_ratio_desktop": "3/2",
-        "image_ratio_mobile": "adapt",
-        "vertical_alignment": "stretch",
-        "horizontal_alignment": "left",
-        "order_desktop": "content_first",
-        "order_mobile": "image_first",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "animation_type": "slide",
-        "enable_loop": true,
-        "enable_parallax": true,
-        "enable_pagination": false,
-        "enable_flowing_navigation": true,
-        "enable_autoplay": true,
-        "slide_duration": 5,
-        "autoplay_stop_on_hover": true,
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -711,11 +561,9 @@
     "slideshow_dYbCAJ",
     "featured_product_b8f8Hz",
     "lookbook_pMJi4z",
+    "lookbook_kG64td",
     "image_gallery_wpbVMx",
     "image_gallery_XMinWW",
-    "rich_text_Qz3dNm",
-    "content_tabs_AdVqmC",
-    "slideshow_m4n8ij",
     "featured_products_BfyE3j",
     "media-banner",
     "newsletter_CVb4QD"
