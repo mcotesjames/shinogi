@@ -122,9 +122,9 @@
                         {%- for specification in specification_group.specification.value -%}
                           <!-- debug: item index={{ forloop.index }} col1={{ specification.column_1 | default: '[blank]' }} col2={{ specification.column_2 | default: '[blank]' }} col3={{ specification.column_3 | default: '[blank]' }} col4={{ specification.column_4 | default: '[blank]' }} -->
                           <div class="product-accordion__specification-item">
-                            {%- if specification_item.column_1 != blank -%}
+                            {%- if specification.column_1 != blank -%}
                               <div class="product-accordion__specification-cell">
-                                {{- specification_item.column_1 -}}
+                                {{- specification.column_1 -}}
                               </div>
                             {%- endif -%}
                             {%- if specification_item.column_2 != blank -%}
