@@ -635,6 +635,7 @@
   flex: 1;
 }
 .product__media-static-grid {
+  border-top: 1px solid rgb(var(--color-border));
   display: none;
   width: 100%;
 }
