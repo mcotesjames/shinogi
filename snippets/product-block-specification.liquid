@@ -45,7 +45,7 @@
       {%- if specification_default_open and forloop.first -%}
         {%- assign group_default_open = true -%}
       {%- endif -%}
-      <div class="product-accordion" {{ block_attributes }}>
+      <div class="product-accordion product-accordion--specification" {{ block_attributes }}>
         <button
           class="button button--simple product-accordion__toggle{% if group_default_open %} active{% endif %} focus-inset"
           aria-label="{{ specification_group.specification_title | escape }}"
