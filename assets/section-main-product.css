@@ -1825,7 +1825,7 @@
   margin-top: 0;
 }
 
-.product-accordion__toggle .product-accordion__specification {
+.product-accordion__specification .product-accordion__toggle {
   padding: 0 0 1rem;
 }
 
