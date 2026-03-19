@@ -164,7 +164,7 @@
         "mobile_gallery_type": "slider",
         "desktop_gallery_order": "before",
         "mobile_gallery_order": "before",
-        "desktop_media_ratio": "square",
+        "desktop_media_ratio": "full_height",
         "constrain_media_to_screen_height": false,
         "mobile_media_ratio": "portrait",
         "image_fit": "cover",
