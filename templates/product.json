@@ -538,69 +538,6 @@
         "margin_bottom": "no-indent"
       }
     },
-    "image_with_text_jHcmce": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_wDRmwg": {
-          "type": "heading",
-          "settings": {
-            "content_heading": "A rigorously developed knife case built to perform at the same level as the tools it protects, with every detail serving reliability, strength, and function.",
-            "content_heading_size": "h4",
-            "content_heading_tag": "h3"
-          }
-        },
-        "description_ihjxVq": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
-            "content_description": "<p>Rooted in the Japanese concept of shinogi—the ridgeline or backbone of a blade—Case 15-25 applies the principles of strength, balance, and integrity to equipment for professionals. Founded by chef Matt Abergel and shaped by a deep respect for Japanese craftsmanship, it represents a decade of research, development, and refinement (2015–2025), resulting in a knife case built to endure time, movement, and daily wear.</p>"
-          }
-        },
-        "button_jC9xam": {
-          "type": "button",
-          "settings": {
-            "list_button_label": "Learn More",
-            "list_button_url": "",
-            "list_button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_wDRmwg",
-        "description_ihjxVq",
-        "button_jC9xam"
-      ],
-      "name": "t:sections.image-with-text.name",
-      "settings": {
-        "color_scheme": "",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "objects_order_desktop": "content_first",
-        "objects_order_mobile": "content_first",
-        "enable_border_between_parts": true,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "aspect_ratio": "recommended",
-        "aspect_ratio_mobile": "recommended",
-        "object_fit": "cover",
-        "overlay_opacity": 0,
-        "image_as_link": false,
-        "image_link": "",
-        "content_vertical_alignment": "stretch",
-        "content_horizontal_alignment": "left",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -796,7 +733,6 @@
     "main_product",
     "lookbook_3kK3yj",
     "specifications",
-    "image_with_text_jHcmce",
     "rich_text",
     "image_gallery_Gg6zHb",
     "popular_products_jjzArx"
