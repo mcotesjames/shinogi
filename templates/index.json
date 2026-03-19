@@ -683,6 +683,7 @@
     },
     "newsletter_CVb4QD": {
       "type": "newsletter",
+      "disabled": true,
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "",
