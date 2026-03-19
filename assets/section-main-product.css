@@ -1829,6 +1829,10 @@
   padding: 0 0 1rem;
 }
 
+.product-accordion__specification-items {
+  margin: 0 0 1rem;
+}
+
 .product-accordion__specification-item {
   display: flex;
   flex-wrap: wrap;
