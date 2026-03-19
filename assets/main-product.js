@@ -400,8 +400,11 @@ function initProductPage(section) {
       return;
     }
 
+    const configEl = section.querySelector(
+      "[data-enable-accordion-transition]"
+    );
     const enableTransition =
-      section.dataset.enableAccordionTransition !== "false";
+      !configEl || configEl.dataset.enableAccordionTransition !== "false";
     const accordions = section.querySelectorAll(".product-accordion");
 
     accordions.forEach((accordion) => {
