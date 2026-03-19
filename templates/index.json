@@ -29,7 +29,7 @@
             "description": "",
             "show_button": true,
             "button_label": "Shop Now",
-            "button_link": "",
+            "button_link": "shopify://products/case-15-25",
             "button_style": "primary"
           }
         }
