@@ -80,7 +80,7 @@
           "type": "specification",
           "settings": {
             "heading": "Specifications",
-            "default_open": false
+            "default_open": true
           }
         },
         "divider_NTNYED": {
