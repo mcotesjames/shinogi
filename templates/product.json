@@ -563,7 +563,7 @@
       "custom_css": [],
       "settings": {
         "color_scheme": "",
-        "layout": "row",
+        "layout": "column",
         "enable_border_top": false,
         "enable_border_bottom": false,
         "heading": "",
