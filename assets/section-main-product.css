@@ -1825,6 +1825,24 @@
   margin-top: 0;
 }
 
+.product-accordion__specification-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+.product-accordion__specification-cell {
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  border-top: 0;
+  border-right: 0;
+  padding: 0.6rem 0.8rem;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.product-accordion__specification-cell:last-child {
+  border-right: 1px solid #000;
+}
+
 .product-popup {
   padding-left: 2rem;
   padding-right: 2rem;
