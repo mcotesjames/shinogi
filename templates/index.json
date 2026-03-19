@@ -216,6 +216,7 @@
     },
     "text_banner_TkfCzB": {
       "type": "text-banner",
+      "disabled": true,
       "name": "t:sections.text-banner.presets.name",
       "settings": {
         "color_scheme": "",
@@ -683,7 +684,6 @@
     },
     "newsletter_CVb4QD": {
       "type": "newsletter",
-      "disabled": true,
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "",
