@@ -73,7 +73,7 @@
           "settings": {
             "enable_border": true,
             "margin_top": "0",
-            "margin_bottom": "auto"
+            "margin_bottom": "0"
           }
         },
         "specification_CpmhFP": {
@@ -106,7 +106,7 @@
           "settings": {
             "enable_border": true,
             "margin_top": "0",
-            "margin_bottom": "0"
+            "margin_bottom": "auto"
           }
         },
         "popup_1": {
