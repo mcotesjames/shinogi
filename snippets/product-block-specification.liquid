@@ -38,7 +38,7 @@
 
 {%- if has_specifications -%}
   <!-- debug: specification_groups count={{ specification_groups.size | default: 0 }} -->
-   <div class="prooduct-specifications">
+   <div class="product-specifications">
     {%- for specification_group in specification_groups -%}
       <!-- debug: group index={{ forloop.index }} title={{ specification_group.specification_title | default: '[blank]' }} -->
       {%- if specification_group.specification_title != blank -%}

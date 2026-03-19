@@ -1721,7 +1721,6 @@
 
 .product-accordion {
   overflow: hidden;
-  padding: 2rem;
   word-break: break-word;
   border-bottom: 1px solid var(--color-border);
 }
@@ -1823,6 +1822,10 @@
 }
 .product-accordion + .product-accordion {
   margin-top: 0;
+}
+
+.product-specification {
+  padding: 2rem;
 }
 
 .product-accordion--specification .product-accordion__toggle {
