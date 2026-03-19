@@ -27,7 +27,7 @@
   }
 }
 .product__media {
-  z-index: 999;
+  z-index: 1;
   overflow: hidden;
   width: 100%;
   background: transparent;
