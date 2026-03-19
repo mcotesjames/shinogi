@@ -1838,6 +1838,10 @@
   padding: 0.6rem 0.8rem;
   flex: 1 1 0;
   min-width: 0;
+  font-family: var(--font-custom-chargevector-family);
+  font-weight: var(--font-heading-weight);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-subtitle-scale) * 1rem);
 }
 .product-accordion__specification-cell--heading {
   background: #000;
