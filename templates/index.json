@@ -89,6 +89,7 @@
         },
         "divider_FJgDkj": {
           "type": "divider",
+          "disabled": true,
           "settings": {
             "enable_border": true,
             "margin_top": "16px",
