@@ -696,6 +696,17 @@
   user-select: none;
   position: relative;
 }
+.product__media-caption {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
 .product__media-item > *:not(.product__xr-button):not(product-model):not(modal-opener):not(.deferred-media) {
   display: block;
   position: relative;

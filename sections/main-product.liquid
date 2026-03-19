@@ -421,6 +421,11 @@
 
           <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
             {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
+            {%- if media.alt != blank -%}
+              <div class="product__media-caption">
+                {{- media.alt -}}
+              </div>
+            {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
