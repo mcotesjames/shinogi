@@ -65,7 +65,8 @@
   margin-inline-end: 1px;
 }
 .featured-product .product__info-container {
-  padding: 0;
+  padding: 2rem 0;
+
 }
 @media (min-width: 990px) {
   .featured-product .product__info-container {
