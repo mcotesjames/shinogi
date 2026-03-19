@@ -216,7 +216,6 @@
     },
     "text_banner_TkfCzB": {
       "type": "text-banner",
-      "disabled": true,
       "name": "t:sections.text-banner.presets.name",
       "settings": {
         "color_scheme": "",
@@ -233,12 +232,12 @@
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
-        "banner_heading": "Where structure and purpose define strength, balance, and lasting integrity",
+        "banner_heading": "Discover the case 15-25",
         "banner_heading_size": "h5",
         "banner_heading_tag": "h3",
         "banner_description": "",
         "list_button_show": true,
-        "list_button_label": "Discover the case 15-25",
+        "list_button_label": "Explore",
         "list_button_url": "",
         "list_button_style": "primary",
         "enable_image": false,
@@ -684,6 +683,7 @@
     },
     "newsletter_CVb4QD": {
       "type": "newsletter",
+      "disabled": true,
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "",
