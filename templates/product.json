@@ -78,7 +78,10 @@
         },
         "specification_CpmhFP": {
           "type": "specification",
-          "settings": {}
+          "settings": {
+            "heading": "Specifications",
+            "default_open": false
+          }
         },
         "divider_NTNYED": {
           "type": "divider",
@@ -158,6 +161,7 @@
         "color_scheme": "",
         "show_breadcrumbs": true,
         "enable_border_top_info": false,
+        "enable_dropdown_transition": false,
         "desktop_gallery_type": "static",
         "mobile_gallery_type": "slider",
         "desktop_gallery_order": "before",
