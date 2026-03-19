@@ -375,7 +375,7 @@
               {% render 'product-block-collapsible-info', block_obj: block %}
 
             {%- when 'specification' -%}
-              {% render 'product-block-specification', product: product %}
+              {% render 'product-block-specification', product: product, block_obj: block %}
 
             {%- when 'extra_option' -%}
               {% render 'product-block-extra-option',
@@ -1701,7 +1701,21 @@
     {
       "type": "specification",
       "name": "Specification",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Specifications"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "default": false,
+          "label": "Default open"
+        }
+      ]
     },
     {
       "type": "popup",
