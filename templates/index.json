@@ -166,6 +166,7 @@
       "blocks": {
         "image_87GcYn": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/DSC00155_3.jpg"
           }
@@ -218,6 +219,7 @@
       "blocks": {
         "image_bBtVzB": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/DSC00132_1.jpg"
           }
