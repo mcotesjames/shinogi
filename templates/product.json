@@ -154,9 +154,7 @@
         "popup_2",
         "sticky_add_to_cart_bar"
       ],
-      "custom_css": [
-        ".product {border-bottom: 1px solid #000000;}"
-      ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "",
         "show_breadcrumbs": true,
@@ -561,6 +559,9 @@
       "block_order": [
         "heading",
         "text"
+      ],
+      "custom_css": [
+        ".product {border-bottom: 1px solid #000000;}"
       ],
       "settings": {
         "color_scheme": "",
