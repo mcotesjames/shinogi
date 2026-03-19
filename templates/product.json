@@ -159,7 +159,7 @@
         "color_scheme": "",
         "show_breadcrumbs": true,
         "enable_border_top_info": false,
-        "enable_dropdown_transition": false,
+        "enable_dropdown_transition": true,
         "desktop_gallery_type": "static",
         "mobile_gallery_type": "slider",
         "desktop_gallery_order": "before",
