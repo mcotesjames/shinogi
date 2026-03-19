@@ -1720,6 +1720,7 @@
 }
 
 .product-accordion {
+  padding: 2rem;
   overflow: hidden;
   word-break: break-word;
   border-bottom: 1px solid var(--color-border);
@@ -1826,6 +1827,10 @@
 
 .product-specifications {
   padding: 2rem;
+}
+
+.product-specifications .product-accordion {
+  padding: 0rem;
 }
 
 .product-accordion--specification .product-accordion__toggle {
