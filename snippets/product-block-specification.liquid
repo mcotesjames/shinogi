@@ -76,8 +76,8 @@
                     <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
                       {{- specification_heading -}}
                     </div>
+                    {%- endfor -%}
                   </div>
-                {%- endfor -%}
               {%- endif -%}
               {%- if specification_group.specification.value != blank -%}
                 {%- for specification_item in specification_group.specification.value -%}
