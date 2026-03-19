@@ -71,28 +71,11 @@
             <div class="product-accordion__specification-items">
               {%- if specification_group.specification_headings.value != blank -%}
                 {%- for specification_heading in specification_group.specification_headings.value -%}
-                  <!-- debug: heading index={{ forloop.index }} col1={{ specification_heading.column_1 | default: '[blank]' }} col2={{ specification_heading.column_2 | default: '[blank]' }} col3={{ specification_heading.column_3 | default: '[blank]' }} col4={{ specification_heading.column_4 | default: '[blank]' }} -->
+                  <!-- debug: heading index={{ forloop.index }} value={{ specification_heading | default: '[blank]' }} -->
                   <div class="product-accordion__specification-item product-accordion__specification-item--heading">
-                    {%- if specification_heading.column_1 != blank -%}
-                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
-                        {{- specification_heading.column_1 -}}
-                      </div>
-                    {%- endif -%}
-                    {%- if specification_heading.column_2 != blank -%}
-                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
-                        {{- specification_heading.column_2 -}}
-                      </div>
-                    {%- endif -%}
-                    {%- if specification_heading.column_3 != blank -%}
-                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
-                        {{- specification_heading.column_3 -}}
-                      </div>
-                    {%- endif -%}
-                    {%- if specification_heading.column_4 != blank -%}
-                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
-                        {{- specification_heading.column_4 -}}
-                      </div>
-                    {%- endif -%}
+                    <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                      {{- specification_heading -}}
+                    </div>
                   </div>
                 {%- endfor -%}
               {%- endif -%}
