@@ -42,6 +42,7 @@
 <div
   id="MainProduct-{{ section.id }}"
   data-section="{{ section.id }}"
+  data-enable-accordion-transition="{{ section.settings.enable_dropdown_transition }}"
   class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} background"
 >
   <div class="product{% if product.has_only_default_variant %} product--no-variant{% endif %}">
@@ -528,6 +529,12 @@
       "default": true,
       "label": "t:sections.main-product.settings.enable_border_top_info.label",
       "info": "t:sections.main-product.settings.enable_border_top_info.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dropdown_transition",
+      "default": true,
+      "label": "Enable dropdown transition"
     },
     {
       "type": "header",

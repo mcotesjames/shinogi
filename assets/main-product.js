@@ -400,6 +400,8 @@ function initProductPage(section) {
       return;
     }
 
+    const enableTransition =
+      section.dataset.enableAccordionTransition !== "false";
     const accordions = section.querySelectorAll(".product-accordion");
 
     accordions.forEach((accordion) => {
@@ -416,10 +418,15 @@ function initProductPage(section) {
         }
 
         const isActive = toggleEl.classList.contains("active");
-        if (!isActive) {
-          slideDown(toggleEl, contentEl, 300); // func in global.js
+        if (enableTransition) {
+          if (!isActive) {
+            slideDown(toggleEl, contentEl, 300); // func in global.js
+          } else {
+            slideUp(toggleEl, contentEl, 300); // func in global.js
+          }
         } else {
-          slideUp(toggleEl, contentEl, 300); // func in global.js
+          toggleEl.classList.toggle("active");
+          contentEl.classList.toggle("active");
         }
       });
     });
