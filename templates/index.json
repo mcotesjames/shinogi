@@ -238,7 +238,7 @@
         "banner_description": "",
         "list_button_show": true,
         "list_button_label": "Explore",
-        "list_button_url": "",
+        "list_button_url": "shopify://products/case-15-25",
         "list_button_style": "primary",
         "enable_image": false,
         "img_as_cursor": true,
