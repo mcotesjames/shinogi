@@ -63,7 +63,7 @@
         </button>
 
         <div class="product-accordion__content{% if group_default_open %} active{% endif %}">
-          {%- if specification_group.specification_item.value != blank -%}
+          {%- if specification_group.specification.value != blank -%}
             <!-- debug: group items count={{ specification_group.specification_item.value.size | default: 0 }} -->
             <div class="product-accordion__specification-items">
               {%- for specification_item in specification_group.specification.value -%}
