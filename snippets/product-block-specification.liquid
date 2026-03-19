@@ -19,11 +19,6 @@
     assign has_specifications = true
   endif
 
-  assign specification_heading = 'Specifications'
-  if block_obj != blank and block_obj.settings.heading != blank
-    assign specification_heading = block_obj.settings.heading
-  endif
-
   assign specification_default_open = false
   if block_obj != blank and block_obj.settings.default_open
     assign specification_default_open = true
@@ -43,73 +38,69 @@
 
 {%- if has_specifications -%}
   <!-- debug: specification_groups count={{ specification_groups.size | default: 0 }} -->
-  <div class="product-accordion" {{ block_attributes }}>
-    <button
-      class="button button--simple product-accordion__toggle{% if specification_default_open %} active{% endif %} focus-inset"
-      aria-label="{{ specification_heading | escape }}"
-    >
-      <div class="button__content">
-        <span class="button__label" data-label="{{- specification_heading | escape -}}">
-          {{- specification_heading | escape -}}
-        </span>
+  {%- for specification_group in specification_groups -%}
+    <!-- debug: group index={{ forloop.index }} title={{ specification_group.specification_title | default: '[blank]' }} -->
+    {%- if specification_group.specification_title != blank -%}
+      {%- assign group_default_open = false -%}
+      {%- if specification_default_open and forloop.first -%}
+        {%- assign group_default_open = true -%}
+      {%- endif -%}
+      <div class="product-accordion" {{ block_attributes }}>
+        <button
+          class="button button--simple product-accordion__toggle{% if group_default_open %} active{% endif %} focus-inset"
+          aria-label="{{ specification_group.specification_title | escape }}"
+        >
+          <div class="button__content">
+            <span class="button__label" data-label="{{- specification_group.specification_title | escape -}}">
+              {{- specification_group.specification_title | escape -}}
+            </span>
 
-        <div class="product-accordion__icon">
-          {% render 'icon-plus-dropdown' %}
-          {% render 'icon-minus-dropdown' %}
-        </div>
-      </div>
-    </button>
+            <div class="product-accordion__icon">
+              {% render 'icon-plus-dropdown' %}
+              {% render 'icon-minus-dropdown' %}
+            </div>
+          </div>
+        </button>
 
-    <div class="product-accordion__content{% if specification_default_open %} active{% endif %}">
-      <div class="product-accordion__specifications">
-        {%- for specification_group in specification_groups -%}
-          <!-- debug: group index={{ forloop.index }} title={{ specification_group.specification_title | default: '[blank]' }} -->
-          {%- if specification_group.specification_title != blank -%}
-            <div class="product-accordion__specification-group">
-              <div class="product-accordion__specification-title">
-                {{- specification_group.specification_title -}}
-              </div>
-
-              {%- if specification_group.specification_item.value != blank -%}
-                <!-- debug: group items count={{ specification_group.specification_item.value.size | default: 0 }} -->
-                <div class="product-accordion__specification-items">
-                  {%- for specification_item in specification_group.specification_item.value -%}
-                    <!-- debug: item index={{ forloop.index }} col1={{ specification_item.column_1 | default: '[blank]' }} col2={{ specification_item.column_2 | default: '[blank]' }} col3={{ specification_item.column_3 | default: '[blank]' }} col4={{ specification_item.column_4 | default: '[blank]' }} -->
-                    <div class="product-accordion__specification-item">
-                      {%- if specification_item.column_1 != blank -%}
-                        <div class="product-accordion__specification-cell">
-                          {{- specification_item.column_1 -}}
-                        </div>
-                      {%- endif -%}
-                      {%- if specification_item.column_2 != blank -%}
-                        <div class="product-accordion__specification-cell">
-                          {{- specification_item.column_2 -}}
-                        </div>
-                      {%- endif -%}
-                      {%- if specification_item.column_3 != blank -%}
-                        <div class="product-accordion__specification-cell">
-                          {{- specification_item.column_3 -}}
-                        </div>
-                      {%- endif -%}
-                      {%- if specification_item.column_4 != blank -%}
-                        <div class="product-accordion__specification-cell">
-                          {{- specification_item.column_4 -}}
-                        </div>
-                      {%- endif -%}
+        <div class="product-accordion__content{% if group_default_open %} active{% endif %}">
+          {%- if specification_group.specification_item.value != blank -%}
+            <!-- debug: group items count={{ specification_group.specification_item.value.size | default: 0 }} -->
+            <div class="product-accordion__specification-items">
+              {%- for specification_item in specification_group.specification_item.value -%}
+                <!-- debug: item index={{ forloop.index }} col1={{ specification_item.column_1 | default: '[blank]' }} col2={{ specification_item.column_2 | default: '[blank]' }} col3={{ specification_item.column_3 | default: '[blank]' }} col4={{ specification_item.column_4 | default: '[blank]' }} -->
+                <div class="product-accordion__specification-item">
+                  {%- if specification_item.column_1 != blank -%}
+                    <div class="product-accordion__specification-cell">
+                      {{- specification_item.column_1 -}}
                     </div>
-                  {%- endfor -%}
+                  {%- endif -%}
+                  {%- if specification_item.column_2 != blank -%}
+                    <div class="product-accordion__specification-cell">
+                      {{- specification_item.column_2 -}}
+                    </div>
+                  {%- endif -%}
+                  {%- if specification_item.column_3 != blank -%}
+                    <div class="product-accordion__specification-cell">
+                      {{- specification_item.column_3 -}}
+                    </div>
+                  {%- endif -%}
+                  {%- if specification_item.column_4 != blank -%}
+                    <div class="product-accordion__specification-cell">
+                      {{- specification_item.column_4 -}}
+                    </div>
+                  {%- endif -%}
                 </div>
-              {%- else -%}
-                <!-- debug: specification_group.specification_item.value is blank -->
-              {%- endif -%}
+              {%- endfor -%}
             </div>
           {%- else -%}
-            <!-- debug: specification_group.specification_title is blank -->
+            <!-- debug: specification_group.specification_item.value is blank -->
           {%- endif -%}
-        {%- endfor -%}
+        </div>
       </div>
-    </div>
-  </div>
+    {%- else -%}
+      <!-- debug: specification_group.specification_title is blank -->
+    {%- endif -%}
+  {%- endfor -%}
 {%- else -%}
   <!-- debug: specification_groups is blank -->
 {%- endif -%}
