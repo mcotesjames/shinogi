@@ -604,12 +604,6 @@
     "rich_text": {
       "type": "rich-text",
       "blocks": {
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Rooted in the Japanese concept of shinogi—the ridgeline or backbone of a blade—Case 15-25 applies the principles of strength, balance, and integrity to equipment for professionals. Founded by chef Matt Abergel and shaped by a deep respect for Japanese craftsmanship, it represents a decade of research, development, and refinement (2015–2025), resulting in a knife case built to endure time, movement, and daily wear.</p>"
-          }
-        },
         "heading": {
           "type": "heading",
           "settings": {
@@ -617,16 +611,22 @@
             "heading_size": "h4",
             "heading_tag": "h3"
           }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Rooted in the Japanese concept of shinogi—the ridgeline or backbone of a blade—Case 15-25 applies the principles of strength, balance, and integrity to equipment for professionals. Founded by chef Matt Abergel and shaped by a deep respect for Japanese craftsmanship, it represents a decade of research, development, and refinement (2015–2025), resulting in a knife case built to endure time, movement, and daily wear.</p>"
+          }
         }
       },
       "block_order": [
-        "text",
-        "heading"
+        "heading",
+        "text"
       ],
       "custom_css": [],
       "settings": {
         "color_scheme": "",
-        "layout": "column",
+        "layout": "row",
         "enable_border_top": false,
         "enable_border_bottom": false,
         "heading": "",
@@ -638,7 +638,7 @@
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
         "heading_group_enable_border_bottom": true,
-        "enable_image": true,
+        "enable_image": false,
         "image": "shopify://shop_images/DSC001161.jpg",
         "image_width": 480,
         "image_aspect_ratio": "adapt",
