@@ -1838,14 +1838,16 @@
   padding: 0.6rem 0.8rem;
   flex: 1 1 0;
   min-width: 0;
-  font-family: var(--font-custom-chargevector-family);
+  text-transform: uppercase;
+  font-family: var(--font-body-family);
   font-weight: var(--font-heading-weight);
   font-style: var(--font-heading-style);
-  font-size: calc(var(--font-subtitle-scale) * 1rem);
+  font-size: 11px;
 }
 .product-accordion__specification-cell--heading {
   background: #000;
   color: #fff;
+  font-size: 12px;
 }
 .product-accordion__specification-cell:last-child {
   border-right: 1px solid #000;
