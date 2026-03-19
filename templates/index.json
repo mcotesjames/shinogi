@@ -188,6 +188,7 @@
         "image_VJxfAp",
         "image_6qt4Pm"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
@@ -240,6 +241,7 @@
         "image_cF4Jek",
         "image_dbdBP8"
       ],
+      "disabled": true,
       "name": "t:sections.image-gallery.name",
       "settings": {
         "color_scheme": "",
