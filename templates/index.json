@@ -249,8 +249,8 @@
         "content_vertical_alignment": "center",
         "content_horizontal_alignment": "center",
         "content_horizontal_alignment_mobile": "left",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
+        "padding_top": "s",
+        "padding_bottom": "s",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
