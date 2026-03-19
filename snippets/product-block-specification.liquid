@@ -70,9 +70,12 @@
             <!-- debug: group items count={{ specification_group.specification_item.value.size | default: 0 }} -->
             <div class="product-accordion__specification-items">
               {%- if specification_group.specification_headings.value != blank -%}
-                {%- for specification_heading in specification_group.specification_headings.value -%}
-                  <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
-                    {{- specification_heading -}}
+                <!-- debug: heading index={{ forloop.index }} value={{ specification_heading | default: '[blank]' }} -->
+                  <div class="product-accordion__specification-item product-accordion__specification-item--heading">
+                    {%- for specification_heading in specification_group.specification_headings.value -%}
+                    <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                      {{- specification_heading -}}
+                    </div>
                   </div>
                 {%- endfor -%}
               {%- endif -%}
