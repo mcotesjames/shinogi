@@ -105,7 +105,7 @@
           "type": "divider",
           "settings": {
             "enable_border": true,
-            "margin_top": "20px",
+            "margin_top": "0",
             "margin_bottom": "0"
           }
         },
