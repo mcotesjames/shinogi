@@ -63,37 +63,69 @@
         </button>
 
         <div class="product-accordion__content{% if group_default_open %} active{% endif %}">
-          {%- if specification_group.specification.value != blank -%}
+          {%- if specification_group.specification_item.value != blank or specification_group.specification_headings.value != blank -%}
+            {%- if specification_group.specification_headings.value != blank -%}
+              <!-- debug: group headings count={{ specification_group.specification_headings.value.size | default: 0 }} -->
+            {%- endif -%}
             <!-- debug: group items count={{ specification_group.specification_item.value.size | default: 0 }} -->
             <div class="product-accordion__specification-items">
-              {%- for specification_item in specification_group.specification.value -%}
-                <!-- debug: item index={{ forloop.index }} col1={{ specification_item.column_1 | default: '[blank]' }} col2={{ specification_item.column_2 | default: '[blank]' }} col3={{ specification_item.column_3 | default: '[blank]' }} col4={{ specification_item.column_4 | default: '[blank]' }} -->
-                <div class="product-accordion__specification-item">
-                  {%- if specification_item.column_1 != blank -%}
-                    <div class="product-accordion__specification-cell specifications__detail-title subtitle">
-                      {{- specification_item.column_1 -}}
-                    </div>
-                  {%- endif -%}
-                  {%- if specification_item.column_2 != blank -%}
-                    <div class="product-accordion__specification-cell specifications__detail-title subtitle">
-                      {{- specification_item.column_2 -}}
-                    </div>
-                  {%- endif -%}
-                  {%- if specification_item.column_3 != blank -%}
-                    <div class="product-accordion__specification-cell specifications__detail-title subtitle">
-                      {{- specification_item.column_3 -}}
-                    </div>
-                  {%- endif -%}
-                  {%- if specification_item.column_4 != blank -%}
-                    <div class="product-accordion__specification-cell specifications__detail-title subtitle">
-                      {{- specification_item.column_4 -}}
-                    </div>
-                  {%- endif -%}
-                </div>
-              {%- endfor -%}
+              {%- if specification_group.specification_headings.value != blank -%}
+                {%- for specification_heading in specification_group.specification_headings.value -%}
+                  <!-- debug: heading index={{ forloop.index }} col1={{ specification_heading.column_1 | default: '[blank]' }} col2={{ specification_heading.column_2 | default: '[blank]' }} col3={{ specification_heading.column_3 | default: '[blank]' }} col4={{ specification_heading.column_4 | default: '[blank]' }} -->
+                  <div class="product-accordion__specification-item product-accordion__specification-item--heading">
+                    {%- if specification_heading.column_1 != blank -%}
+                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                        {{- specification_heading.column_1 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_heading.column_2 != blank -%}
+                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                        {{- specification_heading.column_2 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_heading.column_3 != blank -%}
+                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                        {{- specification_heading.column_3 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_heading.column_4 != blank -%}
+                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading specifications__detail-title subtitle">
+                        {{- specification_heading.column_4 -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+              {%- if specification_group.specification_item.value != blank -%}
+                {%- for specification_item in specification_group.specification_item.value -%}
+                  <!-- debug: item index={{ forloop.index }} col1={{ specification_item.column_1 | default: '[blank]' }} col2={{ specification_item.column_2 | default: '[blank]' }} col3={{ specification_item.column_3 | default: '[blank]' }} col4={{ specification_item.column_4 | default: '[blank]' }} -->
+                  <div class="product-accordion__specification-item">
+                    {%- if specification_item.column_1 != blank -%}
+                      <div class="product-accordion__specification-cell specifications__detail-title subtitle">
+                        {{- specification_item.column_1 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_item.column_2 != blank -%}
+                      <div class="product-accordion__specification-cell specifications__detail-title subtitle">
+                        {{- specification_item.column_2 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_item.column_3 != blank -%}
+                      <div class="product-accordion__specification-cell specifications__detail-title subtitle">
+                        {{- specification_item.column_3 -}}
+                      </div>
+                    {%- endif -%}
+                    {%- if specification_item.column_4 != blank -%}
+                      <div class="product-accordion__specification-cell specifications__detail-title subtitle">
+                        {{- specification_item.column_4 -}}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
             </div>
           {%- else -%}
-            <!-- debug: specification_group.specification_item.value is blank -->
+            <!-- debug: specification_group.specification_item.value and specification_group.specification_headings.value are blank -->
           {%- endif -%}
         </div>
       </div>
