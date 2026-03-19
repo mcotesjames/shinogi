@@ -188,6 +188,93 @@
         "padding_bottom": "no-indent"
       }
     },
+    "lookbook_3kK3yj": {
+      "type": "lookbook",
+      "blocks": {
+        "lookbook_item_VgVF4W": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "heading",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        },
+        "lookbook_item_wJrjyz": {
+          "type": "lookbook_item",
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "heading",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        },
+        "lookbook_item_XGiMQx": {
+          "type": "lookbook_item",
+          "disabled": true,
+          "settings": {
+            "overlay_opacity": 0,
+            "card_overlay_link": "",
+            "card_heading": "Feature Title Here",
+            "card_heading_font": "heading",
+            "card_heading_size": "h6",
+            "card_heading_tag": "h3",
+            "card_description": "Here, you can provide a short description of this column’s focus — whether it’s a product, service, value, or promotion.",
+            "list_button_show": false,
+            "list_button_label": "Learn More",
+            "list_button_link": "",
+            "list_button_style": "tertiary"
+          }
+        }
+      },
+      "block_order": [
+        "lookbook_item_VgVF4W",
+        "lookbook_item_wJrjyz",
+        "lookbook_item_XGiMQx"
+      ],
+      "disabled": true,
+      "name": "t:sections.lookbook.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_border_top": true,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "card_color_scheme": "",
+        "items_per_row": 2,
+        "aspect_ratio": "portrait",
+        "object_fit": "cover",
+        "info_type": "dropdown",
+        "enable_border_info": false,
+        "enable_individual_item_padding": false,
+        "content_horizontal_alignment": "left",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
     "specifications": {
       "type": "specifications",
       "blocks": {
@@ -433,6 +520,7 @@
         "specification_group_2",
         "specification_group_3"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "",
         "enable_border_top": false,
@@ -644,6 +732,7 @@
   },
   "order": [
     "main_product",
+    "lookbook_3kK3yj",
     "specifications",
     "rich_text",
     "image_gallery_Gg6zHb",
