@@ -706,7 +706,7 @@
     border-bottom: 0;
     border-right: 0;
     border-left: 0;
-    font-family: var(--font-heading-style);
+    font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
     padding: 0.6rem;
     font-size: 11px;
