@@ -68,21 +68,6 @@
             "button_link": ""
           }
         },
-        "divider_3": {
-          "type": "divider",
-          "settings": {
-            "enable_border": true,
-            "margin_top": "0",
-            "margin_bottom": "0"
-          }
-        },
-        "specification_CpmhFP": {
-          "type": "specification",
-          "settings": {
-            "heading": "Specifications",
-            "default_open": false
-          }
-        },
         "divider_NTNYED": {
           "type": "divider",
           "settings": {
@@ -145,8 +130,6 @@
         "variant_picker",
         "divider_2",
         "collapsible_info",
-        "divider_3",
-        "specification_CpmhFP",
         "divider_NTNYED",
         "buy_buttons",
         "divider_zL3WB4",
