@@ -1096,7 +1096,7 @@
   position: relative;
   pointer-events: all;
   width: 100%;
-  padding-block: 2rem;
+  padding: 0 2rem 2rem;
 }
 .product-parameters variant-radios,
 .product-parameters variant-selects {
