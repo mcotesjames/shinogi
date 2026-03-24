@@ -33,10 +33,10 @@
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button",
+            "picker_type": "dropdown",
             "color_swatches_type": "variant_image",
             "variant_image_ratio": "portrait",
-            "enable_option_popup": true,
+            "enable_option_popup": false,
             "option_popup_option_name": "Size",
             "option_popup_color_scheme": "",
             "option_popup_button_label": "Size Guide",
@@ -62,7 +62,7 @@
             "enable_icon": false,
             "icon": "none",
             "custom_icon_fit": "cover",
-            "description": "{{ product.description }}",
+            "description": "<p>{{ product.description }}</p>",
             "show_button": false,
             "button_label": "Learn More",
             "button_link": ""
