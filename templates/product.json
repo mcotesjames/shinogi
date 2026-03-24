@@ -83,14 +83,6 @@
             "default_open": false
           }
         },
-        "divider_NTNYED": {
-          "type": "divider",
-          "settings": {
-            "enable_border": true,
-            "margin_top": "0",
-            "margin_bottom": "0"
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -147,7 +139,6 @@
         "collapsible_info",
         "divider_qYkmeM",
         "specification_r3jyJh",
-        "divider_NTNYED",
         "buy_buttons",
         "divider_zL3WB4",
         "popup_1",
