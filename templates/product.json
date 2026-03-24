@@ -62,10 +62,25 @@
             "enable_icon": false,
             "icon": "none",
             "custom_icon_fit": "cover",
-            "description": "<p>{{ product.description }}</p>",
+            "description": "{{ product.description }}",
             "show_button": false,
             "button_label": "Learn More",
             "button_link": ""
+          }
+        },
+        "divider_qYkmeM": {
+          "type": "divider",
+          "settings": {
+            "enable_border": true,
+            "margin_top": "0",
+            "margin_bottom": "0"
+          }
+        },
+        "specification_r3jyJh": {
+          "type": "specification",
+          "settings": {
+            "heading": "Specifications",
+            "default_open": false
           }
         },
         "divider_NTNYED": {
@@ -130,6 +145,8 @@
         "variant_picker",
         "divider_2",
         "collapsible_info",
+        "divider_qYkmeM",
+        "specification_r3jyJh",
         "divider_NTNYED",
         "buy_buttons",
         "divider_zL3WB4",
