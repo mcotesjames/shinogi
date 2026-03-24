@@ -80,7 +80,7 @@
         "show_logo": true,
         "logo": "shopify://shop_images/Vector.svg",
         "show_dm_logo_in_overlay_mode": true,
-        "logo_position": "left-logo",
+        "logo_position": "center-logo",
         "logo_width": 150,
         "h1_logo": true,
         "enable_search": true,
