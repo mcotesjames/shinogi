@@ -31,7 +31,6 @@
 -%}
 
 {%- if has_specifications -%}
-  {% render 'product-block-divider' %}
    <div class="product-specifications">
     {%- for specification_group in specification_groups -%}
       {%- if specification_group.specification_title != blank -%}
@@ -101,4 +100,5 @@
       {%- endif -%}
     {%- endfor -%}
    </div>
+   {% render 'product-block-divider' %}
 {%- endif -%}
