@@ -1189,7 +1189,8 @@
   color: rgb(var(--color-foreground));
   padding: 0 !important;
   overflow: hidden;
-  margin-top: 0.4rem;
+  border-top: 0;
+  /* margin-top: 0.4rem; */
 }
 .product-parameters .dropdown-select__options.active {
   display: block;
