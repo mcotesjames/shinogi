@@ -2249,7 +2249,7 @@ modal-localization-form .disclosure {
   display: block;
   justify-content: space-between;
   z-index: 4;
-  min-height: 4.8rem;
+  min-height: 6rem;
   background-color: rgb(var(--color-background));
   --submenu-transition: 0.3s ease-in-out;
 }
