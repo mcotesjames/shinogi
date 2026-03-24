@@ -85,7 +85,6 @@
         },
         "divider_NTNYED": {
           "type": "divider",
-          "disabled": true,
           "settings": {
             "enable_border": true,
             "margin_top": "0",
