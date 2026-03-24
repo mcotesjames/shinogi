@@ -154,7 +154,7 @@
         "thumbs_aspect_ratio": "portrait",
         "thumbs_image_fit": "cover",
         "show_primary_media_on_page_load": false,
-        "variant_media_display": "show_all",
+        "variant_media_display": "show_only_variant_media",
         "show_no_media_placeholder": true,
         "enable_video_looping": true,
         "enable_video_autoplay": false,
