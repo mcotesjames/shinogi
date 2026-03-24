@@ -337,7 +337,7 @@
   padding: 1rem 1.2rem;
   background: rgb(var(--color-background));
   overflow: hidden;
-  border-radius: 0.2rem;
+  /* border-radius: 0.2rem; */
   border: 0.1rem solid rgb(var(--color-border));
   z-index: 2;
 }
