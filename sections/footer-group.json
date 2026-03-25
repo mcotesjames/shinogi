@@ -97,7 +97,7 @@
         "ticker_text_size": "h5",
         "enable_image": true,
         "image": "shopify://shop_images/Vector.svg",
-        "image_width": 300,
+        "image_width": 200,
         "ticker_speed": 0,
         "ticker_pause_hover": true,
         "ticker_direction": "right_to_left",
