@@ -19,63 +19,82 @@
       >
     {%- endif -%}
 
-    {% liquid
-      assign target_ticker_line_width = 4000
-      assign image_width = section.settings.image_width
-
-      if section.settings.ticker_text_size == 'h1'
-        assign char_width = 32
-      elsif section.settings.ticker_text_size == 'h2'
-        assign char_width = 26
-      elsif section.settings.ticker_text_size == 'h3'
-        assign char_width = 22
-      elsif section.settings.ticker_text_size == 'h4'
-        assign char_width = 18
-      else
-        assign char_width = 12
-      endif
-
-      assign text_length = section.settings.ticker_text.size | default: 1
-      assign text_width = text_length | times: char_width
-      assign block_width = text_width | plus: 300
-      if section.settings.enable_image
-        assign block_width = text_width | plus: image_width
-      endif
-
-      assign ticker_elements_count = target_ticker_line_width | divided_by: block_width | at_least: 1 | plus: 2
-
-      assign min_duration = 60
-      assign max_duration = 140
-      assign speed = section.settings.ticker_speed
-      assign speed_range = 10
-      assign duration_range = max_duration | minus: min_duration
-      assign duration_temp = speed | times: duration_range | divided_by: speed_range
-      assign duration = max_duration | minus: duration_temp
-    %}
-
-    <div
-      class="ticker__wrapper ticker--{{ section.settings.ticker_direction }}{% if section.settings.ticker_pause_hover %} ticker--pause-hover{% endif %}"
-      style="--ticker-duration: {{ duration }}s;"
-    >
+    {%- if section.settings.enable_static_grid -%}
+      {% liquid
+        if section.settings.image != blank
+          assign grid_aspect_pct_num = 100 | divided_by: section.settings.image.aspect_ratio | round: 2
+          assign grid_aspect_pct = grid_aspect_pct_num | append: '%'
+        else
+          assign grid_aspect_pct = '75%'
+        endif
+      %}
       <div
-        class="ticker__line ticker__line--spacer"
-        style="visibility: hidden;opacity: 0;position: static;"
+        class="ticker__grid"
+        style="--grid-columns: {{ section.settings.grid_image_count }}; --grid-aspect-pct: {{ grid_aspect_pct }};"
       >
-        {% render 'ticker-block', settings: section.settings, section_index: section.index, is_spacer: true %}
-      </div>
-
-      <div class="ticker__line{% if speed == 0 %} ticker__line--stopped{% endif %}">
-        {%- for i in (1..ticker_elements_count) -%}
+        {%- for i in (1..section.settings.grid_image_count) -%}
           {% render 'ticker-block', settings: section.settings, section_index: section.index %}
         {%- endfor -%}
       </div>
+    {%- else -%}
+      {% liquid
+        assign target_ticker_line_width = 4000
+        assign image_width = section.settings.image_width
 
-      <div class="ticker__line ticker__line--second{% if speed == 0 %} ticker__line--hidden{% endif %}">
-        {%- for i in (1..ticker_elements_count) -%}
-          {% render 'ticker-block', settings: section.settings, section_index: section.index %}
-        {%- endfor -%}
+        if section.settings.ticker_text_size == 'h1'
+          assign char_width = 32
+        elsif section.settings.ticker_text_size == 'h2'
+          assign char_width = 26
+        elsif section.settings.ticker_text_size == 'h3'
+          assign char_width = 22
+        elsif section.settings.ticker_text_size == 'h4'
+          assign char_width = 18
+        else
+          assign char_width = 12
+        endif
+
+        assign text_length = section.settings.ticker_text.size | default: 1
+        assign text_width = text_length | times: char_width
+        assign block_width = text_width | plus: 300
+        if section.settings.enable_image
+          assign block_width = text_width | plus: image_width
+        endif
+
+        assign ticker_elements_count = target_ticker_line_width | divided_by: block_width | at_least: 1 | plus: 2
+
+        assign min_duration = 60
+        assign max_duration = 140
+        assign speed = section.settings.ticker_speed
+        assign speed_range = 10
+        assign duration_range = max_duration | minus: min_duration
+        assign duration_temp = speed | times: duration_range | divided_by: speed_range
+        assign duration = max_duration | minus: duration_temp
+      %}
+
+      <div
+        class="ticker__wrapper ticker--{{ section.settings.ticker_direction }}{% if section.settings.ticker_pause_hover %} ticker--pause-hover{% endif %}"
+        style="--ticker-duration: {{ duration }}s;"
+      >
+        <div
+          class="ticker__line ticker__line--spacer"
+          style="visibility: hidden;opacity: 0;position: static;"
+        >
+          {% render 'ticker-block', settings: section.settings, section_index: section.index, is_spacer: true %}
+        </div>
+
+        <div class="ticker__line{% if speed == 0 %} ticker__line--stopped{% endif %}">
+          {%- for i in (1..ticker_elements_count) -%}
+            {% render 'ticker-block', settings: section.settings, section_index: section.index %}
+          {%- endfor -%}
+        </div>
+
+        <div class="ticker__line ticker__line--second{% if speed == 0 %} ticker__line--hidden{% endif %}">
+          {%- for i in (1..ticker_elements_count) -%}
+            {% render 'ticker-block', settings: section.settings, section_index: section.index %}
+          {%- endfor -%}
+        </div>
       </div>
-    </div>
+    {%- endif -%}
 
     {%- if section.settings.ticker_link != blank -%}
       </a>
@@ -202,19 +221,37 @@
       "content": "t:sections.ticker.settings.ticker_settings_header.content"
     },
     {
+      "type": "checkbox",
+      "id": "enable_static_grid",
+      "default": false,
+      "label": "Display as static grid"
+    },
+    {
+      "type": "range",
+      "id": "grid_image_count",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Number of images in grid",
+      "visible_if": "{{ section.settings.enable_static_grid }}"
+    },
+    {
       "type": "range",
       "id": "ticker_speed",
       "min": 0,
       "max": 10,
       "step": 1,
       "default": 5,
-      "label": "t:sections.ticker.settings.ticker_speed.label"
+      "label": "t:sections.ticker.settings.ticker_speed.label",
+      "visible_if": "{{ section.settings.enable_static_grid == false }}"
     },
     {
       "type": "checkbox",
       "id": "ticker_pause_hover",
       "default": true,
-      "label": "t:sections.ticker.settings.ticker_pause_hover.label"
+      "label": "t:sections.ticker.settings.ticker_pause_hover.label",
+      "visible_if": "{{ section.settings.enable_static_grid == false }}"
     },
     {
       "type": "select",
@@ -230,7 +267,8 @@
         }
       ],
       "default": "left_to_right",
-      "label": "t:sections.ticker.settings.ticker_direction.label"
+      "label": "t:sections.ticker.settings.ticker_direction.label",
+      "visible_if": "{{ section.settings.enable_static_grid == false }}"
     },
     {
       "type": "url",
