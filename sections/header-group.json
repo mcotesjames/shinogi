@@ -81,7 +81,7 @@
         "logo": "shopify://shop_images/Vector.svg",
         "show_dm_logo_in_overlay_mode": true,
         "logo_position": "center-logo",
-        "logo_width": 150,
+        "logo_width": 200,
         "h1_logo": true,
         "enable_search": true,
         "search_button_type": "icon",
