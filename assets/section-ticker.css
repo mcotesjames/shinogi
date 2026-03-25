@@ -106,19 +106,15 @@
   gap: 1.6rem;
   width: 100%;
   padding: 0 1.2rem;
+  justify-items: center;
+  align-items: center;
 }
 .ticker__grid .ticker__block {
   margin-right: 0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-}
-.ticker__grid .ticker__image-wrapper {
-  width: 100% !important;
-  height: 0 !important;
-  padding-bottom: var(--grid-aspect-pct, 75%) !important;
-  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 .ticker__description {
   max-width: 49.8rem;

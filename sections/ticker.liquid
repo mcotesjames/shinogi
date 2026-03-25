@@ -20,17 +20,9 @@
     {%- endif -%}
 
     {%- if section.settings.enable_static_grid -%}
-      {% liquid
-        if section.settings.image != blank
-          assign grid_aspect_pct_num = 100 | divided_by: section.settings.image.aspect_ratio | round: 2
-          assign grid_aspect_pct = grid_aspect_pct_num | append: '%'
-        else
-          assign grid_aspect_pct = '75%'
-        endif
-      %}
       <div
         class="ticker__grid"
-        style="--grid-columns: {{ section.settings.grid_image_count }}; --grid-aspect-pct: {{ grid_aspect_pct }};"
+        style="--grid-columns: {{ section.settings.grid_image_count }};"
       >
         {%- for i in (1..section.settings.grid_image_count) -%}
           {% render 'ticker-block', settings: section.settings, section_index: section.index %}
