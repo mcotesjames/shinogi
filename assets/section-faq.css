@@ -37,6 +37,10 @@
 }
 @media (min-width: 1200px) {
   .faq .product-accordion {
-    padding: 1.8rem 1.2rem;
+    padding: 2rem;
   }
+}
+
+.faq .product-accordion__content p {
+  max-width: none;
 }
