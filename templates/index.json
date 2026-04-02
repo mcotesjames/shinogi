@@ -255,44 +255,28 @@
           "type": "location",
           "settings": {
             "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
+            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
           }
         },
         "location_giVLFE": {
           "type": "location",
           "settings": {
             "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_V3Kt74": {
-          "type": "location",
-          "settings": {
-            "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
+            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
           }
         },
         "location_6qFkkt": {
           "type": "location",
           "settings": {
             "group_name": "Paris",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_YiCAtd": {
-          "type": "location",
-          "settings": {
-            "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
+            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
           }
         }
       },
       "block_order": [
         "location_Kjm4n3",
         "location_giVLFE",
-        "location_V3Kt74",
-        "location_6qFkkt",
-        "location_YiCAtd"
+        "location_6qFkkt"
       ],
       "name": "t:sections.store-locations.presets.name",
       "settings": {
