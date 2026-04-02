@@ -96,7 +96,7 @@
         "ticker_text": "Your latest announcement",
         "ticker_text_size": "h5",
         "enable_image": true,
-        "image": "shopify://shop_images/Vector.svg",
+        "image": "shopify://shop_images/Vector_1.svg",
         "image_width": 200,
         "enable_static_grid": true,
         "grid_image_count": 3,
