@@ -65,7 +65,7 @@
               : locationNameToShow.offsetTop;
             locationsList.scrollTo({
               top: offset,
-              behavior: "smooth",
+              behavior: "instant",
             });
           } else {
             if (pageHeader) {
@@ -78,7 +78,7 @@
             const offset = absoluteElementTop - tabsPanelHeight;
             window.scrollTo({
               top: offset,
-              behavior: "smooth",
+              behavior: "instant",
             });
 
             if (pageHeader) {
