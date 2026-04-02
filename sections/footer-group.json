@@ -105,8 +105,8 @@
         "ticker_direction": "right_to_left",
         "ticker_link": "",
         "description": "",
-        "padding_top": "l",
-        "padding_bottom": "l",
+        "padding_top": "xl",
+        "padding_bottom": "xl",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -117,40 +117,22 @@
         "block_1": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer",
+            "heading": "Contact",
+            "menu": "contact",
             "default_open": true
-          }
-        },
-        "block_2": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick links",
-            "menu": "footer",
-            "default_open": false
-          }
-        },
-        "block_3": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick links",
-            "menu": "footer",
-            "default_open": false
           }
         },
         "block_4": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer",
+            "heading": "Support",
+            "menu": "support",
             "default_open": false
           }
         }
       },
       "block_order": [
         "block_1",
-        "block_2",
-        "block_3",
         "block_4"
       ],
       "settings": {
