@@ -42,6 +42,7 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1);
+  padding: 12.5%;
 }
 .store-locations__image.highlight--item {
   display: block;
@@ -56,15 +57,9 @@
 }
 @media (min-width: 990px) {
   .store-locations__list {
-    width: min(64rem, 50%);
     overflow: hidden;
     flex-shrink: 0;
     padding-top: 5.7rem;
-  }
-}
-@media (min-width: 1360px) {
-  .store-locations__list {
-    width: min(64rem, 50%);
   }
 }
 .store-locations__tabs {
