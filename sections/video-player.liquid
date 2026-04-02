@@ -59,6 +59,8 @@
                 src="{{ section.settings.video_url }}"
                 {% if section.settings.autoplay %}autoplay muted{% endif %}
                 {% if section.settings.loop %}loop{% endif %}
+                {% if section.settings.poster_image != blank %}poster="{{ section.settings.poster_image | image_url: width: 1920 }}"{% endif %}
+                preload="{{ section.settings.preload | default: 'auto' }}"
                 playsinline
               ></video>
             </video-minimal-skin>
@@ -122,6 +124,24 @@
       "id": "loop",
       "label": "Loop",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "preload",
+      "label": "Preload",
+      "info": "Controls how much the browser buffers before playback. 'Auto' begins downloading immediately for the best experience on slow connections.",
+      "options": [
+        { "value": "auto", "label": "Auto (recommended)" },
+        { "value": "metadata", "label": "Metadata only" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image",
+      "label": "Poster image",
+      "info": "Shown while the video is loading. Improves perceived performance on slow connections."
     },
     {
       "type": "header",
