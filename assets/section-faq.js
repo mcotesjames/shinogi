@@ -29,10 +29,15 @@
     });
   };
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    initFaqAccordion(document.currentScript.parentElement)
-  );
+  const initAll = () => {
+    document.querySelectorAll(".faq-section").forEach(initFaqAccordion);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAll);
+  } else {
+    initAll();
+  }
 
   document.addEventListener("shopify:section:load", function (event) {
     initFaqAccordion(event.target);
