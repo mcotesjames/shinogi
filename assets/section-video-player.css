@@ -1,10 +1,16 @@
 .video-player-section {
   width: 100%;
-  padding-block: 1.5rem;
 }
 
 .video-player-wrapper {
   width: 100%;
+  padding-block: 0;
+}
+
+@media (min-width: 576px) {
+.video-player-wrapper {
+    padding-block: 2.5rem;
+  }
 }
 
 .video-player-wrapper video-player {
