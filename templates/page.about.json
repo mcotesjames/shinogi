@@ -110,16 +110,60 @@
     },
     "video_player_fagei8": {
       "type": "video-player",
+      "blocks": {
+        "timestamp_qtXh9b": {
+          "type": "timestamp",
+          "settings": {
+            "label": "Chapter 001",
+            "timestamp": "0:00"
+          }
+        },
+        "timestamp_DdncWi": {
+          "type": "timestamp",
+          "settings": {
+            "label": "Chapter 002",
+            "timestamp": "0:00"
+          }
+        },
+        "timestamp_TFUaAV": {
+          "type": "timestamp",
+          "settings": {
+            "label": "Chapter 003",
+            "timestamp": "0:00"
+          }
+        },
+        "timestamp_mRwXLT": {
+          "type": "timestamp",
+          "settings": {
+            "label": "Chapter 004",
+            "timestamp": "0:00"
+          }
+        },
+        "timestamp_TagKPm": {
+          "type": "timestamp",
+          "settings": {
+            "label": "Chapter 005",
+            "timestamp": "0:00"
+          }
+        }
+      },
+      "block_order": [
+        "timestamp_qtXh9b",
+        "timestamp_DdncWi",
+        "timestamp_TFUaAV",
+        "timestamp_mRwXLT",
+        "timestamp_TagKPm"
+      ],
       "name": "Video Player",
       "settings": {
         "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100627",
         "autoplay": false,
         "loop": false,
-        "eyebrow": "With Matt Abergel",
+        "eyebrow": "",
         "heading": "How-To",
         "heading_size": "h3",
         "heading_tag": "h2",
-        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ligula lectus, lobortis vitae efficitur a, rhoncus et arcu. In non diam vel quam ullamcorper efficitur.</p>",
+        "description": "",
         "heading_group_button_show": false,
         "button_label": "",
         "button_link": "",
