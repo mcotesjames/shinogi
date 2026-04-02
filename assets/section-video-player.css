@@ -1,0 +1,18 @@
+.video-player-section {
+  width: 100%;
+}
+
+.video-player-wrapper {
+  width: 100%;
+}
+
+.video-player-wrapper video-player {
+  display: block;
+  width: 100%;
+}
+
+.video-player-wrapper video-player video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
