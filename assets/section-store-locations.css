@@ -56,7 +56,7 @@
 }
 @media (min-width: 990px) {
   .store-locations__list {
-    width: min(64rem, 40%);
+    width: min(64rem, 50%);
     overflow: hidden;
     flex-shrink: 0;
     padding-top: 5.7rem;
