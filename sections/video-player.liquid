@@ -8,7 +8,7 @@
 {%- endstyle -%}
 
 <div class="video-player-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} background{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
-  <div class="video-with-text{% if section.settings.reverse_columns %} video-with-text--reversed{% endif %}">
+  <div class="video-with-text{% if section.settings.columns == '1' %} video-with-text--single{% elsif section.settings.reverse_columns %} video-with-text--reversed{% endif %}">
 
     <div class="video-with-text__text">
       {%- if section.settings.eyebrow != blank -%}
@@ -35,6 +35,18 @@
             btn_style: section.settings.button_style
           %}
         </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="video-timestamps">
+          {%- for block in section.blocks -%}
+            <li class="video-timestamps__item" {{ block.shopify_attributes }}>
+              <a href="#" class="video-timestamps__link h6" data-timestamp="{{ block.settings.timestamp }}">
+                {{- block.settings.label -}}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
       {%- endif -%}
     </div>
 
@@ -63,6 +75,27 @@
   "name": "Video Player",
   "tag": "section",
   "class": "video-player-section-wrapper",
+  "blocks": [
+    {
+      "type": "timestamp",
+      "name": "Timestamp",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Chapter title"
+        },
+        {
+          "type": "text",
+          "id": "timestamp",
+          "label": "Timestamp",
+          "info": "Format: 0:00",
+          "default": "0:00"
+        }
+      ]
+    }
+  ],
   "enabled_on": {
     "templates": ["*"]
   },
@@ -176,10 +209,21 @@
       "content": "Layout"
     },
     {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2 columns" },
+        { "value": "1", "label": "1 column" }
+      ],
+      "default": "2"
+    },
+    {
       "type": "checkbox",
       "id": "reverse_columns",
       "label": "Video on left",
-      "default": false
+      "default": false,
+      "visible_if": "{{ section.settings.columns == '2' }}"
     },
     {
       "type": "color_scheme",

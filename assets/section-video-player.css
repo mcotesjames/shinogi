@@ -40,12 +40,30 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.6rem;
-  padding: 2.4rem;
+  padding-block: 2.4rem;
 }
 
 .video-with-text__video {
   grid-area: video;
+}
+
+/* Single-column layout */
+
+.video-with-text--single {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "text"
+    "video";
+}
+
+.video-with-text--single .video-with-text__video {
+  border-left: none;
+  border-right: none;
+  width: 100%;
+}
+
+.video-with-text--single .video-with-text__text {
+  display: none;
 }
 
 /* ==========================================================================
@@ -58,6 +76,9 @@
 
 .video-with-text__heading {
   margin: 0;
+  padding-inline: 1.2rem;
+  width: 100%;
+  padding-bottom: 1.2rem;
 }
 
 .video-with-text__description {
@@ -70,6 +91,33 @@
 
 .video-with-text__btn-wrapper {
   margin-top: 0.8rem;
+}
+
+.video-timestamps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.video-timestamps__item {
+  border-top: 0.1rem solid rgb(var(--color-border));
+  padding: 1rem 1.2rem;
+}
+
+.video-timestamps__item:last-child {
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+}
+
+.video-timestamps__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: calc(var(--font-button-scale) * 1rem);
+}
+
+.video-timestamps__link:hover {
+  opacity: 0.7;
 }
 
 /* ==========================================================================
