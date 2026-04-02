@@ -344,7 +344,7 @@
       "settings": {
         "color_scheme": "",
         "section_ratio_desktop": "24/11",
-        "enable_border_top": true,
+        "enable_border_top": false,
         "enable_border_bottom": true,
         "heading": "",
         "heading_font": "body",
