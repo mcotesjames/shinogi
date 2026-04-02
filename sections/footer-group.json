@@ -138,8 +138,8 @@
       "settings": {
         "main_color_scheme": "background-1",
         "enable_border_top": true,
-        "left_menu_1_heading": "Menu",
-        "left_menu_1": "customer-account-main-menu",
+        "left_menu_1_heading": "Follow",
+        "left_menu_1": "socials",
         "left_menu_2_heading": "Menu",
         "left_menu_2": "",
         "left_menu_3_heading": "Menu",
