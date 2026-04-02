@@ -114,7 +114,7 @@
         "faq_group_dyLFQz": {
           "type": "_faq-group",
           "settings": {
-            "group_heading": "FAQ Category",
+            "group_heading": "Product",
             "group_heading_font": "heading",
             "group_heading_size": "h6",
             "group_heading_tag": "h3"
@@ -157,7 +157,7 @@
         "faq_group_wDqWXN": {
           "type": "_faq-group",
           "settings": {
-            "group_heading": "FAQ Category",
+            "group_heading": "Shipping",
             "group_heading_font": "heading",
             "group_heading_size": "h6",
             "group_heading_tag": "h3"
