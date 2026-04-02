@@ -294,75 +294,6 @@
         "margin_bottom": "no-indent"
       }
     },
-    "store_locations_WipAPa": {
-      "type": "store-locations",
-      "blocks": {
-        "location_G8FwfB": {
-          "type": "location",
-          "settings": {
-            "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_7Q7JQE": {
-          "type": "location",
-          "settings": {
-            "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_W7jA6M": {
-          "type": "location",
-          "settings": {
-            "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_GHkjmB": {
-          "type": "location",
-          "settings": {
-            "group_name": "Paris",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        },
-        "location_UFWcDi": {
-          "type": "location",
-          "settings": {
-            "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href='/'>Get in touch</a></p>"
-          }
-        }
-      },
-      "block_order": [
-        "location_G8FwfB",
-        "location_7Q7JQE",
-        "location_W7jA6M",
-        "location_GHkjmB",
-        "location_UFWcDi"
-      ],
-      "name": "t:sections.store-locations.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "section_ratio_desktop": "24/11",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h4",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "heading_location_size": "h4",
-        "heading_location_tag": "h2",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
     "lookbook_dr4jXp": {
       "type": "lookbook",
       "blocks": {
@@ -529,7 +460,6 @@
     "rich_text",
     "video_player_fagei8",
     "faq_4hTtTg",
-    "store_locations_WipAPa",
     "lookbook_dr4jXp",
     "social_media_kjcK6f"
   ]
