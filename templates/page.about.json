@@ -349,6 +349,7 @@
         "image_gF9G4M",
         "image_XkeQAM"
       ],
+      "disabled": true,
       "name": "t:sections.social-media.presets.name",
       "settings": {
         "color_scheme": "",
