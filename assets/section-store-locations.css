@@ -52,7 +52,7 @@
   animation: fadeIn 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .store-locations__list {
-  width: 100%;
+  width: 50%;
   position: relative;
 }
 @media (min-width: 990px) {
