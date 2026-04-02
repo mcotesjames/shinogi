@@ -105,8 +105,8 @@
         "ticker_direction": "right_to_left",
         "ticker_link": "",
         "description": "",
-        "padding_top": "xs",
-        "padding_bottom": "xs",
+        "padding_top": "s",
+        "padding_bottom": "s",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -138,6 +138,14 @@
       "settings": {
         "main_color_scheme": "background-1",
         "enable_border_top": true,
+        "left_menu_1_heading": "Menu",
+        "left_menu_1": "customer-account-main-menu",
+        "left_menu_2_heading": "Menu",
+        "left_menu_2": "",
+        "left_menu_3_heading": "Menu",
+        "left_menu_3": "",
+        "left_social_menu_heading": "Social",
+        "left_social_menu": "",
         "show_contact": false,
         "contact_heading": "Contact",
         "show_logo": false,
