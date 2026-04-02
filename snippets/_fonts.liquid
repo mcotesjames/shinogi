@@ -85,9 +85,9 @@
     --font-body-letter-spacing: {{ settings.type_body_letter_spacing | divided_by: 10.0 }}em;
 
     /* SUBTITLE */
-    --font-subtitle-family: {{ settings.type_subtitle_font.family }}, {{ settings.type_subtitle_font.fallback_families }};
+    --font-subtitle-family: var(--font-custom-chargevector-family), {{ settings.type_subtitle_font.fallback_families }};
     --font-subtitle-style: {{ settings.type_subtitle_font.style }};
-    --font-subtitle-weight: {{ settings.type_subtitle_font.weight }};
+    --font-subtitle-weight: 700;
     --font-subtitle-text-transform: {{ settings.subtitle_text_transform }};
     --font-subtitle-scale: {{ settings.subtitle_scale | divided_by: 100.0 }};
     --font-subtitle-letter-spacing: {{ settings.subtitle_letter_spacing | divided_by: 10.0 }}em;

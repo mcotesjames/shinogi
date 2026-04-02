@@ -50,11 +50,82 @@
     %}
     <div class="footer-main container color-{{ section.settings.main_color_scheme }} background{% if is_lg_breakpoint %} footer-main--lg-breakpoint{% endif %}{% if is_md_breakpoint %} footer-main--md-breakpoint{% endif %}">
       <div class="footer-main-wrapper">
+
+        {% comment %} ----- FOOTER LEFT COLUMN ----- {% endcomment %}
+        <div class="footer-main-left">
+          {%- for i in (1..3) -%}
+            {%- assign menu_id = 'left_menu_' | append: i -%}
+            {%- assign heading_id = 'left_menu_' | append: i | append: '_heading' -%}
+            {%- if section.settings[menu_id] != blank -%}
+              <div class="footer-block footer-menu-block">
+                <details class="footer-menu-block-mobile-element">
+                  <summary>
+                    <h3 class="footer-block__heading subtitle h6">{{- section.settings[heading_id] | escape -}}</h3>
+                    {% render 'icon-chevron' %}
+                  </summary>
+                  <ul class="footer-menu-block-list list-unstyled">
+                    {%- for link in section.settings[menu_id].links -%}
+                      <li class="footer-menu-block-list__item">
+                        <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
+                          <span class="hover-underlined-link">{{- link.title -}}</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </details>
+                <h3 class="footer-block__heading subtitle h6 footer-menu-block-desktop-element">{{- section.settings[heading_id] | escape -}}</h3>
+                <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
+                  {%- for link in section.settings[menu_id].links -%}
+                    <li class="footer-menu-block-list__item">
+                      <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
+                        <span class="hover-underlined-link">{{- link.title -}}</span>
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if section.settings.left_social_menu != blank -%}
+            <div class="footer-block footer-menu-block">
+              <details class="footer-menu-block-mobile-element">
+                <summary>
+                  <h3 class="footer-block__heading subtitle h6">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
+                  {% render 'icon-chevron' %}
+                </summary>
+                <ul class="footer-menu-block-list list-unstyled">
+                  {%- for link in section.settings.left_social_menu.links -%}
+                    <li class="footer-menu-block-list__item">
+                      <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
+                        <span class="hover-underlined-link">{{- link.title -}}</span>
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+              <h3 class="footer-block__heading subtitle h6 footer-menu-block-desktop-element">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
+              <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
+                {%- for link in section.settings.left_social_menu.links -%}
+                  <li class="footer-menu-block-list__item">
+                    <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
+                      <span class="hover-underlined-link">{{- link.title -}}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {% comment %} ----- FOOTER RIGHT COLUMN ----- {% endcomment %}
+        <div class="footer-main-right">
+
         {% comment %} ----- FOOTER NEWSLETTER FORM ----- {% endcomment %}
         {%- if section.settings.show_newsletter -%}
           <div class="footer-block footer-subscribe-block">
             {% if section.settings.newsletter_heading != blank %}
-              <h3 class="footer-block__heading subtitle">
+              <h3 class="footer-block__heading subtitle h6">
                 {{- section.settings.newsletter_heading -}}
               </h3>
             {% endif %}
@@ -181,7 +252,7 @@
                         {% endif %}
                       >
                         <summary>
-                          <h3 class="footer-block__heading subtitle">
+                          <h3 class="footer-block__heading subtitle h6">
                             {{- block.settings.heading | escape -}}
                           </h3>
                           {% render 'icon-chevron' %}
@@ -206,7 +277,7 @@
                       </details>
 
                       {% comment %} DESKTOP LAYOUT {% endcomment %}
-                      <h3 class="footer-block__heading subtitle footer-menu-block-desktop-element">
+                      <h3 class="footer-block__heading subtitle h6 footer-menu-block-desktop-element">
                         {{- block.settings.heading | escape -}}
                       </h3>
 
@@ -237,7 +308,7 @@
         {%- if section.settings.show_contact -%}
           <div class="footer-block footer-contact-block{% if section.settings.show_newsletter == false %} left-on-desktop{% endif %}">
             {%- if section.settings.contact_heading != blank %}
-              <h3 class="footer-block__heading subtitle">
+              <h3 class="footer-block__heading subtitle h6">
                 {{- section.settings.contact_heading -}}
               </h3>
             {%- endif -%}
@@ -316,6 +387,8 @@
             {%- endif -%}
           </div>
         {%- endif -%}
+
+        </div>{% comment %} end footer-main-right {% endcomment %}
       </div>
     </div>
   {%- endif -%}
@@ -433,6 +506,62 @@
       "id": "enable_border_top",
       "default": false,
       "label": "t:sections.all.borders.enable_border_top.label"
+    },
+    {
+      "type": "header",
+      "content": "Left column menus"
+    },
+    {
+      "type": "text",
+      "id": "left_menu_1_heading",
+      "label": "Menu 1 heading",
+      "default": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "left_menu_1",
+      "label": "Menu 1"
+    },
+    {
+      "type": "text",
+      "id": "left_menu_2_heading",
+      "label": "Menu 2 heading",
+      "default": "Menu",
+      "visible_if": "{{ section.settings.left_menu_1 != blank }}"
+    },
+    {
+      "type": "link_list",
+      "id": "left_menu_2",
+      "label": "Menu 2",
+      "visible_if": "{{ section.settings.left_menu_1 != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "left_menu_3_heading",
+      "label": "Menu 3 heading",
+      "default": "Menu",
+      "visible_if": "{{ section.settings.left_menu_2 != blank }}"
+    },
+    {
+      "type": "link_list",
+      "id": "left_menu_3",
+      "label": "Menu 3",
+      "visible_if": "{{ section.settings.left_menu_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Social menu"
+    },
+    {
+      "type": "text",
+      "id": "left_social_menu_heading",
+      "label": "Social menu heading",
+      "default": "Social"
+    },
+    {
+      "type": "link_list",
+      "id": "left_social_menu",
+      "label": "Social menu"
     },
     {
       "type": "header",
