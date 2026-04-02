@@ -64,7 +64,7 @@
 }
 @media (min-width: 1360px) {
   .store-locations__list {
-    width: min(64rem, 33.3%);
+    width: min(64rem, 50%);
   }
 }
 .store-locations__tabs {
