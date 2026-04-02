@@ -103,7 +103,7 @@
 
 .video-with-text__heading {
   margin: 0;
-  padding: 0rem 1.2rem 1rem;
+  padding: 0rem 3% 1.2rem;
   width: 100%;
 }
 
@@ -129,7 +129,7 @@
 
 .video-timestamps__item {
   border-top: 0.1rem solid rgb(var(--color-border));
-  padding: 1rem 1.2rem;
+  padding: 1rem;
 }
 
 .video-timestamps__item:last-child {
