@@ -105,8 +105,8 @@
         "ticker_direction": "right_to_left",
         "ticker_link": "",
         "description": "",
-        "padding_top": "s",
-        "padding_bottom": "s",
+        "padding_top": "xl",
+        "padding_bottom": "xl",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
