@@ -60,6 +60,32 @@
         "margin_bottom": "no-indent"
       }
     },
+    "video_player_fagei8": {
+      "type": "video-player",
+      "name": "Video Player",
+      "settings": {
+        "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100627",
+        "autoplay": false,
+        "loop": false,
+        "eyebrow": "With Matt Abergel",
+        "heading": "How-To",
+        "heading_size": "h3",
+        "heading_tag": "h2",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ligula lectus, lobortis vitae efficitur a, rhoncus et arcu. In non diam vel quam ullamcorper efficitur.</p>",
+        "heading_group_button_show": false,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "tertiary",
+        "reverse_columns": true,
+        "color_scheme": "",
+        "enable_border_top": true,
+        "enable_border_bottom": true,
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -105,32 +131,6 @@
         "vertical_alignment": "stretch",
         "text_alignment": "left",
         "margin_top": "m",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "video_player_fagei8": {
-      "type": "video-player",
-      "name": "Video Player",
-      "settings": {
-        "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100627",
-        "autoplay": false,
-        "loop": false,
-        "eyebrow": "With Matt Abergel",
-        "heading": "How-To",
-        "heading_size": "h3",
-        "heading_tag": "h2",
-        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ligula lectus, lobortis vitae efficitur a, rhoncus et arcu. In non diam vel quam ullamcorper efficitur.</p>",
-        "heading_group_button_show": false,
-        "button_label": "",
-        "button_link": "",
-        "button_style": "tertiary",
-        "reverse_columns": true,
-        "color_scheme": "",
-        "enable_border_top": true,
-        "enable_border_bottom": true,
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
-        "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
     },
@@ -411,9 +411,9 @@
   },
   "order": [
     "slideshow_b67h6Y",
-    "rich_text",
     "video_player_fagei8",
     "faq_4hTtTg",
+    "rich_text",
     "lookbook_dr4jXp",
     "social_media_kjcK6f"
   ]
