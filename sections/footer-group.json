@@ -163,11 +163,11 @@
         "enable_country_selector": true,
         "enable_language_selector": true,
         "region_color_scheme": "",
-        "payment_enable": true,
-        "enable_copyright": true,
-        "enable_copyright_date": true,
-        "show_policy": true,
-        "enable_follow_on_shop": true
+        "payment_enable": false,
+        "enable_copyright": false,
+        "enable_copyright_date": false,
+        "show_policy": false,
+        "enable_follow_on_shop": false
       }
     }
   },
