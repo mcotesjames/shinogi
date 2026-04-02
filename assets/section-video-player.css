@@ -2,16 +2,92 @@
   width: 100%;
 }
 
-.video-player-wrapper {
-  width: 100%;
-  padding-block: 0;
+/* ==========================================================================
+   Two-column layout
+   ========================================================================== */
+
+.video-with-text {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "text"
+    "video";
 }
 
-@media (min-width: 576px) {
-.video-player-wrapper {
-    padding-block: 2.5rem;
+@media (min-width: 750px) {
+  .video-with-text {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "text video";
+    align-items: start;
+  }
+
+  .video-with-text--reversed {
+    grid-template-areas: "video text";
+  }
+
+  .video-with-text__video {
+    border-left: 0.1rem solid rgb(var(--color-border));
+  }
+
+  .video-with-text--reversed .video-with-text__video {
+    border-left: none;
+    border-right: 0.1rem solid rgb(var(--color-border));
   }
 }
+
+.video-with-text__text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding: 2.4rem;
+}
+
+.video-with-text__video {
+  grid-area: video;
+}
+
+/* ==========================================================================
+   Text column content
+   ========================================================================== */
+
+.video-with-text__eyebrow {
+  margin: 0;
+}
+
+.video-with-text__heading {
+  margin: 0;
+}
+
+.video-with-text__description {
+  margin: 0;
+}
+
+.video-with-text__description p {
+  max-width: none!important;
+}
+
+.video-with-text__btn-wrapper {
+  margin-top: 0.8rem;
+}
+
+/* ==========================================================================
+   Video player wrapper
+   ========================================================================== */
+
+.video-player-wrapper {
+  width: 100%;
+  padding: 0;
+  --media-border-radius: 0;
+  --media-video-border-radius: 0;
+}
+
+/* @media (min-width: 576px) {
+  .video-player-wrapper {
+    padding: 2.5rem;
+  }
+} */
 
 .video-player-wrapper video-player {
   display: block;
