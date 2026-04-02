@@ -1,0 +1,123 @@
+<div class="faq__group">
+  <div class="faq__group-title">
+    {%- if block.settings.group_heading != blank -%}
+      <{{ block.settings.group_heading_tag | default: 'h3' }} class="{% if block.settings.group_heading_font == 'heading'%}{{ block.settings.group_heading_size }}{% elsif block.settings.group_heading_font == 'subtitle' %}subtitle{% else %}title font--body{% endif %} richtext-link-inside">
+        {{- block.settings.group_heading -}}
+      </{{ block.settings.group_heading_tag | default: 'h3' }}>
+    {%- endif -%}
+  </div>
+
+  <div class="faq__group-details">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Group",
+  "tag": "div",
+  "class": "faq-group-block",
+  "blocks": [{ "type": "_faq-item" }],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "group_heading",
+      "label": "t:sections.all.heading.label",
+      "default": "FAQ Category"
+    },
+    {
+      "type": "select",
+      "id": "group_heading_font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:sections.all.heading_font.options__1.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.all.heading_font.options__2.label"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.all.heading_font.options__3.label"
+        }
+      ],
+      "default": "heading",
+      "label": "t:sections.all.heading_font.label",
+      "visible_if": "{{ block.settings.group_heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "group_heading_size",
+      "options": [
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_size.options__6.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_size.options__5.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        }
+      ],
+      "default": "h6",
+      "label": "t:sections.all.heading_size.label",
+      "visible_if": "{{ block.settings.group_heading != blank and block.settings.group_heading_font == 'heading' }}"
+    },
+    {
+      "type": "select",
+      "id": "group_heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ block.settings.group_heading != blank and block.settings.group_heading_font == 'heading' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Group"
+    }
+  ]
+}
+{% endschema %}

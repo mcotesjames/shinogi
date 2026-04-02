@@ -1,0 +1,76 @@
+{%- liquid
+  assign has_question = false
+  if block.settings.question != blank
+    assign has_question = true
+  endif
+
+  assign has_answer = false
+  if block.settings.answer != blank
+    assign has_answer = true
+  endif
+-%}
+
+<div class="faq__item">
+  {%- if has_question -%}
+    <div class="product-accordion">
+      <button
+        class="button button--simple product-accordion__toggle{% if block.settings.default_open %} active{% endif %} focus-inset"
+        aria-label="{{ block.settings.question | escape }}"
+        aria-expanded="{% if block.settings.default_open %}true{% else %}false{% endif %}"
+      >
+        <div class="button__content">
+          <span class="button__label" data-label="{{- block.settings.question | escape -}}">
+            {{- block.settings.question -}}
+          </span>
+          {%- if has_answer -%}
+            <div class="product-accordion__icon">
+              {% render 'icon-plus-dropdown' %}
+              {% render 'icon-minus-dropdown' %}
+            </div>
+          {%- endif -%}
+        </div>
+      </button>
+
+      {%- if has_answer -%}
+        <div class="product-accordion__content{% if block.settings.default_open %} active{% endif %}">
+          <div class="rte">
+            {{- block.settings.answer -}}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Item",
+  "tag": "div",
+  "class": "faq-item-block",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "question",
+      "label": "Question",
+      "default": "Frequently asked question"
+    },
+    {
+      "type": "richtext",
+      "id": "answer",
+      "label": "Answer",
+      "default": "<p>Answer to the frequently asked question.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "default_open",
+      "label": "Open by default",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Item"
+    }
+  ]
+}
+{% endschema %}
