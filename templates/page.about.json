@@ -168,6 +168,8 @@
         "button_label": "",
         "button_link": "",
         "button_style": "tertiary",
+        "columns": "1",
+        "aspect_ratio": "1.7778",
         "reverse_columns": true,
         "color_scheme": "",
         "enable_border_top": true,
