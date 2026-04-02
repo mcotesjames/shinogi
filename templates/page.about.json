@@ -60,6 +60,54 @@
         "margin_bottom": "no-indent"
       }
     },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where structure and purpose define strength, balance, and lasting integrity",
+            "heading_size": "h4",
+            "heading_tag": "h3"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Rooted in the Japanese concept of shinogi – the ridgeline or backbone of a blade – SHINOGI systems are built with technical intent, shaped by real use, and refined through restraint. In traditional sword-making, the shinogi is not ornamental. It is essential. It provides strength, balance, and integrity. This philosophy is applied to every SHINOGI product, beginning with Case 15–25. Nothing is added without reason. Nothing exists without function. The result is equipment designed to endure time, movement, and daily wear.</p><p>Founded by chef Matt Abergel, SHINOGI reflects a deep appreciation for Japanese craftsmanship and the thinking behind it: mastery through precision, strength through simplicity, and beauty born from function. With both his father and grandfather working as carpenters, Matt learned early that the integrity of a tool lies not only in the quality of its materials, but in how they are treated. This understanding, central to Japanese cuisine and craft, shaped his approach long before he entered professional kitchens and became further reinforced through years of building and leading restaurants, beginning with Yardbird in 2011 and most recently, Always Joy.</p><p>Matt started SHINOGI to create the products he wanted to use. The first system, Case 15–25, represents a decade of research, development, and refinement (2015–2025): a knife case designed to perform at the same level as the tools it protects, and built with the same rigor as the craft itself.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "layout": "row",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "enable_image": false,
+        "image_width": 396,
+        "image_aspect_ratio": "square",
+        "image_aspect_ratio_mobile": "adapt",
+        "object_fit": "cover",
+        "objects_order": "content_first",
+        "vertical_alignment": "stretch",
+        "text_alignment": "left",
+        "margin_top": "m",
+        "margin_bottom": "no-indent"
+      }
+    },
     "video_player_fagei8": {
       "type": "video-player",
       "name": "Video Player",
@@ -197,54 +245,6 @@
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
         "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Where structure and purpose define strength, balance, and lasting integrity",
-            "heading_size": "h4",
-            "heading_tag": "h3"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Rooted in the Japanese concept of shinogi – the ridgeline or backbone of a blade – SHINOGI systems are built with technical intent, shaped by real use, and refined through restraint. In traditional sword-making, the shinogi is not ornamental. It is essential. It provides strength, balance, and integrity. This philosophy is applied to every SHINOGI product, beginning with Case 15–25. Nothing is added without reason. Nothing exists without function. The result is equipment designed to endure time, movement, and daily wear.</p><p>Founded by chef Matt Abergel, SHINOGI reflects a deep appreciation for Japanese craftsmanship and the thinking behind it: mastery through precision, strength through simplicity, and beauty born from function. With both his father and grandfather working as carpenters, Matt learned early that the integrity of a tool lies not only in the quality of its materials, but in how they are treated. This understanding, central to Japanese cuisine and craft, shaped his approach long before he entered professional kitchens and became further reinforced through years of building and leading restaurants, beginning with Yardbird in 2011 and most recently, Always Joy.</p><p>Matt started SHINOGI to create the products he wanted to use. The first system, Case 15–25, represents a decade of research, development, and refinement (2015–2025): a knife case designed to perform at the same level as the tools it protects, and built with the same rigor as the craft itself.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "layout": "row",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "heading": "",
-        "heading_font": "body",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "enable_image": false,
-        "image_width": 396,
-        "image_aspect_ratio": "square",
-        "image_aspect_ratio_mobile": "adapt",
-        "object_fit": "cover",
-        "objects_order": "content_first",
-        "vertical_alignment": "stretch",
-        "text_alignment": "left",
-        "margin_top": "m",
         "margin_bottom": "no-indent"
       }
     },
@@ -411,9 +411,9 @@
   },
   "order": [
     "slideshow_b67h6Y",
+    "rich_text",
     "video_player_fagei8",
     "faq_4hTtTg",
-    "rich_text",
     "lookbook_dr4jXp",
     "social_media_kjcK6f"
   ]
