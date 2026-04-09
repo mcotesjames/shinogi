@@ -89,14 +89,14 @@
     "ticker": {
       "type": "ticker",
       "settings": {
-        "color_scheme": "background-4",
+        "color_scheme": "background-1",
         "enable_border_top": false,
         "enable_border_bottom": false,
         "enable_ticker_text": false,
         "ticker_text": "Your latest announcement",
         "ticker_text_size": "h5",
         "enable_image": true,
-        "image": "shopify://shop_images/Vector_1.svg",
+        "image": "shopify://shop_images/Vector.svg",
         "image_width": 200,
         "enable_static_grid": true,
         "grid_image_count": 3,
