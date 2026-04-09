@@ -99,7 +99,7 @@
         "image": "shopify://shop_images/Vector.svg",
         "image_width": 200,
         "enable_static_grid": true,
-        "grid_image_count": 3,
+        "grid_image_count": 1,
         "ticker_speed": 0,
         "ticker_pause_hover": true,
         "ticker_direction": "right_to_left",
