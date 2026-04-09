@@ -6,7 +6,7 @@
   {% render 'section-margin' %}
 {%- endstyle -%}
 
-<div class="faq section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} background{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
+<div id="faqs" class="faq section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} background{% if section.settings.enable_border_top %} section-border-top{% endif %}{% if section.settings.enable_border_bottom %} section-border-bottom{% endif %}">
   {% render 'heading-group', settings: section.settings, class: 'faq-header' %}
 
   {% content_for 'blocks' %}
