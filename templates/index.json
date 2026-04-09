@@ -215,7 +215,7 @@
         "section_ratio_desktop": "adapt",
         "objects_order": "content_first",
         "enable_border_top": false,
-        "enable_border_bottom": true,
+        "enable_border_bottom": false,
         "heading": "",
         "heading_font": "body",
         "heading_size": "h6",
@@ -244,59 +244,6 @@
         "content_horizontal_alignment_mobile": "left",
         "padding_top": "s",
         "padding_bottom": "s",
-        "margin_top": "no-indent",
-        "margin_bottom": "no-indent"
-      }
-    },
-    "store_locations_8CCHHb": {
-      "type": "store-locations",
-      "blocks": {
-        "location_Kjm4n3": {
-          "type": "location",
-          "settings": {
-            "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
-          }
-        },
-        "location_giVLFE": {
-          "type": "location",
-          "settings": {
-            "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
-          }
-        },
-        "location_6qFkkt": {
-          "type": "location",
-          "settings": {
-            "group_name": "Paris",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>"
-          }
-        }
-      },
-      "block_order": [
-        "location_Kjm4n3",
-        "location_giVLFE",
-        "location_6qFkkt"
-      ],
-      "name": "t:sections.store-locations.presets.name",
-      "settings": {
-        "color_scheme": "",
-        "section_ratio_desktop": "24/11",
-        "enable_border_top": false,
-        "enable_border_bottom": true,
-        "heading": "Stockist",
-        "heading_font": "heading",
-        "heading_size": "h6",
-        "heading_tag": "h2",
-        "heading_group_button_show": false,
-        "heading_group_button_label": "Learn More",
-        "heading_group_button_link": "",
-        "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
-        "heading_location_size": "h4",
-        "heading_location_tag": "h2",
-        "padding_top": "no-indent",
-        "padding_bottom": "no-indent",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -762,7 +709,6 @@
     "image_gallery_TV8JjT",
     "featured_product_b8f8Hz",
     "text_banner_TkfCzB",
-    "store_locations_8CCHHb",
     "image_gallery_rKJJqP",
     "lookbook_pMJi4z",
     "lookbook_kG64td",
