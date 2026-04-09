@@ -27,7 +27,7 @@
         "heading_group_enable_border_bottom": true,
         "position": "center",
         "heading_form": "Contact",
-        "heading_form_size": "h5",
+        "heading_form_size": "h4",
         "heading_form_tag": "h3",
         "text_form": "Submit an enquiry and we will respond directly",
         "additional_text": "",
