@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "page_info": {
@@ -63,8 +72,8 @@
         "enable_border_bottom": false,
         "heading": "STOCKISTS",
         "heading_font": "heading",
-        "heading_size": "h3",
-        "heading_tag": "h2",
+        "heading_size": "h1",
+        "heading_tag": "h1",
         "heading_group_button_show": false,
         "heading_group_button_label": "Learn More",
         "heading_group_button_link": "",
