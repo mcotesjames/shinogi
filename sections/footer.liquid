@@ -73,7 +73,7 @@
                     {%- endfor -%}
                   </ul>
                 </details>
-                <h3 class="footer-block__heading h5 footer-menu-block-desktop-element">{{- section.settings[heading_id] | escape -}}</h3>
+                <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">{{- section.settings[heading_id] | escape -}}</h3>
                 <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
                   {%- for link in section.settings[menu_id].links -%}
                     <li class="footer-menu-block-list__item">
@@ -104,7 +104,7 @@
                   {%- endfor -%}
                 </ul>
               </details>
-              <h3 class="footer-block__heading h5 footer-menu-block-desktop-element">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
+              <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
               <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
                 {%- for link in section.settings.left_social_menu.links -%}
                   <li class="footer-menu-block-list__item">
@@ -277,7 +277,7 @@
                       </details>
 
                       {% comment %} DESKTOP LAYOUT {% endcomment %}
-                      <h3 class="footer-block__heading h5 footer-menu-block-desktop-element">
+                      <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">
                         {{- block.settings.heading | escape -}}
                       </h3>
 
