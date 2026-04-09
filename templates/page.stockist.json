@@ -78,7 +78,7 @@
         "heading_group_button_label": "Learn More",
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": false,
+        "heading_group_enable_border_bottom": true,
         "heading_location_size": "h4",
         "heading_location_tag": "h2",
         "padding_top": "no-indent",
