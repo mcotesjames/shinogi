@@ -16,7 +16,7 @@
 
 @media (min-width: 750px) {
   .video-with-text {
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 1fr;
     grid-template-areas: "text video";
     align-items: start;
   }
