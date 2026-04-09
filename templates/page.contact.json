@@ -11,9 +11,7 @@
   "sections": {
     "form": {
       "type": "contact-form",
-      "custom_css": [
-        ".contact-section {border-bottom: 1px solid #000000;}"
-      ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "",
         "enable_border_top": false,
