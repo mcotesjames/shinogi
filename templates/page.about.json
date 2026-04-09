@@ -82,6 +82,7 @@
         "heading",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "",
         "layout": "row",
@@ -159,6 +160,7 @@
         "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100627",
         "autoplay": false,
         "loop": false,
+        "preload": "auto",
         "eyebrow": "",
         "heading": "Manual",
         "heading_size": "h3",
