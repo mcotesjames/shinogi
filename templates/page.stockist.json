@@ -26,7 +26,15 @@
           "settings": {
             "group_name": "Toronto",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC_5339.webp"
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
+          }
+        },
+        "location_RG49Y4": {
+          "type": "location",
+          "settings": {
+            "group_name": "Toronto",
+            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
           }
         },
         "location_fjxPMg": {
@@ -37,12 +45,12 @@
             "location_image": "shopify://shop_images/DSC_5339.webp"
           }
         },
-        "location_RG49Y4": {
+        "location_VrYCrf": {
           "type": "location",
           "settings": {
-            "group_name": "Toronto",
+            "group_name": "New York",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC_5339.webp"
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
           }
         },
         "location_iTeNNd": {
@@ -52,22 +60,14 @@
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
             "location_image": "shopify://shop_images/DSC_5339.webp"
           }
-        },
-        "location_VrYCrf": {
-          "type": "location",
-          "settings": {
-            "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC_5339.webp"
-          }
         }
       },
       "block_order": [
         "location_y9eYmN",
-        "location_fjxPMg",
         "location_RG49Y4",
-        "location_iTeNNd",
-        "location_VrYCrf"
+        "location_fjxPMg",
+        "location_VrYCrf",
+        "location_iTeNNd"
       ],
       "name": "t:sections.store-locations.presets.name",
       "settings": {
