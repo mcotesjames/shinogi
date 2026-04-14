@@ -230,7 +230,7 @@
   right: 0.6rem;
   background-color: #fff;
   border: 0.1rem solid rgb(var(--color-border));
-  padding: 1.6rem;
+  padding: 1rem;
   pointer-events: none;
 }
 .store-locations__overlay-title {
