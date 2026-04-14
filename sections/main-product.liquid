@@ -405,6 +405,7 @@
       </div>
     </div>
     {%- if section.settings.desktop_gallery_type == 'static' and product.media.size > 1 -%}
+      {%- assign static_grid_skip_id = featured_media.id | default: product.media.first.id -%}
       <div class="product__media-static-grid">
         {%- for media in product.media -%}
           {% if show_only_variant_media %}
@@ -415,7 +416,7 @@
             {% continue %}
           {% endif %}
 
-          {%- if featured_media != blank and media.id == featured_media.id -%}
+          {%- if media.id == static_grid_skip_id -%}
             {% continue %}
           {%- endif -%}
 
