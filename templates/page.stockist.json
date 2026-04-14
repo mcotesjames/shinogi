@@ -25,8 +25,9 @@
           "type": "location",
           "settings": {
             "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
+            "location_info": "<p>Contact information goes her</p>",
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp",
+            "get_in_touch_link": "#"
           }
         },
         "location_RG49Y4": {
@@ -34,7 +35,8 @@
           "settings": {
             "group_name": "Toronto",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp",
+            "get_in_touch_link": ""
           }
         },
         "location_fjxPMg": {
@@ -42,7 +44,8 @@
           "settings": {
             "group_name": "New York",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC_5339.webp"
+            "location_image": "shopify://shop_images/DSC_5339.webp",
+            "get_in_touch_link": ""
           }
         },
         "location_VrYCrf": {
@@ -50,7 +53,8 @@
           "settings": {
             "group_name": "New York",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC00739_half_size.webp"
+            "location_image": "shopify://shop_images/DSC00739_half_size.webp",
+            "get_in_touch_link": ""
           }
         },
         "location_iTeNNd": {
@@ -58,7 +62,8 @@
           "settings": {
             "group_name": "Paris",
             "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
-            "location_image": "shopify://shop_images/DSC_5339.webp"
+            "location_image": "shopify://shop_images/DSC_5339.webp",
+            "get_in_touch_link": ""
           }
         }
       },
