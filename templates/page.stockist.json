@@ -34,36 +34,36 @@
           "type": "location",
           "settings": {
             "group_name": "Toronto",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
+            "location_info": "<p>Contact information goes here</p>",
             "location_image": "shopify://shop_images/DSC00739_half_size.webp",
-            "get_in_touch_link": ""
+            "get_in_touch_link": "#"
           }
         },
         "location_fjxPMg": {
           "type": "location",
           "settings": {
             "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
+            "location_info": "<p>Contact information goes here</p>",
             "location_image": "shopify://shop_images/DSC_5339.webp",
-            "get_in_touch_link": ""
+            "get_in_touch_link": "#"
           }
         },
         "location_VrYCrf": {
           "type": "location",
           "settings": {
             "group_name": "New York",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
+            "location_info": "<p>Contact information goes here</p>",
             "location_image": "shopify://shop_images/DSC00739_half_size.webp",
-            "get_in_touch_link": ""
+            "get_in_touch_link": "#"
           }
         },
         "location_iTeNNd": {
           "type": "location",
           "settings": {
             "group_name": "Paris",
-            "location_info": "<p>Contact information goes here</p><p><a href=\"/\">Get in touch</a></p>",
+            "location_info": "<p>Contact information goes here</p>",
             "location_image": "shopify://shop_images/DSC_5339.webp",
-            "get_in_touch_link": ""
+            "get_in_touch_link": "#"
           }
         }
       },
