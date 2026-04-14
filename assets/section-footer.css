@@ -163,7 +163,7 @@
   width: 100%;
 }
 .footer .footer-menu-block-summary {
-  padding: 0.8rem 0;
+  padding: 0 0.8rem 0;
   display: flex;
   flex-direction: row;
   align-items: center;
