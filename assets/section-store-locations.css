@@ -31,6 +31,12 @@
   object-fit: cover;
   transform: scale(1);
   padding: 12.5%;
+  filter: grayscale(100%);
+  transition: filter var(--duration-default) ease;
+}
+.store-locations__image.highlight--item img,
+.store-locations__image.highlight--item .placeholder-svg {
+  filter: grayscale(0%);
 }
 .store-locations__image.highlight--item {
   display: block;

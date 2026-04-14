@@ -204,6 +204,28 @@
       });
     });
 
+    mediaCollection.forEach((media) => {
+      media.addEventListener("mouseenter", (e) => {
+        removeHighlight(blocksCollection);
+        removeHighlight(mediaCollection);
+        tabsCollection?.length > 0 && removeHighlight(tabsCollection, true);
+
+        const target = e.target.closest(".store-locations__image");
+        target.classList.add("highlight--item");
+
+        const targetBlockId = target.dataset.blockIdentifier;
+        const correspondingLocation = locationsWrapper.querySelector(
+          `.store-locations__location[data-block-id="${targetBlockId}"]`
+        );
+        if (correspondingLocation) {
+          correspondingLocation.classList.add("highlight--item");
+          const targetGroupName = correspondingLocation.dataset.groupName;
+          tabsCollection?.length > 0 &&
+            addHighlight(targetGroupName, locationsWrapper, true);
+        }
+      });
+    });
+
     if (!tabsCollection?.length > 0) return;
     tabsCollection.forEach((tab) => {
       tab.addEventListener("click", (e) => {
