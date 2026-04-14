@@ -47,6 +47,7 @@
     overflow: hidden;
     flex-shrink: 0;
     padding-top: 5.7rem;
+    border-left: 0.1rem solid rgb(var(--color-border));
   }
 }
 .store-locations__tab,
@@ -106,14 +107,14 @@
   display: flex;
   align-items: flex-start;
   gap: 0.4rem;
-  padding: 1.2rem;
+  padding: 2rem;
   border-bottom: 0.1rem solid rgb(var(--color-border));
 }
 .store-locations__group-wrapper:not(:last-child) {
   border-bottom: 0.1rem solid rgb(var(--color-border));
 }
 .store-locations__location {
-  padding: 1.2rem;
+  padding: 2rem;
   cursor: pointer;
 }
 .store-locations__location:not(:last-child) {
