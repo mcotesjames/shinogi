@@ -1,7 +1,7 @@
 .footer .footer-main {
   width: 100%;
-  padding: 0 3rem;
-  min-height: 6rem;
+  padding: 2rem 3rem;
+  min-height: 3rem;
   display: flex;
   align-items: center;
 }
@@ -13,7 +13,8 @@
 @media screen and (min-width: 750px) {
   .footer .footer-main-wrapper {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-around;
   }
 }
 .footer .footer-block {
@@ -32,7 +33,7 @@
 }
 @media screen and (min-width: 750px) {
   .footer .footer-menu-block {
-    flex: 1;
+    flex: 0 0 auto;
     border: none;
   }
 }
