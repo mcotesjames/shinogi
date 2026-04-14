@@ -35,57 +35,6 @@
     <div class="footer-main container color-{{ section.settings.main_color_scheme }} background{% if is_lg_breakpoint %} footer-main--lg-breakpoint{% endif %}{% if is_md_breakpoint %} footer-main--md-breakpoint{% endif %}">
       <div class="footer-main-wrapper">
 
-        {% comment %} ----- FOOTER MENUS ----- {% endcomment %}
-        {%- for i in (1..3) -%}
-            {%- assign menu_id = 'left_menu_' | append: i -%}
-            {%- assign heading_id = 'left_menu_' | append: i | append: '_heading' -%}
-            {%- if section.settings[menu_id] != blank -%}
-              <div class="footer-block footer-menu-block">
-                <details class="footer-menu-block-accordion">
-                  <summary class="footer-menu-block-summary focus-inset">
-                    <span class="header-label">{{- section.settings[heading_id] | escape -}}</span>
-                    {% render 'icon-chevron' %}
-                  </summary>
-                  <ul class="footer-menu-block-list list-unstyled">
-                    {%- for link in section.settings[menu_id].links -%}
-                      <li class="footer-menu-block-list__item">
-                        <a href="{{ link.url }}" class="footer-menu-block-list__link list-menu-item-animate focus-inset" aria-label="{{- link.title -}}">
-                          <span class="header-label">{{- link.title -}}</span>
-                        </a>
-                        {%- if link.links != blank -%}
-                          <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
-                        {%- endif -%}
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </details>
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-
-          {%- if section.settings.left_social_menu != blank -%}
-            <div class="footer-block footer-menu-block">
-              <details class="footer-menu-block-accordion">
-                <summary class="footer-menu-block-summary focus-inset">
-                  <span class="header-label">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</span>
-                  {% render 'icon-chevron' %}
-                </summary>
-                <ul class="footer-menu-block-list list-unstyled">
-                  {%- for link in section.settings.left_social_menu.links -%}
-                    <li class="footer-menu-block-list__item">
-                      <a href="{{ link.url }}" class="footer-menu-block-list__link list-menu-item-animate focus-inset" aria-label="{{- link.title -}}">
-                        <span class="header-label">{{- link.title -}}</span>
-                      </a>
-                      {%- if link.links != blank -%}
-                        <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </details>
-            </div>
-          {%- endif -%}
-
         {% comment %} ----- FOOTER NEWSLETTER FORM ----- {% endcomment %}
         {%- if section.settings.show_newsletter -%}
           <div class="footer-block footer-subscribe-block">
@@ -198,52 +147,63 @@
           </div>
         {%- endif -%}
 
-        {% comment %} ----- FOOTER MENU BLOCKS ----- {% endcomment %}
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when 'link_list' -%}
-                {%- if block.settings.heading != blank and block.settings.menu != blank -%}
-                  <div
-                    class="footer-block footer-menu-block"
-                    {{ block.shopify_attributes }}
-                  >
-                    <details
-                      class="footer-menu-block-accordion"
-                      {% if block.settings.default_open %}
-                        open
-                      {% endif %}
-                    >
-                      <summary class="footer-menu-block-summary focus-inset">
-                        <span class="header-label">{{- block.settings.heading | escape -}}</span>
-                        {% render 'icon-chevron' %}
-                      </summary>
-
-                      <ul class="footer-menu-block-list list-unstyled">
-                        {%- for link in block.settings.menu.links -%}
-                          <li class="footer-menu-block-list__item">
-                            <a
-                              href="{{ link.url }}"
-                              {% if settings.links_blank and link.type == 'http_link' %}
-                                target="_blank"
-                              {% endif %}
-                              class="footer-menu-block-list__link list-menu-item-animate focus-inset"
-                              aria-label="{{- link.title -}}"
-                            >
-                              <span class="header-label">{{- link.title -}}</span>
-                            </a>
-                            {%- if link.links != blank -%}
-                              <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
-                            {%- endif -%}
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    </details>
-                  </div>
-                {%- endif -%}
-            {%- endcase -%}
-          {%- endfor -%}
+        {% comment %} ----- FOOTER SOCIALS ----- {% endcomment %}
+        {%- assign has_socials = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'socials' -%}{%- assign has_socials = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if has_socials -%}
+          <div class="footer-socials-group">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'socials' -%}
+                <a
+                  href="{{ block.settings.link | default: '#' }}"
+                  class="footer-social-link focus-inset"
+                  {% if block.settings.label != blank %}aria-label="{{ block.settings.label | escape }}"{% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.svg }}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
         {%- endif -%}
+
+        {% comment %} ----- FOOTER MENU BLOCKS ----- {% endcomment %}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'link_list' and block.settings.heading != blank and block.settings.menu != blank -%}
+            <div
+              class="footer-block footer-menu-block"
+              {{ block.shopify_attributes }}
+            >
+              <details class="footer-menu-block-accordion">
+                <summary class="footer-menu-block-summary focus-inset">
+                  <span class="header-label">{{- block.settings.heading | escape -}}</span>
+                  {% render 'icon-chevron' %}
+                </summary>
+                <ul class="footer-menu-block-list list-unstyled">
+                  {%- for link in block.settings.menu.links -%}
+                    <li class="footer-menu-block-list__item">
+                      <a
+                        href="{{ link.url }}"
+                        {% if settings.links_blank and link.type == 'http_link' %}
+                          target="_blank"
+                        {% endif %}
+                        class="footer-menu-block-list__link list-menu-item-animate focus-inset"
+                        aria-label="{{- link.title -}}"
+                      >
+                        <span class="header-label">{{- link.title -}}</span>
+                      </a>
+                      {%- if link.links != blank -%}
+                        <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
 
         {% comment %} ----- FOOTER CONTACT INFORMATION ----- {% endcomment %}
         {%- if section.settings.show_contact -%}
@@ -449,62 +409,6 @@
     },
     {
       "type": "header",
-      "content": "Left column menus"
-    },
-    {
-      "type": "text",
-      "id": "left_menu_1_heading",
-      "label": "Menu 1 heading",
-      "default": "Menu"
-    },
-    {
-      "type": "link_list",
-      "id": "left_menu_1",
-      "label": "Menu 1"
-    },
-    {
-      "type": "text",
-      "id": "left_menu_2_heading",
-      "label": "Menu 2 heading",
-      "default": "Menu",
-      "visible_if": "{{ section.settings.left_menu_1 != blank }}"
-    },
-    {
-      "type": "link_list",
-      "id": "left_menu_2",
-      "label": "Menu 2",
-      "visible_if": "{{ section.settings.left_menu_1 != blank }}"
-    },
-    {
-      "type": "text",
-      "id": "left_menu_3_heading",
-      "label": "Menu 3 heading",
-      "default": "Menu",
-      "visible_if": "{{ section.settings.left_menu_2 != blank }}"
-    },
-    {
-      "type": "link_list",
-      "id": "left_menu_3",
-      "label": "Menu 3",
-      "visible_if": "{{ section.settings.left_menu_2 != blank }}"
-    },
-    {
-      "type": "header",
-      "content": "Social menu"
-    },
-    {
-      "type": "text",
-      "id": "left_social_menu_heading",
-      "label": "Social menu heading",
-      "default": "Social"
-    },
-    {
-      "type": "link_list",
-      "id": "left_social_menu",
-      "label": "Social menu"
-    },
-    {
-      "type": "header",
       "content": "t:sections.footer.settings.header__contact.content"
     },
     {
@@ -681,6 +585,28 @@
     }
   ],
   "blocks": [
+    {
+      "type": "socials",
+      "name": "Social icon",
+      "settings": [
+        {
+          "type": "html",
+          "id": "svg",
+          "label": "SVG icon"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Accessibility label",
+          "default": "Social media"
+        }
+      ]
+    },
     {
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
