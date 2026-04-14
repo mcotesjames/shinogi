@@ -225,9 +225,9 @@
 }
 .store-locations__overlay {
   position: absolute;
-  bottom: 1.6rem;
-  left: 1.6rem;
-  right: 1.6rem;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
   background-color: #fff;
   border: 0.1rem solid rgb(var(--color-border));
   padding: 1.6rem;
@@ -255,6 +255,9 @@
   flex-shrink: 0;
   pointer-events: auto;
   align-self: flex-end;
+  width: 100%;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
 }
 
 /* Grid layout */
