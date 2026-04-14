@@ -208,6 +208,8 @@
     width: 100%;
     height: auto;
     inset: unset;
+    border-right: 0.1rem solid rgb(var(--color-border));
+    border-bottom: 0.1rem solid rgb(var(--color-border));
   }
 
   .store-locations--grid .store-locations__image img,
