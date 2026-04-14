@@ -8,12 +8,10 @@
 }
 .store-locations__media {
   display: none;
-  border-right: 0.1rem solid rgb(var(--color-border));
 }
 @media screen and (min-width: 990px) {
   .store-locations__media {
     display: block;
-    order: -1;
     position: relative;
     flex-grow: 1;
     overflow: hidden;
@@ -47,7 +45,7 @@
     overflow: hidden;
     flex-shrink: 0;
     padding-top: 5.7rem;
-    border-left: 0.1rem solid rgb(var(--color-border));
+    border-right: 0.1rem solid rgb(var(--color-border));
   }
 }
 .store-locations__tab,
