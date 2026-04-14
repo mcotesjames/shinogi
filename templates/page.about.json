@@ -14,6 +14,7 @@
       "blocks": {
         "slide_8nLXez": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "color_scheme": "background-1",
             "media_color_scheme": "background-1",
@@ -37,6 +38,7 @@
       "block_order": [
         "slide_8nLXez"
       ],
+      "disabled": true,
       "name": "t:sections.slideshow.presets.name",
       "settings": {
         "layout": "split_screen",
@@ -56,6 +58,30 @@
         "enable_autoplay": false,
         "slide_duration": 5,
         "autoplay_stop_on_hover": true,
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
+      }
+    },
+    "collections_list_xpfaGJ": {
+      "type": "collections-list",
+      "name": "t:sections.collections-list.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "Information",
+        "heading_font": "heading",
+        "heading_size": "h3",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Shop Now",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": false,
+        "collection_heading_size": "h3",
+        "collection_heading_tag": "h3",
+        "padding_top": "no-indent",
+        "padding_bottom": "no-indent",
         "margin_top": "no-indent",
         "margin_bottom": "no-indent"
       }
@@ -459,6 +485,7 @@
   },
   "order": [
     "slideshow_b67h6Y",
+    "collections_list_xpfaGJ",
     "rich_text",
     "video_player_fagei8",
     "faq_4hTtTg",
