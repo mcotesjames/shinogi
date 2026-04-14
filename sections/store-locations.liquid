@@ -211,20 +211,22 @@
             {%- if section.settings.layout == 'static_grid' -%}
               <div class="store-locations__overlay">
                 {%- if group_name != blank -%}
-                  <{{ section.settings.heading_location_tag }} class="store-locations__overlay-title {{ section.settings.heading_location_size }}">{{- group_name -}}</{{ section.settings.heading_location_tag }}>
+                  <{{ section.settings.heading_location_tag }} class="store-locations__overlay-title h5">{{- group_name -}}</{{ section.settings.heading_location_tag }}>
                 {%- endif -%}
                 {%- if block.settings.location_info != blank or block.settings.get_in_touch_link != blank -%}
                   <div class="store-locations__overlay-content rte">
-                    {%- if block.settings.location_info != blank -%}
-                      <div class="store-locations__overlay-info">{{ block.settings.location_info }}</div>
-                    {%- endif -%}
-                    {%- if block.settings.get_in_touch_link != blank -%}
-                      <a href="{{ block.settings.get_in_touch_link }}" class="button button--secondary store-locations__overlay-btn">
-                        <div class="button__content">
-                          <span class="button__label" data-label="Get in touch">Get in touch</span>
-                        </div>
-                      </a>
-                    {%- endif -%}
+                    <div class="store-locations__overlay-info">
+                      {%- if block.settings.location_info != blank -%}
+                        <div class="store-locations__overlay-info-text">{{ block.settings.location_info }}</div>
+                      {%- endif -%}
+                      {%- if block.settings.get_in_touch_link != blank -%}
+                        <a href="{{ block.settings.get_in_touch_link }}" class="button button--primary store-locations__overlay-btn">
+                          <div class="button__content">
+                            <span class="button__label" data-label="Get in touch">Get in touch</span>
+                          </div>
+                        </a>
+                      {%- endif -%}
+                    </div>
                   </div>
                 {%- endif -%}
               </div>
