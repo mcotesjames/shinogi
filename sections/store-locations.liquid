@@ -208,11 +208,25 @@
               {% assign placeholder_index = forloop.index | modulo: 3 | plus: 1 %}
               {{ 'hero-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
-            {%- if section.settings.layout == 'static_grid' and block.settings.location_info != blank -%}
+            {%- if section.settings.layout == 'static_grid' -%}
               <div class="store-locations__overlay">
-                <div class="store-locations__overlay-content rte">
-                  {{ block.settings.location_info }}
-                </div>
+                {%- if group_name != blank -%}
+                  <{{ section.settings.heading_location_tag }} class="store-locations__overlay-title {{ section.settings.heading_location_size }}">{{- group_name -}}</{{ section.settings.heading_location_tag }}>
+                {%- endif -%}
+                {%- if block.settings.location_info != blank or block.settings.get_in_touch_link != blank -%}
+                  <div class="store-locations__overlay-content rte">
+                    {%- if block.settings.location_info != blank -%}
+                      <div class="store-locations__overlay-info">{{ block.settings.location_info }}</div>
+                    {%- endif -%}
+                    {%- if block.settings.get_in_touch_link != blank -%}
+                      <a href="{{ block.settings.get_in_touch_link }}" class="button button--secondary store-locations__overlay-btn">
+                        <div class="button__content">
+                          <span class="button__label" data-label="Get in touch">Get in touch</span>
+                        </div>
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
               </div>
             {%- endif -%}
           </div>
@@ -684,6 +698,11 @@
           "type": "image_picker",
           "id": "location_image",
           "label": "t:sections.all.image.label"
+        },
+        {
+          "type": "url",
+          "id": "get_in_touch_link",
+          "label": "Get in touch link"
         }
       ]
     }

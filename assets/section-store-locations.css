@@ -233,6 +233,16 @@
   padding: 1.6rem;
   pointer-events: none;
 }
+.store-locations__overlay-title {
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.store-locations__overlay-content.rte {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
 .store-locations__overlay-content.rte > * {
   margin-inline: unset !important;
   margin-top: 0.2rem;
@@ -240,6 +250,11 @@
 .store-locations__overlay-content.rte > *:first-child {
   margin-top: 0;
   font-weight: 500;
+}
+.store-locations__overlay-btn {
+  flex-shrink: 0;
+  pointer-events: auto;
+  align-self: flex-end;
 }
 
 /* Grid layout */
