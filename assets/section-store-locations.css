@@ -182,3 +182,35 @@
   margin-top: 1.2rem;
   margin-bottom: 0.2rem;
 }
+
+/* Grid layout */
+@media screen and (min-width: 990px) {
+  .store-locations--grid .store-locations__list {
+    width: 25%;
+  }
+
+  .store-locations--grid .store-locations__media {
+    display: grid;
+    grid-template-columns: repeat(3, 33.333%);
+    position: static;
+    overflow: visible;
+    border-right: none;
+  }
+
+  .store-locations--grid .store-locations__image {
+    display: block;
+    position: static;
+    width: 100%;
+    height: auto;
+    inset: unset;
+  }
+
+  .store-locations--grid .store-locations__image img,
+  .store-locations--grid .store-locations__image .placeholder-svg {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+}

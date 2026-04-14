@@ -62,7 +62,7 @@
   {% render 'heading-group', settings: section.settings, class: 'store-locations-header' %}
 
   <div class="store-locations__inner">
-    <div class="store-locations__wrapper">
+    <div class="store-locations__wrapper{% if section.settings.layout == 'grid' %} store-locations--grid{% endif %}">
       <div class="store-locations__list">
         {% assign first_block_found = false %}
         {% assign first_block_id = '' %}
@@ -224,6 +224,22 @@
     "templates": ["*"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
