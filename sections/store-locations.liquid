@@ -62,7 +62,7 @@
   {% render 'heading-group', settings: section.settings, class: 'store-locations-header' %}
 
   <div class="store-locations__inner">
-    <div class="store-locations__wrapper{% if section.settings.layout == 'grid' %} store-locations--grid{% endif %}">
+    <div class="store-locations__wrapper{% if section.settings.layout == 'grid' %} store-locations--grid{% elsif section.settings.layout == 'static_grid' %} store-locations--static-grid{% endif %}">
       <div class="store-locations__list">
         {% assign first_block_found = false %}
         {% assign first_block_id = '' %}
@@ -208,6 +208,13 @@
               {% assign placeholder_index = forloop.index | modulo: 3 | plus: 1 %}
               {{ 'hero-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
+            {%- if section.settings.layout == 'static_grid' and block.settings.location_info != blank -%}
+              <div class="store-locations__overlay">
+                <div class="store-locations__overlay-content rte">
+                  {{ block.settings.location_info }}
+                </div>
+              </div>
+            {%- endif -%}
           </div>
         {%- endfor -%}
       </div>
@@ -236,6 +243,10 @@
         {
           "value": "grid",
           "label": "Grid"
+        },
+        {
+          "value": "static_grid",
+          "label": "Static grid"
         }
       ],
       "default": "default"
