@@ -156,7 +156,7 @@
   padding: 0.3rem 0;
   line-height: 1.2;
   text-decoration: none;
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-foreground-secondary));
 }
 .footer .footer-menu-block-list__link .header-label {
   position: relative;
@@ -184,7 +184,7 @@
   width: 1.2rem;
   height: 1.2rem;
   transform: rotate(-90deg);
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-foreground-secondary));
 }
 .footer .footer-menu-block-list__item:first-child .footer-menu-block-list__link {
   padding-top: 0;
