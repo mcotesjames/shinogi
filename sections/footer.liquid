@@ -1,21 +1,5 @@
 {{- 'section-footer.css' | asset_url | stylesheet_tag -}}
 
-<style>
-  .footer-menu-block-mobile-element {
-    display: block;
-  }
-  .footer-menu-block-desktop-element {
-    display: none;
-  }
-  @media screen and (min-width: 750px) {
-    .footer-menu-block-mobile-element {
-      display: none;
-    }
-    .footer-menu-block-desktop-element {
-      display: block;
-    }
-  }
-</style>
 
 <div class="footer{% if section.settings.enable_border_top %} section-border-top{% endif %}">
   {%- if section.blocks.size > 0 or section.settings.show_newsletter or section.settings.show_contact -%}
@@ -58,62 +42,48 @@
             {%- assign heading_id = 'left_menu_' | append: i | append: '_heading' -%}
             {%- if section.settings[menu_id] != blank -%}
               <div class="footer-block footer-menu-block">
-                <details class="footer-menu-block-mobile-element">
-                  <summary>
-                    <h3 class="footer-block__heading subtitle">{{- section.settings[heading_id] | escape -}}</h3>
+                <details class="footer-menu-block-accordion">
+                  <summary class="footer-menu-block-summary focus-inset">
+                    <span class="header-label">{{- section.settings[heading_id] | escape -}}</span>
                     {% render 'icon-chevron' %}
                   </summary>
                   <ul class="footer-menu-block-list list-unstyled">
                     {%- for link in section.settings[menu_id].links -%}
                       <li class="footer-menu-block-list__item">
-                        <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
-                          <span class="hover-underlined-link">{{- link.title -}}</span>
+                        <a href="{{ link.url }}" class="footer-menu-block-list__link list-menu-item-animate focus-inset" aria-label="{{- link.title -}}">
+                          <span class="header-label">{{- link.title -}}</span>
                         </a>
+                        {%- if link.links != blank -%}
+                          <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
+                        {%- endif -%}
                       </li>
                     {%- endfor -%}
                   </ul>
                 </details>
-                <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">{{- section.settings[heading_id] | escape -}}</h3>
-                <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
-                  {%- for link in section.settings[menu_id].links -%}
-                    <li class="footer-menu-block-list__item">
-                      <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
-                        <span class="hover-underlined-link">{{- link.title -}}</span>
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
               </div>
             {%- endif -%}
           {%- endfor -%}
 
           {%- if section.settings.left_social_menu != blank -%}
             <div class="footer-block footer-menu-block">
-              <details class="footer-menu-block-mobile-element">
-                <summary>
-                  <h3 class="footer-block__heading subtitle">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
+              <details class="footer-menu-block-accordion">
+                <summary class="footer-menu-block-summary focus-inset">
+                  <span class="header-label">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</span>
                   {% render 'icon-chevron' %}
                 </summary>
                 <ul class="footer-menu-block-list list-unstyled">
                   {%- for link in section.settings.left_social_menu.links -%}
                     <li class="footer-menu-block-list__item">
-                      <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
-                        <span class="hover-underlined-link">{{- link.title -}}</span>
+                      <a href="{{ link.url }}" class="footer-menu-block-list__link list-menu-item-animate focus-inset" aria-label="{{- link.title -}}">
+                        <span class="header-label">{{- link.title -}}</span>
                       </a>
+                      {%- if link.links != blank -%}
+                        <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
               </details>
-              <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">{{- section.settings.left_social_menu_heading | default: 'Social' | escape -}}</h3>
-              <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
-                {%- for link in section.settings.left_social_menu.links -%}
-                  <li class="footer-menu-block-list__item">
-                    <a href="{{ link.url }}" class="footer-menu-block-list__link focus-inset body-small" aria-label="{{- link.title -}}">
-                      <span class="hover-underlined-link">{{- link.title -}}</span>
-                    </a>
-                  </li>
-                {%- endfor -%}
-              </ul>
             </div>
           {%- endif -%}
         </div>
@@ -244,17 +214,14 @@
                       class="footer-block footer-menu-block"
                       {{ block.shopify_attributes }}
                     >
-                      {% comment %} MOBILE LAYOUT {% endcomment %}
                       <details
-                        class="footer-menu-block-mobile-element"
+                        class="footer-menu-block-accordion"
                         {% if block.settings.default_open %}
                           open
                         {% endif %}
                       >
-                        <summary>
-                          <h3 class="footer-block__heading subtitle">
-                            {{- block.settings.heading | escape -}}
-                          </h3>
+                        <summary class="footer-menu-block-summary focus-inset">
+                          <span class="header-label">{{- block.settings.heading | escape -}}</span>
                           {% render 'icon-chevron' %}
                         </summary>
 
@@ -266,37 +233,18 @@
                                 {% if settings.links_blank and link.type == 'http_link' %}
                                   target="_blank"
                                 {% endif %}
-                                class="footer-menu-block-list__link focus-inset body-small"
+                                class="footer-menu-block-list__link list-menu-item-animate focus-inset"
                                 aria-label="{{- link.title -}}"
                               >
-                                <span class="hover-underlined-link">{{- link.title -}}</span>
+                                <span class="header-label">{{- link.title -}}</span>
                               </a>
+                              {%- if link.links != blank -%}
+                                <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
+                              {%- endif -%}
                             </li>
                           {%- endfor -%}
                         </ul>
                       </details>
-
-                      {% comment %} DESKTOP LAYOUT {% endcomment %}
-                      <h3 class="footer-block__heading h6 footer-menu-block-desktop-element">
-                        {{- block.settings.heading | escape -}}
-                      </h3>
-
-                      <ul class="footer-menu-block-list list-unstyled footer-menu-block-desktop-element">
-                        {%- for link in block.settings.menu.links -%}
-                          <li class="footer-menu-block-list__item">
-                            <a
-                              href="{{ link.url }}"
-                              {% if settings.links_blank and link.type == 'http_link' %}
-                                target="_blank"
-                              {% endif %}
-                              class="footer-menu-block-list__link focus-inset body-small"
-                              aria-label="{{- link.title -}}"
-                            >
-                              <span class="hover-underlined-link">{{- link.title -}}</span>
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
                     </div>
                   {%- endif -%}
               {%- endcase -%}

@@ -18,7 +18,7 @@
 }
 @media screen and (min-width: 750px) {
   .footer .footer-main-left {
-    border-right: 0.1rem solid rgb(var(--color-border));
+    /* border-right: 0.1rem solid rgb(var(--color-border)); */
     padding: 3rem 3rem 8.4rem;
   }
 }
@@ -147,43 +147,52 @@
     max-width: 20rem;
   }
 }
-.footer .footer-menu-block:first-child > details > summary {
+.footer .footer-menu-block:first-child > .footer-menu-block-accordion > .footer-menu-block-summary {
   padding-top: 0;
 }
 .footer .footer-menu-block:last-child {
   border: none;
 }
-.footer .footer-menu-block:last-child > details:not([open]) > summary {
+.footer .footer-menu-block:last-child > .footer-menu-block-accordion:not([open]) > .footer-menu-block-summary {
   padding-bottom: 0;
 }
-.footer .footer-menu-block:last-child > details > .footer-menu-block-list {
+.footer .footer-menu-block:last-child > .footer-menu-block-accordion > .footer-menu-block-list {
   padding: 0;
 }
-.footer .footer-menu-block > .footer-menu-block-desktop-element {
-  display: none;
-}
-@media screen and (min-width: 750px) {
-  .footer .footer-menu-block > .footer-menu-block-desktop-element {
-    display: block;
-  }
-}
-.footer .footer-menu-block > details {
+.footer .footer-menu-block-accordion {
   width: 100%;
 }
-@media screen and (min-width: 750px) {
-  .footer .footer-menu-block > details {
-    display: none !important;
-  }
-}
-.footer .footer-menu-block > details > summary {
+.footer .footer-menu-block-summary {
   padding: 0.8rem 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   user-select: none;
+  cursor: pointer;
+  list-style: none;
+  color: rgb(var(--color-foreground));
+  gap: 4px;
 }
-.footer .footer-menu-block > details > summary .icon-chevron {
+.footer .footer-menu-block-summary::-webkit-details-marker {
+  display: none;
+}
+.footer .footer-menu-block-summary .header-label {
+  position: relative;
+  display: inline;
+  overflow-wrap: break-word;
+  background: no-repeat 0 100%;
+  background-size: 0% 0.1rem;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position-x: right;
+  transition: background-size var(--duration-default) ease-in-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .footer .footer-menu-block-summary:hover .header-label {
+    background-size: 100% 0.1rem;
+    background-position-x: left;
+  }
+}
+.footer .footer-menu-block-summary .icon-chevron {
   position: static;
   width: 1.6rem;
   height: 1.6rem;
@@ -191,11 +200,13 @@
   pointer-events: none;
   transform: rotate(0);
   transition: transform var(--duration-default) ease-in-out;
+  flex-shrink: 0;
+  margin-top: -2px;
 }
-.footer .footer-menu-block > details > summary + .footer-menu-block-list {
+.footer .footer-menu-block-summary + .footer-menu-block-list {
   user-select: none;
 }
-.footer .footer-menu-block > details[open] > summary .icon-chevron {
+.footer .footer-menu-block-accordion[open] > .footer-menu-block-summary .icon-chevron {
   transform: rotate(-180deg);
 }
 .footer .footer-menu-block-list {
@@ -210,10 +221,45 @@
     padding: 0;
   }
 }
+.footer .footer-menu-block-list__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 .footer .footer-menu-block-list__link {
   display: block;
   padding: 0.3rem 0;
   line-height: 1.2;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+}
+.footer .footer-menu-block-list__link .header-label {
+  position: relative;
+  display: inline;
+  overflow-wrap: break-word;
+  background: no-repeat 0 100%;
+  background-size: 0% 0.1rem;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position-x: right;
+  transition: background-size var(--duration-default) ease-in-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .footer .footer-menu-block-list__link:hover .header-label,
+  .footer .footer-menu-block-list__link:focus .header-label {
+    background-size: 100% 0.1rem;
+    background-position-x: left;
+  }
+}
+.footer .footer-menu-item-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.footer .footer-menu-item-chevron .icon-chevron {
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: rotate(-90deg);
+  color: rgb(var(--color-foreground));
 }
 .footer .footer-menu-block-list__item:first-child .footer-menu-block-list__link {
   padding-top: 0;
