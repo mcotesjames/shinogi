@@ -64,6 +64,7 @@
     },
     "collections_list_xpfaGJ": {
       "type": "collections-list",
+      "disabled": true,
       "name": "t:sections.collections-list.presets.name",
       "settings": {
         "color_scheme": "",
