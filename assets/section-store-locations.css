@@ -275,7 +275,7 @@
 /* Grid layout */
 @media screen and (min-width: 990px) {
   .store-locations--grid .store-locations__list {
-    width: 25%;
+    width: 50%;
   }
 
   .store-locations--grid .store-locations__media {

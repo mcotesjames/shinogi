@@ -161,77 +161,91 @@
       <div class="store-locations__media">
         {%- for block in section.blocks -%}
           {%- assign group_name = block.settings.group_name | strip -%}
-          <div
-            class="store-locations__image{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
-            data-block-identifier="{{ block.id }}"
-          >
-            {%- if block.settings.location_image != blank -%}
-              {% liquid
-                assign styles = 'object-fit: cover;'
-
-                assign fetch_priority = 'auto'
-                assign image_loading = 'lazy'
-                if section.index == 1
-                  assign fetch_priority = 'high'
-                  assign image_loading = 'eager'
-                endif
-
-                assign image_desktop = block.settings.location_image
-                if section.settings.section_ratio_desktop != 'full_height'
-                  assign settings_desktop_aspect_ratio = temp_desktop | divided_by: aspect_ratio_desktop[1] | round: 2
-                else
-                  assign settings_desktop_aspect_ratio = 1.18
-                else
-                  assign settings_desktop_aspect_ratio = image_desktop.aspect_ratio
-                endif
-
-                assign calc_ratio_desktop = 1
-                if image_desktop.aspect_ratio > settings_desktop_aspect_ratio
-                  assign calc_ratio_desktop = image_desktop.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
-                endif
-                assign widths = '360, 533, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3264, 3400, 3584, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 6000'
-              %}
-              {%- capture sizes -%}
-                (min-width: 990px) calc(66.67vw * {{ calc_ratio_desktop }})
-              {%- endcapture -%}
-              {{
-                block.settings.location_image
-                | image_url: width: block.settings.location_image.width
-                | image_tag:
-                  loading: image_loading,
-                  widths: widths,
-                  sizes: sizes,
-                  styles: styles,
-                  fetchpriority: fetch_priority
-              }}
-            {%- else -%}
-              {% assign placeholder_index = forloop.index | modulo: 3 | plus: 1 %}
-              {{ 'hero-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-            {%- if section.settings.layout == 'static_grid' -%}
-              <div class="store-locations__overlay">
-                {%- if group_name != blank -%}
-                  <{{ section.settings.heading_location_tag }} class="store-locations__overlay-title h5">{{- group_name -}}</{{ section.settings.heading_location_tag }}>
-                {%- endif -%}
-                {%- if block.settings.location_info != blank or block.settings.get_in_touch_link != blank -%}
-                  <div class="store-locations__overlay-content">
-                    <div class="store-locations__overlay-info">
-                      {%- if block.settings.location_info != blank -%}
-                        <div class="store-locations__overlay-info-text rte">{{ block.settings.location_info }}</div>
-                      {%- endif -%}
-                      {%- if block.settings.get_in_touch_link != blank -%}
-                        <a href="{{ block.settings.get_in_touch_link }}" class="button button--primary store-locations__overlay-btn">
-                          <div class="button__content">
-                            <span class="button__label" data-label="Get in touch">Get in touch</span>
-                          </div>
-                        </a>
-                      {%- endif -%}
-                    </div>
-                  </div>
-                {%- endif -%}
+          {%- if section.settings.layout == 'grid' -%}
+            {%- if block.settings.location_info != blank -%}
+              <div
+                class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
+                data-block-id="{{ block.id }}"
+                {%- if group_name != blank %} data-group-name="{{ group_name }}"{% endif %}
+              >
+                <div class="store-locations__location-info rte">
+                  {{- block.settings.location_info -}}
+                </div>
               </div>
             {%- endif -%}
-          </div>
+          {%- else -%}
+            <div
+              class="store-locations__image{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
+              data-block-identifier="{{ block.id }}"
+            >
+              {%- if block.settings.location_image != blank -%}
+                {% liquid
+                  assign styles = 'object-fit: cover;'
+
+                  assign fetch_priority = 'auto'
+                  assign image_loading = 'lazy'
+                  if section.index == 1
+                    assign fetch_priority = 'high'
+                    assign image_loading = 'eager'
+                  endif
+
+                  assign image_desktop = block.settings.location_image
+                  if section.settings.section_ratio_desktop != 'full_height'
+                    assign settings_desktop_aspect_ratio = temp_desktop | divided_by: aspect_ratio_desktop[1] | round: 2
+                  else
+                    assign settings_desktop_aspect_ratio = 1.18
+                  else
+                    assign settings_desktop_aspect_ratio = image_desktop.aspect_ratio
+                  endif
+
+                  assign calc_ratio_desktop = 1
+                  if image_desktop.aspect_ratio > settings_desktop_aspect_ratio
+                    assign calc_ratio_desktop = image_desktop.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
+                  endif
+                  assign widths = '360, 533, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3264, 3400, 3584, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 6000'
+                %}
+                {%- capture sizes -%}
+                  (min-width: 990px) calc(66.67vw * {{ calc_ratio_desktop }})
+                {%- endcapture -%}
+                {{
+                  block.settings.location_image
+                  | image_url: width: block.settings.location_image.width
+                  | image_tag:
+                    loading: image_loading,
+                    widths: widths,
+                    sizes: sizes,
+                    styles: styles,
+                    fetchpriority: fetch_priority
+                }}
+              {%- else -%}
+                {% assign placeholder_index = forloop.index | modulo: 3 | plus: 1 %}
+                {{ 'hero-apparel-' | append: placeholder_index | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              {%- if section.settings.layout == 'static_grid' -%}
+                <div class="store-locations__overlay">
+                  {%- if group_name != blank -%}
+                    <{{ section.settings.heading_location_tag }} class="store-locations__overlay-title h5">{{- group_name -}}</{{ section.settings.heading_location_tag }}>
+                  {%- endif -%}
+                  {%- if block.settings.location_info != blank or block.settings.get_in_touch_link != blank -%}
+                    <div class="store-locations__overlay-content">
+                      <div class="store-locations__overlay-info">
+                        {%- if block.settings.location_info != blank -%}
+                          <div class="store-locations__overlay-info-text rte">{{ block.settings.location_info }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.get_in_touch_link != blank -%}
+                          <a href="{{ block.settings.get_in_touch_link }}" class="button button--primary store-locations__overlay-btn">
+                            <div class="button__content">
+                              <span class="button__label" data-label="Get in touch">Get in touch</span>
+                            </div>
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
