@@ -112,7 +112,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.4rem;
-  padding: 2rem;
+  padding: 2rem 1.2rem;
 }
 .store-locations__group-wrapper:not(:last-child) {
   border-bottom: 0.1rem solid rgb(var(--color-border));
