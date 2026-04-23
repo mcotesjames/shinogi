@@ -723,6 +723,9 @@
     },
     "custom_liquid_zNBaxH": {
       "type": "custom-liquid",
+      "custom_css": [
+        ".klaviyo-form-Xxy6td {max-width: 800px;}"
+      ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
         "custom_liquid": "<div class=\"klaviyo-form-Xxy6td\"></div>"
