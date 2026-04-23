@@ -724,7 +724,7 @@
     "custom_liquid_zNBaxH": {
       "type": "custom-liquid",
       "custom_css": [
-        ".klaviyo-form-Xxy6td {max-width: 475px; margin: 0 auto; padding: 80px 2rem;}"
+        ".klaviyo-form-Xxy6td {max-width: 525px; margin: 0 auto; padding: 80px 2rem;}"
       ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
