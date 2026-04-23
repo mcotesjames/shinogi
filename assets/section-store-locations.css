@@ -288,6 +288,10 @@
   flex-direction: row;
   border-bottom: 0.1rem solid rgb(var(--color-border));
 }
+.store-locations--grid .store-locations__grid-row:first-child .store-locations__group,
+.store-locations--grid .store-locations__grid-row:first-child .store-locations__location:first-child {
+  border-top: 0.1rem solid rgb(var(--color-border));
+}
 .store-locations--grid .store-locations__grid-row .store-locations__group {
   width: 50%;
   flex-shrink: 0;
