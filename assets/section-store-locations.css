@@ -323,6 +323,6 @@
 .store-locations--grid .store-locations__grid-locations .store-locations__location {
   width: 100%;
 }
-.store-locations--grid .store-locations__grid-locations .store-locations__location:last-child {
+.store-locations--grid .store-locations__grid-locations {
   border-bottom: 0.1rem solid rgb(var(--color-border));
 }
