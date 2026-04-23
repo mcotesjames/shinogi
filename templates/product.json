@@ -733,6 +733,7 @@
     },
     "newsletter_zk9CYD": {
       "type": "newsletter",
+      "disabled": true,
       "name": "t:sections.newsletter.name",
       "settings": {
         "color_scheme": "",
