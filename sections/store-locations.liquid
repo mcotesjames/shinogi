@@ -63,16 +63,13 @@
 
   <div class="store-locations__inner">
     <div class="store-locations__wrapper{% if section.settings.layout == 'grid' %} store-locations--grid{% elsif section.settings.layout == 'static_grid' %} store-locations--static-grid{% endif %}">
-      <div class="store-locations__list">
-        {% assign first_block_found = false %}
-        {% assign first_block_id = '' %}
-
-        {% comment %} render sticky group list {% endcomment %}
-        {%- if group_names.size > 0 -%}
-          <div class="store-locations__tabs">
+      {%- if section.settings.layout == 'grid' -%}
+        {%- assign grid_first_block_found = false -%}
+        {%- if group_names.size > 0 and section.settings.show_tabs -%}
+          <div class="store-locations__tabs store-locations__tabs--grid">
             {%- for group in group_names -%}
               <button
-                class="store-locations__tab button {% if group == group_names.first and has_blank_group == false %} button--primary{% else %} button--secondary{% endif %} "
+                class="store-locations__tab button {% if group == group_names.first and has_blank_group == false %}button--primary{% else %}button--secondary{% endif %}"
                 data-block-identifier="{{- group -}}"
                 aria-label="{{- group -}}"
               >
@@ -83,112 +80,184 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-        <div class="store-locations__locations-outer">
-          <div class="store-locations__locations">
-            {% comment %} render location list without group {% endcomment %}
+        <div class="store-locations__grid-layout">
 
-            {%- for block in section.blocks -%}
-              {%- assign group_name = block.settings.group_name | strip -%}
-              {%- if group_name == blank -%}
-                {% if first_block_found == false %}
-                  {% assign first_block_found = true %}
-                  {% assign first_block_id = block.id %}
-                {% endif %}
-                {% if block.settings.location_info != blank %}
-                  <div
-                    class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
-                    data-block-id="{{ block.id }}"
-                  >
-                    <div class="store-locations__location-info rte">
-                      {{ block.settings.location_info }}
-                    </div>
-                  </div>
-                {% endif %}
-              {%- endif -%}
-            {%- endfor -%}
-
-            {% comment %} render location list with group {% endcomment %}
-            {% for group in group_names %}
-              <div class="store-locations__group-wrapper" data-group-name="{{ group }}">
-                <div class="store-locations__group" data-group-name="{{ group }}">
-                  {% liquid
-                    assign group_locations = 0
-
-                    for block in section.blocks
-                      assign group_name = block.settings.group_name | strip
-                      if group_name == group and block.settings.location_info != blank
-                        assign group_locations = group_locations | plus: 1
-                      endif
-                    endfor
-
-                    if group_locations < 10
-                      assign group_locations = group_locations | prepend: '0'
-                    endif
-                  %}
-                  <{{ section.settings.heading_location_tag }} class="store-locations__group-title {{ section.settings.heading_location_size }}">
-                    {{- group -}}
-                  </{{ section.settings.heading_location_tag }}>
-                  <p class="subtitle">{{- group_locations -}}</p>
-                </div>
-
+          {%- comment -%} Ungrouped locations {%- endcomment -%}
+          {%- if has_blank_group -%}
+            <div class="store-locations__grid-row">
+              <div class="store-locations__group"></div>
+              <div class="store-locations__grid-locations">
                 {%- for block in section.blocks -%}
-                  {%- assign group_name = block.settings.group_name | strip -%}
-
-                  {%- if group_name == group -%}
-                    {% if first_block_found == false %}
-                      {% assign first_block_found = true %}
-                      {% assign first_block_id = block.id %}
-                    {% endif %}
-                    {% if block.settings.location_info != blank %}
-                      <div
-                        class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
-                        data-block-id="{{ block.id }}"
-                        data-group-name="{{ group_name }}"
-                      >
-                        <div class="store-locations__location-info rte">
-                          {{- block.settings.location_info -}}
-                        </div>
-                      </div>
-                    {% endif %}
+                  {%- assign bgn = block.settings.group_name | strip -%}
+                  {%- if bgn == blank and block.settings.location_info != blank -%}
+                    <div
+                      class="store-locations__location"
+                      data-block-id="{{ block.id }}"
+                    >
+                      <div class="store-locations__location-info rte">{{- block.settings.location_info -}}</div>
+                    </div>
+                    {%- assign grid_first_block_found = true -%}
                   {%- endif -%}
                 {%- endfor -%}
               </div>
-            {% endfor %}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Grouped locations {%- endcomment -%}
+          {%- for group in group_names -%}
+            {%- if group == blank -%}{%- continue -%}{%- endif -%}
+            {%- liquid
+              assign gc = 0
+              for block in section.blocks
+                assign bgn = block.settings.group_name | strip
+                if bgn == group and block.settings.location_info != blank
+                  assign gc = gc | plus: 1
+                endif
+              endfor
+              if gc < 10
+                assign gc_display = gc | prepend: '0'
+              else
+                assign gc_display = gc
+              endif
+            -%}
+            <div class="store-locations__grid-row" data-group-name="{{ group }}">
+              <div class="store-locations__group" data-group-name="{{ group }}">
+                <{{ section.settings.heading_location_tag }} class="store-locations__group-title {{ section.settings.heading_location_size }}">{{- group -}}</{{ section.settings.heading_location_tag }}>
+                <p class="subtitle">{{- gc_display -}}</p>
+              </div>
+              <div class="store-locations__grid-locations">
+                {%- for block in section.blocks -%}
+                  {%- assign bgn = block.settings.group_name | strip -%}
+                  {%- if bgn == group and block.settings.location_info != blank -%}
+                    <div
+                      class="store-locations__location"
+                      data-block-id="{{ block.id }}"
+                      data-group-name="{{ group }}"
+                    >
+                      <div class="store-locations__location-info rte">{{- block.settings.location_info -}}</div>
+                    </div>
+                    {%- assign grid_first_block_found = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+
+        </div>
+      {%- else -%}
+        <div class="store-locations__list">
+          {% assign first_block_found = false %}
+          {% assign first_block_id = '' %}
+
+          {% comment %} render sticky group list {% endcomment %}
+          {%- if group_names.size > 0 -%}
+            <div class="store-locations__tabs">
+              {%- for group in group_names -%}
+                <button
+                  class="store-locations__tab button {% if group == group_names.first and has_blank_group == false %} button--primary{% else %} button--secondary{% endif %} "
+                  data-block-identifier="{{- group -}}"
+                  aria-label="{{- group -}}"
+                >
+                  <div class="button__content">
+                    <span class="button__label" data-label="{{- group -}}">{{- group -}}</span>
+                  </div>
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <div class="store-locations__locations-outer">
+            <div class="store-locations__locations">
+              {% comment %} render location list without group {% endcomment %}
+              {%- for block in section.blocks -%}
+                {%- assign group_name = block.settings.group_name | strip -%}
+                {%- if group_name == blank -%}
+                  {% if first_block_found == false %}
+                    {% assign first_block_found = true %}
+                    {% assign first_block_id = block.id %}
+                  {% endif %}
+                  {% if block.settings.location_info != blank %}
+                    <div
+                      class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
+                      data-block-id="{{ block.id }}"
+                    >
+                      <div class="store-locations__location-info rte">
+                        {{ block.settings.location_info }}
+                      </div>
+                    </div>
+                  {% endif %}
+                {%- endif -%}
+              {%- endfor -%}
+
+              {% comment %} render location list with group {% endcomment %}
+              {% for group in group_names %}
+                <div class="store-locations__group-wrapper" data-group-name="{{ group }}">
+                  <div class="store-locations__group" data-group-name="{{ group }}">
+                    {% liquid
+                      assign group_locations = 0
+                      for block in section.blocks
+                        assign group_name = block.settings.group_name | strip
+                        if group_name == group and block.settings.location_info != blank
+                          assign group_locations = group_locations | plus: 1
+                        endif
+                      endfor
+                      if group_locations < 10
+                        assign group_locations = group_locations | prepend: '0'
+                      endif
+                    %}
+                    <{{ section.settings.heading_location_tag }} class="store-locations__group-title {{ section.settings.heading_location_size }}">
+                      {{- group -}}
+                    </{{ section.settings.heading_location_tag }}>
+                    <p class="subtitle">{{- group_locations -}}</p>
+                  </div>
+
+                  {%- for block in section.blocks -%}
+                    {%- assign group_name = block.settings.group_name | strip -%}
+                    {%- if group_name == group -%}
+                      {% if first_block_found == false %}
+                        {% assign first_block_found = true %}
+                        {% assign first_block_id = block.id %}
+                      {% endif %}
+                      {% if block.settings.location_info != blank %}
+                        <div
+                          class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
+                          data-block-id="{{ block.id }}"
+                          data-group-name="{{ group_name }}"
+                        >
+                          <div class="store-locations__location-info rte">
+                            {{- block.settings.location_info -}}
+                          </div>
+                        </div>
+                      {% endif %}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="store-locations__media">
-        {%- for block in section.blocks -%}
-          {%- assign group_name = block.settings.group_name | strip -%}
-          {%- if section.settings.layout == 'grid' -%}
-            {%- if block.settings.location_info != blank -%}
-              <div
-                class="store-locations__location{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
-                data-block-id="{{ block.id }}"
-                {%- if group_name != blank %} data-group-name="{{ group_name }}"{% endif %}
-              >
-                <div class="store-locations__location-info rte">
-                  {{- block.settings.location_info -}}
-                </div>
-              </div>
-            {%- endif -%}
-          {%- else -%}
+        <div class="store-locations__media">
+          {% assign first_block_found = false %}
+          {% assign first_block_id = '' %}
+          {%- for block in section.blocks -%}
+            {%- assign group_name = block.settings.group_name | strip -%}
+            {% if first_block_found == false %}
+              {% assign first_block_found = true %}
+              {% assign first_block_id = block.id %}
+            {% endif %}
             <div
-              class="store-locations__image{% if first_block_found and first_block_id == block.id %} highlight--item{% endif %}"
+              class="store-locations__image{% if first_block_id == block.id %} highlight--item{% endif %}"
               data-block-identifier="{{ block.id }}"
             >
               {%- if block.settings.location_image != blank -%}
                 {% liquid
                   assign styles = 'object-fit: cover;'
-
                   assign fetch_priority = 'auto'
                   assign image_loading = 'lazy'
                   if section.index == 1
                     assign fetch_priority = 'high'
                     assign image_loading = 'eager'
                   endif
-
                   assign image_desktop = block.settings.location_image
                   if section.settings.section_ratio_desktop != 'full_height'
                     assign settings_desktop_aspect_ratio = temp_desktop | divided_by: aspect_ratio_desktop[1] | round: 2
@@ -197,7 +266,6 @@
                   else
                     assign settings_desktop_aspect_ratio = image_desktop.aspect_ratio
                   endif
-
                   assign calc_ratio_desktop = 1
                   if image_desktop.aspect_ratio > settings_desktop_aspect_ratio
                     assign calc_ratio_desktop = image_desktop.aspect_ratio | divided_by: settings_desktop_aspect_ratio | round: 2
@@ -245,9 +313,9 @@
                 </div>
               {%- endif -%}
             </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
@@ -280,6 +348,13 @@
         }
       ],
       "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Show tabs",
+      "default": true,
+      "visible_if": "{{ section.settings.layout == 'grid' }}"
     },
     {
       "type": "color_scheme",
