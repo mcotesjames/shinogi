@@ -21,15 +21,6 @@
     "store_locations_DApB4w": {
       "type": "store-locations",
       "blocks": {
-        "location_y9eYmN": {
-          "type": "location",
-          "settings": {
-            "group_name": "Toronto",
-            "location_info": "<p><a href=\"#\" title=\"#\">info@yardbird.com</a><br/><a href=\"#\" title=\"#\">+852 1234 5678</a></p>",
-            "location_image": "shopify://shop_images/DSC00739_half_size.webp",
-            "get_in_touch_link": "#"
-          }
-        },
         "location_RG49Y4": {
           "type": "location",
           "settings": {
@@ -77,7 +68,6 @@
         }
       },
       "block_order": [
-        "location_y9eYmN",
         "location_RG49Y4",
         "location_fjxPMg",
         "location_VrYCrf",
@@ -99,7 +89,7 @@
         "heading_group_button_label": "Learn More",
         "heading_group_button_link": "",
         "heading_group_button_style": "tertiary",
-        "heading_group_enable_border_bottom": true,
+        "heading_group_enable_border_bottom": false,
         "heading_location_size": "h4",
         "heading_location_tag": "h2",
         "padding_top": "no-indent",
