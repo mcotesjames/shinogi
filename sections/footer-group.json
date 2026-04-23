@@ -122,14 +122,6 @@
             "label": "Social media"
           }
         },
-        "link_list_XDQEkL": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Shop",
-            "menu": "shop",
-            "default_open": false
-          }
-        },
         "block_1": {
           "type": "link_list",
           "settings": {
@@ -149,7 +141,6 @@
       },
       "block_order": [
         "socials_44XtqW",
-        "link_list_XDQEkL",
         "block_1",
         "block_4"
       ],
