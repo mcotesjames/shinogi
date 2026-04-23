@@ -86,7 +86,7 @@
       ],
       "name": "t:sections.store-locations.presets.name",
       "settings": {
-        "layout": "default",
+        "layout": "grid",
         "color_scheme": "",
         "section_ratio_desktop": "24/11",
         "enable_border_top": false,
