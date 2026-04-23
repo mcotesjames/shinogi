@@ -16,6 +16,7 @@
     align-items: flex-start;
     justify-content: end;
     gap: 2rem;
+    position: relative;
   }
 }
 .footer .footer-socials-group {
@@ -30,7 +31,9 @@
 @media screen and (min-width: 750px) {
   .footer .footer-socials-group {
     width: auto;
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 0;
   }
 }
