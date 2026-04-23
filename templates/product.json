@@ -721,6 +721,13 @@
         "margin_bottom": "no-indent"
       }
     },
+    "custom_liquid_zNBaxH": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"klaviyo-form-Xxy6td\"></div>"
+      }
+    },
     "newsletter_zk9CYD": {
       "type": "newsletter",
       "name": "t:sections.newsletter.name",
@@ -757,6 +764,7 @@
     "rich_text",
     "image_gallery_Gg6zHb",
     "popular_products_jjzArx",
+    "custom_liquid_zNBaxH",
     "newsletter_zk9CYD"
   ]
 }
