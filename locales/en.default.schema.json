@@ -955,6 +955,9 @@
         },
         "recommended": {
           "label": "Recommended"
+        },
+        "none": {
+          "label": "None"
         }
       },
       "slider": {
