@@ -304,12 +304,14 @@
   flex-shrink: 0;
   border-right: none;
   align-self: stretch;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+  background-color: rgba(var(--color-background-secondary), 0.5);
 }
 @media screen and (min-width: 990px) {
   .store-locations--grid .store-locations__grid-row .store-locations__group {
     width: 50%;
     border-right: 0.1rem solid rgb(var(--color-border));
-    border-bottom: 0.1rem solid rgb(var(--color-border));
+    background-color: transparent;
   }
 }
 .store-locations--grid .store-locations__grid-locations {
