@@ -193,9 +193,6 @@
   padding-top: 0;
 }
 @media screen and (max-width: 750px) {
-  .footer .footer-menu-block {
-    display: none;
-  }
   .footer .footer-main-wrapper {
     align-items: flex-start;
   }
