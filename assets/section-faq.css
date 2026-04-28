@@ -43,6 +43,9 @@
   max-width: 100%;
 }
 @media (min-width: 990px) {
+  .faq .faq__group-toggle {
+    align-items: flex-start;
+  }
   .faq .faq__group-details.product-accordion__content {
     display: block;
     width: 50%;
