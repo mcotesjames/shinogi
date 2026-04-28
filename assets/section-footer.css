@@ -198,7 +198,10 @@
   }
   .footer .footer-socials-group {
     width: auto;
-    align-self: flex-end;
+    align-self: flex-start;
+  }
+  .footer .footer-menu-block {
+    align-self: flex-start;
   }
   @keyframes linksFadeIn {
     0% {
