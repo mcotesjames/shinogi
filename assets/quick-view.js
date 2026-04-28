@@ -81,7 +81,7 @@ if (!customElements.get("quick-view-modal")) {
           ".product__media-info",
           "[data-avaliability-notification-script]",
           ".custom-liquid",
-          ".dropdown-accordion",
+          ".product-accordion",
           ".product-app",
         ];
         const removingElements = mainProductElement.querySelectorAll(

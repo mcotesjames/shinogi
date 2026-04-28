@@ -4,15 +4,15 @@
       return;
     }
 
-    const accordions = section.querySelectorAll(".dropdown-accordion");
+    const accordions = section.querySelectorAll(".product-accordion");
 
     accordions.forEach((accordion) => {
       accordion.addEventListener("click", (event) => {
-        const toggleEl = event.target.closest(".dropdown-accordion__toggle");
+        const toggleEl = event.target.closest(".product-accordion__toggle");
         if (!toggleEl) return;
 
         // Prevent nested accordion events from firing on parent accordions
-        if (toggleEl.closest(".dropdown-accordion") !== accordion) return;
+        if (toggleEl.closest(".product-accordion") !== accordion) return;
 
         // Group-level accordion only operates on mobile
         if (toggleEl.classList.contains("faq__group-toggle") && window.innerWidth >= 990) {
@@ -22,7 +22,7 @@
         const contentEl = toggleEl.nextElementSibling;
         if (
           !contentEl ||
-          !contentEl.classList.contains("dropdown-accordion__content")
+          !contentEl.classList.contains("product-accordion__content")
         ) {
           return;
         }

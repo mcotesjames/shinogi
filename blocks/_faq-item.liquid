@@ -12,9 +12,9 @@
 
 <div class="faq__item">
   {%- if has_question -%}
-    <div class="dropdown-accordion">
+    <div class="product-accordion">
       <button
-        class="button button--simple dropdown-accordion__toggle{% if block.settings.default_open %} active{% endif %} focus-inset"
+        class="button button--simple product-accordion__toggle{% if block.settings.default_open %} active{% endif %} focus-inset"
         aria-label="{{ block.settings.question | escape }}"
         aria-expanded="{% if block.settings.default_open %}true{% else %}false{% endif %}"
       >
@@ -23,7 +23,7 @@
             {{- block.settings.question -}}
           </span>
           {%- if has_answer -%}
-            <div class="dropdown-accordion__icon">
+            <div class="product-accordion__icon">
               {% render 'icon-plus-dropdown' %}
               {% render 'icon-minus-dropdown' %}
             </div>
@@ -32,7 +32,7 @@
       </button>
 
       {%- if has_answer -%}
-        <div class="dropdown-accordion__content{% if block.settings.default_open %} active{% endif %}">
+        <div class="product-accordion__content{% if block.settings.default_open %} active{% endif %}">
           <div class="rte">
             {{- block.settings.answer -}}
           </div>

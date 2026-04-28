@@ -30,7 +30,7 @@
     pointer-events: none;
     cursor: default;
   }
-  .faq__group-title .dropdown-accordion__icon {
+  .faq__group-title .product-accordion__icon {
     display: none;
   }
 }
@@ -39,7 +39,7 @@
   max-width: 100%;
 }
 @media (min-width: 990px) {
-  .faq .faq__group-details.dropdown-accordion__content {
+  .faq .faq__group-details.product-accordion__content {
     display: block;
     width: 50%;
     max-width: 50%;
@@ -48,15 +48,15 @@
 .faq__item {
   border-top: 0.1rem solid rgb(var(--color-border));
 }
-.faq .faq__item .dropdown-accordion {
+.faq .faq__item .product-accordion {
   padding: 1.2rem;
   border-bottom: none;
 }
 @media (min-width: 1200px) {
-  .faq .faq__item .dropdown-accordion {
+  .faq .faq__item .product-accordion {
     padding: 2rem;
   }
 }
-.faq .dropdown-accordion__content p {
+.faq .product-accordion__content p {
   max-width: none;
 }

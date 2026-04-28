@@ -405,17 +405,17 @@ function initProductPage(section) {
     );
     const enableTransition =
       !configEl || configEl.dataset.enableAccordionTransition !== "false";
-    const accordions = section.querySelectorAll(".dropdown-accordion");
+    const accordions = section.querySelectorAll(".product-accordion");
 
     accordions.forEach((accordion) => {
       accordion.addEventListener("click", (event) => {
-        const toggleEl = event.target.closest(".dropdown-accordion__toggle");
+        const toggleEl = event.target.closest(".product-accordion__toggle");
         if (!toggleEl) return;
 
         const contentEl = toggleEl.nextElementSibling;
         if (
           !contentEl ||
-          !contentEl.classList.contains("dropdown-accordion__content")
+          !contentEl.classList.contains("product-accordion__content")
         ) {
           return;
         }
