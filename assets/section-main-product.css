@@ -70,10 +70,13 @@
   flex-direction: column;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  border-bottom: 0.1rem solid rgb(var(--color-border));
+  
 }
 @media (min-width: 750px) {
   .product__info-container {
     max-width: 64rem;
+    border-bottom: 0;
   }
 }
 @media (min-width: 990px) {
