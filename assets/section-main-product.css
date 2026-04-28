@@ -1743,6 +1743,9 @@
 }
 
 .product-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   overflow: hidden;
   word-break: break-word;
   border-bottom: 1px solid var(--color-border);
@@ -1901,7 +1904,7 @@
 .product-popup {
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-top: 1.2rem;
+  padding-top: 2rem;
   display: inline-block;
 }
 .product-popup:first-child {
