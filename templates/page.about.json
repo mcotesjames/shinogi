@@ -443,7 +443,7 @@
         "enable_border_bottom": false,
         "heading": "FAQs",
         "heading_font": "heading",
-        "heading_size": "h4",
+        "heading_size": "h3",
         "heading_tag": "h2",
         "heading_group_button_show": false,
         "heading_group_button_label": "Learn More",
