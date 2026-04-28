@@ -18,11 +18,15 @@
   .video-with-text {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "text video";
-    align-items: stretch;
+    align-items: start;
   }
 
   .video-with-text--reversed {
     grid-template-areas: "video text";
+  }
+
+  .video-with-text__text {
+    overflow: hidden;
   }
 
   .video-with-text__video {
