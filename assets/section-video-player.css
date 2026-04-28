@@ -16,9 +16,9 @@
 
 @media (min-width: 990px) {
   .video-with-text {
-  grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas: "text video";
-    align-items: start;
+    align-items: stretch;
   }
 
   .video-with-text--reversed {
@@ -126,9 +126,17 @@
   width: 100%;
 }
 
+@media (min-width: 990px) {
+  .video-timestamps {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+}
+
 .video-timestamps__item {
   border-top: 0.1rem solid rgb(var(--color-border));
-  padding: 1.5rem 1.2rem;
+  padding: 2rem 1.2rem;
 }
 
 .video-timestamps__item:last-child {
