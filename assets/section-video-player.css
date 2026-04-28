@@ -132,7 +132,7 @@
 }
 
 .video-timestamps__item:last-child {
-  border-bottom: 0.1rem solid rgb(var(--color-border));
+  border-bottom: 0;
 }
 
 .video-timestamps__link {
