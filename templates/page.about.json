@@ -139,48 +139,40 @@
     "video_player_fagei8": {
       "type": "video-player",
       "blocks": {
-        "timestamp_qtXh9b": {
-          "type": "timestamp",
+        "chapter_m8apq9": {
+          "type": "chapter",
           "settings": {
-            "label": "Chapter 001",
-            "timestamp": "0:00"
+            "title": "Opening the case",
+            "video_url": ""
           }
         },
-        "timestamp_DdncWi": {
-          "type": "timestamp",
+        "chapter_rHj883": {
+          "type": "chapter",
           "settings": {
-            "label": "Chapter 002",
-            "timestamp": "0:00"
+            "title": "Closing the case",
+            "video_url": ""
           }
         },
-        "timestamp_TFUaAV": {
-          "type": "timestamp",
+        "chapter_t7z8Wr": {
+          "type": "chapter",
           "settings": {
-            "label": "Chapter 003",
-            "timestamp": "0:00"
+            "title": "Change strap",
+            "video_url": ""
           }
         },
-        "timestamp_mRwXLT": {
-          "type": "timestamp",
+        "chapter_RL3UMg": {
+          "type": "chapter",
           "settings": {
-            "label": "Chapter 004",
-            "timestamp": "0:00"
-          }
-        },
-        "timestamp_TagKPm": {
-          "type": "timestamp",
-          "settings": {
-            "label": "Chapter 005",
-            "timestamp": "0:00"
+            "title": "switching the pad",
+            "video_url": ""
           }
         }
       },
       "block_order": [
-        "timestamp_qtXh9b",
-        "timestamp_DdncWi",
-        "timestamp_TFUaAV",
-        "timestamp_mRwXLT",
-        "timestamp_TagKPm"
+        "chapter_m8apq9",
+        "chapter_rHj883",
+        "chapter_t7z8Wr",
+        "chapter_RL3UMg"
       ],
       "name": "Video Player",
       "settings": {
