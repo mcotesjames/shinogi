@@ -41,8 +41,8 @@
         <ul class="video-timestamps">
           {%- for block in section.blocks -%}
             <li class="video-timestamps__item" {{ block.shopify_attributes }}>
-              <a href="#" class="video-timestamps__link h6" data-timestamp="{{ block.settings.timestamp }}">
-                {{- block.settings.label -}}
+              <a href="#" class="video-timestamps__link h6" data-video-url="{{ block.settings.video_url }}">
+                {{- block.settings.title -}}
               </a>
             </li>
           {%- endfor -%}
@@ -72,6 +72,31 @@
   </div>
 </div>
 
+<script>
+  (function () {
+    const section = document.currentScript.closest('.video-player-section-wrapper');
+    if (!section) return;
+
+    const videoEl = section.querySelector('video');
+    const items = section.querySelectorAll('.video-timestamps__item');
+
+    items.forEach((item) => {
+      item.querySelector('.video-timestamps__link')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = e.currentTarget.dataset.videoUrl;
+        if (!url || !videoEl) return;
+
+        items.forEach((i) => i.classList.remove('active'));
+        item.classList.add('active');
+
+        videoEl.src = url;
+        videoEl.load();
+        videoEl.play();
+      });
+    });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Video Player",
@@ -79,21 +104,20 @@
   "class": "video-player-section-wrapper",
   "blocks": [
     {
-      "type": "timestamp",
-      "name": "Timestamp",
+      "type": "chapter",
+      "name": "Chapter",
       "settings": [
         {
           "type": "text",
-          "id": "label",
-          "label": "Label",
+          "id": "title",
+          "label": "Title",
           "default": "Chapter title"
         },
         {
           "type": "text",
-          "id": "timestamp",
-          "label": "Timestamp",
-          "info": "Format: 0:00",
-          "default": "0:00"
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Link to a .mp4, .m4v, or .webm file"
         }
       ]
     }
