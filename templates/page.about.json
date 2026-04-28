@@ -243,7 +243,7 @@
               "type": "_faq-item",
               "settings": {
                 "question": "What is it made from?",
-                "answer": "<p>The case body is ABS plastic with an aluminum frame. The handle is</p><p>nylon paracord with zinc alloy connectors. Closures are Fidlock</p><p>magnetic snap pulls. The nameplate is stainless steel. Every material</p><p>was specified for durability and longevity.</p>",
+                "answer": "<p>The case body is ABS plastic with an aluminum frame. The handle is nylon paracord with zinc alloy connectors. Closures are Fidlock magnetic snap pulls. The nameplate is stainless steel. Every material was specified for durability and longevity.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -253,7 +253,7 @@
               "name": "FAQ Item",
               "settings": {
                 "question": "What comes in the box?",
-                "answer": "<p>The case, 8 accordion dividers, a bamboo splint, 12 elastic nylon</p><p>cords, two silicone mats, a paracord shoulder strap, a stainless</p><p>nameplate, and a notebook.</p>",
+                "answer": "<p>The case, 8 accordion dividers, a bamboo splint, 12 elastic nylon cords, two silicone mats, a paracord shoulder strap, a stainless nameplate, and a notebook.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -263,7 +263,7 @@
               "name": "FAQ Item",
               "settings": {
                 "question": "Is it waterproof?",
-                "answer": "<p>No. It is water resistant and will handle normal use — rain, splashes,</p><p>kitchen environments. It is not designed to be submerged.</p>",
+                "answer": "<p>No. It is water resistant and will handle normal use — rain, splashes, kitchen environments. It is not designed to be submerged.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -273,7 +273,7 @@
               "name": "FAQ Item",
               "settings": {
                 "question": "What does \"shinogi\" mean?",
-                "answer": "<p>Shinogi is the Japanese term for the ridgeline on a traditional blade</p><p>— the backbone that gives a knife its structure and strength. It's the</p><p>principle the brand is built on: structural integrity as a design</p><p>philosophy.</p>",
+                "answer": "<p>Shinogi is the Japanese term for the ridgeline on a traditional blade — the backbone that gives a knife its structure and strength. It's the principle the brand is built on: structural integrity as a design philosophy.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -291,7 +291,7 @@
         "faq_group_wDqWXN": {
           "type": "_faq-group",
           "settings": {
-            "group_heading": "Shipping",
+            "group_heading": "PRESALE",
             "group_heading_font": "heading",
             "group_heading_size": "h6",
             "group_heading_tag": "h3"
@@ -300,8 +300,8 @@
             "faq_item_J8NBnd": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "What is the presale?",
+                "answer": "<p>We are producing 1,000 units of CASE 15-25. The presale allows you to secure one before they ship.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -309,8 +309,8 @@
             "faq_item_VMDjac": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "When will my order ship?",
+                "answer": "<p>Cases are currently in production in Guangzhou. We will notify every customer by email the moment orders begin shipping. We will not give you a date until we are certain of it.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -318,8 +318,8 @@
             "faq_item_xAYBGK": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "Can I cancel my presale order?",
+                "answer": "<p>Yes. Orders can be cancelled for a full refund with processing fees applied - any time before your order ships. Once shipped, all sales are final.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -330,11 +330,111 @@
             "faq_item_VMDjac",
             "faq_item_xAYBGK"
           ]
+        },
+        "faq_group_qbehFj": {
+          "type": "_faq-group",
+          "name": "FAQ Group",
+          "settings": {
+            "group_heading": "SHIPPING",
+            "group_heading_font": "heading",
+            "group_heading_size": "h6",
+            "group_heading_tag": "h3"
+          },
+          "blocks": {
+            "faq_item_6RTy6C": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "Where do you ship?",
+                "answer": "<p>Worldwide. All orders ship from Hong Kong via DHL, FedEx, UPS, or SF Express. Shipping rates are calculated at checkout based on your location.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "faq_item_hr7Dpr": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "Who pays duties and taxes?",
+                "answer": "<p>All orders ship DDU — Delivered Duty Unpaid. Import duties, taxes, and customs fees are the responsibility of the customer. We recommend checking your country's import regulations before ordering.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "faq_item_mAKCda": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "Will I get a tracking number?",
+                "answer": "<p>Yes. You will receive a tracking number by email as soon as your order ships. All shipments are fully tracked.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "faq_item_6RTy6C",
+            "faq_item_hr7Dpr",
+            "faq_item_mAKCda"
+          ]
+        },
+        "faq_group_pKFzrM": {
+          "type": "_faq-group",
+          "name": "FAQ Group",
+          "settings": {
+            "group_heading": "WHOLESALE",
+            "group_heading_font": "heading",
+            "group_heading_size": "h6",
+            "group_heading_tag": "h3"
+          },
+          "blocks": {
+            "faq_item_JG9xUH": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "Do you wholesale?",
+                "answer": "<p>Yes. We are selectively taking on wholesale partners. If you are interested, contact us at info@shinogi.co with details about your business.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "faq_item_JG9xUH"
+          ]
+        },
+        "faq_group_jFcwDd": {
+          "type": "_faq-group",
+          "name": "FAQ Group",
+          "settings": {
+            "group_heading": "CONTACT",
+            "group_heading_font": "heading",
+            "group_heading_size": "h6",
+            "group_heading_tag": "h3"
+          },
+          "blocks": {
+            "faq_item_QXKHbc": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "How do I get in touch?",
+                "answer": "<p>Email us at info@shinogi.co. We'll get back to you within 3 business days.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "faq_item_QXKHbc"
+          ]
         }
       },
       "block_order": [
         "faq_group_dyLFQz",
-        "faq_group_wDqWXN"
+        "faq_group_wDqWXN",
+        "faq_group_qbehFj",
+        "faq_group_pKFzrM",
+        "faq_group_jFcwDd"
       ],
       "name": "FAQ",
       "settings": {
