@@ -135,6 +135,10 @@
   border-bottom: 0;
 }
 
+.video-timestamps__item.active {
+  background-color: rgba(var(--color-background-secondary), 0.5);
+}
+
 .video-timestamps__link {
   display: block;
   text-decoration: none;
