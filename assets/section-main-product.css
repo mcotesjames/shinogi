@@ -1858,7 +1858,10 @@
 }
 
 .product-specifications {
-  padding: 2rem 2rem 1rem;
+  padding: 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .product-specifications .product-accordion {
@@ -1870,7 +1873,7 @@
 }
 
 .product-accordion__specification-items {
-  margin: 0 0 1rem;
+  /* margin: 0 0 1rem; */
 }
 
 .product-accordion__specification-item {
