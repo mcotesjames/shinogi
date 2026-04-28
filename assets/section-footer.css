@@ -15,6 +15,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: end;
+    gap: 0rem;
     position: relative;
   }
 }
