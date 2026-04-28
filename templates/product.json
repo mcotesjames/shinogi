@@ -106,8 +106,8 @@
           "settings": {
             "label": "Shipping Details",
             "color_scheme": "",
-            "heading": "Details",
-            "text": "<p>Use this block to add extra product details.</p>",
+            "heading": "Shipping",
+            "text": "<p>Orders are processed Monday to Friday within 2–3 business days, excluding Hong Kong public holidays. Once dispatched, you will receive an automated tracking notification via email.</p><ul><li><strong>Hong Kong:</strong> Delivered within 2–3 business days via SF Express. Free shipping on orders over HK$500.</li><li><strong>International:</strong> Delivered within 7 business days via FedEx, DHL, or UPS. Shipping costs calculated at checkout.</li></ul><p>All delivery timeframes are estimates and are not guaranteed. Shinogi ships worldwide, with the exception of destinations affected by geopolitical restrictions or carrier suspensions.</p><p>International customers are responsible for any customs duties, import taxes, or fees charged upon delivery. These are not included in the product price or shipping cost.</p>",
             "page": ""
           }
         },
