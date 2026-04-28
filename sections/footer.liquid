@@ -147,6 +147,44 @@
           </div>
         {%- endif -%}
 
+        {% comment %} ----- FOOTER MENU BLOCKS ----- {% endcomment %}
+        <div class="footer-menu-blocks-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link_list' and block.settings.heading != blank and block.settings.menu != blank -%}
+              <div
+                class="footer-block footer-menu-block"
+                {{ block.shopify_attributes }}
+              >
+                <details class="footer-menu-block-accordion">
+                  <summary class="footer-menu-block-summary focus-inset">
+                    <span class="header-label">{{- block.settings.heading | escape -}}</span>
+                    {% render 'icon-chevron' %}
+                  </summary>
+                  <ul class="footer-menu-block-list list-unstyled">
+                    {%- for link in block.settings.menu.links -%}
+                      <li class="footer-menu-block-list__item">
+                        <a
+                          href="{{ link.url }}"
+                          {% if settings.links_blank and link.type == 'http_link' %}
+                            target="_blank"
+                          {% endif %}
+                          class="footer-menu-block-list__link list-menu-item-animate focus-inset"
+                          aria-label="{{- link.title -}}"
+                        >
+                          <span class="header-label">{{- link.title -}}</span>
+                        </a>
+                        {%- if link.links != blank -%}
+                          <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </details>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
         {% comment %} ----- FOOTER SOCIALS ----- {% endcomment %}
         {%- assign has_socials = false -%}
         {%- for block in section.blocks -%}
@@ -168,42 +206,6 @@
             {%- endfor -%}
           </div>
         {%- endif -%}
-
-        {% comment %} ----- FOOTER MENU BLOCKS ----- {% endcomment %}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'link_list' and block.settings.heading != blank and block.settings.menu != blank -%}
-            <div
-              class="footer-block footer-menu-block"
-              {{ block.shopify_attributes }}
-            >
-              <details class="footer-menu-block-accordion">
-                <summary class="footer-menu-block-summary focus-inset">
-                  <span class="header-label">{{- block.settings.heading | escape -}}</span>
-                  {% render 'icon-chevron' %}
-                </summary>
-                <ul class="footer-menu-block-list list-unstyled">
-                  {%- for link in block.settings.menu.links -%}
-                    <li class="footer-menu-block-list__item">
-                      <a
-                        href="{{ link.url }}"
-                        {% if settings.links_blank and link.type == 'http_link' %}
-                          target="_blank"
-                        {% endif %}
-                        class="footer-menu-block-list__link list-menu-item-animate focus-inset"
-                        aria-label="{{- link.title -}}"
-                      >
-                        <span class="header-label">{{- link.title -}}</span>
-                      </a>
-                      {%- if link.links != blank -%}
-                        <span class="footer-menu-item-chevron">{% render 'icon-chevron' %}</span>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </details>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
 
         {% comment %} ----- FOOTER CONTACT INFORMATION ----- {% endcomment %}
         {%- if section.settings.show_contact -%}
