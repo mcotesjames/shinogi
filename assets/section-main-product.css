@@ -540,7 +540,7 @@
     display: none !important;
   }
   .product__media--mobile-type-slider .product__media-item {
-    max-width: 85%;
+    max-width: 100%;
   }
   .product__media--mobile-type-slider .product__media-item:only-child {
     max-width: 100%;
