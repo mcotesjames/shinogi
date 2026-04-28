@@ -84,7 +84,7 @@
         "enable_border_bottom": false,
         "heading": "Stockists",
         "heading_font": "heading",
-        "heading_size": "h6",
+        "heading_size": "h3",
         "heading_tag": "h1",
         "heading_group_button_show": false,
         "heading_group_button_label": "Learn More",
