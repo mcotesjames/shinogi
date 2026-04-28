@@ -196,6 +196,13 @@
   .footer .footer-menu-block {
     display: none;
   }
+  .footer .footer-main-wrapper {
+    align-items: flex-start;
+  }
+  .footer .footer-socials-group {
+    width: auto;
+    align-self: flex-end;
+  }
   @keyframes linksFadeIn {
     0% {
       opacity: 0;
