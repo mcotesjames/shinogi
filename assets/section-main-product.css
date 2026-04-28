@@ -1743,7 +1743,6 @@
 }
 
 .product-accordion {
-  padding: 2rem;
   overflow: hidden;
   word-break: break-word;
   border-bottom: 1px solid var(--color-border);
