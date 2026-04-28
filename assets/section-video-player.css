@@ -25,10 +25,6 @@
     grid-template-areas: "video text";
   }
 
-  .video-with-text__text {
-    overflow: hidden;
-  }
-
   .video-with-text__video {
     border-left: 0.1rem solid rgb(var(--color-border));
   }
@@ -128,14 +124,6 @@
   margin: 0;
   padding: 0;
   width: 100%;
-}
-
-@media (min-width: 990px) {
-  .video-timestamps {
-    flex: 1;
-    overflow-y: auto;
-    min-height: 0;
-  }
 }
 
 .video-timestamps__item {
