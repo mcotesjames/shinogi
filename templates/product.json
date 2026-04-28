@@ -167,7 +167,7 @@
         "enable_video_looping": true,
         "enable_video_autoplay": false,
         "enable_image_zoom_desktop": true,
-        "zoom_image_fit_desktop": "cover",
+        "zoom_image_fit_desktop": "contain",
         "enable_image_zoom_mobile": true,
         "zoom_image_fit_mobile": "cover",
         "zoom_image_color_scheme": "",
