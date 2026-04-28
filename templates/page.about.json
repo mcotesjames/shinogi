@@ -215,7 +215,7 @@
         "faq_group_dyLFQz": {
           "type": "_faq-group",
           "settings": {
-            "group_heading": "Product",
+            "group_heading": "THE PRODUCT",
             "group_heading_font": "heading",
             "group_heading_size": "h6",
             "group_heading_tag": "h3"
@@ -224,8 +224,8 @@
             "faq_item_H9LGaV": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "What is CASE 15-25?",
+                "answer": "<p>CASE 15-25 is a hard-shell knife case designed to carry 8–10 knives.</p><p>The name refers to the years it took to develop — 2015 to 2025. Every</p><p>component was chosen for a reason. Nothing is decorative.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -233,8 +233,8 @@
             "faq_item_MP4gbh": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "How many knives does it hold?",
+                "answer": "<p>8–10 knives depending on size. The accordion divider system adjusts to</p><p>fit different blade widths. The bamboo splint and elastic cord system</p><p>secures each knife individually.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -242,8 +242,38 @@
             "faq_item_RFXUgR": {
               "type": "_faq-item",
               "settings": {
-                "question": "Frequently asked question",
-                "answer": "<p>Answer to the frequently asked question.</p>",
+                "question": "What is it made from?",
+                "answer": "<p>The case body is ABS plastic with an aluminum frame. The handle is</p><p>nylon paracord with zinc alloy connectors. Closures are Fidlock</p><p>magnetic snap pulls. The nameplate is stainless steel. Every material</p><p>was specified for durability and longevity.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "faq_item_HFr6gy": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "What comes in the box?",
+                "answer": "<p>The case, 8 accordion dividers, a bamboo splint, 12 elastic nylon</p><p>cords, two silicone mats, a paracord shoulder strap, a stainless</p><p>nameplate, and a notebook.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "faq_item_qkWdtY": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "Is it waterproof?",
+                "answer": "<p>No. It is water resistant and will handle normal use — rain, splashes,</p><p>kitchen environments. It is not designed to be submerged.</p>",
+                "default_open": false
+              },
+              "blocks": {}
+            },
+            "faq_item_Dapym7": {
+              "type": "_faq-item",
+              "name": "FAQ Item",
+              "settings": {
+                "question": "What does \"shinogi\" mean?",
+                "answer": "<p>Shinogi is the Japanese term for the ridgeline on a traditional blade</p><p>— the backbone that gives a knife its structure and strength. It's the</p><p>principle the brand is built on: structural integrity as a design</p><p>philosophy.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -252,7 +282,10 @@
           "block_order": [
             "faq_item_H9LGaV",
             "faq_item_MP4gbh",
-            "faq_item_RFXUgR"
+            "faq_item_RFXUgR",
+            "faq_item_HFr6gy",
+            "faq_item_qkWdtY",
+            "faq_item_Dapym7"
           ]
         },
         "faq_group_wDqWXN": {
