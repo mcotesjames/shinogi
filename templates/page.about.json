@@ -190,7 +190,7 @@
         "preload": "auto",
         "eyebrow": "",
         "heading": "Manual",
-        "heading_size": "h4",
+        "heading_size": "h3",
         "heading_tag": "h2",
         "description": "",
         "heading_group_button_show": false,
