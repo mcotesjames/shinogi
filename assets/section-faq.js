@@ -11,6 +11,14 @@
         const toggleEl = event.target.closest(".product-accordion__toggle");
         if (!toggleEl) return;
 
+        // Prevent nested accordion events from firing on parent accordions
+        if (toggleEl.closest(".product-accordion") !== accordion) return;
+
+        // Group-level accordion only operates on mobile
+        if (toggleEl.classList.contains("faq__group-toggle") && window.innerWidth >= 990) {
+          return;
+        }
+
         const contentEl = toggleEl.nextElementSibling;
         if (
           !contentEl ||

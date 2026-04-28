@@ -1,13 +1,23 @@
-<div class="faq__group">
-  <div class="faq__group-title">
-    {%- if block.settings.group_heading != blank -%}
-      <{{ block.settings.group_heading_tag | default: 'h3' }} class="{% if block.settings.group_heading_font == 'heading'%}{{ block.settings.group_heading_size }}{% elsif block.settings.group_heading_font == 'subtitle' %}subtitle{% else %}title font--body{% endif %} richtext-link-inside">
-        {{- block.settings.group_heading -}}
-      </{{ block.settings.group_heading_tag | default: 'h3' }}>
-    {%- endif -%}
-  </div>
+<div class="faq__group product-accordion">
+  <button
+    class="button button--simple product-accordion__toggle faq__group-toggle faq__group-title focus-inset"
+    aria-label="{{ block.settings.group_heading | escape }}"
+    aria-expanded="false"
+  >
+    <div class="button__content">
+      {%- if block.settings.group_heading != blank -%}
+        <{{ block.settings.group_heading_tag | default: 'h3' }} class="{% if block.settings.group_heading_font == 'heading'%}{{ block.settings.group_heading_size }}{% elsif block.settings.group_heading_font == 'subtitle' %}subtitle{% else %}title font--body{% endif %} richtext-link-inside">
+          {{- block.settings.group_heading -}}
+        </{{ block.settings.group_heading_tag | default: 'h3' }}>
+      {%- endif -%}
+      <div class="product-accordion__icon">
+        {% render 'icon-plus-dropdown' %}
+        {% render 'icon-minus-dropdown' %}
+      </div>
+    </div>
+  </button>
 
-  <div class="faq__group-details">
+  <div class="faq__group-details product-accordion__content">
     {% content_for 'blocks' %}
   </div>
 </div>
