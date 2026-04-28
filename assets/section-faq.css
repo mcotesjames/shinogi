@@ -42,10 +42,12 @@
   width: 100%;
   max-width: 100%;
 }
+
 @media (min-width: 990px) {
   .faq .faq__group-toggle {
     align-items: flex-start;
   }
+
   .faq .faq__group-details.product-accordion__content {
     display: block;
     width: 50%;
@@ -60,11 +62,17 @@
   padding: 1.2rem;
   border-bottom: none;
 }
-@media (min-width: 1200px) {
+
+.faq .faq__item .product-accordion {
+  padding: 2rem 1.2rem;
+}
+
+@media (min-width: 990px) {
   .faq .faq__item .product-accordion {
     padding: 2rem;
   }
 }
+
 .faq .product-accordion__content p {
   max-width: none;
 }
