@@ -80,6 +80,8 @@
     const videoEl = section.querySelector('video');
     const items = section.querySelectorAll('.video-timestamps__item');
 
+    if (items[0]) items[0].classList.add('active');
+
     items.forEach((item) => {
       item.querySelector('.video-timestamps__link')?.addEventListener('click', (e) => {
         e.preventDefault();
