@@ -114,7 +114,7 @@
         "popup_2": {
           "type": "popup",
           "settings": {
-            "label": "Returns Policy",
+            "label": "Returns & Refunds",
             "color_scheme": "",
             "heading": "Returns & Refunds",
             "text": "<p>All Shinogi sales are final. We do not accept returns or offer refunds.</p><p>If you receive a defective or faulty item, please contact us at <a href=\"mailto:info@shinogi.co\">info@shinogi.co</a> within 7 days of receiving your order. Include your order number, a description of the fault, and clear photographs of the defect. Once your claim is reviewed and approved, we will arrange return shipping at our cost and send a replacement.</p><p>For any questions, contact us at <a href=\"mailto:info@shinogi.co\">info@shinogi.co</a>.</p>",
