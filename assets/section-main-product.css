@@ -33,10 +33,10 @@
   background: transparent;
   order: -1;
   flex-shrink: 0;
-  border-right: 1px solid rgb(var(--color-border));
 }
 @media (min-width: 990px) {
   .product__media {
+    border-right: 1px solid rgb(var(--color-border));
     width: 66.6666666667%;
     position: sticky;
     top: var(--header-height);
@@ -73,9 +73,8 @@
   border-bottom: 0.1rem solid rgb(var(--color-border));
   
 }
-@media (min-width: 750px) {
+@media (min-width: 990px) {
   .product__info-container {
-    max-width: 64rem;
     border-bottom: 0;
   }
 }
