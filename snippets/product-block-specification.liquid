@@ -38,9 +38,9 @@
         {%- if specification_default_open and forloop.first -%}
           {%- assign group_default_open = true -%}
         {%- endif -%}
-        <div class="product-accordion product-accordion--specification" {{ block_attributes }}>
+        <div class="dropdown-accordion dropdown-accordion--specification" {{ block_attributes }}>
           <button
-            class="button button--simple product-accordion__toggle{% if group_default_open %} active{% endif %} focus-inset"
+            class="button button--simple dropdown-accordion__toggle{% if group_default_open %} active{% endif %} focus-inset"
             aria-label="{{ specification_group.specification_title | escape }}"
           >
             <div class="button__content">
@@ -48,20 +48,20 @@
                 {{- specification_group.specification_title | escape -}}
               </span>
 
-              <div class="product-accordion__icon">
+              <div class="dropdown-accordion__icon">
                 {% render 'icon-plus-dropdown' %}
                 {% render 'icon-minus-dropdown' %}
               </div>
             </div>
           </button>
 
-          <div class="product-accordion__content{% if group_default_open %} active{% endif %}">
+          <div class="dropdown-accordion__content{% if group_default_open %} active{% endif %}">
             {%- if specification_group.specification_item.value != blank or specification_group.specification_headings.value != blank -%}
-                <div class="product-accordion__specification-items">
+                <div class="dropdown-accordion__specification-items">
                 {%- if specification_group.specification_headings.value != blank -%}
-                    <div class="product-accordion__specification-item product-accordion__specification-item--heading">
+                    <div class="dropdown-accordion__specification-item dropdown-accordion__specification-item--heading">
                       {%- for specification_heading in specification_group.specification_headings.value -%}
-                      <div class="product-accordion__specification-cell product-accordion__specification-cell--heading">
+                      <div class="dropdown-accordion__specification-cell dropdown-accordion__specification-cell--heading">
                         {{- specification_heading -}}
                       </div>
                       {%- endfor -%}
@@ -69,24 +69,24 @@
                 {%- endif -%}
                 {%- if specification_group.specification.value != blank -%}
                   {%- for specification_item in specification_group.specification.value -%}
-                    <div class="product-accordion__specification-item">
+                    <div class="dropdown-accordion__specification-item">
                       {%- if specification_item.column_1 != blank -%}
-                        <div class="product-accordion__specification-cell">
+                        <div class="dropdown-accordion__specification-cell">
                           {{- specification_item.column_1 -}}
                         </div>
                       {%- endif -%}
                       {%- if specification_item.column_2 != blank -%}
-                        <div class="product-accordion__specification-cell">
+                        <div class="dropdown-accordion__specification-cell">
                           {{- specification_item.column_2 -}}
                         </div>
                       {%- endif -%}
                       {%- if specification_item.column_3 != blank -%}
-                        <div class="product-accordion__specification-cell">
+                        <div class="dropdown-accordion__specification-cell">
                           {{- specification_item.column_3 -}}
                         </div>
                       {%- endif -%}
                       {%- if specification_item.column_4 != blank -%}
-                        <div class="product-accordion__specification-cell">
+                        <div class="dropdown-accordion__specification-cell">
                           {{- specification_item.column_4 -}}
                         </div>
                       {%- endif -%}
