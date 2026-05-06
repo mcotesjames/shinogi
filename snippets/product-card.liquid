@@ -479,11 +479,13 @@
                       aria-label="{{ 'general.product_card.quick_add_button' | t }}"
                     >
                       <div class="button__content">
+                        {%- assign _atc_label = settings.add_to_cart_label -%}
+                        {%- if _atc_label == blank -%}{%- assign _atc_label = 'general.product_card.quick_add_button' | t -%}{%- endif -%}
                         <span
                           class="product-card__quickadd-text button__label{% if is_sold_out %} hidden{% endif %}"
-                          data-label="{{ 'general.product_card.quick_add_button' | t }}"
+                          data-label="{{ _atc_label }}"
                         >
-                          {{- 'general.product_card.quick_add_button' | t -}}
+                          {{- _atc_label -}}
                         </span>
                         <span class="sold-out-message button__label{% if is_sold_out == false %} hidden{% endif %}">
                           {{- 'products.product.sold_out' | t -}}

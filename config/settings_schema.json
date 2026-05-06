@@ -988,6 +988,12 @@
     "name": "t:settings_schema.cart.name",
     "settings": [
       {
+        "type": "text",
+        "id": "add_to_cart_label",
+        "label": "t:settings_schema.cart.settings.add_to_cart_label.label",
+        "placeholder": "t:settings_schema.cart.settings.add_to_cart_label.placeholder"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.header_notification.content"
       },

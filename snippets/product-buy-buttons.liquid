@@ -143,8 +143,10 @@
           >
             <div class="button__content">
               {%- if product.selected_or_first_available_variant.available -%}
-                <span class="button__label" data-label="{{- 'products.product.add_to_cart' | t -}}">
-                  {{- 'products.product.add_to_cart' | t -}}
+                {%- assign _atc_label = settings.add_to_cart_label -%}
+                {%- if _atc_label == blank -%}{%- assign _atc_label = 'products.product.add_to_cart' | t -%}{%- endif -%}
+                <span class="button__label" data-label="{{ _atc_label }}">
+                  {{- _atc_label -}}
                 </span>
               {%- else -%}
                 <span>

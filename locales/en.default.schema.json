@@ -463,6 +463,10 @@
     "cart": {
       "name": "Cart",
       "settings": {
+        "add_to_cart_label": {
+          "label": "Add to cart button text",
+          "placeholder": "Add to Cart"
+        },
         "header_notification": {
           "content": "Cart notification"
         },
