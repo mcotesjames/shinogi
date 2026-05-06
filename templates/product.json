@@ -68,28 +68,6 @@
             "button_link": ""
           }
         },
-        "divider_rRy6Gn": {
-          "type": "divider",
-          "settings": {
-            "enable_border": true,
-            "margin_top": "0",
-            "margin_bottom": "0"
-          }
-        },
-        "collapsible_info_LyxpTC": {
-          "type": "collapsible_info",
-          "settings": {
-            "default_open": false,
-            "heading": "Features",
-            "enable_icon": false,
-            "icon": "none",
-            "custom_icon_fit": "cover",
-            "description": "<ul><li>Hand-woven high-tension paracord.</li><li>Durable matte black hardware.</li><li>Comfortable, non-slip grip.</li><li>Lightweight yet rugged construction.</li><li>Modular attachment compatible.</li></ul>",
-            "show_button": false,
-            "button_label": "Learn More",
-            "button_link": ""
-          }
-        },
         "divider_qYkmeM": {
           "type": "divider",
           "settings": {
@@ -159,8 +137,6 @@
         "variant_picker",
         "divider_2",
         "collapsible_info",
-        "divider_rRy6Gn",
-        "collapsible_info_LyxpTC",
         "divider_qYkmeM",
         "specification_r3jyJh",
         "buy_buttons",
