@@ -166,6 +166,7 @@
         "show_no_media_placeholder": true,
         "enable_video_looping": true,
         "enable_video_autoplay": false,
+        "show_media_captions": false,
         "enable_image_zoom_desktop": true,
         "zoom_image_fit_desktop": "contain",
         "enable_image_zoom_mobile": true,
