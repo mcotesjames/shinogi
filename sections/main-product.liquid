@@ -422,7 +422,7 @@
 
           <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
             {% render 'product-media-item', media: media, product_obj: product, section_obj: section %}
-            {%- if media.alt != blank -%}
+            {%- if section.settings.show_media_captions and media.alt != blank -%}
               <div class="product__media-caption">
                 {{- media.alt -}}
               </div>
@@ -777,6 +777,12 @@
       "id": "enable_video_autoplay",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_autoplay.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_captions",
+      "default": true,
+      "label": "Show media captions"
     },
     {
       "type": "checkbox",
