@@ -246,7 +246,7 @@
               "name": "FAQ Item",
               "settings": {
                 "question": "What comes in the box?",
-                "answer": "<p>The case, 8 accordion dividers, a bamboo splint, 12 elastic nylon cords, two silicone mats, a paracord shoulder strap, a stainless nameplate, and a notebook.</p>",
+                "answer": "<p>The case, 9 accordion dividers, a bamboo splint, 12 elastic nylon cords, two silicone mats, a paracord shoulder strap, a stainless nameplate, and a notebook.</p>",
                 "default_open": false
               },
               "blocks": {}
