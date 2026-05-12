@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "favicon": "shopify://shop_images/Shinogi_symbol.svg",
     "color_scheme": "light",
     "type_body_font": "bricolage_grotesque_n4",
     "type_header_font": "bricolage_grotesque_n5",
