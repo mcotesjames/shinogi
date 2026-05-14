@@ -215,7 +215,7 @@
         "section_ratio_desktop": "adapt",
         "objects_order": "content_first",
         "enable_border_top": false,
-        "enable_border_bottom": false,
+        "enable_border_bottom": true,
         "heading": "",
         "heading_font": "body",
         "heading_size": "h6",
