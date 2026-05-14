@@ -143,28 +143,26 @@
           "type": "chapter",
           "settings": {
             "title": "Opening the case",
-            "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100629"
+            "video_url": "shopify://files/videos/videoplayback.mp4"
           }
         },
         "chapter_rHj883": {
           "type": "chapter",
           "settings": {
             "title": "Closing the case",
-            "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100629"
+            "video_url": "shopify://files/videos/SHINOGI Reel_1.mp4"
           }
         },
         "chapter_t7z8Wr": {
           "type": "chapter",
           "settings": {
-            "title": "Change strap",
-            "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100629"
+            "title": "Change strap"
           }
         },
         "chapter_RL3UMg": {
           "type": "chapter",
           "settings": {
-            "title": "switching the pad",
-            "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100629"
+            "title": "switching the pad"
           }
         }
       },
@@ -177,7 +175,6 @@
       "disabled": true,
       "name": "Video Player",
       "settings": {
-        "video_url": "https://cdn.shopify.com/s/files/1/0929/2854/0973/files/dummy-video.m4v?v=1775100627",
         "autoplay": false,
         "loop": false,
         "preload": "auto",
