@@ -164,15 +164,35 @@
           "settings": {
             "title": "switching the pad"
           }
+        },
+        "chapter_8tY46x": {
+          "type": "chapter",
+          "settings": {
+            "title": "switching the pad"
+          }
+        },
+        "chapter_6yQNMN": {
+          "type": "chapter",
+          "settings": {
+            "title": "switching the pad"
+          }
+        },
+        "chapter_WiyqMB": {
+          "type": "chapter",
+          "settings": {
+            "title": "switching the pad"
+          }
         }
       },
       "block_order": [
         "chapter_m8apq9",
         "chapter_rHj883",
         "chapter_t7z8Wr",
-        "chapter_RL3UMg"
+        "chapter_RL3UMg",
+        "chapter_8tY46x",
+        "chapter_6yQNMN",
+        "chapter_WiyqMB"
       ],
-      "disabled": true,
       "name": "Video Player",
       "settings": {
         "autoplay": false,
@@ -188,7 +208,6 @@
         "button_link": "",
         "button_style": "tertiary",
         "columns": "2",
-        "aspect_ratio": "1.7778",
         "reverse_columns": false,
         "color_scheme": "",
         "enable_border_top": false,
