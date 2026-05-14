@@ -41,7 +41,7 @@
         <ul class="video-timestamps">
           {%- for block in section.blocks -%}
             <li class="video-timestamps__item" {{ block.shopify_attributes }}>
-              <a href="#" class="video-timestamps__link h6" data-video-url="{{ block.settings.video_url }}">
+              <a href="#" class="video-timestamps__link h6" data-video-url="{{ block.settings.video_url.sources[0].url }}"{% if block.settings.poster_image != blank %} data-poster="{{ block.settings.poster_image | image_url: width: 1920 }}"{% endif %}>
                 {{- block.settings.title -}}
               </a>
             </li>
@@ -51,18 +51,18 @@
     </div>
 
     <div class="video-with-text__video">
-      {%- if section.settings.video_url != blank -%}
+      {%- if section.blocks.size > 0 -%}
         <div class="video-player-wrapper"{% if section.settings.columns == '1' %} style="--video-aspect-ratio: {{ section.settings.aspect_ratio | default: '1.7778' }}"{% endif %}>
           <video-player>
             <video-minimal-skin>
               <video
                 {% if section.settings.autoplay %}autoplay muted{% endif %}
                 {% if section.settings.loop %}loop{% endif %}
-                {% if section.settings.poster_image != blank %}poster="{{ section.settings.poster_image | image_url: width: 1920 }}"{% endif %}
+                {% if section.blocks.first.settings.poster_image != blank %}poster="{{ section.blocks.first.settings.poster_image | image_url: width: 1920 }}"{% endif %}
                 preload="{{ section.settings.preload | default: 'auto' }}"
                 playsinline
               >
-                {%- for source in section.settings.video_url.sources -%}
+                {%- for source in section.blocks.first.settings.video_url.sources -%}
                   <source src="{{ source.url }}" type="{{ source.mime_type }}">
                 {%- endfor -%}
               </video>
@@ -94,6 +94,8 @@
         items.forEach((i) => i.classList.remove('active'));
         item.classList.add('active');
 
+        const poster = e.currentTarget.dataset.poster;
+        if (poster) videoEl.poster = poster;
         videoEl.src = url;
         videoEl.load();
         videoEl.play();
@@ -119,10 +121,14 @@
           "default": "Chapter title"
         },
         {
-          "type": "text",
+          "type": "video",
           "id": "video_url",
-          "label": "Video URL",
-          "info": "Link to a .mp4, .m4v, or .webm file"
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster image"
         }
       ]
     }
@@ -134,12 +140,6 @@
     {
       "type": "header",
       "content": "Video"
-    },
-    {
-      "type": "video",
-      "id": "video_url",
-      "label": "Video URL",
-      "info": "Link to a .mp4, .m4v, or .webm file"
     },
     {
       "type": "checkbox",
@@ -165,12 +165,6 @@
         { "value": "none", "label": "None" }
       ],
       "default": "auto"
-    },
-    {
-      "type": "image_picker",
-      "id": "poster_image",
-      "label": "Poster image",
-      "info": "Shown while the video is loading. Improves perceived performance on slow connections."
     },
     {
       "type": "header",
