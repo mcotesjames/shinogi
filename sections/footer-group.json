@@ -14,7 +14,7 @@
     "custom_liquid_r8KePU": {
       "type": "custom-liquid",
       "custom_css": [
-        ".klaviyo-form-Xxy6td {border-top: 1px solid var(--color-border); max-width: 525px; margin: 0 auto; padding: 80px 2rem;}"
+        ".klaviyo-form-Xxy6td {border-top: 1px solid #000; max-width: 525px; margin: 0 auto; padding: 80px 2rem;}"
       ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
