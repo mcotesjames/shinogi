@@ -172,7 +172,6 @@
         "chapter_t7z8Wr",
         "chapter_RL3UMg"
       ],
-      "disabled": true,
       "name": "Video Player",
       "settings": {
         "autoplay": false,
@@ -188,7 +187,6 @@
         "button_link": "",
         "button_style": "tertiary",
         "columns": "2",
-        "aspect_ratio": "1.7778",
         "reverse_columns": false,
         "color_scheme": "",
         "enable_border_top": false,
