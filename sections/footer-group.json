@@ -11,6 +11,16 @@
   "type": "footer",
   "name": "t:sections.footer.settings.footer-group.label",
   "sections": {
+    "custom_liquid_r8KePU": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".klaviyo-form-Xxy6td {max-width: 525px; margin: 0 auto; padding: 80px 2rem;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"klaviyo-form-Xxy6td\"></div>"
+      }
+    },
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
@@ -173,6 +183,7 @@
     }
   },
   "order": [
+    "custom_liquid_r8KePU",
     "multicolumn",
     "ticker",
     "footer"

@@ -724,6 +724,7 @@
     },
     "custom_liquid_zNBaxH": {
       "type": "custom-liquid",
+      "disabled": true,
       "custom_css": [
         ".klaviyo-form-Xxy6td {max-width: 525px; margin: 0 auto; padding: 80px 2rem;}"
       ],
