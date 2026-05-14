@@ -56,13 +56,16 @@
           <video-player>
             <video-minimal-skin>
               <video
-                src="{{ section.settings.video_url }}"
                 {% if section.settings.autoplay %}autoplay muted{% endif %}
                 {% if section.settings.loop %}loop{% endif %}
                 {% if section.settings.poster_image != blank %}poster="{{ section.settings.poster_image | image_url: width: 1920 }}"{% endif %}
                 preload="{{ section.settings.preload | default: 'auto' }}"
                 playsinline
-              ></video>
+              >
+                {%- for source in section.settings.video_url.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
+              </video>
             </video-minimal-skin>
           </video-player>
         </div>
