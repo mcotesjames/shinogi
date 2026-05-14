@@ -18,7 +18,7 @@
   .video-with-text {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "text video";
-    align-items: start;
+    align-items: stretch;
   }
 
   .video-with-text--reversed {
@@ -32,6 +32,15 @@
   .video-with-text--reversed .video-with-text__video {
     border-left: none;
     border-right: 0.1rem solid rgb(var(--color-border));
+  }
+
+  .video-with-text__text {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .video-timestamps {
+    overflow-y: auto;
   }
 }
 
@@ -124,6 +133,8 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .video-timestamps__item {
