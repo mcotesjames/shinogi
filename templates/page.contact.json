@@ -11,11 +11,13 @@
   "sections": {
     "form": {
       "type": "contact-form",
-      "custom_css": [],
+      "custom_css": [
+        ".contact-section {padding-bottom: 60px;}"
+      ],
       "settings": {
         "color_scheme": "",
         "enable_border_top": false,
-        "enable_border_bottom": false,
+        "enable_border_bottom": true,
         "heading": "",
         "heading_font": "body",
         "heading_size": "h6",
@@ -36,8 +38,8 @@
         "text_alignment": "left",
         "padding_top": "no-indent",
         "padding_bottom": "no-indent",
-        "margin_top": "m",
-        "margin_bottom": "l"
+        "margin_top": "no-indent",
+        "margin_bottom": "no-indent"
       }
     }
   },
