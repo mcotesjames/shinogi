@@ -193,6 +193,7 @@
         "chapter_6yQNMN",
         "chapter_WiyqMB"
       ],
+      "disabled": true,
       "name": "Video Player",
       "settings": {
         "autoplay": false,
