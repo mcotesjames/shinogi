@@ -157,6 +157,7 @@
 .video-player-wrapper {
   width: 100%;
   padding: 0;
+  aspect-ratio: var(--video-aspect-ratio, 1.7778);
   --media-border-radius: 0;
   --media-video-border-radius: 0;
 }
