@@ -33,10 +33,6 @@
     border-left: none;
     border-right: 0.1rem solid rgb(var(--color-border));
   }
-
-  .video-timestamps {
-    aspect-ratio: 16 / 9;
-  }
 }
 
 .video-with-text__text {
@@ -44,6 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  aspect-ratio: 16 / 9;
+  overflow: scroll;
 }
 
 .video-with-text__video {
@@ -128,7 +126,6 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  aspect-ratio: 4 / 3;
   overflow-y: auto;
 }
 
