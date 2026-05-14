@@ -450,7 +450,7 @@
       "settings": {
         "color_scheme": "",
         "enable_border_top": false,
-        "enable_border_bottom": false,
+        "enable_border_bottom": true,
         "heading": "FAQs",
         "heading_font": "heading",
         "heading_size": "h3",
