@@ -37,7 +37,7 @@
     "custom_colors": "test : #000000",
     "card_color_scheme": "background-1",
     "add_to_cart_label": "Pre-Order Now",
-    "show_shipping": true,
+    "show_shipping": false,
     "message_shipping_free": "You qualify for free shipping.",
     "social_instagram_link": "",
     "button_border_radius": 0,
