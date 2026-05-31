@@ -1912,7 +1912,7 @@
   .product-accordion__specification-item:not(.product-accordion__specification-item--heading) {
     display: block;
     border: 1px solid #000;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .product-accordion__specification-item:not(.product-accordion__specification-item--heading):last-child {
