@@ -1904,6 +1904,41 @@
   border-right: 1px solid #000;
 }
 
+@media (max-width: 749px) {
+  .product-accordion__specification-item--heading {
+    display: none;
+  }
+
+  .product-accordion__specification-item:not(.product-accordion__specification-item--heading) {
+    display: block;
+    border: 1px solid #000;
+    margin-bottom: 16px;
+  }
+
+  .product-accordion__specification-item:not(.product-accordion__specification-item--heading):last-child {
+    margin-bottom: 0;
+  }
+
+  .product-accordion__specification-cell {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: none;
+    border-bottom: 1px solid #000;
+    border-right: none;
+  }
+
+  .product-accordion__specification-cell:last-child {
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .product-accordion__specification-cell::before {
+    content: attr(data-heading);
+    flex-shrink: 0;
+  }
+}
+
 .product-popup {
   padding-left: 2rem;
   padding-right: 2rem;
