@@ -235,7 +235,7 @@
               "type": "_faq-item",
               "settings": {
                 "question": "What is CASE 15-25?",
-                "answer": "<p>CASE 15-25 is a hard-shell knife case designed to carry 8–10 knives.</p><p>The name refers to the years it took to develop — 2015 to 2025. Every component was chosen for a reason. Nothing is decorative.</p>",
+                "answer": "<p><a href=\"/products/case-15-25\" title=\"Case 15-25\">CASE 15-25</a> is a hard-shell knife case designed to carry 8–10 knives.</p><p>The name refers to the years it took to develop — 2015 to 2025. Every component was chosen for a reason. Nothing is decorative.</p>",
                 "default_open": false
               },
               "blocks": {}
@@ -263,7 +263,7 @@
               "name": "FAQ Item",
               "settings": {
                 "question": "What comes in the box?",
-                "answer": "<p>The case, 9 accordion dividers, a bamboo splint, 12 elastic nylon cords, two silicone mats, a paracord shoulder strap, a stainless nameplate, and a notebook.</p>",
+                "answer": "<p>The case, 9 accordion dividers, a bamboo splint, 12 elastic nylon cords, two <a href=\"/products/silicone-sheet\" title=\"Shinogi Monogram Silicone Pad\">silicone mats</a>, a <a href=\"/products/shinogi-paracord-utility-handle\" title=\"Shinogi Paracord Utility Handle\">paracord shoulder strap</a>, a stainless nameplate, and a notebook.</p>",
                 "default_open": false
               },
               "blocks": {}
