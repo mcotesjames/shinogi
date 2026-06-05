@@ -1,0 +1,35 @@
+{%- liquid
+  assign has_faq_items = false
+  for block in section.blocks
+    if block.type == '_faq-item' and block.settings.question != blank and block.settings.answer != blank
+      assign has_faq_items = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_faq_items -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- assign faq_started = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '_faq-item' and block.settings.question != blank and block.settings.answer != blank -%}
+          {%- if faq_started -%},{%- endif -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | strip_html | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.answer | strip_html | json }}
+            }
+          }
+          {%- assign faq_started = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+{%- endif -%}
