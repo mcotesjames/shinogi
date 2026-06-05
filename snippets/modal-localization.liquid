@@ -43,33 +43,10 @@
           role="list"
           class="disclosure__list list-unstyled color-background-1"
           hidden
-        >
-          {%- for country in localization.available_countries -%}
-            <li class="disclosure__item" tabindex="-1">
-              <a
-                class="disclosure__link {% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset"
-                href="#"
-                {% if country.iso_code == localization.country.iso_code %}
-                  aria-current="true"
-                {% endif %}
-                data-value="{{ country.iso_code }}"
-                data-label="{{ country.name }} ({{- country.currency.iso_code }} {{ country.currency.symbol -}})"
-              >
-                <span class="form-text">
-                  {{ country.name }}
-                  <span class="localization-form__currency">
-                    (
-                    {{- country.currency.iso_code }}
-                    {{ country.currency.symbol -}}
-                    )
-                  </span>
-                </span>
-
-                {% render 'icon-check' %}
-              </a>
-            </li>
-          {%- endfor -%}
-        </ul>
+        ></ul>
+        <script type="application/json" id="{{ list_id }}-data">
+          {"current":{{ localization.country.iso_code | json }},"countries":[{%- for country in localization.available_countries -%}{"code":{{ country.iso_code | json }},"name":{{ country.name | json }},"currency":{{ country.currency.iso_code | json }},"symbol":{{ country.currency.symbol | json }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]}
+        </script>
       </div>
       <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
       <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">

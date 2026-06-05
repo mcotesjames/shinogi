@@ -1,0 +1,35 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | strip_newlines | json }},
+    {% if product.featured_image -%}
+      "image": {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }},
+    {%- endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | json }}
+    },
+    "sku": {{ product.selected_or_first_available_variant.sku | default: product.id | json }},
+    "url": {{ shop.url | append: product.url | json }},
+    "offers": {
+      "@type": "Offer",
+      "url": {{ shop.url | append: product.url | json }},
+      "priceCurrency": {{ shop.currency | json }},
+      "price": {{ product.price | divided_by: 100.0 }},
+      {%- assign _variant = product.selected_or_first_available_variant -%}
+      {%- if _variant.inventory_policy == 'continue' -%}
+        "availability": "https://schema.org/PreOrder",
+      {%- elsif product.available -%}
+        "availability": "https://schema.org/InStock",
+      {%- else -%}
+        "availability": "https://schema.org/OutOfStock",
+      {%- endif -%}
+      "seller": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      }
+    }
+  }
+</script>

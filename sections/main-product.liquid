@@ -12,6 +12,9 @@
 
 <script src="{{ 'main-product.js' | asset_url }}" defer="defer"></script>
 
+{% comment %} seo scripts {% endcomment %}
+{% render '_seo_script_product', product: product %}
+
 {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
 {%- if first_3d_model -%}
   {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
