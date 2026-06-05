@@ -1,6 +1,9 @@
 {{ 'section-faq.css' | asset_url | stylesheet_tag }}
 {{ 'section-faq.js' | asset_url | script_tag }}
 
+{% comment %} seo scripts {% endcomment %}
+{% render '_seo_script_faq', section: section %}
+
 {%- style -%}
   {% render 'section-padding' %}
   {% render 'section-margin' %}
