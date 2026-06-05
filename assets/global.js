@@ -2568,6 +2568,46 @@ class ModalLocalizationForm extends LocalizationForm {
     super();
 
     this.selectedEl = this.querySelector("button .localization-value-label");
+    this._listBuilt = false;
+  }
+
+  showPanel() {
+    if (!this._listBuilt) {
+      this._buildList();
+      this._listBuilt = true;
+    }
+    super.showPanel();
+  }
+
+  _buildList() {
+    const dataEl = this.querySelector('script[type="application/json"]');
+    if (!dataEl || !this.elements.panel) return;
+    try {
+      const { current, countries } = JSON.parse(dataEl.textContent);
+      const svgCheck =
+        '<svg class="icon icon-check" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9.5L8 12.5L13 6" stroke="currentColor" stroke-width="1.5"/></svg>';
+      const fragment = document.createDocumentFragment();
+      countries.forEach(({ code, name, currency, symbol }) => {
+        const isActive = code === current;
+        const label = `${name} (${currency} ${symbol})`;
+        const li = document.createElement("li");
+        li.className = "disclosure__item";
+        li.tabIndex = -1;
+        const a = document.createElement("a");
+        a.className = `disclosure__link${isActive ? " disclosure__link--active" : ""} focus-inset`;
+        a.href = "#";
+        if (isActive) a.setAttribute("aria-current", "true");
+        a.dataset.value = code;
+        a.dataset.label = label;
+        a.innerHTML = `<span class="form-text">${name} <span class="localization-form__currency">(${currency} ${symbol})</span></span>${svgCheck}`;
+        a.addEventListener("click", this.onItemClick.bind(this));
+        li.appendChild(a);
+        fragment.appendChild(li);
+      });
+      this.elements.panel.appendChild(fragment);
+    } catch {
+      // silent fail — noscript <select> fallback covers this case
+    }
   }
 
   // item click without submit
