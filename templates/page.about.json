@@ -235,7 +235,7 @@
               "type": "_faq-item",
               "settings": {
                 "question": "What is CASE 15-25?",
-                "answer": "<p><a href=\"/products/case-15-25\" title=\"Case 15-25\">CASE 15-25</a> is a hard-shell knife case designed to carry 8–10 knives.</p><p>The name refers to the years it took to develop — 2015 to 2025. Every component was chosen for a reason. Nothing is decorative. Test</p>",
+                "answer": "<p><a href=\"/products/case-15-25\" title=\"Case 15-25\">CASE 15-25</a> is a hard-shell knife case designed to carry 8–10 knives.</p><p>The name refers to the years it took to develop — 2015 to 2025. Every component was chosen for a reason. Nothing is decorative.</p>",
                 "default_open": false
               },
               "blocks": {}
