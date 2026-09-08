@@ -4,12 +4,13 @@
   @param {object} product - Product Liquid object
   @param {object} block_obj - Block Liquid object
   @param {string} section_id - Section ID
+  @param {boolean} has_duties_notice - Optional. True when the duties notice renders in this section, tightens the price block's bottom padding
 
   @example
   {% render 'product-block-price', product: product, block_obj: block, section_id: section.id %}
 {% enddoc %}
 
-<div class="product__price" id="price-{{ section_id }}" role="status" {{ block_obj.shopify_attributes }}>
+<div class="product__price{% if has_duties_notice %} product__price--with-duties-notice{% endif %}" id="price-{{ section_id }}" role="status" {{ block_obj.shopify_attributes }}>
   <div class="product__price-inner">
     {% liquid
       assign show_sale_badge = false

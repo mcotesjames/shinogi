@@ -30,6 +30,13 @@
             "sale_badge_type": "percentage"
           }
         },
+        "duties_notice_y9Wg9b": {
+          "type": "duties_notice",
+          "settings": {
+            "margin_top": "0",
+            "margin_bottom": "0"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -140,6 +147,7 @@
       "block_order": [
         "title",
         "price",
+        "duties_notice_y9Wg9b",
         "variant_picker",
         "divider_2",
         "collapsible_info",

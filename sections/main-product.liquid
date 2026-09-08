@@ -233,6 +233,18 @@
 
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+        {%- liquid
+          capture duties_notice
+            render 'duties-notice'
+          endcapture
+          assign duties_notice = duties_notice | strip
+          assign has_duties_notice = false
+          assign duties_notice_blocks = section.blocks | where: 'type', 'duties_notice'
+          if duties_notice_blocks.size > 0 and duties_notice != blank
+            assign has_duties_notice = true
+          endif
+        -%}
+
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'text' -%}
@@ -248,7 +260,12 @@
               {% render 'product-block-badges', product: product, block_obj: block %}
 
             {%- when 'price' -%}
-              {% render 'product-block-price', product: product, block_obj: block, section_id: section.id %}
+              {% render 'product-block-price',
+                product: product,
+                block_obj: block,
+                section_id: section.id,
+                has_duties_notice: has_duties_notice
+              %}
 
             {%- when 'description' -%}
               {% render 'product-block-description', product: product, block_obj: block %}
@@ -393,6 +410,19 @@
 
             {%- when 'divider' -%}
               {% render 'product-block-divider', block_obj: block %}
+
+            {%- when 'duties_notice' -%}
+              {%- if has_duties_notice -%}
+                <div
+                  class="product__duties-notice"
+                  {% if block.settings.margin_top != '0' or block.settings.margin_bottom != '0' %}
+                    style="margin-top: {{ block.settings.margin_top }}; margin-bottom: {{ block.settings.margin_bottom }};"
+                  {% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  {{ duties_notice }}
+                </div>
+              {%- endif -%}
 
             {%- when 'custom_liquid' -%}
               <div class="custom-liquid" {{ block.shopify_attributes }}>
@@ -2152,6 +2182,89 @@
           "id": "enable_border",
           "default": true,
           "label": "t:sections.all.borders.enable_border.label"
+        },
+        {
+          "type": "select",
+          "id": "margin_top",
+          "options": [
+            {
+              "value": "0",
+              "label": "t:sections.all.section-margin.options__1.label"
+            },
+            {
+              "value": "auto",
+              "label": "t:sections.all.section-margin.options__7.label"
+            },
+            {
+              "value": "4px",
+              "label": "t:sections.all.section-margin.options__2.label"
+            },
+            {
+              "value": "12px",
+              "label": "t:sections.all.section-margin.options__3.label"
+            },
+            {
+              "value": "20px",
+              "label": "t:sections.all.section-margin.options__4.label"
+            },
+            {
+              "value": "32px",
+              "label": "t:sections.all.section-margin.options__5.label"
+            },
+            {
+              "value": "44px",
+              "label": "t:sections.all.section-margin.options__6.label"
+            }
+          ],
+          "default": "0",
+          "label": "t:sections.all.section-margin.margin_top.label"
+        },
+        {
+          "type": "select",
+          "id": "margin_bottom",
+          "options": [
+            {
+              "value": "0",
+              "label": "t:sections.all.section-margin.options__1.label"
+            },
+            {
+              "value": "auto",
+              "label": "t:sections.all.section-margin.options__7.label"
+            },
+            {
+              "value": "4px",
+              "label": "t:sections.all.section-margin.options__2.label"
+            },
+            {
+              "value": "12px",
+              "label": "t:sections.all.section-margin.options__3.label"
+            },
+            {
+              "value": "20px",
+              "label": "t:sections.all.section-margin.options__4.label"
+            },
+            {
+              "value": "32px",
+              "label": "t:sections.all.section-margin.options__5.label"
+            },
+            {
+              "value": "44px",
+              "label": "t:sections.all.section-margin.options__6.label"
+            }
+          ],
+          "default": "0",
+          "label": "t:sections.all.section-margin.margin_bottom.label"
+        }
+      ]
+    },
+    {
+      "type": "duties_notice",
+      "name": "Duties notice",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows the import duties disclaimer in markets where duties are not collected at checkout. Controlled by the market metafield custom.duties_collected."
         },
         {
           "type": "select",

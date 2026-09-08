@@ -1,0 +1,29 @@
+{%- comment -%}
+  Duties notice
+  --------------------------------------------------------------------------
+  Shows the disclaimer only in markets where duties are NOT collected at
+  checkout — i.e. where the buyer really will be billed on delivery.
+
+  Driven by a market metafield, set by hand per market:
+    Settings → Custom data → Markets → custom.duties_collected (boolean)
+    Tick it for markets where duty collection is enabled at checkout.
+
+  Unset = treated as false = disclaimer shows. Deliberate: under-promising is
+  recoverable, over-promising is a chargeback.
+
+  NOTE: to invert (show when duties ARE collected), change `unless` to `if`.
+
+  Usage:
+    {% render 'duties-notice' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign duties_collected = false
+  if localization.market.metafields.custom.duties_collected.value
+    assign duties_collected = true
+  endif
+-%}
+
+{%- unless duties_collected -%}
+  <p class="duties-notice">{{ 'products.product.duties.notice' | t }}</p>
+{%- endunless -%}
