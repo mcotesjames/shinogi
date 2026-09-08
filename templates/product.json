@@ -68,6 +68,12 @@
             "button_link": ""
           }
         },
+        "custom_liquid_P4Cg4y": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{%- liquid\n  assign duties_collected = false\n  if localization.market.metafields.custom.duties_collected.value\n    assign duties_collected = true\n  endif\n\n  if duties_collected\n    assign notice_key = 'all_inclusive'\n  else\n    assign notice_key = 'tax_and_duties_due'\n  endif\n\n  assign notice_string = 'products.product.duties.' | append: notice_key\n-%}"
+          }
+        },
         "divider_qYkmeM": {
           "type": "divider",
           "settings": {
@@ -137,6 +143,7 @@
         "variant_picker",
         "divider_2",
         "collapsible_info",
+        "custom_liquid_P4Cg4y",
         "divider_qYkmeM",
         "specification_r3jyJh",
         "buy_buttons",
