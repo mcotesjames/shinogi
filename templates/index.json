@@ -60,6 +60,55 @@
         "margin_bottom": "no-indent"
       }
     },
+    "rich_text_JQxz3b": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UHexjh": {
+          "type": "heading",
+          "settings": {
+            "heading": "Designing durable, purpose-built systems to protect and organize professional tools.",
+            "heading_size": "h3",
+            "heading_tag": "h3"
+          }
+        },
+        "text_iAmqzy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>SHINOGI exists to protect the tools that professionals rely on. We apply technical precision and utilitarian design to create systems that withstand time and use. Every detail serves a purpose: built for reliability and guided by respect for craft.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UHexjh",
+        "text_iAmqzy"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "layout": "row",
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "heading": "",
+        "heading_font": "body",
+        "heading_size": "h6",
+        "heading_tag": "h2",
+        "heading_group_button_show": false,
+        "heading_group_button_label": "Learn More",
+        "heading_group_button_link": "",
+        "heading_group_button_style": "tertiary",
+        "heading_group_enable_border_bottom": true,
+        "enable_image": true,
+        "image_width": 396,
+        "image_aspect_ratio": "square",
+        "image_aspect_ratio_mobile": "adapt",
+        "object_fit": "cover",
+        "objects_order": "content_first",
+        "vertical_alignment": "stretch",
+        "text_alignment": "left",
+        "margin_top": "l",
+        "margin_bottom": "l"
+      }
+    },
     "image_gallery_TV8JjT": {
       "type": "image-gallery",
       "blocks": {
@@ -706,6 +755,7 @@
   },
   "order": [
     "slideshow_dYbCAJ",
+    "rich_text_JQxz3b",
     "image_gallery_TV8JjT",
     "featured_product_b8f8Hz",
     "text_banner_TkfCzB",
