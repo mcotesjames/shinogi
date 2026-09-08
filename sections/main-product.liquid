@@ -233,6 +233,18 @@
 
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+        {%- liquid
+          capture duties_notice
+            render 'duties-notice'
+          endcapture
+          assign duties_notice = duties_notice | strip
+          assign has_duties_notice = false
+          assign duties_notice_blocks = section.blocks | where: 'type', 'duties_notice'
+          if duties_notice_blocks.size > 0 and duties_notice != blank
+            assign has_duties_notice = true
+          endif
+        -%}
+
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'text' -%}
@@ -248,7 +260,12 @@
               {% render 'product-block-badges', product: product, block_obj: block %}
 
             {%- when 'price' -%}
-              {% render 'product-block-price', product: product, block_obj: block, section_id: section.id %}
+              {% render 'product-block-price',
+                product: product,
+                block_obj: block,
+                section_id: section.id,
+                has_duties_notice: has_duties_notice
+              %}
 
             {%- when 'description' -%}
               {% render 'product-block-description', product: product, block_obj: block %}
@@ -402,7 +419,7 @@
                 {% endif %}
                 {{ block.shopify_attributes }}
               >
-                {% render 'duties-notice' %}
+                {{ duties_notice }}
               </div>
 
             {%- when 'custom_liquid' -%}

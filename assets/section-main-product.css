@@ -106,6 +106,10 @@
 .product__divider:empty {
   display: block;
 }
+.product__duties-notice {
+  padding: 0.2rem 2rem 2rem;
+  font-size: calc(var(--font-body-scale) * 1.2rem);
+}
 .product__title {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -116,6 +120,11 @@
   padding-right: 2rem;
   padding-bottom: 2rem;
 }
+
+.product__title + .product__price.product__price--with-duties-notice, .product__title + .product__sku {
+  padding-bottom: 1rem;
+}
+
 .product__text {
   display: inline-block;
   margin-top: 1.2rem;
@@ -142,6 +151,10 @@
 .product__price {
   display: flex;
   flex-direction: column;
+  padding-bottom: 2rem;
+}
+.product__price--with-duties-notice {
+  padding-bottom: 1rem;
 }
 .product__price + .product__title, .product__price + .product__text, .product__price + .product__sku {
   margin-top: 0.2rem;

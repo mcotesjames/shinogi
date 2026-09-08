@@ -180,7 +180,7 @@
         "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> in cart"
       },
       "duties": {
-        "notice": "Import duties and taxes are not included and may be charged on delivery."
+        "notice": "*Import duties and taxes are not included and may be charged on delivery."
       },
       "pickup_availability": {
         "modal_window_title": "Pickup availability",
